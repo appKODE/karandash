@@ -1,0 +1,170 @@
+# Built-in module registry manifest
+#
+# Single source of truth for all modules bundled with the Karandash CLI.
+# The Gradle task `generateBuiltInRegistry` reads this file and produces
+# GeneratedBuiltInRegistry.kt with the factory list.
+#
+# Format: one fully-qualified factory expression per line.
+#   - Simple:  com.example.pkg.MyModule           -> { _ -> MyModule() }
+#   - Wrapped: com.example.Adapter(com.example.Inner())  -> { _ -> Adapter(Inner()) }
+#   - Registry: com.example.pkg.MyModule @registry -> { registry -> MyModule(registry) }
+#
+# Append @registry to modules that need the ModuleRegistry as a constructor parameter.
+#
+# Blank lines and lines starting with # are ignored.
+# ORDER MATTERS — modules are loaded in the order listed here.
+
+# ── Rules ──────────────────────────────────────────────────────────────
+io.karandash.validators.TitleFormatRuleModule
+io.karandash.validators.CommitMessagesRuleModule
+io.karandash.validators.JiraTicketRuleModule
+io.karandash.validators.BranchNamingRuleModule
+io.karandash.validators.FileChangesRuleModule
+io.karandash.validators.CodeownersRuleModule
+io.karandash.validators.ApprovalRuleModule
+io.karandash.validators.ReviewerRuleModule
+io.karandash.validators.CicdStatusRuleModule
+io.karandash.validators.ConflictRuleModule
+io.karandash.validators.DraftRuleModule
+io.karandash.validators.LabelsRuleModule
+io.karandash.validators.SizeLimitsRuleModule
+io.karandash.validators.SecurityRuleModule
+io.karandash.validators.ContextTagRuleModule
+io.karandash.validators.DescriptionFormatRuleModule
+io.karandash.validators.CrossEntityConsistencyRuleModule
+io.karandash.validators.LanguagePolicyRuleModule
+io.karandash.validators.CommitBodyRuleModule
+io.karandash.validators.DependencyValidationRuleModule
+
+# ── AI rules (optional — skipped when initialize() returns false) ─────
+io.karandash.plugins.ai.AiRuleModule @registry
+io.karandash.plugins.ai.AiPipelineExtension @registry
+io.karandash.plugins.ai.AiCliCommandModule
+
+# ── AI analyzers ──────────────────────────────────────────────────────
+io.karandash.plugins.ai.analyzers.riskscoring.RiskScoringAnalyzerModule
+io.karandash.plugins.ai.analyzers.descriptionquality.DescriptionQualityAnalyzerModule
+io.karandash.plugins.ai.analyzers.changecategorization.ChangeCategorizationAnalyzerModule
+io.karandash.plugins.ai.analyzers.reviewcomments.ReviewCommentsAnalyzerModule
+io.karandash.plugins.ai.analyzers.similarissues.SimilarIssuesAnalyzerModule
+io.karandash.plugins.ai.analyzers.fixsuggestions.FixSuggestionsAnalyzerModule
+io.karandash.plugins.ai.analyzers.codesuggestions.CodeSuggestionsAnalyzerModule
+io.karandash.plugins.ai.analyzers.prsplit.PrSplitAnalyzerModule
+io.karandash.plugins.ai.analyzers.generatedescription.GenerateDescriptionAnalyzerModule
+io.karandash.plugins.ai.analyzers.outdateddocs.OutdatedDocsAnalyzerModule
+io.karandash.plugins.ai.analyzers.commentanalysis.CommentAnalysisAnalyzerModule
+io.karandash.plugins.ai.analyzers.mrsummary.MrSummaryAnalyzerModule
+io.karandash.plugins.ai.analyzers.designdocdrift.DesignDocDriftAnalyzerModule
+io.karandash.plugins.ai.analyzers.codequality.CodeQualityAnalyzerModule
+io.karandash.plugins.ai.analyzers.ownership.OwnershipAnalyzerModule
+
+# ── AI reports and metrics (consumed by `karandash ai report` / AiReportGenerator) ──
+io.karandash.plugins.ai.core.reporters.modules.AiPredictionReportModule
+io.karandash.plugins.ai.core.reporters.modules.ComplianceEvidenceReportModule
+io.karandash.plugins.ai.core.reporters.modules.CrossPlatformConsistencyReportModule
+io.karandash.plugins.ai.core.reporters.modules.DeveloperGrowthReportModule
+io.karandash.plugins.ai.core.reporters.modules.DoraMetricsReportModule
+io.karandash.plugins.ai.core.reporters.modules.FlakyRuleReportModule
+io.karandash.plugins.ai.core.reporters.modules.PolicyDriftReportModule
+io.karandash.plugins.ai.core.reporters.modules.RiskHeatmapReportModule
+io.karandash.plugins.ai.core.reporters.modules.RoiReportModule
+io.karandash.plugins.ai.core.reporters.modules.SmartDigestReportModule
+io.karandash.plugins.ai.core.reporters.modules.TeamScorecardReportModule
+io.karandash.plugins.ai.core.metrics.modules.AvgFindingsMetricModule
+io.karandash.plugins.ai.core.metrics.modules.ChangeEntropyMetricModule
+io.karandash.plugins.ai.core.metrics.modules.ChangeFailureRateMetricModule
+io.karandash.plugins.ai.core.metrics.modules.CognitiveLoadMetricModule
+io.karandash.plugins.ai.core.metrics.modules.CostSavedMetricModule
+io.karandash.plugins.ai.core.metrics.modules.DeployFrequencyMetricModule
+io.karandash.plugins.ai.core.metrics.modules.HotspotDensityMetricModule
+io.karandash.plugins.ai.core.metrics.modules.HoursSavedMetricModule
+io.karandash.plugins.ai.core.metrics.modules.QualityTrendMetricModule
+io.karandash.plugins.ai.core.metrics.modules.TeamScoreMetricModule
+
+# ── AI providers (optional — each skipped when its env var is absent) ─
+io.karandash.plugins.ai.providers.OpenAiProvider
+io.karandash.plugins.ai.providers.AnthropicProvider
+io.karandash.plugins.ai.providers.GeminiProvider
+io.karandash.plugins.ai.providers.OllamaProvider
+io.karandash.plugins.ai.providers.LiteLLMProvider
+io.karandash.plugins.ai.providers.BifrostProvider
+io.karandash.plugins.ai.stub.StubAiProvider
+
+# ── Format modules ───────────────────────────────────────────────────
+io.karandash.plugins.formats.ConsoleFormatModule
+io.karandash.plugins.formats.MarkdownFormatModule
+io.karandash.plugins.formats.JsonReportFormatModule
+io.karandash.plugins.formats.SarifFormatModule
+io.karandash.plugins.formats.JunitFormatModule
+io.karandash.plugins.formats.RdjsonFormatModule
+io.karandash.plugins.formats.RdjsonlFormatModule
+io.karandash.plugins.formats.SlackFormatModule
+io.karandash.plugins.formats.HtmlFormatModule
+io.karandash.plugins.formats.TemplateFormatModule
+io.karandash.plugins.formats.CodeQualityFormatModule
+
+# ── Output modules ───────────────────────────────────────────────────
+io.karandash.plugins.outputs.StdoutOutputModule
+io.karandash.plugins.outputs.PlatformOutputModule
+io.karandash.plugins.outputs.FilesystemOutputModule
+io.karandash.plugins.outputs.WebhookOutputModule
+io.karandash.plugins.outputs.StatusOutputModule
+io.karandash.plugins.outputs.SlackOutputModule
+io.karandash.plugins.outputs.EmailOutputModule
+
+# ── Platform services (unified provider + mutator + comment-poster) ───
+io.karandash.platforms.gitlab.GitLabPlatformService
+io.karandash.platforms.github.GitHubPlatformService
+io.karandash.platforms.bitbucket.BitbucketPlatformService
+io.karandash.platforms.localgit.LocalGitProvider
+io.karandash.platforms.gerrit.GerritPlatformService
+io.karandash.platforms.azuredevops.AzureDevOpsPlatformService
+io.karandash.platforms.awscodecommit.AwsCodeCommitPlatformService
+io.karandash.platforms.gitea.GiteaPlatformService
+io.karandash.platforms.jenkins.JenkinsProvider @registry
+
+# ── Enrichment providers ─────────────────────────────────────────────
+io.karandash.enrichment.jira.JiraEnrichmentProvider
+io.karandash.enrichment.localgit.LocalGitEnrichmentProvider
+io.karandash.enrichment.confluence.ConfluenceEnrichmentProvider
+io.karandash.enrichment.github.GitHubIssueEnrichmentProvider
+io.karandash.enrichment.gitlabissue.GitLabIssueEnrichmentProvider
+io.karandash.enrichment.ci.CiEnrichmentProvider
+io.karandash.enrichment.symbol.SymbolContextEnrichmentProvider
+
+# ── AI context enrichers (defaultEnabled=false except DiffAnnotations) ─
+io.karandash.plugins.ai.core.context.ConventionContextEnricher
+io.karandash.plugins.ai.core.context.FullFileContextEnricher
+io.karandash.plugins.ai.core.context.RelatedFileContextEnricher
+io.karandash.enrichment.localgit.LocalGitEnrichmentContextEnricher
+io.karandash.plugins.ai.core.context.TicketContentEnricher
+io.karandash.plugins.ai.core.context.DesignDocEnricher
+io.karandash.plugins.ai.core.context.CiContextEnricher
+io.karandash.plugins.ai.core.context.SymbolContextEnricher
+io.karandash.plugins.ai.core.context.DiffAnnotationsEnricher
+io.karandash.plugins.ai.core.context.SymbolDefinitionsEnricher
+
+# ── Profiles ──────────────────────────────────────────────────────────
+io.karandash.profiles.MinimalProfileModule
+io.karandash.profiles.ConventionalCommitsProfileModule
+io.karandash.profiles.GitHubFlowProfileModule
+io.karandash.profiles.GitFlowProfileModule
+io.karandash.profiles.TrunkBasedProfileModule
+io.karandash.profiles.SemanticVersioningProfileModule
+io.karandash.profiles.SecurityConsciousProfileModule
+io.karandash.profiles.IntegrationMrProfileModule
+
+# ── Pipeline extensions ──────────────────────────────────────────────
+io.karandash.extensions.SeverityCapExtension
+
+# ── Translation packs (every language beyond the built-in en) ─────────
+io.karandash.translations.polish.PolishTranslationModule
+io.karandash.translations.russian.RussianTranslationModule
+
+# ── Script module ─────────────────────────────────────────────────────
+io.karandash.scripts.BuiltInScriptModule
+
+# ── Config format parsers (order = discovery priority: kts > yaml > json) ─
+io.karandash.plugins.parsers.kts.KtsFormatModuleLoader
+io.karandash.plugins.parsers.yaml.YamlFormatModuleLoader
+io.karandash.plugins.parsers.json.JsonFormatModuleLoader

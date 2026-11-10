@@ -1,0 +1,316 @@
+# Release pipeline shared by release.yml (v* tags) and release-dry-run.yml (manual).
+# dry_run: Docker images are built but not pushed, the SDK goes to mavenLocal instead of Maven Central, and no
+# GitHub Release or Pages deploy happens.
+# Publishing secrets live in the protected `release` environment; the jobs that use them enter it on a real release only.
+# On a dry run they run in the unprotected `dry-run` environment and every step that reads a secret is skipped.
+name: Release build
+
+on:
+  workflow_call:
+    inputs:
+      dry_run:
+        type: boolean
+        required: true
+
+permissions:
+  contents: read
+
+env:
+  GRADLE_OPTS: -Dorg.gradle.daemon=false
+
+jobs:
+  meta:
+    runs-on: ubuntu-latest
+    outputs:
+      tag: ${{ steps.v.outputs.tag }}
+      version: ${{ steps.v.outputs.version }}
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+      - id: v
+        env:
+          REF_TYPE: ${{ github.ref_type }}
+          REF_NAME: ${{ github.ref_name }}
+          DRY_RUN: ${{ inputs.dry_run }}
+        run: |
+          VERSION=$(sed -n 's/^ *version = "\(.*\)"$/\1/p' build.gradle.kts | head -1)
+          [ -n "$VERSION" ] || { echo "::error::no version in build.gradle.kts"; exit 1; }
+          if [ "$DRY_RUN" != true ] && [ "$REF_TYPE" != tag ]; then
+            echo "::error::a real release runs on a v* tag, not on $REF_NAME"; exit 1
+          fi
+          if [ "$REF_TYPE" = tag ]; then
+            [ "$REF_NAME" = "v$VERSION" ] || { echo "::error::tag $REF_NAME does not match the project version $VERSION"; exit 1; }
+          fi
+          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+          echo "tag=v$VERSION" >> "$GITHUB_OUTPUT"
+
+  # Every target the CLI builds ships a binary. macosX64 is cross-built on the arm64 runner and mingwX64 on Linux.
+  build:
+    needs: meta
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - name: linux
+            os: ubuntu-latest
+            prepare: :cli:compileKotlinLinuxX64
+            tasks: :cli:linkReleaseExecutableLinuxX64 :plugins:loader:jar-bridge:shadowJar :cli:shadowJar
+            paths: |
+              cli/build/bin/linuxX64/releaseExecutable/cli.kexe
+              plugins/loader/jar-bridge/build/libs/karandash-jar-bridge.jar
+              cli/build/libs/karandash.jar
+          - name: mingw
+            os: ubuntu-latest
+            prepare: :cli:compileKotlinMingwX64
+            tasks: :cli:linkReleaseExecutableMingwX64
+            paths: cli/build/bin/mingwX64/releaseExecutable/cli.exe
+          - name: macos
+            os: macos-14
+            prepare: :cli:compileKotlinMacosArm64 :cli:compileKotlinMacosX64
+            tasks: :cli:linkReleaseExecutableMacosArm64 :cli:linkReleaseExecutableMacosX64
+            paths: |
+              cli/build/bin/macosArm64/releaseExecutable/cli.kexe
+              cli/build/bin/macosX64/releaseExecutable/cli.kexe
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+      - uses: ./.github/actions/setup
+      # compile first, then one Gradle run per task: each K/N release link starts on an empty heap (7.7 GB private runners)
+      - run: |
+          ./gradlew ${{ matrix.prepare }} -x jvmTest
+          for t in ${{ matrix.tasks }}; do ./gradlew "$t" -x jvmTest; done
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: build-${{ matrix.name }}
+          path: ${{ matrix.paths }}
+          if-no-files-found: error
+          retention-days: 7
+
+  assets:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4.3.0
+        with:
+          pattern: build-*
+          path: out
+      - name: Release asset names and SHA256SUMS
+        run: |
+          mkdir dist
+          cp out/build-linux/cli/build/libs/karandash.jar dist/karandash.jar
+          cp out/build-linux/plugins/loader/jar-bridge/build/libs/karandash-jar-bridge.jar dist/karandash-jar-bridge.jar
+          cp out/build-linux/cli/build/bin/linuxX64/releaseExecutable/cli.kexe dist/karandash-linux-x64
+          cp out/build-macos/macosArm64/releaseExecutable/cli.kexe dist/karandash-macos-arm64
+          cp out/build-macos/macosX64/releaseExecutable/cli.kexe dist/karandash-macos-x64
+          cp out/build-mingw/cli.exe dist/karandash-windows-x64.exe
+          chmod +x dist/karandash-linux-x64 dist/karandash-macos-arm64 dist/karandash-macos-x64
+          (cd dist && sha256sum -- * > SHA256SUMS)
+          cat dist/SHA256SUMS
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: release-assets
+          path: dist/
+          if-no-files-found: error
+
+  # The native image carries the jar-bridge at /app next to the binary
+  docker-native:
+    needs: [meta, build]
+    runs-on: ubuntu-latest
+    environment: ${{ inputs.dry_run && 'dry-run' || 'release' }}
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4.3.0
+        with:
+          name: build-linux
+      - if: ${{ !inputs.dry_run }}
+        uses: docker/login-action@c94ce9fb468520275223c153574b00df6fe4bcc9 # v3.7.0
+        with:
+          username: ${{ secrets.DOCKER_HUB_USERNAME }}
+          password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
+      - uses: docker/setup-buildx-action@8d2750c68a42422c14e847fe6c8ac0403b4cbd6f # v3.12.0
+      - uses: docker/build-push-action@10e90e3645eae34f1e60eeb005ba3a3d33f178e8 # v6.19.2
+        with:
+          context: .
+          file: docker/Dockerfile.runtime-native
+          platforms: linux/amd64
+          push: ${{ !inputs.dry_run }}
+          build-args: |
+            BINARY_FILE=cli/build/bin/linuxX64/releaseExecutable/cli.kexe
+            BRIDGE_JAR_FILE=plugins/loader/jar-bridge/build/libs/karandash-jar-bridge.jar
+            VERSION=${{ needs.meta.outputs.version }}
+          tags: |
+            rinekri/karandash:${{ needs.meta.outputs.tag }}
+            rinekri/karandash:latest
+
+  docker-jvm:
+    needs: [meta, build]
+    runs-on: ubuntu-latest
+    environment: ${{ inputs.dry_run && 'dry-run' || 'release' }}
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4.3.0
+        with:
+          name: build-linux
+      - if: ${{ !inputs.dry_run }}
+        uses: docker/login-action@c94ce9fb468520275223c153574b00df6fe4bcc9 # v3.7.0
+        with:
+          username: ${{ secrets.DOCKER_HUB_USERNAME }}
+          password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
+      - uses: docker/setup-qemu-action@c7c53464625b32c7a7e944ae62b3e17d2b600130 # v3.7.0
+      - uses: docker/setup-buildx-action@8d2750c68a42422c14e847fe6c8ac0403b4cbd6f # v3.12.0
+      - uses: docker/build-push-action@10e90e3645eae34f1e60eeb005ba3a3d33f178e8 # v6.19.2
+        with:
+          context: .
+          file: docker/Dockerfile.runtime-jvm
+          platforms: linux/amd64,linux/arm64
+          push: ${{ !inputs.dry_run }}
+          build-args: |
+            JAR_FILE=cli/build/libs/karandash.jar
+            VERSION=${{ needs.meta.outputs.version }}
+          tags: |
+            rinekri/karandash:${{ needs.meta.outputs.tag }}-jvm
+            rinekri/karandash:latest-jvm
+
+  # macOS host: the SDK modules declare every native target, and only a Mac builds the Apple klibs.
+  maven:
+    needs: meta
+    runs-on: macos-14
+    environment: ${{ inputs.dry_run && 'dry-run' || 'release' }}
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+      - uses: ./.github/actions/setup
+      - if: ${{ !inputs.dry_run }}
+        env:
+          KEY: ${{ secrets.GPG_KEY_CONTENTS }}
+          USER: ${{ secrets.MAVEN_CENTRAL_USERNAME }}
+        run: '[ -n "$KEY" ] && [ -n "$USER" ] || { echo "::error::GPG_KEY_CONTENTS or MAVEN_CENTRAL_USERNAME secret is missing"; exit 1; }'
+      - if: ${{ !inputs.dry_run }}
+        env:
+          ORG_GRADLE_PROJECT_mavenCentralUsername: ${{ secrets.MAVEN_CENTRAL_USERNAME }}
+          ORG_GRADLE_PROJECT_mavenCentralPassword: ${{ secrets.MAVEN_CENTRAL_PASSWORD }}
+          ORG_GRADLE_PROJECT_signingInMemoryKey: ${{ secrets.GPG_KEY_CONTENTS }}
+          ORG_GRADLE_PROJECT_signingInMemoryKeyId: ${{ secrets.SIGNING_KEY_ID }}
+          ORG_GRADLE_PROJECT_signingInMemoryKeyPassword: ${{ secrets.SIGNING_PASSWORD }}
+        run: ./gradlew publishAndReleaseToMavenCentral --no-configuration-cache
+      - if: ${{ inputs.dry_run }}
+        run: ./gradlew publishToMavenLocal --no-configuration-cache
+
+  # Behavior changes since the previous GitHub release. A release tag means the diff was reviewed and recorded under the
+  # CHANGELOG entry for the release (COMPAT_DIFF_ACCEPTED); the diff stays in the artifacts.
+  compat-diff:
+    needs: [meta, build]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+      - uses: actions/setup-java@cf277c60eb25467037889841efdb72551f06f6c3 # v4.9.1
+        with:
+          distribution: zulu
+          java-version: '17'
+      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4.3.0
+        with:
+          name: build-linux
+      - name: Previous release jar
+        id: prev
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TAG: ${{ needs.meta.outputs.tag }}
+        run: |
+          PREV=$(gh release list -R "$GITHUB_REPOSITORY" --exclude-drafts --exclude-pre-releases --limit 50 \
+            --json tagName --jq '.[].tagName' | grep -vxF "$TAG" | head -1 || true)
+          if [ -z "$PREV" ]; then
+            echo "::notice::no previous GitHub release, compat-diff skipped"
+            exit 0
+          fi
+          echo "Comparing $PREV against $TAG"
+          gh release download "$PREV" -R "$GITHUB_REPOSITORY" -p karandash.jar -D "$RUNNER_TEMP/prev"
+          echo "jar=$RUNNER_TEMP/prev/karandash.jar" >> "$GITHUB_OUTPUT"
+      - if: steps.prev.outputs.jar != ''
+        env:
+          COMPAT_DIFF_ACCEPTED: ${{ !inputs.dry_run }}
+        run: bash tools/ci/compat-diff.sh "${{ steps.prev.outputs.jar }}" cli/build/libs/karandash.jar build/compat-diff
+      - if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: compat-diff
+          path: build/compat-diff/
+          if-no-files-found: ignore
+          retention-days: 30
+
+  # The release carries every binary; the SDK publish (maven) is not required for it
+  release:
+    if: ${{ !inputs.dry_run }}
+    needs: [meta, assets, docker-native, docker-jvm]
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4.3.0
+        with:
+          name: release-assets
+          path: dist
+      - env:
+          GH_TOKEN: ${{ github.token }}
+          TAG: ${{ needs.meta.outputs.tag }}
+          IMAGE: rinekri/karandash
+        run: |
+          cat > "$RUNNER_TEMP/notes.md" <<NOTES
+          ## Downloads
+
+          | Asset | Description |
+          |-------|-------------|
+          | karandash.jar | Fat JAR (requires Java 17+) |
+          | karandash-linux-x64 | Native binary, Linux x64 (no JRE needed) |
+          | karandash-macos-arm64 | Native binary, macOS Apple silicon |
+          | karandash-macos-x64 | Native binary, macOS Intel (a WASM plugin call that times out ends the run with exit code 6 after 5 s) |
+          | karandash-windows-x64.exe | Native binary, Windows x64 |
+          | karandash-jar-bridge.jar | Lets the native binary load JAR plugins (needs Java 17+); put it next to the binary or in \`~/.karandash/lib/\` |
+          | SHA256SUMS | sha256 of every asset |
+
+          ## Docker
+          \`\`\`bash
+          docker run --rm ${IMAGE}:${TAG} validate --help       # native, linux/amd64
+          docker run --rm ${IMAGE}:${TAG}-jvm validate --help   # JVM, linux/amd64 and linux/arm64
+          \`\`\`
+          NOTES
+          gh release create "$TAG" dist/* --title "Karandash $TAG" --notes-file "$RUNNER_TEMP/notes.md" --generate-notes
+
+  # Docs site: mkdocs at the root, dokka for the SDK and core API under api/. Built on a dry run too, deployed only on release.
+  pages:
+    needs: meta
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+      - uses: ./.github/actions/setup
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5.6.0
+        with:
+          python-version: '3.12'
+      - name: Build site
+        run: |
+          pip install -q -r docs/requirements.txt
+          bash docs/deploy.sh build public
+          ./gradlew :plugins:sdk:dokkaGenerate :core:api:dokkaGenerate
+          mkdir -p public/api
+          cp -r plugins/sdk/build/dokka/html public/api/sdk
+          cp -r core/api/build/dokka/html public/api/core
+      - if: ${{ !inputs.dry_run }}
+        uses: actions/upload-pages-artifact@56afc609e74202658d3ffba0e8f6dda462b719fa # v3.0.1
+        with:
+          path: public
+
+  pages-deploy:
+    if: ${{ !inputs.dry_run }}
+    needs: pages
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    steps:
+      - uses: actions/configure-pages@983d7736d9b0ae728b81ab479565c72886d7745b # v5.0.0
+      - id: deploy
+        uses: actions/deploy-pages@d6db90164ac5ed86f2b6aed7e0febac5b3c0c03e # v4.0.5

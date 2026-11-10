@@ -1,0 +1,17 @@
+# Karandash config for AI suggestions in markdown reporter integration testing.
+# Exercises: platform service fetch -> rule validation -> markdown reporter (with AI suggestions) -> comment posting.
+platforms:
+  gitlab:
+    url: "http://localhost:${MOCK_PORT}"
+    token: "test-token"
+    allow_localhost: true
+
+rules:
+  title-format:
+    pattern: "^(feat|fix|chore|refactor|docs|test|ci):"
+  branch-naming:
+    pattern: "^(feature|fix|chore|release)/"
+
+reporters:
+  console: true
+  markdown: true

@@ -1,0 +1,262 @@
+# Base Karandash config for all Android/KMP projects.
+# Secrets must be set in CI/CD; defaults below are used when not set.
+
+env:
+  BIFROST_API_KEY: null
+  BIFROST_BASE_URL: null
+  KARANDASH_PROJECT_TOKEN: null
+  REVIEW_BOT_TOKEN: null
+  KARANDASH_JIRA_KEY: null
+  KARANDASH_CONFIG: ".karandash"
+  KARANDASH_AI_MAX_TOKENS: "30000"
+
+# Reusable named patterns — referenced as @project-ticket, @project-title, etc.
+# Child configs can override any of these via extends.
+patterns:
+  project-ticket: "@jira-ticket(@project:${KARANDASH_JIRA_KEY})"
+  project-tickets: "@one-or-more(@bracketed(@project-ticket))"
+  project-title: "@optional(@project-tickets ).+"
+  changelog-entry: "@bracketed(@project-ticket) .+"
+  changelog-line: "^CHANGELOG: @separated-list(@changelog-entry, ', ')\\.$"
+
+platforms:
+  gitlab:
+    url: "https://gitlab.example.com"
+    token: "${KARANDASH_PROJECT_TOKEN}"
+
+reporters:
+  markdown: true
+  console: false
+
+rules:
+  # --- MR Title Format ---
+  # Format: optional [MAPS-{id}]... MR title
+  # Android-only projects: no platform tag required — all commits are Android by definition.
+  # KMP and multi-platform projects override these patterns and add context-tag via extends.
+  title-format:
+    pattern: "@project-title"
+    min-length: 10
+    max-length: 120
+    bail-on-fail: true
+    suggestion: "Format: '[${KARANDASH_JIRA_KEY}-123] Title' or just 'Title'. Examples: '[${KARANDASH_JIRA_KEY}-42] Add device profile screen', 'Fix null pointer in login flow'. Length: 10–120 chars."
+    explanation: "Consistent MR titles make git history searchable by task ID and enable automated changelog generation."
+
+  # --- Commit Title Format ---
+  # Format: optional [PROJ-{id}]... Commit title
+  commit-messages:
+    pattern: "@project-title"
+    min-length: 10
+    max-length: 72
+    bail-on-fail: true
+    suggestion: "Format: '[${KARANDASH_JIRA_KEY}-123] Description' or just 'Description'. Examples: '[${KARANDASH_JIRA_KEY}-42] Implement device profile UI', 'Fix null pointer in login'. Max 72 chars."
+    explanation: "Consistent commit messages improve git log readability and enable per-task release notes."
+
+  # --- Jira Ticket Validation ---
+  jira-ticket:
+    when: 'title_matches("@any-ticket")'
+    projectKeys: ["${KARANDASH_JIRA_KEY}"]
+    suggestion: "Use your project's JIRA key in the ticket reference. Example: '[${KARANDASH_JIRA_KEY}-123]' not '[WAL-123]' in an ${KARANDASH_JIRA_KEY} project."
+    explanation: "JIRA references link code changes to project requirements for audit trails and sprint tracking."
+
+  # --- Cross-Entity Consistency ---
+  # Commit task IDs must be subset of MR task IDs
+  # CHANGELOG task IDs must be consistent
+  cross-entity-consistency:
+    ticket-format: jira
+    ticket-projects: ["${KARANDASH_JIRA_KEY}"]
+    commitTasksSubsetOfMr: true
+    changelogConsistency: true
+    changelogPrefix: "CHANGELOG:"
+    mrTaskSource: "title"
+    changelogDuplicateRequiresMatchingText: true
+    suggestion: "All task IDs in commits must also appear in the MR title. If a commit references [${KARANDASH_JIRA_KEY}-999], the MR title must include [${KARANDASH_JIRA_KEY}-999] too."
+    explanation: "Orphaned task references cause broken JIRA links and inaccurate sprint reports."
+
+  # --- Draft Prevention ---
+  draft-prevention:
+    wip-markers: ["WIP", "DRAFT", "DO NOT MERGE"]
+    suggestion: "In GitLab, click 'Mark as ready'. Remove 'WIP:', '[WIP]', or 'Draft:' from the title if present."
+    explanation: "Merging incomplete work can break the main branch and block other developers."
+
+  # --- Labels ---
+  labels:
+    requiredLabels: []
+    suggestion: "No labels required currently. When labels are configured, apply them via the MR sidebar in GitLab."
+    explanation: "Labels categorize MRs for filtering, metrics, and automated workflow routing."
+
+  size-limits:
+    maxFiles: 75
+    maxLines: 2000
+    maxCommits: 30
+    suggestion: "Split large MRs into smaller focused ones. Aim for a single logical change per MR."
+    explanation: "Large MRs are harder to review thoroughly and increase the risk of bugs slipping through."
+
+  # --- Language Policy ---
+  # All text must be in English (Latin script only) in MR title, branch name, commit title
+  # Supported scripts: latin, cyrillic, greek, arabic, cjk, hebrew, devanagari
+  # Custom Unicode ranges: e.g., "0400-04FF" for Cyrillic
+  language-policy:
+    allowedScripts: ["latin"]
+    checkMrTitle: true
+    checkCommitTitle: true
+    checkBranchName: true
+    checkMrDescription: false
+    checkCommitDescription: false
+    suggestion: "Replace non-Latin characters with English equivalents in MR title, branch name, and commit title."
+    explanation: "English-only text ensures all team members can read git-flow information regardless of native language."
+
+# CHANGELOG required whenever a JIRA ticket appears in the MR title.
+# Android-only projects: all changes are Android, so any JIRA ticket triggers this.
+# KMP and multi-platform projects override this condition to be platform-specific.
+# Format: CHANGELOG: [PROJ-123] Description. or multi-task: CHANGELOG: [PROJ-123] Task one, [PROJ-456] Task two.
+policies:
+  # ── Rule config overrides ──────────────────────────────────────────────
+  # When a JIRA ticket appears in the MR title, require a CHANGELOG line in
+  # commit bodies that reference a JIRA ticket. Commits without a ticket in
+  # their subject are exempt. Android-only projects: all commits are Android
+  # by definition; KMP projects override the condition to be platform-specific.
+  - name: changelog-requirement
+    when: 'title_matches("@any-ticket")'
+    override:
+      commit-body:
+        pattern: "@changelog-line"
+        required-when-subject-matches: "@any-ticket"
+        required-when-title-matches: "@any-ticket"
+        matchMode: "fullMatch"
+        suggestion: "Add CHANGELOG line ending with a period: 'CHANGELOG: [${KARANDASH_JIRA_KEY}-123] Description.' or for multiple tasks: 'CHANGELOG: [${KARANDASH_JIRA_KEY}-123] Task one, [${KARANDASH_JIRA_KEY}-456] Task two.' (description can be in Russian)"
+        explanation: "CHANGELOG lines enable per-platform release notes generation."
+
+  # ── AI gating ──────────────────────────────────────────────────────────
+  # Skip all AI analysis modules on draft/WIP MRs to save API tokens.
+  # Uses modules: to target only AI modules; all other rules still run.
+  - name: ai-draft-gating
+    when: 'is_draft'
+    modules:
+      - risk-scoring
+      - review-comments
+      - code-suggestions
+      - review-thread-analysis
+      - mr-summary
+    enabled: false
+
+cache:
+  dir: "cache"
+  state:
+    ttl: "7d"
+  responses:
+    enabled: true
+    ttl: "60s"
+  memory:
+    max-entries: 128
+
+ai:
+  provider: "bifrost"
+  model: "openrouter/moonshotai/kimi-k2.5"
+  api-key: "${BIFROST_API_KEY}"
+  base-url: "${BIFROST_BASE_URL}"
+  max-token-budget: "${KARANDASH_AI_MAX_TOKENS}"
+  fail-on-error: false
+  timeout: "8m"
+  execution-timeout: "10m"
+  max-retries: 1
+  priority: 200
+  mode: supplement
+  response-language: "English"
+  strictness: "standard"
+
+  extra-instructions: { file: "instructions/extra-instructions.md" }
+
+  # --- Prompts ---
+  # Main review prompt
+  prompts:
+    review-comments:
+      layered:
+        include-builtin: true
+        sources:
+          - file: "prompts/review-prompt.md"
+
+  # --- Per-Rule Model Overrides ---
+  # Light rules use a fast/cheap MoE model (35B, 3B active);
+  # heavy code-analysis rules keep the default kimi-k2.5.
+  models:
+    review-thread-analysis: "openrouter/qwen/qwen3.5-35b-a3b"
+    mr-summary: "openrouter/qwen/qwen3.5-35b-a3b"
+    risk-scoring: "openrouter/qwen/qwen3.5-35b-a3b"
+
+  # --- AI Sub-Rules ---
+  risk-scoring:
+    enabled: true
+    model: "openrouter/qwen/qwen3.5-35b-a3b"
+
+  review-comments:
+    enabled: true
+
+  code-suggestions:
+    enabled: true
+    mode: "inline"
+    min-severity: "warning"
+
+  review-thread-analysis:
+    enabled: true
+
+  mr-summary:
+    enabled: true
+
+  cost-budget:
+    max-tokens-per-run: "${KARANDASH_AI_MAX_TOKENS}"
+    on-budget-exceeded: "skip-remaining"
+
+  # --- Grounding Verification --- 
+  # Verify AI findings reference real code symbols and snippets.
+  grounding:
+    check-symbol-existence: true
+    check-code-snippets: true
+    auto-downgrade-refuted: true
+
+  # --- Finding Filter --- 
+  filter:
+    max-per-rule: 10
+    max-per-file: 5
+    min-confidence: 0.3
+    deduplicate: true
+
+  # --- Downgrade severity --- 
+  # Cap all AI review ERRORs to WARNING
+  severity-overrides:
+    - rule: review-comments
+      reclassify:
+        error: warning
+
+  # --- Size Policy ---
+  size-policy:
+    skip:
+      maxFiles: 500
+      maxTotalLines: 50000
+      maxCommits: 200
+    exclude:
+      patterns:
+        - "**/generated/**"
+        - "**/*.generated.*"
+        - "**/build/**"
+        - "**/.gradle/**"
+        - "**/Pods/**"
+        - "**/package-lock.json"
+        - "**/*.md"
+    partial-review:
+      maxFiles: 40
+      strategy: "most-changed"
+    diff-preprocessor:
+      skip-deleted-files: true
+      skip-pure-renames: true
+      strip-diff-metadata: true
+      skip-binary-diffs: true
+
+  # --- Scopes (per-platform review context) ---
+  scopes:
+    android:
+      paths: ["**/*.kt", "**/*.java", "**/*.xml", "**/*.gradle.kts"]
+      instructions: { file: "scopes/android-instructions.md" }
+      best-practices: { file: "scopes/android-best-practices.md" }
+    ci:
+      paths: ["ci/**", ".gitlab-ci.yml", ".github/**", "Makefile"]
+      instructions: { file: "scopes/ci-instructions.md" }

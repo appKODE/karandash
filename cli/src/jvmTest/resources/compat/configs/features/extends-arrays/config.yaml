@@ -1,0 +1,14 @@
+# Source: configuration-schema.md "extends" merge rules. A child array replaces the parent array
+# (scripts, rule lists); `policies` is the exception and merges by `name`.
+extends: "../extends-arrays-base/config.yaml"
+
+scripts:
+  - path: .karandash/child-checks.js
+rules:
+  jira-ticket:
+    project-keys: [CHILD]
+policies:
+  - name: dry-run-info
+    when: 'is_dry_run'
+    modules: [labels]
+    severity: info

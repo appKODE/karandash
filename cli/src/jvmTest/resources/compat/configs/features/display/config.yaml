@@ -1,0 +1,9 @@
+# Source: DisplayConfig KDoc (core/config).
+display:
+  git:
+    short-sha-length: 10
+  watcher:
+    debounce: 750ms
+  console:
+    success-mark: "OK"
+    failure-mark: "FAIL"

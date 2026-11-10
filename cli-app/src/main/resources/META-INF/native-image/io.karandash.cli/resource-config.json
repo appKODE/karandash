@@ -1,0 +1,28 @@
+{
+  "resources": {
+    "includes": [
+      {
+        "pattern": ".*\\.properties$"
+      },
+      {
+        "pattern": ".*\\.yaml$"
+      },
+      {
+        "pattern": ".*\\.yml$"
+      },
+      {
+        "pattern": ".*\\.json$"
+      },
+      {
+        "pattern": ".*\\.txt$"
+      },
+      {
+        "pattern": "META-INF/.*"
+      },
+      {
+        "pattern": "version\\.properties"
+      }
+    ]
+  },
+  "bundles": []
+}

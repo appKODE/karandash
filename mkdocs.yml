@@ -1,0 +1,182 @@
+site_name: Karandash
+site_description: The fastest, most extensible MR validation tool
+site_author: Karandash Team
+site_url: https://appkode.github.io/karandash/
+repo_url: https://github.com/appKODE/karandash
+repo_name: appKODE/karandash
+
+strict: true
+
+validation:
+  omitted_files: warn
+  absolute_links: warn
+  unrecognized_links: warn
+  anchors: warn
+
+theme:
+  name: material
+  palette:
+    primary: indigo
+    accent: indigo
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - toc.integrate
+    - search.suggest
+    - search.highlight
+
+nav:
+  - Home: index.md
+  - Getting Started:
+    - Installation: getting-started/installation.md
+    - Quick Start: getting-started/quick-start.md
+  - Configuration:
+    - YAML Config: configuration/YAML_CONFIG.md
+    - Zero-Config: configuration/ZERO_CONFIG.md
+    - Config Inheritance: features/config-inheritance.md
+    - Profiles: features/profiles.md
+    - Scripts: configuration/scripts.md
+    - Dangerfile: configuration/dangerfile.md
+  - Rules:
+    - Overview: rules/index.md
+    - Title & Description:
+      - Title Format: rules/title-format.md
+      - Description Format: rules/description-format.md
+      - Commit Messages: rules/commit-messages.md
+      - Commit Body: rules/commit-body.md
+      - JIRA Ticket: rules/jira-ticket.md
+    - Branch & Labels:
+      - Branch Naming: rules/branch-naming.md
+      - Labels: rules/labels.md
+      - Context Tags: rules/context-tags.md
+    - Files & Changes:
+      - File Changes: rules/file-changes.md
+      - Size Limits: rules/size-limits.md
+      - Security: rules/security.md
+      - Dependency Validation: rules/dependency-validation.md
+    - Approvals & Reviewers:
+      - Approvals: rules/approvals.md
+      - Reviewers: rules/reviewers.md
+      - Codeowners: rules/codeowners.md
+    - CI/CD & Status:
+      - CI/CD Status: rules/cicd-status.md
+      - Conflict Detection: rules/conflict-detection.md
+      - Draft Detection: rules/draft-detection.md
+    - Advanced:
+      - Conditional Rules: rules/conditional.md
+      - Cross-Entity Consistency: rules/cross-entity-consistency.md
+      - Language Policy: rules/language-policy.md
+      - JIRA Enrichment: rules/jira-validation.md
+    - AI:
+      - AI-Powered Rules: rules/ai-rules.md
+  - Platforms:
+    - Overview: platforms/index.md
+    - GitLab: platforms/gitlab.md
+    - GitHub: platforms/github.md
+    - Bitbucket: platforms/bitbucket.md
+    - Azure DevOps: platforms/azure-devops.md
+    - Gerrit: platforms/gerrit.md
+    - Gitea: platforms/gitea.md
+    - AWS CodeCommit: platforms/aws-codecommit.md
+    - Jenkins: platforms/jenkins.md
+    - Local Git: platforms/local-git.md
+  - Reporters:
+    - Overview: reporters/index.md
+    - Formats:
+      - Console: reporters/console.md
+      - Markdown: reporters/markdown.md
+      - JSON: reporters/json.md
+      - SARIF: reporters/sarif.md
+      - HTML: reporters/html.md
+      - JUnit: reporters/junit.md
+      - Reviewdog: reporters/reviewdog.md
+      - Code Quality: reporters/codequality.md
+    - Outputs:
+      - Slack: reporters/slack.md
+      - Email: reporters/email.md
+      - Webhook: reporters/webhook.md
+      - Status: reporters/status.md
+      - Templates: reporters/template.md
+  - Features:
+    - AI Features: features/AI_FEATURES_REFERENCE.md
+    - Watch Mode: features/watch-mode.md
+    - Auto-Fix: features/auto-fix.md
+    - Enrichment: features/enrichment.md
+    - Knowledge Context: features/knowledge-context.md
+  - Integrations:
+    - CI/CD Integration: integrations/ci-cd-integration.md
+    - Reviewdog: integrations/reviewdog.md
+  - CLI Reference:
+    - Overview: reference/cli-reference.md
+    - Core:
+      - validate: reference/cli/validate.md
+      - validate-local: reference/cli/validate-local.md
+      - simulate: reference/cli/simulate.md
+      - test-rule: reference/cli/test-rule.md
+    - Configuration:
+      - init: reference/cli/init.md
+      - wizard: reference/cli/wizard.md
+      - config: reference/cli/config.md
+      - explain: reference/cli/explain.md
+      - verify-policy: reference/cli/verify-policy.md
+      - profile: reference/cli/profile.md
+      - validate-extends: reference/cli/validate-extends.md
+    - Analysis:
+      - doctor: reference/cli/doctor.md
+      - deps: reference/cli/deps.md
+      - stats: reference/cli/stats.md
+      - calibrate: reference/cli/calibrate.md
+      - ai: reference/cli/ai.md
+    - Reporting:
+      - report: reference/cli/report.md
+      - format: reference/cli/format.md
+      - mutate: reference/cli/mutate.md
+    - Merge requests:
+      - mr: reference/cli/mr.md
+    - Cache:
+      - cache: reference/cli/cache.md
+    - Plugins:
+      - plugin: reference/cli/plugin.md
+    - Security:
+      - sign: reference/cli/sign.md
+      - generate: reference/cli/generate.md
+  - Reference:
+    - API Reference: reference/api-reference.md
+    - Configuration Schema: reference/configuration-schema.md
+    - Environment Variables: reference/environment-variables.md
+    - Observability: reference/observability.md
+    - Error Codes: reference/error-codes.md
+    - Severity Policy: reference/severity-policy.md
+    - Patterns: reference/patterns.md
+    - Glossary: reference/glossary.md
+  - Distributions:
+    - Overview: distributions/README.md
+    - Choosing: distributions/choosing.md
+    - Native Binary: distributions/native-binary.md
+    - Native Image: distributions/native-image.md
+    - jpackage: distributions/jpackage.md
+  - Plugins:
+    - Overview: plugins/overview.md
+    - Creating Plugins: plugins/creating-plugins.md
+    - Plugin Tutorial: plugins/tutorial.md
+    - JavaScript Guide: plugins/js-plugin-guide.md
+    - Native Guide: plugins/native-plugin-guide.md
+    - WASM Guide: plugins/wasm-plugin-guide.md
+    - Publishing: guides/publishing-plugins.md
+    - Extracting Built-ins: plugins/extracting-builtin-modules.md
+    - Adding Bridge Types: plugins/adding-bridge-types.md
+    - WASM Export Table: native-sdk/wasm-exports.md
+  - Advanced:
+    - Architecture: advanced/ARCHITECTURE_MULTIPLATFORM.md
+    - Plugin System: advanced/MULTIPLATFORM_PLUGIN_SYSTEM.md
+    - JVM vs Native: advanced/JVM_VS_NATIVE_FEATURES.md
+    - Build from Source: advanced/build-from-source.md
+    - Build Native CLI: advanced/BUILD_NATIVE_CLI.md
+  - Development:
+      - Contributor Conventions: development/conventions.md
+      - Feature Matrix: development/feature-matrix.md
+      - AI Eval Harness: development/ai-eval.md
+      - Known Limits: development/known-limits.md
+  - Guides:
+    - Troubleshooting: guides/troubleshooting.md
+    - Self-hosted Cache Server: guides/self-hosted-cache-server.md

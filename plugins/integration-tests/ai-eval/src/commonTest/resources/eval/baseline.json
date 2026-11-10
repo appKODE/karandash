@@ -1,0 +1,197 @@
+{
+    "overall": {
+        "precision": 0.975,
+        "recall": 0.9512,
+        "f1": 0.963,
+        "tp": 39,
+        "fp": 1,
+        "fn": 2,
+        "duplicates": 1,
+        "anchorable": 10,
+        "anchored": 10
+    },
+    "analyzers": {
+        "change-categorization": {
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0,
+            "tp": 5
+        },
+        "code-quality": {
+            "precision": 1.0,
+            "recall": 0.8889,
+            "f1": 0.9412,
+            "tp": 8,
+            "fn": 1,
+            "anchorable": 4,
+            "anchored": 4
+        },
+        "code-suggestions": {
+            "precision": 1.0,
+            "recall": 0.5,
+            "f1": 0.6667,
+            "tp": 1,
+            "fn": 1,
+            "anchorable": 1,
+            "anchored": 1
+        },
+        "description-quality": {
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0,
+            "tp": 2
+        },
+        "design-doc-drift": {
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0,
+            "tp": 1
+        },
+        "fix-suggestions": {
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0,
+            "tp": 1
+        },
+        "generate-description": {
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0,
+            "tp": 1
+        },
+        "mr-summary": {
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0,
+            "tp": 5
+        },
+        "outdated-docs": {
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0,
+            "tp": 1
+        },
+        "ownership-analysis": {
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0,
+            "tp": 2
+        },
+        "pr-split": {
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0,
+            "tp": 1
+        },
+        "review-comments": {
+            "precision": 0.8333,
+            "recall": 1.0,
+            "f1": 0.9091,
+            "tp": 5,
+            "fp": 1,
+            "duplicates": 1,
+            "anchorable": 5,
+            "anchored": 5
+        },
+        "review-thread-analysis": {
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0,
+            "tp": 1
+        },
+        "risk-scoring": {
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0,
+            "tp": 4
+        },
+        "similar-issues": {
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0,
+            "tp": 1
+        }
+    },
+    "pipeline": {
+        "01-user-lookup-bugs": {
+            "notes": 3,
+            "findingsKept": 10,
+            "findingsDropped": 8,
+            "silentDrops": 0,
+            "estimatedTokens": 15333
+        },
+        "02-payments-api-rename": {
+            "notes": 0,
+            "findingsKept": 5,
+            "findingsDropped": 1,
+            "silentDrops": 0,
+            "estimatedTokens": 4146
+        },
+        "03-mixed-auth-billing": {
+            "notes": 0,
+            "findingsKept": 5,
+            "findingsDropped": 0,
+            "silentDrops": 0,
+            "estimatedTokens": 5699
+        },
+        "04-clean-kdoc-typo": {
+            "notes": 0,
+            "findingsKept": 0,
+            "findingsDropped": 0,
+            "silentDrops": 0,
+            "estimatedTokens": 7411
+        },
+        "05-clean-dependency-bump": {
+            "notes": 0,
+            "findingsKept": 0,
+            "findingsDropped": 0,
+            "silentDrops": 0,
+            "estimatedTokens": 6996
+        },
+        "06-order-cancel-swallowed": {
+            "notes": 3,
+            "findingsKept": 7,
+            "findingsDropped": 2,
+            "silentDrops": 0,
+            "estimatedTokens": 9295
+        },
+        "07-hardcoded-api-key": {
+            "notes": 1,
+            "findingsKept": 5,
+            "findingsDropped": 2,
+            "silentDrops": 0,
+            "estimatedTokens": 8835
+        },
+        "08-clean-test-rename": {
+            "notes": 0,
+            "findingsKept": 0,
+            "findingsDropped": 0,
+            "silentDrops": 0,
+            "estimatedTokens": 7551
+        },
+        "09-clean-import-order": {
+            "notes": 0,
+            "findingsKept": 0,
+            "findingsDropped": 0,
+            "silentDrops": 0,
+            "estimatedTokens": 0
+        },
+        "10-feature-clamp-helper": {
+            "notes": 0,
+            "findingsKept": 3,
+            "findingsDropped": 0,
+            "silentDrops": 0,
+            "estimatedTokens": 8975
+        }
+    },
+    "coverage": {
+        "cases": 10,
+        "analyzers": 15,
+        "labels": 41
+    },
+    "notMeasured": {
+        "precisionLowerBound": "40 synthetic findings are too few for a meaningful interval; precision is a point estimate with zero tolerance",
+        "costUsd": "replay has no provider pricing; cost is estimated tokens (chars / 4) per case, +15% floor",
+        "minedFixtures": "mined MR fixtures are confidential client data and never committed; only the synthetic corpus runs in the gate"
+    }
+}

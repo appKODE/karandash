@@ -1,0 +1,259 @@
+# Pull request and main-branch CI.
+#  gate        tools/ci/gate.sh on Linux: format, JVM tests + kover floors, apiCheck, lint, static self-checks,
+#              linuxX64 tests + link + smoke, benchmark regression check (native and jar), integration scripts
+#              (CI=true: a skipped example check is a failure, WASM build), project scenarios; then the action smoke
+#  gate2       tools/ci/gate2.sh: plugin isolation, extensibility, Gradle self-checks (no orphan script),
+#              consumer guard, dokka, mkdocs --strict
+#  build-logic convention plugin tests
+#  macos       macosArm64 tests, release kexe link + smoke, compat-diff of the kexe against the jar
+#  vscode      compiles and packages the VS Code extension
+#  audit-corpus unit tests of the eval corpus fetcher (tools/audit)
+#  benchmarks  benchmark-cli.sh on the gate's kexe and jar, plus the comparison report
+#  dogfood     karandash validates its own pull request (zero-config) through the GitHub platform service
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+env:
+  GRADLE_OPTS: -Dorg.gradle.daemon=false
+
+jobs:
+  # gate.sh split in two jobs (GATE_STEPS) so each fits a 7.7 GB / 14 GB-disk private runner
+  # gate.sh split by concern: each job runs the named steps (GATE_STEPS) on its own runner, so no job outgrows 7.7 GB
+  gate:
+    name: gate (${{ matrix.part }})
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - part: static
+            steps: FMT STATIC TESTFILES SELFCHECK
+          - part: jvm
+            steps: JVM
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+        with:
+          # LocalGitProviderTest diffs HEAD~1..HEAD
+          fetch-depth: 2
+      - uses: ./.github/actions/setup
+      - uses: ./.github/actions/toolchains
+      - name: Gate
+        env:
+          GATE_STEPS: ${{ matrix.steps }}
+        run: bash tools/ci/gate.sh
+      - if: ${{ always() && !success() }}
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: gate-logs-${{ matrix.part }}
+          path: build/gate-logs/
+          retention-days: 14
+
+  # native tests, release link and fat jar; the binaries feed e2e and benchmarks
+  native:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+      - uses: ./.github/actions/setup
+      - name: Gate
+        env:
+          GATE_STEPS: NATIVE SMOKE
+        run: bash tools/ci/gate.sh
+      - name: Action smoke
+        env:
+          KARANDASH_NATIVE: cli/build/bin/linuxX64/releaseExecutable/cli.kexe
+        run: bash tools/ci/selfcheck-action-yml.sh
+      - if: ${{ always() && !success() }}
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: gate-logs-native
+          path: build/gate-logs/
+          retention-days: 14
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: gate-binaries
+          path: |
+            cli/build/bin/linuxX64/releaseExecutable/cli.kexe
+            cli/build/libs/karandash.jar
+          retention-days: 7
+
+  # end-to-end runs against the binaries the native job built
+  e2e:
+    name: e2e (${{ matrix.part }})
+    needs: native
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - part: bench
+            steps: BENCH BENCHJAR
+          - part: integration
+            steps: INTEG
+          - part: scenarios
+            steps: SCENARIOS
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+      - uses: ./.github/actions/setup
+      - uses: ./.github/actions/toolchains
+      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4.3.0
+        with:
+          name: gate-binaries
+          path: cli/build
+      - run: chmod +x cli/build/bin/linuxX64/releaseExecutable/cli.kexe
+      - name: Gate
+        env:
+          GATE_STEPS: ${{ matrix.steps }}
+        run: bash tools/ci/gate.sh
+      - if: ${{ always() && !success() }}
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: gate-logs-${{ matrix.part }}
+          path: |
+            build/gate-logs/
+            build/integration-logs/
+          retention-days: 14
+
+  gate2:
+    runs-on: ubuntu-latest
+    timeout-minutes: 180
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+      - uses: ./.github/actions/setup
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5.6.0
+        with:
+          python-version: '3.12'
+      - name: Gradle 8.5 for the init-script check, wasm-ld for the WASM build
+        run: |
+          # The WASM build compiles the WASM C standalone with clang --target=wasm32, which links through wasm-ld (lld)
+          sudo apt-get update -q && sudo apt-get install -y -q --no-install-recommends lld
+          curl -fsSL -o "$RUNNER_TEMP/gradle-8.5.zip" https://services.gradle.org/distributions/gradle-8.5-bin.zip
+          echo "9d926787066a081739e8200858338b4a69e837c3a821a33aca9db09dd4a41026  $RUNNER_TEMP/gradle-8.5.zip" | sha256sum -c -
+          unzip -q "$RUNNER_TEMP/gradle-8.5.zip" -d "$RUNNER_TEMP"
+          echo "GRADLE85=$RUNNER_TEMP/gradle-8.5/bin/gradle" >> "$GITHUB_ENV"
+      - name: Gate 2
+        run: bash tools/ci/gate2.sh
+      - if: ${{ always() && !success() }}
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: gate2-logs
+          path: build/gate-logs/
+          retention-days: 14
+
+  build-logic:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+      - uses: ./.github/actions/setup
+      - run: ./gradlew -p build-logic test
+
+  macos:
+    runs-on: macos-14
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+      - uses: ./.github/actions/setup
+      - run: ./gradlew macosArm64Test :cli:linkReleaseExecutableMacosArm64 :cli:shadowJar
+      - name: Smoke
+        run: |
+          cli/build/bin/macosArm64/releaseExecutable/cli.kexe --version
+          cli/build/bin/macosArm64/releaseExecutable/cli.kexe --help
+      - name: compat-diff, native against JVM
+        run: bash tools/ci/compat-diff.sh cli/build/libs/karandash.jar cli/build/bin/macosArm64/releaseExecutable/cli.kexe build/compat-kexe
+      - if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: compat-kexe
+          path: build/compat-kexe/
+          if-no-files-found: ignore
+          retention-days: 7
+
+  vscode:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    defaults:
+      run:
+        working-directory: tools/ide-extensions/vscode-extension
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          node-version: '20'
+      - run: npm ci && npm run compile
+      - run: npm run package -- --no-dependencies
+
+  audit-corpus:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+      - run: python3 -I tools/audit/test_fetch_gitlab_corpus.py
+
+  benchmarks:
+    needs: native
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+      - uses: actions/setup-java@cf277c60eb25467037889841efdb72551f06f6c3 # v4.9.1
+        with:
+          distribution: zulu
+          java-version: '17'
+      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4.3.0
+        with:
+          name: gate-binaries
+          path: cli/build
+      - name: Benchmark native and fat jar
+        run: |
+          sudo apt-get install -y -qq --no-install-recommends libcurl4
+          chmod +x cli/build/bin/linuxX64/releaseExecutable/cli.kexe
+          bash tools/benchmarks/benchmark-cli.sh cli/build/bin/linuxX64/releaseExecutable/cli.kexe 50 native
+          bash tools/benchmarks/benchmark-cli.sh "java -jar cli/build/libs/karandash.jar" 50 fatjar
+          bash tools/benchmarks/generate-report.sh benchmarks/results/native.csv benchmarks/results/fatjar.csv
+          cat benchmarks/results/summary.md >> "$GITHUB_STEP_SUMMARY"
+      - if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: benchmark-results
+          path: benchmarks/results/
+          if-no-files-found: ignore
+          retention-days: 90
+
+  dogfood:
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    # a fork pull request gets a read-only token: the run reports what it can and never blocks the merge
+    continue-on-error: true
+    permissions:
+      contents: read
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+      - uses: ./.github/actions/setup
+      - run: ./gradlew :cli:shadowJar -x jvmTest
+      - name: karandash validate
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: java -jar cli/build/libs/karandash.jar validate --verbose --diagnostic diagnostics/diagnostic.json --global-timeout=5m
+      - if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: diagnostics
+          path: diagnostics/
+          if-no-files-found: ignore
+          retention-days: 30

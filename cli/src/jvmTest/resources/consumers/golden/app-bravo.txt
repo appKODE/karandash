@@ -1,0 +1,6 @@
+rules: commitMessages crossEntityConsistency draftPrevention jiraTicket labels languagePolicy sizeLimits titleFormat
+changelog-entry = \[BRAVO-\d+\] .+
+changelog-line = ^CHANGELOG: \[BRAVO-\d+\] .+(?:, \[BRAVO-\d+\] .+)*\.$
+project-ticket = BRAVO-\d+
+project-tickets = (?:\[BRAVO-\d+\])+
+project-title = (?:(?:\[BRAVO-\d+\])+)?.+

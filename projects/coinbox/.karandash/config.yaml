@@ -1,0 +1,16 @@
+# Coinbox fintech Android app (native Android, early stage).
+# Extends base. All rules and AI config inherited.
+# Secrets (GITLAB_TOKEN, BIFROST_API_KEY, BIFROST_BASE_URL, KARANDASH_BASE_TOKEN) must be set in CI/CD.
+#
+# Production extends (in coinbox-android repo's .karandash/config.yaml):
+#   extends:
+#     url: "https://gitlab.example.com/api/v4/projects/<BASE_PROJECT_ID>/repository/files/.karandash%2Fconfig.yaml/raw?ref=main"
+#     auth:
+#       type: bearer-token
+#       token: "${KARANDASH_BASE_TOKEN}"
+
+extends: "../../base/.karandash/config.yaml"
+
+env:
+  KARANDASH_JIRA_KEY: "CBX"
+  KARANDASH_AI_MAX_TOKENS: "10000"

@@ -1,0 +1,45 @@
+# Karandash Benchmark Environment Image
+#
+# Lightweight runtime with JRE for running benchmarks.
+# Does NOT contain Karandash binaries - those are injected via:
+#   - CI artifacts (copied into the job workspace)
+#   - Volume mount (local development)
+#
+# Build:
+#   docker build --platform linux/amd64 -f docker/Dockerfile.benchmark-env -t karandash/benchmark-env .
+#
+# Usage in CI:
+#   image: ${CI_REGISTRY_IMAGE}/benchmark-env:latest-amd64
+#   needs: [build-fatjar, build-native]
+#   script:
+#     - bash tools/benchmarks/benchmark-cli.sh cli.kexe 50 native
+#
+# Usage locally:
+#   docker run --rm --platform linux/amd64 \
+#     -v $(pwd):/workspace -w /workspace \
+#     -e BENCH_ITERATIONS=30 \
+#     karandash/benchmark-env \
+#     bash tools/benchmarks/benchmark-cli.sh build/docker-out/cli.kexe 30 native
+
+FROM debian:bookworm-slim
+
+LABEL org.opencontainers.image.title="karandash-benchmark-env"
+LABEL org.opencontainers.image.description="Lightweight benchmark runtime for Karandash"
+
+RUN set -eux; \
+    find /etc/apt -type f -name '*.list' -print0 | xargs -0r sed -i 's|http://|https://|g'; \
+    apt-get -o Acquire::Retries=5 -o Acquire::http::No-Cache=true -o Acquire::https::No-Cache=true update; \
+    apt-get install -y --no-install-recommends \
+        openjdk-17-jre-headless \
+        libssl3 \
+        libcurl4 \
+        ca-certificates \
+        coreutils \
+        bash \
+        python3; \
+    rm -rf /var/lib/apt/lists/*
+
+ENV BENCH_ITERATIONS=30
+
+WORKDIR /workspace
+CMD ["bash"]

@@ -1,0 +1,69 @@
+{
+  "responses": {
+    "change-categorization": {
+      "suggestedLabels": [
+        "feature"
+      ],
+      "confidence": 0.9,
+      "reasoning": "Adds gateway configuration."
+    },
+    "code-quality": {
+      "overallScore": 0.4,
+      "dimensions": {
+        "correctness": 0.9,
+        "errorHandling": 0.8,
+        "readability": 0.9,
+        "maintainability": 0.6,
+        "performance": 0.9,
+        "security": 0.1,
+        "design": 0.6
+      },
+      "issues": [
+        {
+          "file": "src/main/kotlin/payments/GatewayConfig.kt",
+          "line": 6,
+          "dimension": "security",
+          "severity": "error",
+          "message": "Live API key committed to source",
+          "suggestion": "Read the key from the environment and rotate it"
+        }
+      ],
+      "strengths": [],
+      "summary": "A live credential is hard coded."
+    },
+    "mr-summary": {
+      "summary": "Adds the payment gateway configuration object.",
+      "keyChanges": [
+        "GatewayConfig"
+      ],
+      "risks": [
+        "Committed credential"
+      ],
+      "reviewFocus": [
+        "GatewayConfig.API_KEY"
+      ]
+    },
+    "review-comments": {
+      "comments": [
+        {
+          "file": "src/main/kotlin/payments/GatewayConfig.kt",
+          "line": 6,
+          "category": "security",
+          "severity": "error",
+          "confidence": 0.97,
+          "message": "A live API key is committed in source and must be rotated.",
+          "fix": "Load the key from an environment variable at startup."
+        }
+      ]
+    },
+    "risk-scoring": {
+      "riskScore": 0.85,
+      "riskLevel": "high",
+      "confidence": 0.9,
+      "factors": [
+        "Live credential in version control"
+      ],
+      "summary": "High risk: leaked credential."
+    }
+  }
+}

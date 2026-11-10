@@ -1,0 +1,64 @@
+scenarios:
+  - name: "Valid: CBX JIRA + English title + CHANGELOG"
+    mr:
+      title: "[CBX-42] Add OTP auto-fill from SMS"
+      commits:
+        - subject: "[CBX-42] Implement SMS OTP reader"
+          body: "CHANGELOG: [CBX-42] Add OTP auto-fill from SMS."
+      branch: "feature/CBX-42-otp-autofill"
+    expect: pass
+
+  - name: "Valid: no JIRA — no CHANGELOG required"
+    mr:
+      title: "Fix phone number input validation"
+      commits:
+        - subject: "Reject invalid phone number formats"
+      branch: "fix/phone-validation"
+    expect: pass
+
+  - name: "Valid: CBX JIRA + CHANGELOG in Russian"
+    mr:
+      title: "[CBX-100] Improve onboarding flow"
+      commits:
+        - subject: "[CBX-100] Add skip button to onboarding screens"
+          body: "CHANGELOG: [CBX-100] Улучшить флоу онбординга."
+      branch: "feature/CBX-100-onboarding"
+    expect: pass
+
+  - name: "Valid: multi-task CHANGELOG — both tickets in title and commit"
+    mr:
+      title: "[CBX-50] [CBX-51] Fix auth and OTP issues"
+      commits:
+        - subject: "[CBX-50] [CBX-51] Fix session init and OTP expiry"
+          body: "CHANGELOG: [CBX-50] Fix session initialization on login, [CBX-51] Fix OTP expiry not shown."
+      branch: "fix/CBX-50-CBX-51-auth-batch"
+    expect: pass
+
+  - name: "Valid: JIRA in title, mixed commits — only JIRA commit needs CHANGELOG"
+    mr:
+      title: "[CBX-200] Add biometric login"
+      commits:
+        - subject: "[CBX-200] Implement fingerprint authentication"
+          body: "CHANGELOG: [CBX-200] Add biometric login support."
+        - subject: "Add missing biometric permission string"
+          body: ""
+      branch: "feature/CBX-200-biometric"
+    expect: pass
+
+  - name: "Valid: CBX JIRA + CHANGELOG English with trailing period"
+    mr:
+      title: "[CBX-300] Add transaction history filters"
+      commits:
+        - subject: "[CBX-300] Implement date range filter for transactions"
+          body: "CHANGELOG: [CBX-300] Add date range filter to transaction history."
+      branch: "feature/CBX-300-tx-filter"
+    expect: pass
+
+  - name: "Valid: commit task is subset of MR title tasks"
+    mr:
+      title: "[CBX-400] Refactor auth module"
+      commits:
+        - subject: "[CBX-400] Extract AuthRepository from ViewModel"
+          body: "CHANGELOG: [CBX-400] Refactor auth module for testability."
+      branch: "refactor/CBX-400-auth"
+    expect: pass

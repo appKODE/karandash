@@ -1,0 +1,97 @@
+{
+  "id": "03-mixed-auth-billing",
+  "title": "Auth token storage and invoice formatting cleanup",
+  "description": "Stores the auth token and cleans up invoice formatting. Also bumps Gradle plugins.",
+  "commits": [
+    "feat(auth): persist token",
+    "refactor(billing): tidy invoice formatter",
+    "chore: bump plugins"
+  ],
+  "files": [
+    {
+      "path": "src/main/kotlin/auth/TokenStore.kt",
+      "diff": [
+        "@@ -5,3 +5,6 @@ class TokenStore(",
+        "     private val prefs: Prefs,",
+        " ) {",
+        "+    fun save(token: String) {",
+        "+        prefs.putString(\"token\", token)",
+        "+    }",
+        " }"
+      ]
+    },
+    {
+      "path": "src/main/kotlin/auth/LoginViewModel.kt",
+      "diff": [
+        "@@ -1,3 +1,4 @@",
+        " package app",
+        "+// touched by LoginViewModel.kt",
+        " ",
+        " class Placeholder"
+      ]
+    },
+    {
+      "path": "src/main/kotlin/billing/InvoiceFormatter.kt",
+      "diff": [
+        "@@ -1,3 +1,4 @@",
+        " package app",
+        "+// touched by InvoiceFormatter.kt",
+        " ",
+        " class Placeholder"
+      ]
+    },
+    {
+      "path": "src/main/kotlin/billing/InvoiceRepository.kt",
+      "diff": [
+        "@@ -1,3 +1,4 @@",
+        " package app",
+        "+// touched by InvoiceRepository.kt",
+        " ",
+        " class Placeholder"
+      ]
+    },
+    {
+      "path": "build.gradle.kts",
+      "diff": [
+        "@@ -1,3 +1,4 @@",
+        " package app",
+        "+// touched by build.gradle.kts",
+        " ",
+        " class Placeholder"
+      ]
+    }
+  ],
+  "analyzers": [
+    "pr-split",
+    "change-categorization",
+    "risk-scoring",
+    "mr-summary",
+    "code-quality"
+  ],
+  "expected": [
+    {
+      "analyzer": "pr-split",
+      "category": "true"
+    },
+    {
+      "analyzer": "change-categorization",
+      "category": "refactor"
+    },
+    {
+      "analyzer": "risk-scoring",
+      "category": "medium"
+    },
+    {
+      "analyzer": "mr-summary"
+    },
+    {
+      "analyzer": "code-quality"
+    },
+    {
+      "analyzer": "code-quality",
+      "file": "src/main/kotlin/auth/TokenStore.kt",
+      "startLine": 7,
+      "category": "security"
+    }
+  ]
+}

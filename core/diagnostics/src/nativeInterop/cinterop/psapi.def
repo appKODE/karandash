@@ -1,0 +1,12 @@
+headers = windows.h psapi.h
+package = io.karandash.diagnostics.psapi
+linkerOpts.mingw = -lpsapi
+---
+// Peak and current working set of this process in bytes; returns 0 when GetProcessMemoryInfo fails.
+static inline int karandashProcessMemory(unsigned long long *peak, unsigned long long *current) {
+    PROCESS_MEMORY_COUNTERS counters;
+    if (!GetProcessMemoryInfo(GetCurrentProcess(), &counters, sizeof(counters))) return 0;
+    *peak = counters.PeakWorkingSetSize;
+    *current = counters.WorkingSetSize;
+    return 1;
+}

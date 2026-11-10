@@ -1,0 +1,130 @@
+{
+    "rules": {
+        "ruleConfigs": {
+            "titleFormat": {
+                "pattern": "^(feat|fix|docs|test|refactor|chore): .+",
+                "maxLength": 72
+            },
+            "commitMessages": {
+                "pattern": "^(feat|fix|docs|test|refactor|chore): .+",
+                "maxLength": 100
+            },
+            "draftPrevention": {
+                "blockDraft": "fail"
+            },
+            "approval": {
+                "minApprovals": 2,
+                "requiredApprovers": [
+                    "senior-team"
+                ]
+            },
+            "sizeLimits": {
+                "maxLines": 500,
+                "maxFiles": 20
+            },
+            "conflict": {
+                "blockOnConflicts": "fail"
+            }
+        },
+        "ruleMeta": {
+            "titleFormat": {
+                "priority": 100,
+                "bailOnFail": false,
+                "when": null,
+                "mode": "normal",
+                "suggestion": "Use a conventional commit prefix, e.g. 'feat: add login page' or 'fix: handle null response'",
+                "explanation": "Conventional commit prefixes enable automated changelogs and semantic versioning",
+                "concernArea": null,
+                "severity": null,
+                "excludePaths": []
+            },
+            "commitMessages": {
+                "priority": 100,
+                "bailOnFail": false,
+                "when": null,
+                "mode": "normal",
+                "suggestion": "Format commits as '<type>: <description>', e.g. 'feat: add OAuth2 support'",
+                "explanation": "Consistent commit messages improve git history readability and support tooling like release-please",
+                "concernArea": null,
+                "severity": null,
+                "excludePaths": []
+            }
+        }
+    },
+    "platforms": null,
+    "reporters": {
+        "console": {}
+    },
+    "profile": null,
+    "scripts": null,
+    "dangerfile": null,
+    "baseline": null,
+    "dryRun": false,
+    "dryRunScope": null,
+    "allowLocalhost": false,
+    "allowPrivateNetwork": false,
+    "enrichment": null,
+    "enrichmentProviders": null,
+    "ai": null,
+    "aiReports": null,
+    "aiMetrics": null,
+    "autoApprove": null,
+    "cache": null,
+    "limits": {
+        "maxFindings": 10000,
+        "fetchTimeout": "10s",
+        "expressions": {
+            "maxLength": 1000,
+            "maxNestingDepth": 50
+        },
+        "extends": {
+            "maxEntries": 10,
+            "maxDepth": 5,
+            "maxChainSize": 20
+        },
+        "glob": {
+            "maxExpansion": 10,
+            "maxDirectoryDepth": 5
+        },
+        "regex": {
+            "maxPatternLength": 500,
+            "maxQuantifierNesting": 1
+        },
+        "patterns": {
+            "maxExpansionDepth": 20
+        }
+    },
+    "http": {
+        "retry": null,
+        "pagination": null,
+        "responseCache": null
+    },
+    "patterns": {},
+    "timeouts": null,
+    "diagnostics": null,
+    "policies": [],
+    "profileOverrides": {
+        "title": {
+            "minLength": null,
+            "maxLength": null,
+            "maxSubjectLength": null
+        },
+        "size": {
+            "maxLines": null,
+            "maxCommits": null
+        }
+    },
+    "display": {
+        "git": {
+            "shortShaLength": 7
+        },
+        "watcher": {
+            "debounce": "500ms"
+        },
+        "console": {
+            "successMark": "✓",
+            "failureMark": "✗"
+        }
+    },
+    "ruleEnrichment": null
+}

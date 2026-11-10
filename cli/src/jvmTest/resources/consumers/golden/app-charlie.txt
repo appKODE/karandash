@@ -1,0 +1,6 @@
+rules: commitMessages crossEntityConsistency draftPrevention jiraTicket labels languagePolicy sizeLimits titleFormat
+changelog-entry = \[CHARLIE-\d+\] .+
+changelog-line = ^CHANGELOG: \[CHARLIE-\d+\] .+(?:, \[CHARLIE-\d+\] .+)*\.$
+project-ticket = CHARLIE-\d+
+project-tickets = (?:\[CHARLIE-\d+\])+
+project-title = (?:(?:\[CHARLIE-\d+\])+)?.+

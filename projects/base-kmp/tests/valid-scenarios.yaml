@@ -1,0 +1,73 @@
+scenarios:
+  - name: "Valid: KMP — android JIRA + CHANGELOG (no platform tag in CHANGELOG body)"
+    mr:
+      title: "[PROJ-123][android] Add Compose screen in android module"
+      commits:
+        - subject: "[PROJ-123][android] Implement ProfileScreen.kt in android/"
+          body: "CHANGELOG: [PROJ-123] Добавить экран профиля в Android модуле."
+      branch: "feature/PROJ-123-profile-screen"
+      changed-files:
+        - "android/feature/profile/ProfileScreen.kt"
+    expect: pass
+
+  - name: "Valid: KMP — ios change with JIRA — no CHANGELOG required"
+    mr:
+      title: "[PROJ-456][ios] Fix SwiftUI navigation bug"
+      commits:
+        - subject: "[PROJ-456][ios] Fix NavigationStack pop on iOS 16"
+      branch: "fix/PROJ-456-navigation"
+    expect: pass
+
+  - name: "Valid: KMP — android tag only (no JIRA, no CHANGELOG needed)"
+    mr:
+      title: "[android] Refactor shared domain model"
+      commits:
+        - subject: "[android] Extract UserProfile to shared domain"
+      branch: "refactor/shared-domain"
+    expect: pass
+
+  - name: "Valid: KMP — ios only change no JIRA"
+    mr:
+      title: "[ios] Fix bottom sheet animation"
+      commits:
+        - subject: "[ios] Animate bottom sheet dismiss correctly"
+      branch: "fix/ios-bottom-sheet"
+    expect: pass
+
+  - name: "Valid: KMP — android JIRA + CHANGELOG in English"
+    mr:
+      title: "[PROJ-789][android] Add dark theme support"
+      commits:
+        - subject: "[PROJ-789][android] Implement Material3 dark color scheme"
+          body: "CHANGELOG: [PROJ-789] Add dark theme support."
+      branch: "feature/PROJ-789-dark-theme"
+    expect: pass
+
+  - name: "Valid: KMP — multi-task android CHANGELOG — both tickets in title and commit"
+    mr:
+      title: "[PROJ-100][PROJ-101][android] Batch login and profile fix"
+      commits:
+        - subject: "[PROJ-100][PROJ-101][android] Fix login state and profile update"
+          body: "CHANGELOG: [PROJ-100] Fix login state, [PROJ-101] Fix profile update."
+      branch: "fix/PROJ-100-PROJ-101-batch"
+    expect: pass
+
+  - name: "Valid: KMP — ios JIRA, no CHANGELOG (ios is exempt)"
+    mr:
+      title: "[PROJ-500][ios] Improve accessibility labels"
+      commits:
+        - subject: "[PROJ-500][ios] Add VoiceOver labels to payment screen"
+          body: ""
+      branch: "feature/PROJ-500-a11y"
+    expect: pass
+
+  - name: "Valid: KMP — android mixed commits, only JIRA commit needs CHANGELOG"
+    mr:
+      title: "[PROJ-600][android] Add biometric auth"
+      commits:
+        - subject: "[PROJ-600][android] Implement fingerprint unlock"
+          body: "CHANGELOG: [PROJ-600] Add biometric authentication support."
+        - subject: "[android] Add missing permission declaration"
+          body: ""
+      branch: "feature/PROJ-600-biometric"
+    expect: pass

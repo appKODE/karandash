@@ -1,0 +1,72 @@
+scenarios:
+  - name: "Valid: WAL JIRA + android + English title + CHANGELOG"
+    mr:
+      title: "[WAL-3953][android] Add card details screen"
+      commits:
+        - subject: "[WAL-3953][android] Implement card details UI"
+          body: "CHANGELOG: [WAL-3953] Add card details screen."
+      branch: "feature/WAL-3953-card-details"
+    expect: pass
+
+  - name: "Valid: WAL JIRA + ios + no CHANGELOG required"
+    mr:
+      title: "[WAL-3953][ios] Fix OTP timer reset on background"
+      commits:
+        - subject: "[WAL-3953][ios] Stop timer when app goes to background"
+          body: ""
+      branch: "fix/WAL-3953-otp-timer"
+    expect: pass
+
+  - name: "Valid: android platform tag only (no JIRA)"
+    mr:
+      title: "[android] Fix NPE in transfer flow"
+      commits:
+        - subject: "[android] Guard null amount in TransferViewModel"
+      branch: "fix/transfer-npe"
+    expect: pass
+
+  - name: "Valid: ios platform tag only (no JIRA)"
+    mr:
+      title: "[ios] Fix bottom sheet dismiss animation"
+      commits:
+        - subject: "[ios] Correct animation curve for dismiss"
+      branch: "fix/ios-bottom-sheet"
+    expect: pass
+
+  - name: "Valid: WAL JIRA + android + CHANGELOG in Russian"
+    mr:
+      title: "[WAL-1234][android] Improve statement list performance"
+      commits:
+        - subject: "[WAL-1234][android] Paginate statement list with Flow"
+          body: "CHANGELOG: [WAL-1234] Улучшить производительность списка выписок."
+      branch: "perf/WAL-1234-statement-pagination"
+    expect: pass
+
+  - name: "Valid: WAL multi-task android + CHANGELOG — both tickets in title and commit"
+    mr:
+      title: "[WAL-100][WAL-101][android] Batch payment and statement fix"
+      commits:
+        - subject: "[WAL-100][WAL-101][android] Implement payment batch and fix statement"
+          body: "CHANGELOG: [WAL-100] Implement payment batch processing, [WAL-101] Fix statement date sorting."
+      branch: "feature/WAL-100-WAL-101-batch"
+    expect: pass
+
+  - name: "Valid: WAL android mixed commits — only JIRA commit has CHANGELOG"
+    mr:
+      title: "[WAL-200][android] Add push notification handler"
+      commits:
+        - subject: "[WAL-200][android] Implement FCM push handler"
+          body: "CHANGELOG: [WAL-200] Add push notification support."
+        - subject: "[android] Add missing notification channel registration"
+          body: ""
+      branch: "feature/WAL-200-push"
+    expect: pass
+
+  - name: "Valid: WAL ios JIRA — no CHANGELOG required (ios exempt)"
+    mr:
+      title: "[WAL-500][ios] Improve accessibility on login screen"
+      commits:
+        - subject: "[WAL-500][ios] Add VoiceOver labels to login fields"
+          body: ""
+      branch: "feature/WAL-500-a11y"
+    expect: pass

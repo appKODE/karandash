@@ -1,0 +1,21 @@
+public final class io/karandash/normalize/ConfigKeyNormalizer {
+	public static final field INSTANCE Lio/karandash/normalize/ConfigKeyNormalizer;
+	public final fun camelToKebabCase (Ljava/lang/String;)Ljava/lang/String;
+	public final fun kebabToCamelCase (Ljava/lang/String;)Ljava/lang/String;
+}
+
+public final class io/karandash/normalize/DeepNormalizeKeysKt {
+	public static final fun deepNormalizeKeys (Lkotlinx/serialization/json/JsonElement;Ljava/util/Set;)Lkotlinx/serialization/json/JsonElement;
+	public static final fun deepNormalizeKeys (Lkotlinx/serialization/json/JsonElement;Ljava/util/Set;Lkotlin/jvm/functions/Function2;)Lkotlinx/serialization/json/JsonElement;
+	public static synthetic fun deepNormalizeKeys$default (Lkotlinx/serialization/json/JsonElement;Ljava/util/Set;ILjava/lang/Object;)Lkotlinx/serialization/json/JsonElement;
+	public static synthetic fun deepNormalizeKeys$default (Lkotlinx/serialization/json/JsonElement;Ljava/util/Set;Lkotlin/jvm/functions/Function2;ILjava/lang/Object;)Lkotlinx/serialization/json/JsonElement;
+	public static final fun normalizedKeyCollisionMessage (Ljava/lang/String;Ljava/util/List;)Ljava/lang/String;
+}
+
+public final class io/karandash/normalize/ModuleIdNormalizer {
+	public static final field INSTANCE Lio/karandash/normalize/ModuleIdNormalizer;
+	public final fun matches (Ljava/lang/String;Ljava/lang/String;)Z
+	public final fun normalize (Ljava/lang/String;)Ljava/lang/String;
+	public final fun resolve (Ljava/lang/String;Ljava/util/Collection;)Ljava/lang/String;
+}
+

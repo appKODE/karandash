@@ -1,0 +1,80 @@
+scenarios:
+  - name: "Invalid: wrong JIRA key (WAL instead of GRD)"
+    mr:
+      title: "[WAL-123] Add feature"
+      commits:
+        - subject: "[WAL-123] Implement feature"
+          body: "CHANGELOG: [WAL-123] Add feature."
+    expect: fail
+    expected-rules: ["jira-ticket"]
+
+  - name: "Invalid: Cyrillic in MR title"
+    mr:
+      title: "Исправить ошибку входа"
+    expect: fail
+    expected-rules: ["language-policy"]
+
+  - name: "Invalid: GRD JIRA present but missing CHANGELOG"
+    mr:
+      title: "[GRD-123] Add subscription screen"
+      commits:
+        - subject: "[GRD-123] Implement subscription UI"
+          body: ""
+    expect: fail
+    expected-rules: ["commit-body"]
+
+  - name: "Invalid: CHANGELOG missing task ID"
+    mr:
+      title: "[GRD-123] Add subscription screen"
+      commits:
+        - subject: "[GRD-123] Implement subscription UI"
+          body: "CHANGELOG: Add subscription screen."
+    expect: fail
+    expected-rules: ["commit-body"]
+
+  - name: "Invalid: draft MR"
+    mr:
+      title: "Draft: Fix auth flow"
+      draft: true
+    expect: fail
+    expected-rules: ["draft-prevention"]
+
+  - name: "Invalid: Cyrillic in commit title"
+    mr:
+      title: "Fix meter reading input"
+      commits:
+        - subject: "Исправить ввод показаний счётчика"
+    expect: fail
+    expected-rules: ["language-policy"]
+
+  - name: "Invalid: Cyrillic in branch name"
+    mr:
+      title: "Fix payment history load"
+      commits:
+        - subject: "Fix pagination in payment history"
+      branch: "fix/исправить-платежи"
+    expect: fail
+    expected-rules: ["language-policy"]
+
+  - name: "Invalid: commit task not in MR title"
+    mr:
+      title: "[GRD-100] Implement feature"
+      commits:
+        - subject: "[GRD-999] Unrelated change"
+    expect: fail
+    expected-rules: ["cross-entity-consistency"]
+
+  - name: "Invalid: title too short"
+    mr:
+      title: "Fix bug"
+    expect: fail
+    expected-rules: ["title-format"]
+
+  - name: "Invalid: CHANGELOG references task not in MR title"
+    mr:
+      title: "[GRD-100] Add feature"
+      commits:
+        - subject: "[GRD-100] Implement feature"
+          body: "CHANGELOG: [GRD-100] Add feature, [GRD-999] Fix unrelated issue."
+    expect: fail
+    expected-rules: ["cross-entity-consistency"]

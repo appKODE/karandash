@@ -1,0 +1,30 @@
+[workspace]
+members = [
+    "common",
+    "rule",
+    "reporter",
+    "provider",
+    "mutator",
+    "comment-poster",
+    "cli-command",
+    "config-format",
+    "profile",
+    "ai-provider",
+    "ai-interceptor",
+    "ai-analyzer",
+    "ai-prompt-processor",
+    "ai-response-transformer",
+    "ai-context-enricher",
+    "ai-redactor",
+    "ai-token-allocator",
+    "script",
+]
+resolver = "2"
+
+[workspace.dependencies]
+karandash-wasm-common = { path = "common" }
+karandash-plugin-common = { path = "../karandash-plugin-common" }
+
+[profile.release]
+opt-level = "s"
+lto = true

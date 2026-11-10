@@ -1,0 +1,12 @@
+WARN [E0022] Environment variable 'GITLAB_TOKEN' is referenced in config but not set.
+WARN [E0022] Environment variable 'GITHUB_TOKEN' is referenced in config but not set.
+WARN [E0022] Environment variable 'BITBUCKET_TOKEN' is referenced in config but not set.
+WARN [E0022] Environment variable 'GERRIT_USERNAME' is referenced in config but not set.
+WARN [E0022] Environment variable 'GERRIT_TOKEN' is referenced in config but not set.
+WARN [E0022] Environment variable 'AZURE_DEVOPS_TOKEN' is referenced in config but not set.
+WARN [E0022] Environment variable 'AWS_ACCESS_KEY_ID' is referenced in config but not set.
+WARN [E0022] Environment variable 'GITEA_TOKEN' is referenced in config but not set.
+WARN [E0022] Environment variable 'JIRA_TOKEN' is referenced in config but not set.
+WARN [E0022] Environment variable 'JIRA_EMAIL' is referenced in config but not set.
+WARN [E0022] Environment variable 'CONFLUENCE_TOKEN' is referenced in config but not set.
+WARN [E0022] Environment variable 'CONFLUENCE_EMAIL' is referenced in config but not set.

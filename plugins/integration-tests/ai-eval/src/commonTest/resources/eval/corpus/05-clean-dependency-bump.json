@@ -1,0 +1,28 @@
+{
+  "id": "05-clean-dependency-bump",
+  "title": "Bump kotlinx-coroutines to 1.10.2",
+  "description": "Routine patch bump (PROJ-40). No API changes.",
+  "commits": [
+    "chore(deps): bump kotlinx-coroutines to 1.10.2"
+  ],
+  "files": [
+    {
+      "path": "gradle/libs.versions.toml",
+      "diff": [
+        "@@ -4,3 +4,3 @@",
+        " kotlin = \"2.2.0\"",
+        "-coroutines = \"1.10.1\"",
+        "+coroutines = \"1.10.2\""
+      ]
+    }
+  ],
+  "designDoc": "## Dependencies\nAll versions live in gradle/libs.versions.toml; patch bumps need no review.",
+  "analyzers": [
+    "review-comments",
+    "code-suggestions",
+    "outdated-docs",
+    "design-doc-drift",
+    "risk-scoring"
+  ],
+  "expected": []
+}

@@ -1,0 +1,119 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://karandash.io/schemas/registry-v1.json",
+  "title": "Karandash Plugin Registry Schema",
+  "description": "JSON schema for the Karandash plugin registry format",
+  "type": "object",
+  "required": ["version", "lastUpdated", "plugins"],
+  "properties": {
+    "$schema": {
+      "type": "string",
+      "description": "Reference to this schema"
+    },
+    "version": {
+      "type": "string",
+      "description": "Registry format version",
+      "pattern": "^[0-9]+$"
+    },
+    "lastUpdated": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO 8601 timestamp of last registry update"
+    },
+    "plugins": {
+      "type": "array",
+      "description": "Array of plugin entries",
+      "items": {
+        "$ref": "#/definitions/plugin"
+      }
+    }
+  },
+  "definitions": {
+    "plugin": {
+      "type": "object",
+      "required": [
+        "id",
+        "name",
+        "description",
+        "author",
+        "version",
+        "type",
+        "tags",
+        "url",
+        "checksum",
+        "minHostVersion",
+        "repository"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique plugin identifier (lowercase, hyphenated)",
+          "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$"
+        },
+        "name": {
+          "type": "string",
+          "description": "Human-readable plugin name",
+          "minLength": 1,
+          "maxLength": 100
+        },
+        "description": {
+          "type": "string",
+          "description": "Brief plugin description",
+          "minLength": 1,
+          "maxLength": 200
+        },
+        "author": {
+          "type": "string",
+          "description": "Plugin author or organization",
+          "minLength": 1
+        },
+        "version": {
+          "type": "string",
+          "description": "Semantic version (MAJOR.MINOR.PATCH)",
+          "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)(-(0|[1-9][0-9]*|[0-9]*[a-zA-Z-][0-9a-zA-Z-]*)(\\.(0|[1-9][0-9]*|[0-9]*[a-zA-Z-][0-9a-zA-Z-]*))*)?(\\+[0-9a-zA-Z-]+(\\.[0-9a-zA-Z-]+)*)?$"
+        },
+        "type": {
+          "type": "string",
+          "description": "Plugin type",
+          "enum": ["rule", "reporter"]
+        },
+        "tags": {
+          "type": "array",
+          "description": "Searchable tags",
+          "items": {
+            "type": "string",
+            "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$"
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "url": {
+          "type": "string",
+          "description": "Direct download URL for plugin JAR",
+          "format": "uri",
+          "pattern": "^https://"
+        },
+        "checksum": {
+          "type": "string",
+          "description": "SHA-256 checksum for integrity verification",
+          "pattern": "^sha256:[a-f0-9]{64}$"
+        },
+        "minHostVersion": {
+          "type": "string",
+          "description": "Minimum required Karandash version",
+          "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)"
+        },
+        "repository": {
+          "type": "string",
+          "description": "Source code repository URL",
+          "format": "uri"
+        },
+        "documentation": {
+          "type": "string",
+          "description": "Plugin documentation URL",
+          "format": "uri"
+        }
+      }
+    }
+  }
+}

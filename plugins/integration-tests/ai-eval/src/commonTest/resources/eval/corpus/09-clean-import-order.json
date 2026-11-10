@@ -1,0 +1,32 @@
+{
+  "id": "09-clean-import-order",
+  "title": "Sort imports in Clock helpers",
+  "description": "Sorts the imports of ClockHelpers.kt alphabetically. No behavior change.",
+  "commits": [
+    "style: sort imports in ClockHelpers"
+  ],
+  "files": [
+    {
+      "path": "src/main/kotlin/util/ClockHelpers.kt",
+      "diff": [
+        "@@ -1,5 +1,5 @@",
+        " package util",
+        " ",
+        "-import kotlin.time.Instant",
+        " import kotlin.time.Clock",
+        "+import kotlin.time.Instant",
+        " "
+      ]
+    }
+  ],
+  "analyzers": [
+    "review-comments",
+    "code-suggestions",
+    "risk-scoring",
+    "outdated-docs",
+    "similar-issues",
+    "review-thread-analysis",
+    "description-quality"
+  ],
+  "expected": []
+}

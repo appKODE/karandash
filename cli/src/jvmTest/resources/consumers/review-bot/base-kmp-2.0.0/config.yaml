@@ -1,0 +1,73 @@
+# 2.0.0: same rules as base-kmp-1.45.0; the release line moved to 2.0.0 (no config migration needed).
+# Base config for KMP (Kotlin Multiplatform) projects.
+# Adds platform tag requirement [android|ios] and narrows android AI scope to android/**
+
+extends:                                                                                                                                                                                                                                                                                        
+  file-resolution: fallback-remote                   
+  url: "../../base/.karandash/config.yaml"     
+
+patterns:
+  # 1.45.0: the tag is matched without case, like context-tag below ([iOS] and [Android] pass).
+  project-tag: "@bracketed((?:[Aa]ndroid|[Ii][Oo][Ss]))"
+  project-title: "@optional(@project-tickets)@project-tag .+"
+
+rules:
+  title-format:
+    pattern: "@project-title"
+    suggestion: "Format: '[${KARANDASH_JIRA_KEY}-123][android] Title' or '[ios] Title'. Examples: '[${KARANDASH_JIRA_KEY}-42][android] Add login screen', '[ios] Fix OTP timer'. Length: 10–120 chars."
+    explanation: "Platform tag routes the MR to the correct reviewers and enables per-platform metrics."
+
+  commit-messages:
+    pattern: "@project-title"
+    suggestion: "Format: '[${KARANDASH_JIRA_KEY}-123][android] Description' or '[ios] Description'. Examples: '[${KARANDASH_JIRA_KEY}-42][android] Implement login UI', '[ios] Stop timer on background'. Max 100 chars."
+    explanation: "Platform-tagged commits enable per-platform release notes and route issues to the right team."
+
+  context-tag:
+    allowed: [android, ios]
+    delimiter: brackets
+    exactlyOne: true
+    # 1.45.0: [Android] and [iOS] count as [android] and [ios] (audit C2).
+    caseSensitive: false
+    checkMrTitle: true
+    checkCommitTitles: true
+    suggestion: "Add exactly one tag: [android] for Android, or [ios] for iOS. Place it after the optional task ID in both MR title and each commit."
+    explanation: "Context tags route MRs to platform-specific reviewers and feed per-platform metrics dashboards."
+
+# KMP: CHANGELOG required only for Android changes with a JIRA ticket (iOS exempt)
+# Policies use array REPLACE — must include all needed policies from base.
+# 1.45.0: the override repeats the full base commit-body block (a replaced policies: array does not inherit
+# the base override) and keeps ai-draft-gating, which 1.41.0 dropped.
+policies:
+  - name: changelog-requirement
+    when: 'title_matches("@any-ticket") && has_tag(android)'
+    override:
+      commit-body:
+        pattern: "@changelog-line"
+        match-mode: anyLine
+        scope: anyCommit
+        required-when-subject-matches: "@any-ticket"
+        suggestion: "Add a CHANGELOG line: 'CHANGELOG: [${KARANDASH_JIRA_KEY}-123] Description' or for multiple tasks: 'CHANGELOG: [${KARANDASH_JIRA_KEY}-123] Task one, [${KARANDASH_JIRA_KEY}-456] Task two' (description can be in Russian)"
+        explanation: "CHANGELOG lines for Android changes enable per-platform release notes generation."
+
+  - name: ai-draft-gating
+    when: 'is_draft'
+    modules:
+      - risk-scoring
+      - review-comments
+      - code-suggestions
+      - review-thread-analysis
+      - mr-summary
+    enabled: false
+ai:
+  scopes:
+    android:
+      paths: ["android/**"]
+    ios:
+      paths: ["ios/**/*.{swift,m,mm,h}"]
+      instructions: { file: "scopes/ios-instructions.md" }
+      best-practices: { file: "scopes/ios-best-practices.md" }
+    shared:
+      paths: ["shared/**/*.kt"]
+      instructions: { file: "scopes/shared-instructions.md" }
+      best-practices: { file: "scopes/shared-best-practices.md" }
+

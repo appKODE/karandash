@@ -1,0 +1,29 @@
+{
+  "responses": {
+    "code-suggestions": {
+      "suggestions": []
+    },
+    "design-doc-drift": {
+      "hasDrift": false,
+      "driftScore": 0.0,
+      "divergedSections": [],
+      "recommendations": [],
+      "summary": "Follows the dependency policy."
+    },
+    "outdated-docs": {
+      "issues": []
+    },
+    "review-comments": {
+      "comments": []
+    },
+    "risk-scoring": {
+      "riskScore": 0.1,
+      "riskLevel": "low",
+      "confidence": 0.9,
+      "factors": [
+        "Patch version bump"
+      ],
+      "summary": "Low risk."
+    }
+  }
+}

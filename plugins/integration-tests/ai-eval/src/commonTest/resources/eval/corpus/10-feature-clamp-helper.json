@@ -1,0 +1,51 @@
+{
+  "id": "10-feature-clamp-helper",
+  "title": "Add Int.clampTo helper",
+  "description": "Adds Int.clampTo(range) to the util package, with a unit test (PROJ-44).",
+  "sourceBranch": "feature/PROJ-44-clamp",
+  "commits": [
+    "feat(util): add clampTo (PROJ-44)"
+  ],
+  "files": [
+    {
+      "path": "src/main/kotlin/util/Ints.kt",
+      "diff": [
+        "@@ -2,3 +2,5 @@",
+        " package util",
+        " ",
+        "+fun Int.clampTo(range: IntRange): Int = coerceIn(range.first, range.last)",
+        "+"
+      ]
+    },
+    {
+      "path": "src/test/kotlin/util/IntsTest.kt",
+      "diff": [
+        "@@ -5,3 +5,6 @@ class IntsTest {",
+        "     @Test",
+        "+    fun clampToStaysInsideRange() {",
+        "+        assertEquals(5, 9.clampTo(1..5))",
+        "+    }",
+        " }"
+      ]
+    }
+  ],
+  "analyzers": [
+    "review-comments",
+    "risk-scoring",
+    "change-categorization",
+    "mr-summary",
+    "description-quality"
+  ],
+  "expected": [
+    {
+      "analyzer": "change-categorization",
+      "category": "feature"
+    },
+    {
+      "analyzer": "mr-summary"
+    },
+    {
+      "analyzer": "description-quality"
+    }
+  ]
+}

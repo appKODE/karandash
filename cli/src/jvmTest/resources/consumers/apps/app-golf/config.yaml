@@ -1,0 +1,16 @@
+# Synthetic sample consumer: a native Android app.
+# Extends base. All rules and AI config inherited.
+# Secrets (KARANDASH_GITLAB_TOKEN, BIFROST_API_KEY, BIFROST_BASE_URL, REVIEW_BOT_TOKEN) must be set in CI/CD.
+extends:
+  file-resolution: fallback-remote
+  url: "https://gitlab.example.com/api/v4/projects/1234/repository/files/base%2F.karandash%2Fconfig.yaml/raw?ref=1.41.0"
+  auth:
+    type: custom-header
+    name: "PRIVATE-TOKEN"
+    value: "${KARANDASH_GITLAB_TOKEN}"
+
+env:
+  KARANDASH_JIRA_KEY: "GOLF"
+
+cache:
+  dir: "cache/karandash"

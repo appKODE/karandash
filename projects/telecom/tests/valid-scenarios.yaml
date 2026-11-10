@@ -1,0 +1,64 @@
+scenarios:
+  - name: "Valid: TEL JIRA + English title + CHANGELOG"
+    mr:
+      title: "[TEL-2247] Add device profile screen"
+      commits:
+        - subject: "[TEL-2247] Implement device profile UI"
+          body: "CHANGELOG: [TEL-2247] Add device profile screen."
+      branch: "feature/TEL-2247-device-profile"
+    expect: pass
+
+  - name: "Valid: no JIRA — no CHANGELOG required"
+    mr:
+      title: "Fix Telecom installation step navigation"
+      commits:
+        - subject: "Correct back navigation in installation flow"
+      branch: "fix/tel-install-nav"
+    expect: pass
+
+  - name: "Valid: TEL JIRA + CHANGELOG in Russian"
+    mr:
+      title: "[TEL-1000] Improve payment error handling"
+      commits:
+        - subject: "[TEL-1000] Show user-friendly error on payment failure"
+          body: "CHANGELOG: [TEL-1000] Улучшить обработку ошибок оплаты."
+      branch: "feature/TEL-1000-payment-errors"
+    expect: pass
+
+  - name: "Valid: multi-task CHANGELOG — both tickets in title and commit"
+    mr:
+      title: "[TEL-200] [TEL-201] Fix installation flow issues"
+      commits:
+        - subject: "[TEL-200] [TEL-201] Fix step navigation and state reset"
+          body: "CHANGELOG: [TEL-200] Fix installation step navigation, [TEL-201] Fix state reset on back press."
+      branch: "fix/TEL-200-TEL-201-install-flow"
+    expect: pass
+
+  - name: "Valid: JIRA in title, mixed commits — only JIRA commit needs CHANGELOG"
+    mr:
+      title: "[TEL-300] Add Telecom QR scan flow"
+      commits:
+        - subject: "[TEL-300] Implement QR code scanner fragment"
+          body: "CHANGELOG: [TEL-300] Add Telecom QR scan flow."
+        - subject: "Add missing string resources"
+          body: ""
+      branch: "feature/TEL-300-qr-scan"
+    expect: pass
+
+  - name: "Valid: commit task is subset of MR title tasks"
+    mr:
+      title: "[TEL-400] Refactor Telecom manager"
+      commits:
+        - subject: "[TEL-400] Extract TelecomRepository from legacy manager"
+          body: "CHANGELOG: [TEL-400] Refactor Telecom manager for better testability."
+      branch: "refactor/TEL-400-manager"
+    expect: pass
+
+  - name: "Valid: TEL JIRA + CHANGELOG English with trailing period"
+    mr:
+      title: "[TEL-500] Add device compatibility check screen"
+      commits:
+        - subject: "[TEL-500] Implement device compatibility checks before setup"
+          body: "CHANGELOG: [TEL-500] Add device compatibility check before Telecom setup."
+      branch: "feature/TEL-500-compat-check"
+    expect: pass

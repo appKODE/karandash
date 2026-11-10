@@ -1,0 +1,34 @@
+exit=1
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="karandash" tests="2" failures="2" errors="0">
+  <testsuite name="labels" tests="1" failures="1" errors="0">
+    <testcase name="labels #1" classname="karandash.rules.labels">
+      <failure message="Missing required label: &apos;needs-review&apos;" type="ERROR">
+Rule: labels
+Severity: ERROR
+Message: Missing required label: &apos;needs-review&apos;
+How to fix: Add the required label via the MR sidebar.
+Explanation: Labels help categorize and route MRs through review workflows.
+Error code: E0202
+fingerprint: 6c7083707cbaef03
+fixSuggestions: add label &apos;needs-review&apos;
+      </failure>
+    </testcase>
+  </testsuite>
+  <testsuite name="titleFormat" tests="1" failures="1" errors="0">
+    <testcase name="titleFormat #1" classname="karandash.rules.titleFormat">
+      <failure message="MR title does not match required pattern." type="ERROR">
+Rule: titleFormat
+Severity: ERROR
+Message: MR title does not match required pattern.
+Where: `feat: add runtime verification` — at the start expected `&quot;JIRA-&quot;` — found `feat`
+How to fix: Change the title to match the format, e.g. `JIRA-0: feat: add runtime verification`.
+Format: `Start &apos;JIRA-&apos; [&apos;0&apos;-&apos;9&apos;]+ &apos;: &apos; .+`
+Explanation: Title format rules ensure consistent MR naming for changelogs and automation.
+Error code: E0200
+pattern: Start &apos;JIRA-&apos; [&apos;0&apos;-&apos;9&apos;]+ &apos;: &apos; .+
+fingerprint: 7046752bc194af19
+      </failure>
+    </testcase>
+  </testsuite>
+</testsuites>

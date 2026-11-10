@@ -1,0 +1,15 @@
+[
+  {
+    "name": "java.lang.System",
+    "methods": [
+      {
+        "name": "load",
+        "parameterTypes": ["java.lang.String"]
+      },
+      {
+        "name": "loadLibrary",
+        "parameterTypes": ["java.lang.String"]
+      }
+    ]
+  }
+]

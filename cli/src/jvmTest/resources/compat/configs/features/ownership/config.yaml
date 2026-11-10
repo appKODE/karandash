@@ -1,0 +1,16 @@
+# Source: docs/features/AI_FEATURES_REFERENCE.md, team ownership (`ai.teams`).
+ai:
+  provider: anthropic
+  teams:
+    - name: platform
+      owns: ["infra/**", "k8s/**"]
+      rules:
+        ai-security-scan:
+          enabled: true
+        size-limits:
+          maxFiles: 30
+    - name: api
+      owns: ["services/api/**", "lib/api/**"]
+      rules:
+        ai-security-scan:
+          enabled: false

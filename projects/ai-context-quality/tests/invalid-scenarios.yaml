@@ -1,0 +1,31 @@
+scenarios:
+  - name: "Invalid: Cyrillic in MR title still rejected under context-quality"
+    mr:
+      title: "Добавить поддержку контекстного качества"
+    expect: fail
+    expected-rules: ["language-policy"]
+
+  - name: "Invalid: JIRA present but CHANGELOG missing"
+    mr:
+      title: "[ACQ-10] Extend finding validator"
+      commits:
+        - subject: "[ACQ-10] Tighten finding validator"
+          body: ""
+    expect: fail
+    expected-rules: ["commit-body"]
+
+  - name: "Invalid: wrong JIRA key (WAL instead of ACQ)"
+    mr:
+      title: "[WAL-123] Add feature"
+      commits:
+        - subject: "[WAL-123] Implement feature"
+          body: "CHANGELOG: [WAL-123] Add feature."
+    expect: fail
+    expected-rules: ["jira-ticket"]
+
+  - name: "Invalid: draft MR blocked"
+    mr:
+      title: "Draft: experimenting with new enricher"
+      draft: true
+    expect: fail
+    expected-rules: ["draft-prevention"]

@@ -1,0 +1,6 @@
+rules: commitMessages crossEntityConsistency draftPrevention jiraTicket labels languagePolicy sizeLimits titleFormat
+changelog-entry = \[GOLF-\d+\] .+
+changelog-line = ^CHANGELOG: \[GOLF-\d+\] .+(?:, \[GOLF-\d+\] .+)*\.$
+project-ticket = GOLF-\d+
+project-tickets = (?:\[GOLF-\d+\])+
+project-title = (?:(?:\[GOLF-\d+\])+)?.+

@@ -1,0 +1,111 @@
+{
+    "rules": {
+        "ruleConfigs": {},
+        "ruleMeta": {}
+    },
+    "platforms": null,
+    "reporters": null,
+    "profile": null,
+    "scripts": null,
+    "dangerfile": null,
+    "baseline": null,
+    "dryRun": false,
+    "dryRunScope": null,
+    "allowLocalhost": false,
+    "allowPrivateNetwork": false,
+    "enrichment": null,
+    "enrichmentProviders": null,
+    "ai": {
+        "provider": "anthropic",
+        "teams": [
+            {
+                "name": "platform",
+                "owns": [
+                    "infra/**",
+                    "k8s/**"
+                ],
+                "rules": {
+                    "aiSecurityScan": {
+                        "enabled": true
+                    },
+                    "sizeLimits": {
+                        "maxFiles": 30
+                    }
+                }
+            },
+            {
+                "name": "api",
+                "owns": [
+                    "services/api/**",
+                    "lib/api/**"
+                ],
+                "rules": {
+                    "aiSecurityScan": {
+                        "enabled": false
+                    }
+                }
+            }
+        ]
+    },
+    "aiReports": null,
+    "aiMetrics": null,
+    "autoApprove": null,
+    "cache": null,
+    "limits": {
+        "maxFindings": 10000,
+        "fetchTimeout": "10s",
+        "expressions": {
+            "maxLength": 1000,
+            "maxNestingDepth": 50
+        },
+        "extends": {
+            "maxEntries": 10,
+            "maxDepth": 5,
+            "maxChainSize": 20
+        },
+        "glob": {
+            "maxExpansion": 10,
+            "maxDirectoryDepth": 5
+        },
+        "regex": {
+            "maxPatternLength": 500,
+            "maxQuantifierNesting": 1
+        },
+        "patterns": {
+            "maxExpansionDepth": 20
+        }
+    },
+    "http": {
+        "retry": null,
+        "pagination": null,
+        "responseCache": null
+    },
+    "patterns": {},
+    "timeouts": null,
+    "diagnostics": null,
+    "policies": [],
+    "profileOverrides": {
+        "title": {
+            "minLength": null,
+            "maxLength": null,
+            "maxSubjectLength": null
+        },
+        "size": {
+            "maxLines": null,
+            "maxCommits": null
+        }
+    },
+    "display": {
+        "git": {
+            "shortShaLength": 7
+        },
+        "watcher": {
+            "debounce": "500ms"
+        },
+        "console": {
+            "successMark": "✓",
+            "failureMark": "✗"
+        }
+    },
+    "ruleEnrichment": null
+}

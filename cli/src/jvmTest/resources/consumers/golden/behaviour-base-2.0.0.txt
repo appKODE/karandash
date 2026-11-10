@@ -1,0 +1,5 @@
+changelog-without-period: PASS
+ticketless-follow-up-commit: PASS
+catalog-tag-without-ticket: PASS
+capitalized-platform-tag: PASS
+subject-of-85-chars: PASS

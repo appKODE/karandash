@@ -1,0 +1,97 @@
+[versions]
+kotlin = "2.4.21"
+shadow = "9.6.1"
+antlrKotlinPlugin = "1.0.14"
+kotlinxSerialization = "1.11.0"
+kotlinxCoroutines = "1.11.0"
+atomicfu = "0.33.0"
+kotlinxDatetime = "0.8.0"
+kotlinxIo = "0.9.1"
+ktor = "3.6.0"
+quickJs = "1.0.15"
+jna = "5.19.1"
+chicory = "1.7.5"
+chasm = "2.2.0"
+# Chasm 2.x publishes no macosX64 build; 1.7.0 is the last one (core/wasm macosX64Main only).
+chasmMacosX64 = "1.7.0"
+pomsky-kt = "0.19.0"
+junit = "6.1.3"
+clikt = "5.1.0"
+mordant = "3.1.0"
+yamlkt = "0.13.0"
+jakartaMail = "2.1.5"
+angusMail = "2.0.5"
+antlrKotlinRuntime = "1.0.14"
+lsp4j = "1.0.0"
+cryptography = "0.6.0"
+ktlint-plugin = "14.2.0"
+ktlint-tool = "1.8.0"
+detekt = "2.0.0-alpha.6"
+binary-compatibility-validator = "0.18.2"
+kover = "0.9.11"
+dokka = "2.2.0"
+vanniktech-maven-publish = "0.37.0"
+owasp-dependency-check = "13.0.0"
+
+[libraries]
+kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinxSerialization" }
+kotlinx-serialization-json-io = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json-io", version.ref = "kotlinxSerialization" }
+kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "kotlinxCoroutines" }
+kotlinx-coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "kotlinxCoroutines" }
+kotlinx-atomicfu = { module = "org.jetbrains.kotlinx:atomicfu", version.ref = "atomicfu" }
+kotlinx-datetime = { module = "org.jetbrains.kotlinx:kotlinx-datetime", version.ref = "kotlinxDatetime" }
+kotlinx-io-core = { module = "org.jetbrains.kotlinx:kotlinx-io-core", version.ref = "kotlinxIo" }
+ktor-client-core = { module = "io.ktor:ktor-client-core", version.ref = "ktor" }
+ktor-client-content-negotiation = { module = "io.ktor:ktor-client-content-negotiation", version.ref = "ktor" }
+ktor-serialization-kotlinx-json = { module = "io.ktor:ktor-serialization-kotlinx-json", version.ref = "ktor" }
+ktor-client-cio = { module = "io.ktor:ktor-client-cio", version.ref = "ktor" }
+ktor-client-curl = { module = "io.ktor:ktor-client-curl", version.ref = "ktor" }
+ktor-client-winhttp = { module = "io.ktor:ktor-client-winhttp", version.ref = "ktor" }
+ktor-client-mock = { module = "io.ktor:ktor-client-mock", version.ref = "ktor" }
+ktor-server-core = { module = "io.ktor:ktor-server-core", version.ref = "ktor" }
+ktor-server-cio = { module = "io.ktor:ktor-server-cio", version.ref = "ktor" }
+ktor-server-test-host = { module = "io.ktor:ktor-server-test-host", version.ref = "ktor" }
+# Ktor server logs through SLF4J; the cache server logs itself, so this silences the "no provider" warning
+slf4j-nop = { module = "org.slf4j:slf4j-nop", version = "2.0.17" }
+quickjs-kt = { module = "io.github.dokar3:quickjs-kt", version.ref = "quickJs" }
+jna = { module = "net.java.dev.jna:jna", version.ref = "jna" }
+jna-platform = { module = "net.java.dev.jna:jna-platform", version.ref = "jna" }
+chicory-runtime = { module = "com.dylibso.chicory:runtime", version.ref = "chicory" }
+chasm = { module = "io.github.charlietap.chasm:chasm", version.ref = "chasm" }
+chasm-macosx64 = { module = "io.github.charlietap.chasm:chasm", version.ref = "chasmMacosX64" }
+pomsky-kt-lib = { module = "ru.kode.pomsky-kt:lib", version.ref = "pomsky-kt" }
+pomsky-kt-decompiler = { module = "ru.kode.pomsky-kt:decompiler", version.ref = "pomsky-kt" }
+junit-jupiter = { module = "org.junit.jupiter:junit-jupiter", version.ref = "junit" }
+clikt = { module = "com.github.ajalt.clikt:clikt", version.ref = "clikt" }
+mordant = { module = "com.github.ajalt.mordant:mordant", version.ref = "mordant" }
+yamlkt = { module = "net.mamoe.yamlkt:yamlkt", version.ref = "yamlkt" }
+jakarta-mail-api = { module = "jakarta.mail:jakarta.mail-api", version.ref = "jakartaMail" }
+angus-mail = { module = "org.eclipse.angus:angus-mail", version.ref = "angusMail" }
+antlr-kotlin-runtime = { module = "com.strumenta:antlr-kotlin-runtime", version.ref = "antlrKotlinRuntime" }
+lsp4j = { module = "org.eclipse.lsp4j:org.eclipse.lsp4j", version.ref = "lsp4j" }
+cryptography-provider-optimal = { module = "dev.whyoleg.cryptography:cryptography-provider-optimal", version.ref = "cryptography" }
+# Plugin artifacts for use in build-logic/build.gradle.kts
+kotlin-gradle-plugin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
+shadow-gradle-plugin = { module = "com.gradleup.shadow:shadow-gradle-plugin", version.ref = "shadow" }
+ktlint-gradle-plugin = { module = "org.jlleitschuh.gradle.ktlint:org.jlleitschuh.gradle.ktlint.gradle.plugin", version.ref = "ktlint-plugin" }
+detekt-gradle-plugin = { module = "dev.detekt:detekt-gradle-plugin", version.ref = "detekt" }
+detekt-api = { module = "dev.detekt:detekt-api", version.ref = "detekt" }
+detekt-test = { module = "dev.detekt:detekt-test", version.ref = "detekt" }
+kover-gradle-plugin = { module = "org.jetbrains.kotlinx:kover-gradle-plugin", version.ref = "kover" }
+dokka-gradle-plugin = { module = "org.jetbrains.dokka:dokka-gradle-plugin", version.ref = "dokka" }
+vanniktech-maven-publish-gradle-plugin = { module = "com.vanniktech:gradle-maven-publish-plugin", version.ref = "vanniktech-maven-publish" }
+
+
+[plugins]
+kotlin-multiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
+kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
+kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
+shadow = { id = "com.gradleup.shadow", version.ref = "shadow" }
+antlr-kotlin = { id = "com.strumenta.antlr-kotlin", version.ref = "antlrKotlinPlugin" }
+atomicfu = { id = "org.jetbrains.kotlinx.atomicfu", version.ref = "atomicfu" }
+ktlint = { id = "org.jlleitschuh.gradle.ktlint", version.ref = "ktlint-plugin" }
+detekt = { id = "dev.detekt", version.ref = "detekt" }
+binary-compatibility-validator = { id = "org.jetbrains.kotlinx.binary-compatibility-validator", version.ref = "binary-compatibility-validator" }
+kover = { id = "org.jetbrains.kotlinx.kover", version.ref = "kover" }
+dokka = { id = "org.jetbrains.dokka", version.ref = "dokka" }
+owasp-dependency-check = { id = "org.owasp.dependencycheck", version.ref = "owasp-dependency-check" }

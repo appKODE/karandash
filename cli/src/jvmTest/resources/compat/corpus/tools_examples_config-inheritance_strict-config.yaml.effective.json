@@ -1,0 +1,166 @@
+{
+    "rules": {
+        "ruleConfigs": {
+            "titleFormat": {
+                "pattern": "^(feat|fix|docs|style|refactor|perf|test|chore|ci|build)\\([a-z0-9-]+\\):.+",
+                "minLength": 15,
+                "maxLength": 50,
+                "requireTicket": true
+            },
+            "commitMessages": {
+                "pattern": "^(feat|fix|docs|style|refactor|perf|test|chore|ci|build)\\([a-z0-9-]+\\):.+",
+                "maxLength": 50,
+                "minLength": 15
+            },
+            "branchNaming": {
+                "allowedPatterns": [
+                    "feat/.*",
+                    "fix/.*",
+                    "docs/.*",
+                    "refactor/.*",
+                    "test/.*",
+                    "chore/.*"
+                ],
+                "requireSourceMatch": true,
+                "requireTargetMatch": false
+            },
+            "sizeLimits": {
+                "maxFiles": 25,
+                "maxLines": 500
+            },
+            "draftPrevention": {
+                "blockDraft": "fail"
+            },
+            "jiraTicket": {
+                "projectKeys": [
+                    "PROJ",
+                    "FEAT"
+                ],
+                "validateStatus": [
+                    "In Progress",
+                    "In Review"
+                ],
+                "validateAssignee": false
+            },
+            "fileChanges": {
+                "patterns": [
+                    {
+                        "pattern": ".*\\.sql",
+                        "require-approval": [
+                            "dba-team"
+                        ],
+                        "require-labels": [
+                            "database-change"
+                        ]
+                    },
+                    {
+                        "pattern": ".*\\.env.*",
+                        "block-on-draft": "fail"
+                    }
+                ]
+            },
+            "codeowners": {
+                "path": "CODEOWNERS",
+                "requireOwnerApproval": true
+            }
+        },
+        "ruleMeta": {
+            "titleFormat": {
+                "priority": 100,
+                "bailOnFail": false,
+                "when": null,
+                "mode": "normal",
+                "suggestion": "Use scoped conventional commits: 'feat(auth): add OAuth2' or 'fix(api): handle timeout'",
+                "explanation": "Scoped conventional commits enable fine-grained changelog sections per component",
+                "concernArea": null,
+                "severity": null,
+                "excludePaths": []
+            },
+            "commitMessages": {
+                "priority": 100,
+                "bailOnFail": false,
+                "when": null,
+                "mode": "normal",
+                "suggestion": "Use scoped format: 'feat(scope): description' — scope must be lowercase alphanumeric",
+                "explanation": "Strict commit format is required for automated semantic versioning in this project",
+                "concernArea": null,
+                "severity": null,
+                "excludePaths": []
+            }
+        }
+    },
+    "platforms": null,
+    "reporters": null,
+    "profile": null,
+    "scripts": null,
+    "dangerfile": null,
+    "baseline": null,
+    "dryRun": false,
+    "dryRunScope": null,
+    "allowLocalhost": false,
+    "allowPrivateNetwork": false,
+    "enrichment": null,
+    "enrichmentProviders": null,
+    "ai": null,
+    "aiReports": null,
+    "aiMetrics": null,
+    "autoApprove": null,
+    "cache": null,
+    "limits": {
+        "maxFindings": 10000,
+        "fetchTimeout": "10s",
+        "expressions": {
+            "maxLength": 1000,
+            "maxNestingDepth": 50
+        },
+        "extends": {
+            "maxEntries": 10,
+            "maxDepth": 5,
+            "maxChainSize": 20
+        },
+        "glob": {
+            "maxExpansion": 10,
+            "maxDirectoryDepth": 5
+        },
+        "regex": {
+            "maxPatternLength": 500,
+            "maxQuantifierNesting": 1
+        },
+        "patterns": {
+            "maxExpansionDepth": 20
+        }
+    },
+    "http": {
+        "retry": null,
+        "pagination": null,
+        "responseCache": null
+    },
+    "patterns": {},
+    "timeouts": null,
+    "diagnostics": null,
+    "policies": [],
+    "profileOverrides": {
+        "title": {
+            "minLength": null,
+            "maxLength": null,
+            "maxSubjectLength": null
+        },
+        "size": {
+            "maxLines": null,
+            "maxCommits": null
+        }
+    },
+    "display": {
+        "git": {
+            "shortShaLength": 7
+        },
+        "watcher": {
+            "debounce": "500ms"
+        },
+        "console": {
+            "successMark": "✓",
+            "failureMark": "✗"
+        }
+    },
+    "ruleEnrichment": null
+}

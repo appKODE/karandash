@@ -1,0 +1,30 @@
+{
+  "id": "08-clean-test-rename",
+  "title": "Rename a unit test",
+  "description": "Renames a unit test so its name states the expected behavior.",
+  "commits": [
+    "test: rename truncate test"
+  ],
+  "files": [
+    {
+      "path": "src/test/kotlin/util/StringsTest.kt",
+      "diff": [
+        "@@ -6,4 +6,4 @@ class StringsTest {",
+        "     @Test",
+        "-    fun test1() {",
+        "+    fun truncateKeepsAtMostMaxCharacters() {",
+        "         assertEquals(\"ab\", \"abc\".truncate(2))"
+      ]
+    }
+  ],
+  "analyzers": [
+    "review-comments",
+    "code-suggestions",
+    "risk-scoring",
+    "outdated-docs",
+    "similar-issues",
+    "review-thread-analysis",
+    "description-quality"
+  ],
+  "expected": []
+}

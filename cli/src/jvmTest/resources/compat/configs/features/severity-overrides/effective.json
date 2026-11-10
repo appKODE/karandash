@@ -1,0 +1,117 @@
+{
+    "rules": {
+        "ruleConfigs": {
+            "titleFormat": {
+                "minLength": 10
+            },
+            "labels": {
+                "requiredLabels": [
+                    "needs-review"
+                ]
+            }
+        },
+        "ruleMeta": {}
+    },
+    "platforms": null,
+    "reporters": null,
+    "profile": null,
+    "scripts": null,
+    "dangerfile": null,
+    "baseline": null,
+    "dryRun": false,
+    "dryRunScope": null,
+    "allowLocalhost": false,
+    "allowPrivateNetwork": false,
+    "enrichment": null,
+    "enrichmentProviders": null,
+    "ai": null,
+    "aiReports": null,
+    "aiMetrics": null,
+    "autoApprove": null,
+    "cache": null,
+    "limits": {
+        "maxFindings": 10000,
+        "fetchTimeout": "10s",
+        "expressions": {
+            "maxLength": 1000,
+            "maxNestingDepth": 50
+        },
+        "extends": {
+            "maxEntries": 10,
+            "maxDepth": 5,
+            "maxChainSize": 20
+        },
+        "glob": {
+            "maxExpansion": 10,
+            "maxDirectoryDepth": 5
+        },
+        "regex": {
+            "maxPatternLength": 500,
+            "maxQuantifierNesting": 1
+        },
+        "patterns": {
+            "maxExpansionDepth": 20
+        }
+    },
+    "http": {
+        "retry": null,
+        "pagination": null,
+        "responseCache": null
+    },
+    "patterns": {},
+    "timeouts": null,
+    "diagnostics": null,
+    "policies": [
+        {
+            "when": "is_draft",
+            "name": null,
+            "modules": [
+                "titleFormat",
+                "labels"
+            ],
+            "enabled": null,
+            "severity": "warning",
+            "override": null,
+            "autoApprove": null,
+            "autoFix": null,
+            "scripts": null,
+            "dangerfile": null
+        },
+        {
+            "when": "is_dry_run",
+            "name": null,
+            "modules": null,
+            "enabled": null,
+            "severity": "info",
+            "override": null,
+            "autoApprove": null,
+            "autoFix": null,
+            "scripts": null,
+            "dangerfile": null
+        }
+    ],
+    "profileOverrides": {
+        "title": {
+            "minLength": null,
+            "maxLength": null,
+            "maxSubjectLength": null
+        },
+        "size": {
+            "maxLines": null,
+            "maxCommits": null
+        }
+    },
+    "display": {
+        "git": {
+            "shortShaLength": 7
+        },
+        "watcher": {
+            "debounce": "500ms"
+        },
+        "console": {
+            "successMark": "✓",
+            "failureMark": "✗"
+        }
+    },
+    "ruleEnrichment": null
+}

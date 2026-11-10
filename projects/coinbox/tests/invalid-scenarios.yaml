@@ -1,0 +1,80 @@
+scenarios:
+  - name: "Invalid: wrong JIRA key (WAL instead of CBX)"
+    mr:
+      title: "[WAL-123] Add feature"
+      commits:
+        - subject: "[WAL-123] Implement feature"
+          body: "CHANGELOG: [WAL-123] Add feature."
+    expect: fail
+    expected-rules: ["jira-ticket"]
+
+  - name: "Invalid: Cyrillic in MR title"
+    mr:
+      title: "Добавить экран входа"
+    expect: fail
+    expected-rules: ["language-policy"]
+
+  - name: "Invalid: CBX JIRA present but missing CHANGELOG"
+    mr:
+      title: "[CBX-42] Add registration screen"
+      commits:
+        - subject: "[CBX-42] Implement registration form"
+          body: ""
+    expect: fail
+    expected-rules: ["commit-body"]
+
+  - name: "Invalid: CHANGELOG missing task ID"
+    mr:
+      title: "[CBX-42] Add registration screen"
+      commits:
+        - subject: "[CBX-42] Implement registration form"
+          body: "CHANGELOG: Add registration screen."
+    expect: fail
+    expected-rules: ["commit-body"]
+
+  - name: "Invalid: draft MR"
+    mr:
+      title: "WIP: Add auth flow"
+      draft: true
+    expect: fail
+    expected-rules: ["draft-prevention"]
+
+  - name: "Invalid: Cyrillic in commit title"
+    mr:
+      title: "Fix OTP validation"
+      commits:
+        - subject: "Исправить валидацию OTP"
+    expect: fail
+    expected-rules: ["language-policy"]
+
+  - name: "Invalid: Cyrillic in branch name"
+    mr:
+      title: "Fix login timeout"
+      commits:
+        - subject: "Handle login timeout correctly"
+      branch: "fix/исправить-вход"
+    expect: fail
+    expected-rules: ["language-policy"]
+
+  - name: "Invalid: commit task not in MR title"
+    mr:
+      title: "[CBX-100] Implement feature"
+      commits:
+        - subject: "[CBX-999] Unrelated change"
+    expect: fail
+    expected-rules: ["cross-entity-consistency"]
+
+  - name: "Invalid: title too short"
+    mr:
+      title: "Fix bug"
+    expect: fail
+    expected-rules: ["title-format"]
+
+  - name: "Invalid: CHANGELOG references task not in MR title"
+    mr:
+      title: "[CBX-100] Add feature"
+      commits:
+        - subject: "[CBX-100] Implement feature"
+          body: "CHANGELOG: [CBX-100] Add feature, [CBX-999] Fix unrelated issue."
+    expect: fail
+    expected-rules: ["cross-entity-consistency"]

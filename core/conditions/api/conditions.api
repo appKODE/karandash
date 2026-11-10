@@ -1,0 +1,158 @@
+public final class io/karandash/conditions/AtomExpression {
+	public static final field INSTANCE Lio/karandash/conditions/AtomExpression;
+	public final fun evaluate (Ljava/lang/String;Ljava/util/List;)Z
+	public final fun leaf (I)Ljava/lang/String;
+}
+
+public final class io/karandash/conditions/BuiltinPredicates {
+	public static final field INSTANCE Lio/karandash/conditions/BuiltinPredicates;
+	public final fun createRegistry ()Lio/karandash/conditions/MutablePredicateRegistry;
+	public final fun createRegistry (Lio/karandash/api/ModuleRegistry;Ljava/util/List;)Lio/karandash/conditions/MutablePredicateRegistry;
+	public final fun evaluator (Lio/karandash/api/context/ConditionContext;Lio/karandash/api/platform/PredicateRegistry;Lkotlin/jvm/functions/Function1;II)Lio/karandash/conditions/ExpressionEvaluator;
+	public final fun evaluator (Lio/karandash/api/context/ConditionContext;Lio/karandash/api/platform/PredicateRegistry;Lkotlin/jvm/functions/Function1;III)Lio/karandash/conditions/ExpressionEvaluator;
+	public static synthetic fun evaluator$default (Lio/karandash/conditions/BuiltinPredicates;Lio/karandash/api/context/ConditionContext;Lio/karandash/api/platform/PredicateRegistry;Lkotlin/jvm/functions/Function1;IIIILjava/lang/Object;)Lio/karandash/conditions/ExpressionEvaluator;
+	public final fun useManaged (Lio/karandash/cache/CacheManager;)V
+}
+
+public final class io/karandash/conditions/CommonPredicates {
+	public static final field INSTANCE Lio/karandash/conditions/CommonPredicates;
+	public final fun getFilePathMatches ()Lio/karandash/api/context/ConditionPredicate;
+	public final fun getHasChangesIn ()Lio/karandash/api/context/ConditionPredicate;
+	public final fun getLabelExists ()Lio/karandash/api/context/ConditionPredicate;
+	public final fun registerAll (Lio/karandash/api/platform/PredicateRegistry;Lkotlin/jvm/functions/Function1;)V
+	public static synthetic fun registerAll$default (Lio/karandash/conditions/CommonPredicates;Lio/karandash/api/platform/PredicateRegistry;Lkotlin/jvm/functions/Function1;ILjava/lang/Object;)V
+}
+
+public final class io/karandash/conditions/ConfigPredicates {
+	public static final field INSTANCE Lio/karandash/conditions/ConfigPredicates;
+	public final fun registerAll (Lio/karandash/api/platform/PredicateRegistry;)V
+}
+
+public final class io/karandash/conditions/DefaultPolicyEngine : io/karandash/conditions/PolicyEngine {
+	public static final field Companion Lio/karandash/conditions/DefaultPolicyEngine$Companion;
+	public fun <init> ()V
+	public fun <init> (Lio/karandash/logger/Logger;)V
+	public fun <init> (Lio/karandash/logger/Logger;Lkotlin/jvm/functions/Function1;)V
+	public fun <init> (Lio/karandash/logger/Logger;Lkotlin/jvm/functions/Function1;II)V
+	public fun <init> (Lio/karandash/logger/Logger;Lkotlin/jvm/functions/Function1;III)V
+	public synthetic fun <init> (Lio/karandash/logger/Logger;Lkotlin/jvm/functions/Function1;IIIILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public synthetic fun <init> (Lio/karandash/logger/Logger;Lkotlin/jvm/functions/Function1;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public fun evaluate (Ljava/util/List;Lio/karandash/api/context/ConditionContext;Lio/karandash/api/platform/PredicateRegistry;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+}
+
+public final class io/karandash/conditions/DefaultPolicyEngine$Companion {
+}
+
+public final class io/karandash/conditions/EnvironmentPredicates {
+	public static final field INSTANCE Lio/karandash/conditions/EnvironmentPredicates;
+	public final fun registerAll (Lio/karandash/api/platform/PredicateRegistry;Lkotlin/jvm/functions/Function1;)V
+	public static synthetic fun registerAll$default (Lio/karandash/conditions/EnvironmentPredicates;Lio/karandash/api/platform/PredicateRegistry;Lkotlin/jvm/functions/Function1;ILjava/lang/Object;)V
+}
+
+public final class io/karandash/conditions/ExpressionEvaluator {
+	public static final field CACHE_NAME Ljava/lang/String;
+	public static final field Companion Lio/karandash/conditions/ExpressionEvaluator$Companion;
+	public fun <init> (Ljava/lang/Object;Ljava/util/List;Lio/karandash/cache/TieredCache;Lkotlin/jvm/functions/Function1;III)V
+	public synthetic fun <init> (Ljava/lang/Object;Ljava/util/List;Lio/karandash/cache/TieredCache;Lkotlin/jvm/functions/Function1;IIIILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun cachedRegex (Ljava/lang/String;)Lkotlin/text/Regex;
+	public final fun evaluate (Ljava/lang/String;)Z
+	public final fun markBarePredicate (Ljava/lang/String;)V
+	public final fun markComparisonPredicate (Ljava/lang/String;)V
+	public final fun markRegexPredicate (Ljava/lang/String;)V
+	public final fun registerAll (Lio/karandash/api/platform/PredicateRegistry;)V
+	public final fun registerOperatorField (Ljava/lang/String;Lio/karandash/conditions/ExpressionEvaluator$OperatorPredicateNames;)V
+	public final fun registerPredicate (Lio/karandash/api/context/ConditionPredicate;)V
+	public final fun validate (Ljava/lang/String;)V
+}
+
+public final class io/karandash/conditions/ExpressionEvaluator$CompOp : java/lang/Enum {
+	public static final field EQ Lio/karandash/conditions/ExpressionEvaluator$CompOp;
+	public static final field GT Lio/karandash/conditions/ExpressionEvaluator$CompOp;
+	public static final field GTE Lio/karandash/conditions/ExpressionEvaluator$CompOp;
+	public static final field LT Lio/karandash/conditions/ExpressionEvaluator$CompOp;
+	public static final field LTE Lio/karandash/conditions/ExpressionEvaluator$CompOp;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public static fun valueOf (Ljava/lang/String;)Lio/karandash/conditions/ExpressionEvaluator$CompOp;
+	public static fun values ()[Lio/karandash/conditions/ExpressionEvaluator$CompOp;
+}
+
+public final class io/karandash/conditions/ExpressionEvaluator$Companion {
+	public final fun compareInt (ILio/karandash/conditions/ExpressionEvaluator$CompOp;I)Z
+	public final fun createManagedRegexCache (Lio/karandash/cache/CacheManager;)Lio/karandash/cache/TieredCache;
+}
+
+public final class io/karandash/conditions/ExpressionEvaluator$FieldOp : java/lang/Enum {
+	public static final field EXACT Lio/karandash/conditions/ExpressionEvaluator$FieldOp;
+	public static final field GLOB Lio/karandash/conditions/ExpressionEvaluator$FieldOp;
+	public static final field REGEX Lio/karandash/conditions/ExpressionEvaluator$FieldOp;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public static fun valueOf (Ljava/lang/String;)Lio/karandash/conditions/ExpressionEvaluator$FieldOp;
+	public static fun values ()[Lio/karandash/conditions/ExpressionEvaluator$FieldOp;
+}
+
+public final class io/karandash/conditions/ExpressionEvaluator$OperatorPredicateNames {
+	public static final field Companion Lio/karandash/conditions/ExpressionEvaluator$OperatorPredicateNames$Companion;
+	public fun <init> (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V
+	public final fun component1 ()Ljava/lang/String;
+	public final fun component2 ()Ljava/lang/String;
+	public final fun component3 ()Ljava/lang/String;
+	public final fun copy (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)Lio/karandash/conditions/ExpressionEvaluator$OperatorPredicateNames;
+	public static synthetic fun copy$default (Lio/karandash/conditions/ExpressionEvaluator$OperatorPredicateNames;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;ILjava/lang/Object;)Lio/karandash/conditions/ExpressionEvaluator$OperatorPredicateNames;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getExactName ()Ljava/lang/String;
+	public final fun getGlobName ()Ljava/lang/String;
+	public final fun getRegexName ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final synthetic class io/karandash/conditions/ExpressionEvaluator$OperatorPredicateNames$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lio/karandash/conditions/ExpressionEvaluator$OperatorPredicateNames$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lio/karandash/conditions/ExpressionEvaluator$OperatorPredicateNames;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lio/karandash/conditions/ExpressionEvaluator$OperatorPredicateNames;)V
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/karandash/conditions/ExpressionEvaluator$OperatorPredicateNames$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/karandash/conditions/FieldMatchPredicates {
+	public static final field INSTANCE Lio/karandash/conditions/FieldMatchPredicates;
+	public final fun forField (Ljava/lang/String;Lkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function1;)Ljava/util/List;
+	public static synthetic fun forField$default (Lio/karandash/conditions/FieldMatchPredicates;Ljava/lang/String;Lkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function1;ILjava/lang/Object;)Ljava/util/List;
+	public final fun operatorNames (Ljava/lang/String;)Lio/karandash/conditions/ExpressionEvaluator$OperatorPredicateNames;
+}
+
+public final class io/karandash/conditions/FileMetricPredicates {
+	public static final field INSTANCE Lio/karandash/conditions/FileMetricPredicates;
+	public final fun registerAll (Lio/karandash/api/platform/PredicateRegistry;)V
+}
+
+public final class io/karandash/conditions/MrDataPredicates {
+	public static final field INSTANCE Lio/karandash/conditions/MrDataPredicates;
+	public final fun registerAll (Lio/karandash/api/platform/PredicateRegistry;Lkotlin/jvm/functions/Function1;)V
+	public static synthetic fun registerAll$default (Lio/karandash/conditions/MrDataPredicates;Lio/karandash/api/platform/PredicateRegistry;Lkotlin/jvm/functions/Function1;ILjava/lang/Object;)V
+}
+
+public final class io/karandash/conditions/MutablePredicateRegistry : io/karandash/api/platform/PredicateRegistry {
+	public fun <init> ()V
+	public fun all ()Ljava/util/List;
+	public fun exists (Ljava/lang/String;)Z
+	public fun get (Ljava/lang/String;)Lio/karandash/api/context/ConditionPredicate;
+	public fun register (Lio/karandash/api/context/ConditionPredicate;)V
+}
+
+public abstract interface class io/karandash/conditions/PolicyEngine {
+	public abstract fun evaluate (Ljava/util/List;Lio/karandash/api/context/ConditionContext;Lio/karandash/api/platform/PredicateRegistry;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+}
+
+public final class io/karandash/conditions/RuleResultPredicates {
+	public static final field INSTANCE Lio/karandash/conditions/RuleResultPredicates;
+	public final fun register (Lio/karandash/api/platform/PredicateRegistry;Ljava/util/Map;)V
+}
+

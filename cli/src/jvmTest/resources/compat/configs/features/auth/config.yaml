@@ -1,0 +1,12 @@
+# Source: docs/configuration/YAML_CONFIG.md. Both the inline (documented) form and the
+# top-level `auth:` block (documented as ignored, but parsed by AuthBlockParser) are kept so
+# the effective result of each is frozen.
+platforms:
+  gitlab:
+    url: "https://gitlab.example.com"
+    token: "compat-literal-token"
+
+auth:
+  gitlab:
+    url: "https://gitlab.example.com"
+    token: "compat-auth-block-token"

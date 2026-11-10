@@ -1,0 +1,2 @@
+# Production modules with more than 5 main Kotlin files and no tests, tolerated by verify-test-coverage.sh.
+# One module path per line. Empty: every such module has tests; keep it that way rather than adding lines.

@@ -1,0 +1,115 @@
+{
+    "rules": {
+        "ruleConfigs": {
+            "titleFormat": {
+                "pattern": "^(feat|fix|chore|docs|test|refactor|style|perf|build|ci|revert)(\\(.+\\))?!?:.*",
+                "minLength": 10,
+                "maxLength": 72,
+                "requireTicket": false
+            },
+            "commitMessages": {
+                "maxLength": 72,
+                "pattern": "^(feat|fix|chore|docs|test|refactor|style|perf|build|ci|revert)(\\(.+\\))?!?:.*"
+            },
+            "sizeLimits": {
+                "maxLines": 800,
+                "maxCommits": 25,
+                "excludeRenames": false,
+                "excludeDeleted": false,
+                "severities": {
+                    "onViolation": "error"
+                }
+            },
+            "draftPrevention": {
+                "blockDraft": "fail",
+                "wipPatterns": [
+                    "\\bWIP\\b",
+                    "\\[WIP\\]",
+                    "\\bwip:",
+                    "\\bWIP:"
+                ]
+            }
+        },
+        "ruleMeta": {}
+    },
+    "platforms": null,
+    "reporters": null,
+    "profile": {
+        "id": "conventional-commits",
+        "severity": null,
+        "overrides": {
+            "rules": {}
+        }
+    },
+    "scripts": null,
+    "dangerfile": null,
+    "baseline": null,
+    "dryRun": false,
+    "dryRunScope": null,
+    "allowLocalhost": false,
+    "allowPrivateNetwork": false,
+    "enrichment": null,
+    "enrichmentProviders": null,
+    "ai": null,
+    "aiReports": null,
+    "aiMetrics": null,
+    "autoApprove": null,
+    "cache": null,
+    "limits": {
+        "maxFindings": 10000,
+        "fetchTimeout": "10s",
+        "expressions": {
+            "maxLength": 1000,
+            "maxNestingDepth": 50
+        },
+        "extends": {
+            "maxEntries": 10,
+            "maxDepth": 5,
+            "maxChainSize": 20
+        },
+        "glob": {
+            "maxExpansion": 10,
+            "maxDirectoryDepth": 5
+        },
+        "regex": {
+            "maxPatternLength": 500,
+            "maxQuantifierNesting": 1
+        },
+        "patterns": {
+            "maxExpansionDepth": 20
+        }
+    },
+    "http": {
+        "retry": null,
+        "pagination": null,
+        "responseCache": null
+    },
+    "patterns": {},
+    "timeouts": null,
+    "diagnostics": null,
+    "policies": [],
+    "profileOverrides": {
+        "title": {
+            "minLength": 10,
+            "maxLength": 72,
+            "maxSubjectLength": null
+        },
+        "size": {
+            "maxLines": 800,
+            "maxCommits": null
+        }
+    },
+    "display": {
+        "git": {
+            "shortShaLength": 7
+        },
+        "watcher": {
+            "debounce": "500ms"
+        },
+        "console": {
+            "successMark": "✓",
+            "failureMark": "✗"
+        }
+    },
+    "ruleEnrichment": null
+}

@@ -1,0 +1,54 @@
+exit=1
+{
+    "schemaVersion": 1,
+    "passed": false,
+    "findings": [
+        {
+            "severity": "error",
+            "message": "Missing required label: 'needs-review'",
+            "rule": "labels",
+            "location": null,
+            "suggestion": "Add the required label via the MR sidebar.",
+            "explanation": "Labels help categorize and route MRs through review workflows.",
+            "metadata": null,
+            "attachments": null,
+            "errorCode": "E0202",
+            "fingerprint": "6c7083707cbaef03",
+            "fixSuggestions": [
+                {
+                    "type": "add-label",
+                    "label": "needs-review"
+                }
+            ]
+        },
+        {
+            "severity": "error",
+            "message": "MR title does not match required pattern.",
+            "rule": "titleFormat",
+            "location": null,
+            "suggestion": "Change the title to match the format, e.g. `JIRA-0: feat: add runtime verification`.",
+            "explanation": "Title format rules ensure consistent MR naming for changelogs and automation.",
+            "metadata": {
+                "expectedFormat": "Start 'JIRA-' ['0'-'9']+ ': ' .+",
+                "mismatch": "{\"value\":\"feat: add runtime verification\",\"position\":0,\"expected\":\"\\\"JIRA-\\\"\"}",
+                "formatExplain": "start of string, followed by \"JIRA-\", followed by one or more digits (0-9), followed by \": \", followed by one or more of any character",
+                "formatDiagram": "── START ────── \"JIRA-\" ────── [0-9] ── +──── \": \" ────── . ── +",
+                "pattern": "Start 'JIRA-' ['0'-'9']+ ': ' .+"
+            },
+            "attachments": null,
+            "expectedFormat": "Start 'JIRA-' ['0'-'9']+ ': ' .+",
+            "mismatch": {
+                "value": "feat: add runtime verification",
+                "position": 0,
+                "expected": "\"JIRA-\""
+            },
+            "errorCode": "E0200",
+            "fingerprint": "7046752bc194af19"
+        }
+    ],
+    "summary": {
+        "errors": 2,
+        "warnings": 0,
+        "info": 0
+    }
+}

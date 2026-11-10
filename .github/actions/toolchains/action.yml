@@ -1,0 +1,16 @@
+name: Plugin example toolchains
+description: wasm32 Rust target, lld for the WASM C examples, Gradle 8.5 for the init-script check, node for the JS plugins.
+runs:
+  using: composite
+  steps:
+    - shell: bash
+      run: |
+        rustup target add wasm32-unknown-unknown
+        # the WASM C examples build with clang --target=wasm32, which links through wasm-ld (lld)
+        sudo apt-get update -q && sudo apt-get install -y -q --no-install-recommends lld
+        # the extensibility init script must also compile under Gradle 8.5
+        curl -fsSL -o "$RUNNER_TEMP/gradle-8.5.zip" https://services.gradle.org/distributions/gradle-8.5-bin.zip
+        echo "9d926787066a081739e8200858338b4a69e837c3a821a33aca9db09dd4a41026  $RUNNER_TEMP/gradle-8.5.zip" | sha256sum -c -
+        unzip -q "$RUNNER_TEMP/gradle-8.5.zip" -d "$RUNNER_TEMP"
+        echo "GRADLE85=$RUNNER_TEMP/gradle-8.5/bin/gradle" >> "$GITHUB_ENV"
+        echo "EM_NODE_JS=$(command -v node)" >> "$GITHUB_ENV"

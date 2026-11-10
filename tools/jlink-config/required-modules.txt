@@ -1,0 +1,7 @@
+java.base
+java.desktop
+java.instrument
+java.security.sasl
+java.sql
+jdk.management
+jdk.unsupported

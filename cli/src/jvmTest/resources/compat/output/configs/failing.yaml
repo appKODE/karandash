@@ -1,0 +1,6 @@
+# Fixed findings on tools/integration-tests/fixtures/test-mr.json: one error per rule below.
+rules:
+  title-format:
+    pattern: "^JIRA-[0-9]+: .+"
+  labels:
+    required-labels: ["needs-review"]

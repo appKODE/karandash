@@ -1,0 +1,172 @@
+scenarios:
+  - name: "Valid: JIRA + English title + CHANGELOG"
+    mr:
+      title: "[PROJ-123] Add user profile screen"
+      commits:
+        - subject: "[PROJ-123] Implement profile screen UI"
+          body: "CHANGELOG: [PROJ-123] Add user profile screen."
+      branch: "feature/PROJ-123-user-profile"
+    expect: pass
+
+  - name: "Valid: no JIRA — no CHANGELOG required"
+    mr:
+      title: "Fix NPE on empty profile"
+      commits:
+        - subject: "Guard null check in ProfileAdapter"
+      branch: "fix/null-profile"
+    expect: pass
+
+  - name: "Valid: JIRA + CHANGELOG in Russian"
+    mr:
+      title: "[PROJ-789] Improve payment UX"
+      commits:
+        - subject: "[PROJ-789] Redesign payment confirmation screen"
+          body: "CHANGELOG: [PROJ-789] Улучшить интерфейс подтверждения платежа."
+      branch: "feature/PROJ-789-payment-ux"
+    expect: pass
+
+  - name: "Valid: multi-task CHANGELOG — both tickets in title and commit"
+    mr:
+      title: "[PROJ-100] [PROJ-101] Batch feature and bugfix"
+      commits:
+        - subject: "[PROJ-100] [PROJ-101] Implement feature and fix related bug"
+          body: "CHANGELOG: [PROJ-100] Add new feature, [PROJ-101] Fix related crash."
+      branch: "feature/PROJ-100-PROJ-101-batch"
+    expect: pass
+
+  - name: "Valid: JIRA in title but commit without JIRA — no CHANGELOG on that commit"
+    mr:
+      title: "[PROJ-123] Add user profile screen"
+      commits:
+        - subject: "[PROJ-123] Implement profile screen UI"
+          body: "CHANGELOG: [PROJ-123] Add user profile screen."
+        - subject: "Fix typo in layout file"
+          body: ""
+      branch: "feature/PROJ-123-user-profile"
+    expect: pass
+
+  - name: "Valid: commit task is subset of MR title tasks"
+    mr:
+      title: "[PROJ-200] Fix auth and logout issues"
+      commits:
+        - subject: "[PROJ-200] Fix token refresh on auth failure"
+          body: "CHANGELOG: [PROJ-200] Fix auth token refresh on session expiry."
+      branch: "fix/PROJ-200-auth"
+    expect: pass
+
+  - name: "Valid: JIRA + CHANGELOG English, second commit without ticket needs no CHANGELOG"
+    mr:
+      title: "[PROJ-300] Refactor payment module"
+      commits:
+        - subject: "[PROJ-300] Extract PaymentRepository from ViewModel"
+          body: "CHANGELOG: [PROJ-300] Refactor payment module for better testability."
+        - subject: "Add unit tests for PaymentRepository"
+          body: ""
+      branch: "refactor/PROJ-300-payment"
+    expect: pass
+
+  - name: "Valid: env var substitution — JIRA key matches commit (config merging)"
+    mr:
+      title: "[PROJ-999] Add notification preferences screen"
+      commits:
+        - subject: "[PROJ-999] Implement notification toggle UI"
+          body: "CHANGELOG: [PROJ-999] Add notification preferences screen."
+      branch: "feature/PROJ-999-notifications"
+    expect: pass
+
+  - name: "Valid: title at minimum length boundary (exactly 10 chars)"
+    mr:
+      title: "Fix errors"
+      commits:
+        - subject: "Fix errors"
+    expect: pass
+
+  - name: "Valid: no required labels — any labels accepted"
+    mr:
+      title: "Fix auth flow regression"
+      commits:
+        - subject: "Fix null pointer in login"
+      labels: ["bugfix", "priority:high"]
+    expect: pass
+
+  - name: "Valid: MR with file changes within size limits"
+    mr:
+      title: "Add logging utility"
+      commits:
+        - subject: "Add logging utility class"
+      changes:
+        - path: "src/main/Logger.kt"
+          additions: 50
+          deletions: 0
+    expect: pass
+
+  - name: "Valid: TASK metadata precedes CHANGELOG in commit body"
+    mr:
+      title: "[PROJ-1988] [PROJ-1989] Fix referral code substitution in internal build"
+      commits:
+        - subject: "[PROJ-1988] [PROJ-1989] Fix referral code substitution in internal build"
+          body: |
+            TASK: https://jira.example.com/browse/PROJ-1988
+
+            CHANGELOG: [PROJ-1988] Bottom sheet with referral code does not open.
+
+            TASK: https://jira.example.com/browse/PROJ-1989
+
+            CHANGELOG: [PROJ-1989] Bottom sheet opens without referral code substitution.
+      branch: "feature/PROJ-1988-referral"
+    expect: pass
+
+  - name: "Valid: CHANGELOG without trailing period (period now optional)"
+    mr:
+      title: "[PROJ-501] Add feature"
+      commits:
+        - subject: "[PROJ-501] Implement feature"
+          body: "CHANGELOG: [PROJ-501] Add feature"
+      branch: "feature/PROJ-501-add"
+    expect: pass
+
+  - name: "Valid: CHANGELOG with [Platform] tag and no trailing period (BRAVO-style)"
+    mr:
+      title: "[PROJ-2432] Implement google pay payment cancellation"
+      commits:
+        - subject: "[PROJ-2432] Implement google pay payment cancellation"
+          body: "CHANGELOG: [PROJ-2432] [Android] Отмена платежа при закрытии Google Pay"
+      branch: "feature/PROJ-2432"
+    expect: pass
+
+  - name: "Valid: CHANGELOG with no space after colon and short [AND] platform tag (CHARLIE-style)"
+    mr:
+      title: "[PROJ-104] [PROJ-105] Implement subscription details"
+      commits:
+        - subject: "[PROJ-104] [PROJ-105] Implement subscription details"
+          body: |
+            CHANGELOG:[PROJ-104][AND] Верстка экрана деталей подписки
+            CHANGELOG:[PROJ-105][AND] Логика экрана деталей подписки
+      branch: "feature/PROJ-104-subscription"
+    expect: pass
+
+  - name: "Valid: anyCommit scope — only the umbrella commit carries CHANGELOG"
+    mr:
+      title: "[PROJ-104] [PROJ-105] Implement subscription details"
+      commits:
+        - subject: "[PROJ-105] Refactor and reuse OtpInputContent screen"
+          body: "TASK: https://jira.example.com/browse/PROJ-105"
+        - subject: "[PROJ-105] Implement logic for phone confirmation"
+          body: "TASK: https://jira.example.com/browse/PROJ-105"
+        - subject: "[PROJ-104] [PROJ-105] Implement UI and logic for SubscriptionScreen"
+          body: |
+            CHANGELOG:[PROJ-104][AND] Верстка экрана деталей подписки
+            CHANGELOG:[PROJ-105][AND] Логика экрана деталей подписки
+      branch: "feature/PROJ-104-subscription"
+    expect: pass
+
+  - name: "Valid: multi-ticket MR with separate commit per ticket (coverage check passes)"
+    mr:
+      title: "[PROJ-1] [PROJ-2] Implement combined feature"
+      commits:
+        - subject: "[PROJ-1] First piece"
+          body: "CHANGELOG: [PROJ-1] First piece description"
+        - subject: "[PROJ-2] Second piece"
+          body: "CHANGELOG: [PROJ-2] Second piece description"
+      branch: "feature/PROJ-1-PROJ-2-combined"
+    expect: pass

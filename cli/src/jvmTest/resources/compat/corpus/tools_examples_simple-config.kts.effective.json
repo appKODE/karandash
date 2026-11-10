@@ -1,0 +1,125 @@
+{
+    "rules": {
+        "ruleConfigs": {
+            "titleFormat": {
+                "pattern": "^(feat|fix|docs|style|refactor|test|chore): .+",
+                "minLength": 10,
+                "maxLength": 72,
+                "requireTicket": false
+            },
+            "commitMessages": {
+                "format": "conventional",
+                "maxLength": 72
+            },
+            "jiraTicket": {
+                "projectKeys": [
+                    "PROJ",
+                    "TASK",
+                    "BUG"
+                ],
+                "pattern": "([A-Z]+-\\d+)"
+            }
+        },
+        "ruleMeta": {
+            "titleFormat": {
+                "priority": 100,
+                "bailOnFail": false,
+                "when": null,
+                "mode": "normal",
+                "suggestion": "Start with a type prefix: 'feat: ', 'fix: ', 'docs: ', etc.",
+                "explanation": "Conventional commit prefixes enable automated changelogs and semantic versioning",
+                "concernArea": null,
+                "severity": null,
+                "excludePaths": []
+            },
+            "commitMessages": {
+                "priority": 100,
+                "bailOnFail": false,
+                "when": null,
+                "mode": "normal",
+                "suggestion": "Use conventional commit format: '<type>[(scope)]: <description>'",
+                "explanation": "Conventional commits enable automated changelog generation and release tooling",
+                "concernArea": null,
+                "severity": null,
+                "excludePaths": []
+            }
+        }
+    },
+    "platforms": null,
+    "reporters": {
+        "platform": {},
+        "console": {}
+    },
+    "profile": null,
+    "scripts": null,
+    "dangerfile": null,
+    "baseline": null,
+    "dryRun": false,
+    "dryRunScope": null,
+    "allowLocalhost": false,
+    "allowPrivateNetwork": false,
+    "enrichment": null,
+    "enrichmentProviders": null,
+    "ai": null,
+    "aiReports": null,
+    "aiMetrics": null,
+    "autoApprove": null,
+    "cache": null,
+    "limits": {
+        "maxFindings": 10000,
+        "fetchTimeout": "10s",
+        "expressions": {
+            "maxLength": 1000,
+            "maxNestingDepth": 50
+        },
+        "extends": {
+            "maxEntries": 10,
+            "maxDepth": 5,
+            "maxChainSize": 20
+        },
+        "glob": {
+            "maxExpansion": 10,
+            "maxDirectoryDepth": 5
+        },
+        "regex": {
+            "maxPatternLength": 500,
+            "maxQuantifierNesting": 1
+        },
+        "patterns": {
+            "maxExpansionDepth": 20
+        }
+    },
+    "http": {
+        "retry": null,
+        "pagination": null,
+        "responseCache": null
+    },
+    "patterns": {},
+    "timeouts": null,
+    "diagnostics": null,
+    "policies": [],
+    "profileOverrides": {
+        "title": {
+            "minLength": null,
+            "maxLength": null,
+            "maxSubjectLength": null
+        },
+        "size": {
+            "maxLines": null,
+            "maxCommits": null
+        }
+    },
+    "display": {
+        "git": {
+            "shortShaLength": 7
+        },
+        "watcher": {
+            "debounce": "500ms"
+        },
+        "console": {
+            "successMark": "✓",
+            "failureMark": "✗"
+        }
+    },
+    "ruleEnrichment": null
+}

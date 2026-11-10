@@ -1,0 +1,103 @@
+# Karandash Docker Compose - Local development services
+#
+# Usage:
+#   cd karandash
+#   docker compose -f docker/docker-compose.yml run --rm test
+#   docker compose -f docker/docker-compose.yml run --rm build-fatjar
+#   docker compose -f docker/docker-compose.yml run --rm build-native
+#   docker compose -f docker/docker-compose.yml run --rm benchmark
+#
+# Or use karandash.sh which wraps these:
+#   ./docker/karandash.sh test
+#   ./docker/karandash.sh build fatjar
+
+x-common: &common
+  platform: linux/amd64
+  working_dir: /build
+  volumes:
+    - ..:/build
+    - gradle-cache:/root/.gradle
+  environment:
+    GRADLE_OPTS: "-Xmx4g -XX:MaxMetaspaceSize=1g"
+
+services:
+  # ── Builder services (use karandash-base image) ────────────────────────────
+
+  test:
+    <<: *common
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile.base
+    command: ./gradlew jvmTest ktlintCheck detekt --no-daemon
+
+  build-jar:
+    <<: *common
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile.base
+    command: ./gradlew :cli:jvmJar --no-daemon -x jvmTest
+
+  build-fatjar:
+    <<: *common
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile.base
+    command: ./gradlew :cli:shadowJar --no-daemon -x jvmTest
+
+  build-native:
+    <<: *common
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile.base
+    command: ./gradlew :cli:linkReleaseExecutableLinuxX64 --no-daemon -x linuxX64Test
+
+  # ── Toolchain service (for plugin integration tests) ───────────────────────
+
+  plugin-tests:
+    <<: *common
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile.toolchain
+      args:
+        BASE_IMAGE: karandash/base:latest-amd64
+    command: >-
+      bash -c "
+        bash tools/integration-tests/plugin-examples-test.sh tools/examples
+      "
+
+  # ── Benchmark services ─────────────────────────────────────────────────────
+
+  benchmark:
+    platform: linux/amd64
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile.benchmark-env
+    working_dir: /workspace
+    volumes:
+      - ..:/workspace
+    environment:
+      BENCH_ITERATIONS: "${BENCH_ITERATIONS:-30}"
+    command: >-
+      bash -c "
+        chmod +x build/docker-out/cli.kexe &&
+        bash tools/benchmarks/benchmark-cli.sh build/docker-out/cli.kexe $${BENCH_ITERATIONS} native &&
+        bash tools/benchmarks/benchmark-cli.sh 'java -jar build/docker-out/karandash.jar' $${BENCH_ITERATIONS} fatjar
+      "
+
+  competitor-bench:
+    platform: linux/amd64
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile.competitor-env
+      args:
+        BASE_IMAGE: karandash/benchmark-env:latest-amd64
+    working_dir: /workspace
+    volumes:
+      - ..:/workspace
+    environment:
+      BENCH_ITERATIONS: "${BENCH_ITERATIONS:-30}"
+    command: bash tools/benchmarks/benchmark-competitors.sh
+
+volumes:
+  gradle-cache:
+    name: karandash-gradle-cache

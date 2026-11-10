@@ -1,0 +1,26 @@
+scenarios:
+  - name: "Valid: JIRA + CHANGELOG with ACQ key inherits base rules"
+    mr:
+      title: "[ACQ-1] Add AI context quality support"
+      commits:
+        - subject: "[ACQ-1] Wire enrichers into pipeline"
+          body: "CHANGELOG: [ACQ-1] Enable context enrichers for AI review."
+      branch: "feature/ACQ-1-enrichers"
+    expect: pass
+
+  - name: "Valid: no JIRA — no CHANGELOG required (title policy still applies)"
+    mr:
+      title: "Refactor hunk parser for clarity"
+      commits:
+        - subject: "Extract helper for added-line detection"
+      branch: "refactor/hunk-parser"
+    expect: pass
+
+  - name: "Valid: multi-rule MR stays compliant under context-quality defaults"
+    mr:
+      title: "[ACQ-7] Improve diff truncation budget allocation"
+      commits:
+        - subject: "[ACQ-7] Tune proportional allocator defaults"
+          body: "CHANGELOG: [ACQ-7] Adjust budget allocator weighting."
+      branch: "feature/ACQ-7-budget"
+    expect: pass

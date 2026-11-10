@@ -1,0 +1,6 @@
+rules: commitMessages crossEntityConsistency draftPrevention jiraTicket labels languagePolicy sizeLimits titleFormat
+changelog-entry = \[FOXTROT-\d+\] .+
+changelog-line = ^CHANGELOG: \[FOXTROT-\d+\] .+(?:, \[FOXTROT-\d+\] .+)*\.$
+project-ticket = FOXTROT-\d+
+project-tickets = (?:\[FOXTROT-\d+\])+
+project-title = (?:(?:\[FOXTROT-\d+\])+)?.+

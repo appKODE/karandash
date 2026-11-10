@@ -1,0 +1,11 @@
+exit=1
+<!-- karandash-validation-result -->
+> [!caution]
+> **Failed · 2 errors**
+
+| | Rule | Finding | How to fix |
+|---|---|---|---|
+| ❌ | `labels` | Missing required label: 'needs-review' | Add the required label via the MR sidebar. |
+| ❌ | `titleFormat` | MR title does not match required pattern. | Change the title to match the format, e.g. `JIRA-0: feat: add runtime verification`. |
+
+<sub>karandash <version> · React 👎 on a finding to mark it as a false positive.</sub>

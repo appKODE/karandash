@@ -1,0 +1,69 @@
+{
+  "id": "06-order-cancel-swallowed",
+  "title": "Add OrderService.cancel",
+  "description": "Adds cancel(id) to OrderService (PROJ-31). Cancelling an unknown order must not crash the caller.",
+  "sourceBranch": "feature/PROJ-31-cancel-order",
+  "commits": [
+    "feat(orders): add cancel (PROJ-31)"
+  ],
+  "files": [
+    {
+      "path": "src/main/kotlin/orders/OrderService.kt",
+      "diff": [
+        "@@ -8,4 +8,11 @@ class OrderService(",
+        "     private val repo: OrderRepository,",
+        " ) {",
+        "+    fun cancel(id: Long) {",
+        "+        val order = repo.find(id)",
+        "+        try {",
+        "+            repo.delete(order!!.id)",
+        "+        } catch (e: Exception) {",
+        "+        }",
+        "+    }",
+        " ",
+        "     fun count(): Int = repo.count()"
+      ]
+    }
+  ],
+  "analyzers": [
+    "review-comments",
+    "code-quality",
+    "risk-scoring",
+    "change-categorization",
+    "mr-summary"
+  ],
+  "expected": [
+    {
+      "analyzer": "review-comments",
+      "file": "src/main/kotlin/orders/OrderService.kt",
+      "startLine": 13,
+      "category": "BUG"
+    },
+    {
+      "analyzer": "review-comments",
+      "file": "src/main/kotlin/orders/OrderService.kt",
+      "startLine": 14,
+      "category": "BUG"
+    },
+    {
+      "analyzer": "code-quality"
+    },
+    {
+      "analyzer": "code-quality",
+      "file": "src/main/kotlin/orders/OrderService.kt",
+      "startLine": 13,
+      "category": "correctness"
+    },
+    {
+      "analyzer": "risk-scoring",
+      "category": "medium"
+    },
+    {
+      "analyzer": "change-categorization",
+      "category": "feature"
+    },
+    {
+      "analyzer": "mr-summary"
+    }
+  ]
+}

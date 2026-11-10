@@ -1,0 +1,39 @@
+{
+  "responses": {
+    "code-suggestions": {
+      "suggestions": []
+    },
+    "review-thread-analysis": {
+      "issues": []
+    },
+    "description-quality": {
+      "qualityScore": 0.9,
+      "issues": [],
+      "summary": "Accurate and sufficient for a typo fix."
+    },
+    "outdated-docs": {
+      "issues": []
+    },
+    "review-comments": {
+      "comments": []
+    },
+    "risk-scoring": {
+      "riskScore": 0.05,
+      "riskLevel": "low",
+      "confidence": 0.95,
+      "factors": [],
+      "summary": "Comment-only change."
+    },
+    "similar-issues": {
+      "patterns": [
+        {
+          "description": "Other typos in util KDoc",
+          "confidence": 0.4
+        }
+      ],
+      "searchTerms": [
+        "typo"
+      ]
+    }
+  }
+}

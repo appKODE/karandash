@@ -1,0 +1,370 @@
+{
+    "rules": {
+        "ruleConfigs": {
+            "titleFormat": {
+                "pattern": "^(feat|fix|docs|test|refactor|chore|ci|perf|style|build)(\\(.+\\))?: .+",
+                "minLength": 10,
+                "maxLength": 72,
+                "requireTicket": false
+            },
+            "commitMessages": {
+                "format": "conventional",
+                "pattern": "^(feat|fix|docs|test|refactor|chore|ci|perf|style|build)(\\(.+\\))?: .+",
+                "maxLength": 100
+            },
+            "jiraTicket": {
+                "projectKeys": [
+                    "PROJ",
+                    "TASK",
+                    "BUG",
+                    "FEAT"
+                ],
+                "pattern": "([A-Z]+-\\d+)"
+            },
+            "branchNaming": {
+                "pattern": "^(feature|bugfix|hotfix|release)/[a-z0-9-]+$",
+                "allowedPatterns": [
+                    "^feature/.*",
+                    "^bugfix/.*",
+                    "^hotfix/.*",
+                    "^release/.*"
+                ],
+                "requireSourceMatch": true,
+                "requireTargetMatch": false
+            },
+            "fileChanges": {
+                "patterns": [
+                    {
+                        "pattern": "**/*.sql",
+                        "requireApproval": [
+                            "dba"
+                        ]
+                    },
+                    {
+                        "pattern": "**/Dockerfile",
+                        "requireLabels": [
+                            "infra-change"
+                        ]
+                    }
+                ],
+                "requireApproval": [
+                    "code-owner"
+                ],
+                "blockOnDraft": "off"
+            },
+            "codeowners": {
+                "path": "CODEOWNERS",
+                "requireOwnerApproval": true
+            },
+            "approval": {
+                "minApprovals": 2,
+                "requiredApprovers": [
+                    "tech-lead",
+                    "senior-dev"
+                ],
+                "noChangesSinceApproval": true
+            },
+            "reviewer": {
+                "requiredReviewers": [
+                    "senior-dev-1",
+                    "senior-dev-2"
+                ],
+                "requiredTeams": [
+                    "backend-team",
+                    "security-team"
+                ],
+                "excludedReviewers": [
+                    "external-contractor"
+                ]
+            },
+            "cicdStatus": {
+                "requirePassed": true,
+                "requiredJobs": [
+                    "build",
+                    "test",
+                    "lint",
+                    "security-scan"
+                ],
+                "blockOnFailing": "fail"
+            },
+            "conflict": {
+                "blockOnConflicts": "fail"
+            },
+            "draftPrevention": {
+                "blockDraft": "fail",
+                "wipPatterns": [
+                    "WIP",
+                    "\\[WIP\\]",
+                    "wip:",
+                    "WIP:",
+                    "DRAFT",
+                    "\\[DRAFT\\]"
+                ]
+            },
+            "labels": {
+                "requiredLabels": [
+                    "status: needs-review"
+                ],
+                "forbiddenLabels": [
+                    "status: do-not-merge",
+                    "wip",
+                    "blocked"
+                ]
+            },
+            "sizeLimits": {
+                "maxFiles": 30,
+                "maxLines": 800,
+                "maxCommits": 20
+            },
+            "security": {
+                "scanForSecrets": true,
+                "secretPatterns": [
+                    "(?i)(api[_-]?key|apikey)\\s*[:=]\\s*['\"]?[a-zA-Z0-9_\\-]{20,}['\"]?",
+                    "(?i)(password|passwd|pwd)\\s*[:=]\\s*['\"]?[^\\s'\"]{8,}['\"]?",
+                    "(?i)(aws[_-]?access[_-]?key[_-]?id)\\s*[:=]\\s*['\"]?[A-Z0-9]{20}['\"]?"
+                ],
+                "sensitiveFiles": [
+                    "**/.env",
+                    "**/.env.*",
+                    "**/*secret*",
+                    "**/*.pem",
+                    "**/*.key",
+                    "**/id_rsa"
+                ]
+            }
+        },
+        "ruleMeta": {}
+    },
+    "platforms": {
+        "gitlab": {
+            "url": "https://gitlab.com",
+            "token": ""
+        },
+        "github": {
+            "token": ""
+        },
+        "bitbucket": {
+            "token": ""
+        },
+        "gerrit": {
+            "url": "https://gerrit.example.com",
+            "username": "",
+            "token": ""
+        },
+        "azureDevOps": {
+            "token": "",
+            "organization": "my-organization"
+        },
+        "awsCodeCommit": {
+            "region": "us-west-2",
+            "accessKeyId": "",
+            "secretAccessKey": "${AWS_SECRET_ACCESS_KEY}"
+        },
+        "gitea": {
+            "url": "https://gitea.example.com",
+            "token": ""
+        }
+    },
+    "reporters": {
+        "console": {},
+        "platform": {}
+    },
+    "profile": null,
+    "scripts": [
+        {
+            "path": ".karandash/checks.js",
+            "mode": "auto",
+            "timeout": "30s",
+            "env": null
+        },
+        {
+            "path": ".karandash/security.js",
+            "mode": "subprocess",
+            "timeout": "4h 10m",
+            "env": [
+                "JIRA_TOKEN"
+            ]
+        }
+    ],
+    "dangerfile": null,
+    "baseline": null,
+    "dryRun": false,
+    "dryRunScope": null,
+    "allowLocalhost": false,
+    "allowPrivateNetwork": false,
+    "enrichment": null,
+    "enrichmentProviders": {
+        "jira": {
+            "url": "https://acme.atlassian.net",
+            "token": "",
+            "email": "",
+            "tickets": {
+                "enabled": true,
+                "maxPerMr": 10
+            },
+            "acceptanceCriteria": {
+                "enabled": true
+            },
+            "linkedIssues": {
+                "enabled": true
+            },
+            "ticketKeys": {
+                "enabled": true
+            }
+        },
+        "confluence": {
+            "url": "https://acme.atlassian.net/wiki",
+            "token": "",
+            "email": "",
+            "pages": {
+                "enabled": true,
+                "maxPagesPerMr": 5,
+                "maxCharsPerPage": 4000
+            }
+        },
+        "githubIssue": {
+            "owner": "acme",
+            "repo": "backend",
+            "token": "",
+            "issues": {
+                "enabled": true
+            }
+        },
+        "gitlabIssue": {
+            "projectId": 12345678,
+            "token": "",
+            "issues": {
+                "enabled": true
+            }
+        },
+        "ci": {
+            "platform": "gitlab",
+            "projectId": "12345678",
+            "token": "",
+            "failedJobs": {
+                "enabled": true,
+                "maxJobs": 10
+            },
+            "coverageGaps": {
+                "enabled": true
+            }
+        },
+        "symbolContext": {
+            "changed": {
+                "enabled": true
+            }
+        },
+        "localGit": {
+            "fileFrequency": {
+                "enabled": true,
+                "period": "6m"
+            }
+        }
+    },
+    "ai": null,
+    "aiReports": null,
+    "aiMetrics": null,
+    "autoApprove": null,
+    "cache": null,
+    "limits": {
+        "maxFindings": 10000,
+        "fetchTimeout": "10s",
+        "expressions": {
+            "maxLength": 1000,
+            "maxNestingDepth": 50
+        },
+        "extends": {
+            "maxEntries": 10,
+            "maxDepth": 5,
+            "maxChainSize": 20
+        },
+        "glob": {
+            "maxExpansion": 10,
+            "maxDirectoryDepth": 5
+        },
+        "regex": {
+            "maxPatternLength": 500,
+            "maxQuantifierNesting": 1
+        },
+        "patterns": {
+            "maxExpansionDepth": 20
+        }
+    },
+    "http": {
+        "retry": null,
+        "pagination": null,
+        "responseCache": null
+    },
+    "patterns": {},
+    "timeouts": null,
+    "diagnostics": null,
+    "policies": [
+        {
+            "when": "file_path_matches(\"src/**/*.ts\")",
+            "name": null,
+            "modules": [
+                "titleFormat",
+                "fileChanges"
+            ],
+            "enabled": null,
+            "severity": null,
+            "override": null,
+            "autoApprove": null,
+            "autoFix": null,
+            "scripts": null,
+            "dangerfile": null
+        },
+        {
+            "when": "is_draft",
+            "name": null,
+            "modules": null,
+            "enabled": false,
+            "severity": null,
+            "override": null,
+            "autoApprove": null,
+            "autoFix": null,
+            "scripts": null,
+            "dangerfile": null
+        }
+    ],
+    "profileOverrides": {
+        "title": {
+            "minLength": null,
+            "maxLength": null,
+            "maxSubjectLength": null
+        },
+        "size": {
+            "maxLines": null,
+            "maxCommits": null
+        }
+    },
+    "display": {
+        "git": {
+            "shortShaLength": 7
+        },
+        "watcher": {
+            "debounce": "500ms"
+        },
+        "console": {
+            "successMark": "✓",
+            "failureMark": "✗"
+        }
+    },
+    "ruleEnrichment": {
+        "review-comments": {
+            "enrich": [
+                "jira:*",
+                "confluence:*",
+                "ci:*",
+                "symbols:*"
+            ]
+        },
+        "risk-scoring": {
+            "enrich": [
+                "jira:tickets",
+                "ci:failed-jobs",
+                "ci:coverage-gaps"
+            ]
+        }
+    }
+}

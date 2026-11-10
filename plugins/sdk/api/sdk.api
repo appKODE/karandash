@@ -1,0 +1,907 @@
+public abstract interface class io/karandash/sdk/ModuleScopedPluginContextFactory {
+	public fun forModule (Lio/karandash/api/Module;)Lio/karandash/api/PluginContext;
+	public abstract fun forModule (Ljava/lang/String;)Lio/karandash/api/PluginContext;
+}
+
+public final class io/karandash/sdk/ModuleScopedPluginContextFactory$DefaultImpls {
+	public static fun forModule (Lio/karandash/sdk/ModuleScopedPluginContextFactory;Lio/karandash/api/Module;)Lio/karandash/api/PluginContext;
+}
+
+public final class io/karandash/sdk/cache/RuleCacheHelper {
+	public static final field INSTANCE Lio/karandash/sdk/cache/RuleCacheHelper;
+	public final fun cachedValidate (Lio/karandash/api/cache/KarandashCache;Ljava/lang/String;Ljava/util/Map;Lkotlin/jvm/functions/Function1;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+}
+
+public final class io/karandash/sdk/config/BlockMode : java/lang/Enum {
+	public static final field Companion Lio/karandash/sdk/config/BlockMode$Companion;
+	public static final field FAIL Lio/karandash/sdk/config/BlockMode;
+	public static final field OFF Lio/karandash/sdk/config/BlockMode;
+	public static final field WARN Lio/karandash/sdk/config/BlockMode;
+	public final fun applyTo (Lio/karandash/models/finding/Finding;)Lio/karandash/models/finding/Finding;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public static fun valueOf (Ljava/lang/String;)Lio/karandash/sdk/config/BlockMode;
+	public static fun values ()[Lio/karandash/sdk/config/BlockMode;
+}
+
+public final class io/karandash/sdk/config/BlockMode$Companion {
+	public final fun parse (Ljava/lang/String;Lio/karandash/sdk/config/BlockMode;)Lio/karandash/sdk/config/BlockMode;
+}
+
+public final class io/karandash/sdk/config/BlockModeFalseOffSerializer : io/karandash/sdk/config/BlockModeSerializer {
+	public static final field INSTANCE Lio/karandash/sdk/config/BlockModeFalseOffSerializer;
+}
+
+public final class io/karandash/sdk/config/BlockModeFalseWarnSerializer : io/karandash/sdk/config/BlockModeSerializer {
+	public static final field INSTANCE Lio/karandash/sdk/config/BlockModeFalseWarnSerializer;
+}
+
+public class io/karandash/sdk/config/BlockModeSerializer : kotlinx/serialization/KSerializer {
+	public fun <init> (Lio/karandash/sdk/config/BlockMode;)V
+	public fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lio/karandash/sdk/config/BlockMode;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public fun serialize (Lkotlinx/serialization/encoding/Encoder;Lio/karandash/sdk/config/BlockMode;)V
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+}
+
+public class io/karandash/sdk/config/ConfigFormatModuleAdapter : io/karandash/api/Module, io/karandash/api/module/ConfigFormatModule {
+	public fun <init> (Lio/karandash/api/module/ConfigFormatModule;)V
+	public fun configSchema (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun defaultConfig (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun getConfigKey ()Ljava/lang/String;
+	public fun getDefaultEnabled ()Z
+	public fun getDefaultPriority ()I
+	public final fun getDelegate ()Lio/karandash/api/module/ConfigFormatModule;
+	public fun getDescription ()Ljava/lang/String;
+	public fun getDslName ()Ljava/lang/String;
+	public fun getFileExtensions ()Ljava/util/Set;
+	public fun getFormatId ()Ljava/lang/String;
+	public fun getHoverDocumentation ()Ljava/lang/String;
+	public fun getId ()Ljava/lang/String;
+	public fun getMinApiLevel ()I
+	public fun getName ()Ljava/lang/String;
+	public fun getPriority ()I
+	public fun getScope ()Lio/karandash/api/module/ModuleScope;
+	public fun getType ()Lio/karandash/api/ModuleType;
+	public fun getVersion ()Ljava/lang/String;
+	public fun initialize (Lio/karandash/api/PluginContext;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun messages (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun newHandle (Lio/karandash/api/PluginContext;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun parseExtendsOnly (Ljava/lang/String;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun parseToJsonElement (Ljava/lang/String;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun preserveKeys ()Ljava/util/Set;
+	public fun registerPatterns (Lio/karandash/api/platform/PatternRegistry;)V
+	public fun registerPredicates (Lio/karandash/api/platform/PredicateRegistry;)V
+	public fun shutdown (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+}
+
+public final class io/karandash/sdk/config/ConfigMapSerializerKt {
+	public static final fun anyToJsonElement (Ljava/lang/Object;)Lkotlinx/serialization/json/JsonElement;
+	public static final fun getConfigDeserializer ()Lkotlinx/serialization/json/Json;
+	public static final fun getSdkConfigMapJson ()Lkotlinx/serialization/json/Json;
+	public static final fun toAnyMap (Lkotlinx/serialization/json/JsonElement;)Ljava/util/Map;
+	public static final fun toAnyValue (Lkotlinx/serialization/json/JsonElement;)Ljava/lang/Object;
+}
+
+public final class io/karandash/sdk/config/ConfigSupportKt {
+	public static final fun configFieldsToProperties (Ljava/util/List;)Ljava/util/List;
+	public static final fun configSchemaFromDescriptor (Lkotlinx/serialization/descriptors/SerialDescriptor;)Ljava/util/List;
+	public static final fun deserializeConfigReporting (Lkotlinx/serialization/KSerializer;Lkotlinx/serialization/json/JsonElement;)Lkotlin/Pair;
+	public static final fun toConfigFieldType (Lkotlinx/serialization/descriptors/SerialDescriptor;)Lio/karandash/api/config/ConfigFieldType;
+	public static final fun unknownConfigKeys (Lkotlinx/serialization/descriptors/SerialDescriptor;Lkotlinx/serialization/json/JsonElement;)Ljava/util/List;
+}
+
+public final class io/karandash/sdk/config/EmptyConfig {
+	public static final field INSTANCE Lio/karandash/sdk/config/EmptyConfig;
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/karandash/sdk/config/ProfileRuleConfigBuilder {
+	public fun <init> ()V
+	public final fun build ()Ljava/util/Map;
+	public final fun getEntries ()Ljava/util/Map;
+}
+
+public final class io/karandash/sdk/config/ProfileRuleConfigBuilderKt {
+	public static final field PROFILE_RULE_SEVERITY_KEY Ljava/lang/String;
+	public static final fun profileRuleConfigs (Lkotlin/jvm/functions/Function1;)Ljava/util/Map;
+	public static final fun withMetaSeverity (Ljava/lang/String;Lkotlinx/serialization/json/JsonElement;Ljava/lang/String;)Lkotlinx/serialization/json/JsonElement;
+}
+
+public final class io/karandash/sdk/context/BridgeHostSettings {
+	public static final field INSTANCE Lio/karandash/sdk/context/BridgeHostSettings;
+	public static final field PATTERNS Ljava/lang/String;
+	public static final field PATTERN_OPTIONS Ljava/lang/String;
+	public static final field PATTERN_SOURCE Ljava/lang/String;
+	public static final field SHORT_SHA_LENGTH Ljava/lang/String;
+	public final fun apply (Lkotlinx/serialization/json/JsonObject;)V
+	public final fun pattern (Lkotlinx/serialization/json/JsonObject;Ljava/lang/String;)Lkotlin/text/Regex;
+}
+
+public final class io/karandash/sdk/enrichment/EnrichmentConfigParser {
+	public static final field INSTANCE Lio/karandash/sdk/enrichment/EnrichmentConfigParser;
+	public final fun closestMatch (Ljava/lang/String;Ljava/util/Set;)Ljava/lang/String;
+	public final fun configWarnings (Lkotlinx/serialization/json/JsonObject;Ljava/util/Set;Ljava/lang/String;)Ljava/util/List;
+	public final fun decodeOrDefault (Lkotlinx/serialization/json/JsonElement;Lkotlinx/serialization/DeserializationStrategy;Ljava/util/Set;Ljava/lang/String;Lkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function0;)Ljava/lang/Object;
+	public final fun extractSubBlocks (Lkotlinx/serialization/json/JsonObject;Ljava/util/Set;Ljava/lang/String;Ljava/util/List;)Ljava/util/Map;
+	public final fun getRESERVED_KEYS ()Ljava/util/Set;
+}
+
+public final class io/karandash/sdk/enrichment/EnrichmentKeys {
+	public static final field CI_COVERAGE_GAPS Ljava/lang/String;
+	public static final field CI_FAILED_JOBS Ljava/lang/String;
+	public static final field CONFLUENCE_PAGES Ljava/lang/String;
+	public static final field GITHUB_ISSUES Ljava/lang/String;
+	public static final field GITLAB_ISSUES Ljava/lang/String;
+	public static final field INSTANCE Lio/karandash/sdk/enrichment/EnrichmentKeys;
+	public static final field JIRA_ACCEPTANCE_CRITERIA Ljava/lang/String;
+	public static final field JIRA_LINKED_ISSUES Ljava/lang/String;
+	public static final field JIRA_TICKETS Ljava/lang/String;
+	public static final field JIRA_TICKET_KEYS Ljava/lang/String;
+	public static final field LOCAL_GIT_CONTRIBUTOR_STATS Ljava/lang/String;
+	public static final field LOCAL_GIT_FILE_FREQUENCY Ljava/lang/String;
+	public static final field SYMBOLS_CHANGED Ljava/lang/String;
+}
+
+public final class io/karandash/sdk/finding/MetaKey {
+	public fun <init> (Ljava/lang/String;Lkotlinx/serialization/KSerializer;)V
+	public final fun getName ()Ljava/lang/String;
+	public final fun getSerializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/karandash/sdk/finding/MetaKeyKt {
+	public static final fun meta (Lio/karandash/models/finding/Finding;Lio/karandash/sdk/finding/MetaKey;)Ljava/lang/Object;
+	public static final fun withMeta (Lio/karandash/models/finding/Finding;Lio/karandash/sdk/finding/MetaKey;Ljava/lang/Object;)Lio/karandash/models/finding/Finding;
+}
+
+public abstract class io/karandash/sdk/module/AbstractFormatModule : io/karandash/api/module/FormatModule {
+	public fun <init> ()V
+	public fun configSchema (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun defaultConfig (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun getConfigKey ()Ljava/lang/String;
+	public fun getDefaultEnabled ()Z
+	public fun getDefaultPriority ()I
+	public fun getDescription ()Ljava/lang/String;
+	public fun getDslName ()Ljava/lang/String;
+	public fun getHoverDocumentation ()Ljava/lang/String;
+	public fun getMinApiLevel ()I
+	public fun getScope ()Lio/karandash/api/module/ModuleScope;
+	public fun getType ()Lio/karandash/api/ModuleType;
+	public fun initialize (Lio/karandash/api/PluginContext;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun isDefaultInteractive ()Z
+	public fun isDefaultPlatform ()Z
+	public fun messages (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun newHandle (Lio/karandash/api/PluginContext;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun preserveKeys ()Ljava/util/Set;
+	public fun registerPatterns (Lio/karandash/api/platform/PatternRegistry;)V
+	public fun registerPredicates (Lio/karandash/api/platform/PredicateRegistry;)V
+	public fun shutdown (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+}
+
+public abstract class io/karandash/sdk/module/AbstractOutputModule : io/karandash/api/module/OutputModule {
+	public fun <init> ()V
+	public fun configSchema (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun configurePlatformContext (Lio/karandash/api/module/PlatformServiceModule;Ljava/lang/String;Ljava/lang/String;Lio/karandash/models/DiffRefs;Ljava/util/Map;)V
+	public fun defaultConfig (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun getAcceptedFormats ()Ljava/util/Set;
+	public fun getConfigKey ()Ljava/lang/String;
+	public fun getDefaultEnabled ()Z
+	public fun getDefaultPriority ()I
+	public fun getDescription ()Ljava/lang/String;
+	public fun getDslName ()Ljava/lang/String;
+	public fun getHasExternalSideEffects ()Z
+	public fun getHoverDocumentation ()Ljava/lang/String;
+	public fun getMinApiLevel ()I
+	public fun getPreferredFormat ()Ljava/lang/String;
+	public fun getRequiresPlatformContext ()Z
+	public fun getScope ()Lio/karandash/api/module/ModuleScope;
+	public fun getSupportsFileOutput ()Z
+	public fun getType ()Lio/karandash/api/ModuleType;
+	public fun initialize (Lio/karandash/api/PluginContext;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun isDefaultInteractive ()Z
+	public fun isDefaultPlatform ()Z
+	public fun messages (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun newHandle (Lio/karandash/api/PluginContext;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun preserveKeys ()Ljava/util/Set;
+	public fun registerPatterns (Lio/karandash/api/platform/PatternRegistry;)V
+	public fun registerPredicates (Lio/karandash/api/platform/PredicateRegistry;)V
+	public fun shutdown (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+}
+
+public abstract class io/karandash/sdk/module/AbstractProfileModule : io/karandash/api/module/ProfileModule {
+	public fun <init> ()V
+	public fun configSchema (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun defaultConfig (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun getConfigKey ()Ljava/lang/String;
+	public fun getDefaultEnabled ()Z
+	public fun getDefaultPriority ()I
+	public fun getDefaultSeverity ()Lio/karandash/models/finding/Severity;
+	public fun getDescription ()Ljava/lang/String;
+	public fun getDslName ()Ljava/lang/String;
+	public fun getHoverDocumentation ()Ljava/lang/String;
+	public fun getId ()Ljava/lang/String;
+	public fun getMinApiLevel ()I
+	public fun getScope ()Lio/karandash/api/module/ModuleScope;
+	public fun getType ()Lio/karandash/api/ModuleType;
+	public fun getVersion ()Ljava/lang/String;
+	public fun initialize (Lio/karandash/api/PluginContext;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun isDefaultZeroConfigProfile ()Z
+	public fun messages (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun newHandle (Lio/karandash/api/PluginContext;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun policies (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun preserveKeys ()Ljava/util/Set;
+	public fun registerPatterns (Lio/karandash/api/platform/PatternRegistry;)V
+	public fun registerPredicates (Lio/karandash/api/platform/PredicateRegistry;)V
+	public fun reporterConfigs (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun shutdown (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun tags (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+}
+
+public abstract class io/karandash/sdk/module/AbstractReporterModule : io/karandash/api/module/ReporterModule {
+	public fun <init> ()V
+	public fun configSchema (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun defaultConfig (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun getConfigKey ()Ljava/lang/String;
+	public fun getDefaultEnabled ()Z
+	public fun getDefaultPriority ()I
+	public fun getDescription ()Ljava/lang/String;
+	public fun getDslName ()Ljava/lang/String;
+	public fun getHasExternalSideEffects ()Z
+	public fun getHoverDocumentation ()Ljava/lang/String;
+	public fun getMinApiLevel ()I
+	public fun getRequiresPlatformContext ()Z
+	public fun getScope ()Lio/karandash/api/module/ModuleScope;
+	public fun getSupportsFileOutput ()Z
+	public fun getSupportsLiveMode ()Z
+	public fun getType ()Lio/karandash/api/ModuleType;
+	public fun initialize (Lio/karandash/api/PluginContext;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun isDefaultCI ()Z
+	public fun isDefaultInteractive ()Z
+	public fun isDefaultReporter ()Z
+	public fun messages (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun newHandle (Lio/karandash/api/PluginContext;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun preserveKeys ()Ljava/util/Set;
+	public fun registerPatterns (Lio/karandash/api/platform/PatternRegistry;)V
+	public fun registerPredicates (Lio/karandash/api/platform/PredicateRegistry;)V
+	public fun runtimeReporterConfig (Lkotlinx/serialization/json/JsonElement;Lkotlinx/serialization/json/JsonElement;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun shutdown (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+}
+
+public abstract class io/karandash/sdk/module/AbstractRuleModule : io/karandash/api/module/RuleModule {
+	public fun <init> ()V
+	public fun configSchema (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun defaultConfig (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun getConfigKey ()Ljava/lang/String;
+	public fun getDefaultEnabled ()Z
+	public fun getDefaultPriority ()I
+	public fun getDescription ()Ljava/lang/String;
+	public fun getDslName ()Ljava/lang/String;
+	public fun getExecutionTimeout-FghU774 ()Lkotlin/time/Duration;
+	public fun getHoverDocumentation ()Ljava/lang/String;
+	public fun getMinApiLevel ()I
+	public fun getRequiredEnrichment ()Ljava/util/List;
+	public fun getScope ()Lio/karandash/api/module/ModuleScope;
+	public fun getSupportedEnrichment ()Ljava/util/List;
+	public fun getType ()Lio/karandash/api/ModuleType;
+	public fun getUsage ()Lio/karandash/api/module/ModuleUsage;
+	public fun getUsesExtensionComputedConfig ()Z
+	public fun initialize (Lio/karandash/api/PluginContext;Ljava/util/Map;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun initialize (Lio/karandash/api/PluginContext;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun logCostSummary ()V
+	public fun messages (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun newHandle (Lio/karandash/api/PluginContext;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun preserveKeys ()Ljava/util/Set;
+	public fun registerPatterns (Lio/karandash/api/platform/PatternRegistry;)V
+	public fun registerPredicates (Lio/karandash/api/platform/PredicateRegistry;)V
+	public fun requiredMergeRequestFields (Ljava/lang/String;)Ljava/util/Set;
+	public fun requiredMergeRequestFields (Ljava/lang/String;Lkotlinx/serialization/json/JsonElement;)Ljava/util/Set;
+	public fun ruleExplanation (Ljava/lang/String;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun shutdown (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun tokensConsumed ()Ljava/lang/Integer;
+	public fun validate (Ljava/lang/String;Lio/karandash/models/MergeRequest;Lkotlinx/serialization/json/JsonElement;Lio/karandash/api/run/RunContext;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+}
+
+public final class io/karandash/sdk/platform/ReinitializableClient {
+	public fun <init> (Lkotlin/jvm/functions/Function2;)V
+	public final fun close (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public final fun getValue ()Ljava/lang/Object;
+	public final fun rebuild (Ljava/lang/Object;Lkotlin/jvm/functions/Function0;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+}
+
+public final class io/karandash/sdk/regex/SafeRegex {
+	public static final field INSTANCE Lio/karandash/sdk/regex/SafeRegex;
+	public final fun compileOrNull (Ljava/lang/String;)Lkotlin/text/Regex;
+	public final fun tryCompile (Ljava/lang/String;Ljava/lang/String;Ljava/util/List;)Lkotlin/text/Regex;
+}
+
+public abstract class io/karandash/sdk/typed/AbstractTypedEnrichedReporterModule : io/karandash/sdk/typed/AbstractTypedReporterModule, io/karandash/sdk/typed/TypedEnrichedReporterModule {
+	public fun <init> (Lkotlinx/serialization/KSerializer;)V
+	public fun reportEnriched (Lio/karandash/api/finding/ValidationReport;Lkotlinx/serialization/json/JsonElement;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+}
+
+public abstract class io/karandash/sdk/typed/AbstractTypedFormatModule : io/karandash/sdk/typed/TypedFormatModule {
+	public fun <init> (Lkotlinx/serialization/KSerializer;)V
+	public fun configSchema (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun defaultConfig (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun format (Lio/karandash/api/finding/ValidationReport;Lkotlinx/serialization/json/JsonElement;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun getConfigKey ()Ljava/lang/String;
+	public fun getConfigSerializer ()Lkotlinx/serialization/KSerializer;
+	public fun getDefaultEnabled ()Z
+	public fun getDefaultPriority ()I
+	public fun getDescription ()Ljava/lang/String;
+	public fun getDslName ()Ljava/lang/String;
+	public fun getHoverDocumentation ()Ljava/lang/String;
+	public fun getMinApiLevel ()I
+	public fun getScope ()Lio/karandash/api/module/ModuleScope;
+	public fun getType ()Lio/karandash/api/ModuleType;
+	public fun initialize (Lio/karandash/api/PluginContext;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun isDefaultInteractive ()Z
+	public fun isDefaultPlatform ()Z
+	public fun messages (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun newHandle (Lio/karandash/api/PluginContext;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun preserveKeys ()Ljava/util/Set;
+	public fun registerPatterns (Lio/karandash/api/platform/PatternRegistry;)V
+	public fun registerPredicates (Lio/karandash/api/platform/PredicateRegistry;)V
+	public fun shutdown (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+}
+
+public abstract class io/karandash/sdk/typed/AbstractTypedMultiRuleModule : io/karandash/sdk/typed/TypedRuleModule {
+	public fun <init> (Lkotlinx/serialization/KSerializer;)V
+	public fun configSchema (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun defaultConfig (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	protected abstract fun doValidateTyped (Ljava/lang/String;Lio/karandash/models/MergeRequest;Ljava/lang/Object;)Ljava/util/List;
+	public fun getConfigKey ()Ljava/lang/String;
+	public fun getConfigSerializer ()Lkotlinx/serialization/KSerializer;
+	public fun getDefaultEnabled ()Z
+	public fun getDefaultPriority ()I
+	public fun getDescription ()Ljava/lang/String;
+	public fun getDslName ()Ljava/lang/String;
+	public fun getExecutionTimeout-FghU774 ()Lkotlin/time/Duration;
+	public fun getHoverDocumentation ()Ljava/lang/String;
+	public fun getMinApiLevel ()I
+	public fun getRequiredEnrichment ()Ljava/util/List;
+	public fun getScope ()Lio/karandash/api/module/ModuleScope;
+	public fun getSupportedEnrichment ()Ljava/util/List;
+	public fun getType ()Lio/karandash/api/ModuleType;
+	public fun getUsage ()Lio/karandash/api/module/ModuleUsage;
+	public fun getUsesExtensionComputedConfig ()Z
+	public fun getVersion ()Ljava/lang/String;
+	public fun initialize (Lio/karandash/api/PluginContext;Ljava/util/Map;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun initialize (Lio/karandash/api/PluginContext;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun logCostSummary ()V
+	public fun messages (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun newHandle (Lio/karandash/api/PluginContext;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun preserveKeys ()Ljava/util/Set;
+	public fun registerPatterns (Lio/karandash/api/platform/PatternRegistry;)V
+	public fun registerPredicates (Lio/karandash/api/platform/PredicateRegistry;)V
+	public fun requiredMergeRequestFields (Ljava/lang/String;)Ljava/util/Set;
+	public fun requiredMergeRequestFields (Ljava/lang/String;Lkotlinx/serialization/json/JsonElement;)Ljava/util/Set;
+	public fun ruleExplanation (Ljava/lang/String;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun shutdown (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun tokensConsumed ()Ljava/lang/Integer;
+	public fun validate (Ljava/lang/String;Lio/karandash/models/MergeRequest;Lkotlinx/serialization/json/JsonElement;Lio/karandash/api/run/RunContext;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun validate (Ljava/lang/String;Lio/karandash/models/MergeRequest;Lkotlinx/serialization/json/JsonElement;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun validateTyped (Ljava/lang/String;Lio/karandash/models/MergeRequest;Ljava/lang/Object;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+}
+
+public abstract class io/karandash/sdk/typed/AbstractTypedOutputModule : io/karandash/sdk/typed/TypedOutputModule {
+	public fun <init> (Lkotlinx/serialization/KSerializer;)V
+	public fun configSchema (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun configurePlatformContext (Lio/karandash/api/module/PlatformServiceModule;Ljava/lang/String;Ljava/lang/String;Lio/karandash/models/DiffRefs;Ljava/util/Map;)V
+	public fun defaultConfig (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun getAcceptedFormats ()Ljava/util/Set;
+	public fun getConfigKey ()Ljava/lang/String;
+	public fun getConfigSerializer ()Lkotlinx/serialization/KSerializer;
+	public fun getDefaultEnabled ()Z
+	public fun getDefaultPriority ()I
+	public fun getDescription ()Ljava/lang/String;
+	public fun getDslName ()Ljava/lang/String;
+	public fun getHasExternalSideEffects ()Z
+	public fun getHoverDocumentation ()Ljava/lang/String;
+	public fun getMinApiLevel ()I
+	public fun getPreferredFormat ()Ljava/lang/String;
+	public fun getRequiresPlatformContext ()Z
+	public fun getScope ()Lio/karandash/api/module/ModuleScope;
+	public fun getSupportsFileOutput ()Z
+	public fun getType ()Lio/karandash/api/ModuleType;
+	public fun initialize (Lio/karandash/api/PluginContext;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun isDefaultInteractive ()Z
+	public fun isDefaultPlatform ()Z
+	public fun messages (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun newHandle (Lio/karandash/api/PluginContext;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun output (Lio/karandash/api/finding/FormattedReport;Lkotlinx/serialization/json/JsonElement;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun preserveKeys ()Ljava/util/Set;
+	public fun registerPatterns (Lio/karandash/api/platform/PatternRegistry;)V
+	public fun registerPredicates (Lio/karandash/api/platform/PredicateRegistry;)V
+	public fun shutdown (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+}
+
+public abstract class io/karandash/sdk/typed/AbstractTypedPlatformServiceModule : io/karandash/sdk/typed/TypedPlatformServiceModule {
+	public fun <init> (Lkotlinx/serialization/KSerializer;)V
+	public fun addLabels (Ljava/lang/String;Ljava/lang/String;Ljava/util/List;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun addReviewers-BWLJW6A (Ljava/lang/String;Ljava/lang/String;Ljava/util/List;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun aliases (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun approve (Ljava/lang/String;Ljava/lang/String;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun authTokenHint (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	protected final fun bestEffort (Ljava/lang/String;Ljava/lang/Object;Lkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function1;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun bestEffort$default (Lio/karandash/sdk/typed/AbstractTypedPlatformServiceModule;Ljava/lang/String;Ljava/lang/Object;Lkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function1;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public fun checkAuth (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun closeMr-0E7RQCE (Ljava/lang/String;Ljava/lang/String;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun configSchema (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun currentUsername (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun defaultApiUrl (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun defaultConfig (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun deleteComment (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun deleteMarkedInlineComments (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun detectCiEnvironment (Lkotlin/jvm/functions/Function1;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun detectConfidence (Lkotlin/jvm/functions/Function1;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun fetchApprovalSignals (Ljava/lang/String;Ljava/lang/String;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun fetchFileBlame (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun fetchFileContent (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun fetchFindingFeedback-0E7RQCE (Ljava/lang/String;Ljava/lang/String;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun fetchMergeRequest (Ljava/lang/String;Ljava/lang/String;Lio/karandash/api/platform/FetchOptions;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun fetchMergeRequest (Ljava/lang/String;Ljava/lang/String;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun fetchMergeRequestByUrl (Ljava/lang/String;Lio/karandash/api/platform/FetchOptions;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun fetchMergeRequestByUrl (Ljava/lang/String;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun findAllMatchingComments (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun findCommentBody (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun getConfigKey ()Ljava/lang/String;
+	public fun getConfigSerializer ()Lkotlinx/serialization/KSerializer;
+	public fun getDefaultEnabled ()Z
+	public fun getDefaultPriority ()I
+	public fun getDescription ()Ljava/lang/String;
+	public fun getDslName ()Ljava/lang/String;
+	public fun getHoverDocumentation ()Ljava/lang/String;
+	public fun getMinApiLevel ()I
+	public fun getScope ()Lio/karandash/api/module/ModuleScope;
+	public fun getSupportsFileContent ()Z
+	public fun getType ()Lio/karandash/api/ModuleType;
+	public fun initialize (Lio/karandash/api/PluginContext;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	protected fun invalidMergeRequestUrl (Ljava/lang/String;)Ljava/lang/Void;
+	public fun isProjectMember (Ljava/lang/String;Ljava/lang/String;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun listDismissedInlineComments (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun listMarkedComments (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun listOpenMergeRequestIds (Ljava/lang/String;Ljava/lang/String;ILkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun listReviewThreads (Ljava/lang/String;Ljava/lang/String;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun mergeMr-BWLJW6A (Ljava/lang/String;Ljava/lang/String;Lio/karandash/api/platform/MergeOptions;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun messages (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun newHandle (Lio/karandash/api/PluginContext;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun notFoundGuidance ()Ljava/lang/String;
+	public fun parseGitRemoteUrl (Ljava/lang/String;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun parseMergeRequestUrl (Ljava/lang/String;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun permissionScope ()Ljava/lang/String;
+	public fun preserveKeys ()Ljava/util/Set;
+	public fun rateLimitStatus (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun registerPatterns (Lio/karandash/api/platform/PatternRegistry;)V
+	public fun registerPredicates (Lio/karandash/api/platform/PredicateRegistry;)V
+	public fun removeLabels (Ljava/lang/String;Ljava/lang/String;Ljava/util/List;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun removeReviewers-BWLJW6A (Ljava/lang/String;Ljava/lang/String;Ljava/util/List;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun renderSuggestionBlock (Ljava/lang/String;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun reopenMr-0E7RQCE (Ljava/lang/String;Ljava/lang/String;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun replyToThread-yxL6bBk (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	protected fun resolveMarked (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/util/Set;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun resolveMarkedInlineComments (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun resolveMarkedInlineCommentsForFiles (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/util/Set;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun resolveThread-yxL6bBk (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun searchMergeRequests (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;ILkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun setDraft (Ljava/lang/String;Ljava/lang/String;ZLkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	protected final fun setManagedCloseable (Lio/karandash/api/platform/PlatformCloseable;)V
+	public fun shutdown (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun supports (Lio/karandash/api/platform/PlatformOperation;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun tokenLocationHint ()Ljava/lang/String;
+	public fun unapprove (Ljava/lang/String;Ljava/lang/String;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun unavailableMergeRequestFields ()Ljava/util/Set;
+	public fun updateDescription (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun updateNote-hUnOzRk (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun updateTitle (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	protected final fun withInitializedClient (Ljava/lang/Object;Ljava/lang/String;Lkotlin/jvm/functions/Function2;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun withInitializedClient$default (Lio/karandash/sdk/typed/AbstractTypedPlatformServiceModule;Ljava/lang/Object;Ljava/lang/String;Lkotlin/jvm/functions/Function2;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+}
+
+public abstract class io/karandash/sdk/typed/AbstractTypedReporterModule : io/karandash/sdk/typed/TypedReporterModule {
+	public fun <init> (Lkotlinx/serialization/KSerializer;)V
+	public fun configSchema (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun defaultConfig (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun fromCliParams (Lkotlinx/serialization/json/JsonElement;)Lkotlinx/serialization/json/JsonElement;
+	public fun getConfigKey ()Ljava/lang/String;
+	public fun getConfigSerializer ()Lkotlinx/serialization/KSerializer;
+	public fun getDefaultEnabled ()Z
+	public fun getDefaultPriority ()I
+	public fun getDescription ()Ljava/lang/String;
+	public fun getDslName ()Ljava/lang/String;
+	public fun getHasExternalSideEffects ()Z
+	public fun getHoverDocumentation ()Ljava/lang/String;
+	public fun getMinApiLevel ()I
+	public fun getRequiresPlatformContext ()Z
+	public fun getScope ()Lio/karandash/api/module/ModuleScope;
+	public fun getSupportsFileOutput ()Z
+	public fun getSupportsLiveMode ()Z
+	public fun getType ()Lio/karandash/api/ModuleType;
+	public fun initialize (Lio/karandash/api/PluginContext;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun isDefaultCI ()Z
+	public fun isDefaultInteractive ()Z
+	public fun isDefaultReporter ()Z
+	public fun messages (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun newHandle (Lio/karandash/api/PluginContext;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun preserveKeys ()Ljava/util/Set;
+	public fun registerPatterns (Lio/karandash/api/platform/PatternRegistry;)V
+	public fun registerPredicates (Lio/karandash/api/platform/PredicateRegistry;)V
+	public fun report (Ljava/util/List;ZLkotlinx/serialization/json/JsonElement;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun runtimeReporterConfig (Lkotlinx/serialization/json/JsonElement;Lkotlinx/serialization/json/JsonElement;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun shutdown (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+}
+
+public abstract class io/karandash/sdk/typed/AbstractTypedSingleRuleModule : io/karandash/sdk/typed/TypedRuleModule {
+	public fun <init> (Lkotlinx/serialization/KSerializer;)V
+	public fun configSchema (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun contributedRules (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun defaultConfig (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	protected abstract fun doValidateTyped (Lio/karandash/models/MergeRequest;Ljava/lang/Object;)Ljava/util/List;
+	protected fun doValidateTyped (Lio/karandash/models/MergeRequest;Ljava/lang/Object;Lio/karandash/models/support/PatternAwareCompiler;)Ljava/util/List;
+	public fun getConfigKey ()Ljava/lang/String;
+	public fun getConfigSerializer ()Lkotlinx/serialization/KSerializer;
+	public fun getDefaultEnabled ()Z
+	public fun getDefaultPriority ()I
+	public fun getDescription ()Ljava/lang/String;
+	public fun getDslName ()Ljava/lang/String;
+	public fun getExecutionTimeout-FghU774 ()Lkotlin/time/Duration;
+	protected abstract fun getExplanation ()Ljava/lang/String;
+	public fun getHoverDocumentation ()Ljava/lang/String;
+	public fun getId ()Ljava/lang/String;
+	public fun getMinApiLevel ()I
+	public fun getRequiredEnrichment ()Ljava/util/List;
+	protected abstract fun getRuleId ()Ljava/lang/String;
+	public fun getScope ()Lio/karandash/api/module/ModuleScope;
+	public fun getSupportedEnrichment ()Ljava/util/List;
+	public fun getType ()Lio/karandash/api/ModuleType;
+	public fun getUsage ()Lio/karandash/api/module/ModuleUsage;
+	public fun getUsesExtensionComputedConfig ()Z
+	public fun getVersion ()Ljava/lang/String;
+	public fun initialize (Lio/karandash/api/PluginContext;Ljava/util/Map;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun initialize (Lio/karandash/api/PluginContext;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun logCostSummary ()V
+	public fun messages (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun newHandle (Lio/karandash/api/PluginContext;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun preserveKeys ()Ljava/util/Set;
+	public fun registerPatterns (Lio/karandash/api/platform/PatternRegistry;)V
+	public fun registerPredicates (Lio/karandash/api/platform/PredicateRegistry;)V
+	public fun requiredMergeRequestFields (Ljava/lang/String;)Ljava/util/Set;
+	public fun requiredMergeRequestFields (Ljava/lang/String;Lkotlinx/serialization/json/JsonElement;)Ljava/util/Set;
+	public fun ruleExplanation (Ljava/lang/String;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun shutdown (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun tokensConsumed ()Ljava/lang/Integer;
+	public fun validate (Ljava/lang/String;Lio/karandash/models/MergeRequest;Lkotlinx/serialization/json/JsonElement;Lio/karandash/api/run/RunContext;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun validate (Ljava/lang/String;Lio/karandash/models/MergeRequest;Lkotlinx/serialization/json/JsonElement;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun validateTyped (Ljava/lang/String;Lio/karandash/models/MergeRequest;Ljava/lang/Object;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+}
+
+public final class io/karandash/sdk/typed/FormatId {
+	public static final synthetic fun box-impl (Ljava/lang/String;)Lio/karandash/sdk/typed/FormatId;
+	public static fun constructor-impl (Ljava/lang/String;)Ljava/lang/String;
+	public fun equals (Ljava/lang/Object;)Z
+	public static fun equals-impl (Ljava/lang/String;Ljava/lang/Object;)Z
+	public static final fun equals-impl0 (Ljava/lang/String;Ljava/lang/String;)Z
+	public final fun getValue ()Ljava/lang/String;
+	public fun hashCode ()I
+	public static fun hashCode-impl (Ljava/lang/String;)I
+	public fun toString ()Ljava/lang/String;
+	public static fun toString-impl (Ljava/lang/String;)Ljava/lang/String;
+	public final synthetic fun unbox-impl ()Ljava/lang/String;
+}
+
+public final class io/karandash/sdk/typed/ModuleId {
+	public static final synthetic fun box-impl (Ljava/lang/String;)Lio/karandash/sdk/typed/ModuleId;
+	public static fun constructor-impl (Ljava/lang/String;)Ljava/lang/String;
+	public fun equals (Ljava/lang/Object;)Z
+	public static fun equals-impl (Ljava/lang/String;Ljava/lang/Object;)Z
+	public static final fun equals-impl0 (Ljava/lang/String;Ljava/lang/String;)Z
+	public final fun getValue ()Ljava/lang/String;
+	public fun hashCode ()I
+	public static fun hashCode-impl (Ljava/lang/String;)I
+	public fun toString ()Ljava/lang/String;
+	public static fun toString-impl (Ljava/lang/String;)Ljava/lang/String;
+	public final synthetic fun unbox-impl ()Ljava/lang/String;
+}
+
+public final class io/karandash/sdk/typed/ProviderId {
+	public static final synthetic fun box-impl (Ljava/lang/String;)Lio/karandash/sdk/typed/ProviderId;
+	public static fun constructor-impl (Ljava/lang/String;)Ljava/lang/String;
+	public fun equals (Ljava/lang/Object;)Z
+	public static fun equals-impl (Ljava/lang/String;Ljava/lang/Object;)Z
+	public static final fun equals-impl0 (Ljava/lang/String;Ljava/lang/String;)Z
+	public final fun getValue ()Ljava/lang/String;
+	public fun hashCode ()I
+	public static fun hashCode-impl (Ljava/lang/String;)I
+	public fun toString ()Ljava/lang/String;
+	public static fun toString-impl (Ljava/lang/String;)Ljava/lang/String;
+	public final synthetic fun unbox-impl ()Ljava/lang/String;
+}
+
+public final class io/karandash/sdk/typed/RuleId {
+	public static final synthetic fun box-impl (Ljava/lang/String;)Lio/karandash/sdk/typed/RuleId;
+	public static fun constructor-impl (Ljava/lang/String;)Ljava/lang/String;
+	public fun equals (Ljava/lang/Object;)Z
+	public static fun equals-impl (Ljava/lang/String;Ljava/lang/Object;)Z
+	public static final fun equals-impl0 (Ljava/lang/String;Ljava/lang/String;)Z
+	public final fun getValue ()Ljava/lang/String;
+	public fun hashCode ()I
+	public static fun hashCode-impl (Ljava/lang/String;)I
+	public fun toString ()Ljava/lang/String;
+	public static fun toString-impl (Ljava/lang/String;)Ljava/lang/String;
+	public final synthetic fun unbox-impl ()Ljava/lang/String;
+}
+
+public abstract interface class io/karandash/sdk/typed/TypedEnrichedReporterModule : io/karandash/api/module/EnrichedReporterModule, io/karandash/sdk/typed/TypedReporterModule {
+	public fun reportEnriched (Lio/karandash/api/finding/ValidationReport;Lkotlinx/serialization/json/JsonElement;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public abstract fun reportEnrichedTyped (Lio/karandash/api/finding/ValidationReport;Ljava/lang/Object;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+}
+
+public final class io/karandash/sdk/typed/TypedEnrichedReporterModule$DefaultImpls {
+	public static fun configSchema (Lio/karandash/sdk/typed/TypedEnrichedReporterModule;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static fun defaultConfig (Lio/karandash/sdk/typed/TypedEnrichedReporterModule;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static fun fromCliParams (Lio/karandash/sdk/typed/TypedEnrichedReporterModule;Lkotlinx/serialization/json/JsonElement;)Lkotlinx/serialization/json/JsonElement;
+	public static fun getConfigKey (Lio/karandash/sdk/typed/TypedEnrichedReporterModule;)Ljava/lang/String;
+	public static fun getDefaultEnabled (Lio/karandash/sdk/typed/TypedEnrichedReporterModule;)Z
+	public static fun getDefaultPriority (Lio/karandash/sdk/typed/TypedEnrichedReporterModule;)I
+	public static fun getDescription (Lio/karandash/sdk/typed/TypedEnrichedReporterModule;)Ljava/lang/String;
+	public static fun getDslName (Lio/karandash/sdk/typed/TypedEnrichedReporterModule;)Ljava/lang/String;
+	public static fun getHasExternalSideEffects (Lio/karandash/sdk/typed/TypedEnrichedReporterModule;)Z
+	public static fun getHoverDocumentation (Lio/karandash/sdk/typed/TypedEnrichedReporterModule;)Ljava/lang/String;
+	public static fun getMinApiLevel (Lio/karandash/sdk/typed/TypedEnrichedReporterModule;)I
+	public static fun getRequiresPlatformContext (Lio/karandash/sdk/typed/TypedEnrichedReporterModule;)Z
+	public static fun getScope (Lio/karandash/sdk/typed/TypedEnrichedReporterModule;)Lio/karandash/api/module/ModuleScope;
+	public static fun getSupportsFileOutput (Lio/karandash/sdk/typed/TypedEnrichedReporterModule;)Z
+	public static fun getSupportsLiveMode (Lio/karandash/sdk/typed/TypedEnrichedReporterModule;)Z
+	public static fun getType (Lio/karandash/sdk/typed/TypedEnrichedReporterModule;)Lio/karandash/api/ModuleType;
+	public static fun isDefaultCI (Lio/karandash/sdk/typed/TypedEnrichedReporterModule;)Z
+	public static fun isDefaultInteractive (Lio/karandash/sdk/typed/TypedEnrichedReporterModule;)Z
+	public static fun isDefaultReporter (Lio/karandash/sdk/typed/TypedEnrichedReporterModule;)Z
+	public static fun messages (Lio/karandash/sdk/typed/TypedEnrichedReporterModule;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static fun newHandle (Lio/karandash/sdk/typed/TypedEnrichedReporterModule;Lio/karandash/api/PluginContext;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static fun preserveKeys (Lio/karandash/sdk/typed/TypedEnrichedReporterModule;)Ljava/util/Set;
+	public static fun registerPatterns (Lio/karandash/sdk/typed/TypedEnrichedReporterModule;Lio/karandash/api/platform/PatternRegistry;)V
+	public static fun registerPredicates (Lio/karandash/sdk/typed/TypedEnrichedReporterModule;Lio/karandash/api/platform/PredicateRegistry;)V
+	public static fun report (Lio/karandash/sdk/typed/TypedEnrichedReporterModule;Ljava/util/List;ZLkotlinx/serialization/json/JsonElement;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static fun reportEnriched (Lio/karandash/sdk/typed/TypedEnrichedReporterModule;Lio/karandash/api/finding/ValidationReport;Lkotlinx/serialization/json/JsonElement;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static fun runtimeReporterConfig (Lio/karandash/sdk/typed/TypedEnrichedReporterModule;Lkotlinx/serialization/json/JsonElement;Lkotlinx/serialization/json/JsonElement;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static fun shutdown (Lio/karandash/sdk/typed/TypedEnrichedReporterModule;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+}
+
+public abstract interface class io/karandash/sdk/typed/TypedFormatModule : io/karandash/api/module/FormatModule, io/karandash/sdk/typed/TypedModule {
+	public fun format (Lio/karandash/api/finding/ValidationReport;Lkotlinx/serialization/json/JsonElement;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public abstract fun formatTyped (Lio/karandash/api/finding/ValidationReport;Ljava/lang/Object;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+}
+
+public final class io/karandash/sdk/typed/TypedFormatModule$DefaultImpls {
+	public static fun configSchema (Lio/karandash/sdk/typed/TypedFormatModule;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static fun defaultConfig (Lio/karandash/sdk/typed/TypedFormatModule;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static fun format (Lio/karandash/sdk/typed/TypedFormatModule;Lio/karandash/api/finding/ValidationReport;Lkotlinx/serialization/json/JsonElement;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static fun getConfigKey (Lio/karandash/sdk/typed/TypedFormatModule;)Ljava/lang/String;
+	public static fun getDefaultEnabled (Lio/karandash/sdk/typed/TypedFormatModule;)Z
+	public static fun getDefaultPriority (Lio/karandash/sdk/typed/TypedFormatModule;)I
+	public static fun getDescription (Lio/karandash/sdk/typed/TypedFormatModule;)Ljava/lang/String;
+	public static fun getDslName (Lio/karandash/sdk/typed/TypedFormatModule;)Ljava/lang/String;
+	public static fun getHoverDocumentation (Lio/karandash/sdk/typed/TypedFormatModule;)Ljava/lang/String;
+	public static fun getMinApiLevel (Lio/karandash/sdk/typed/TypedFormatModule;)I
+	public static fun getScope (Lio/karandash/sdk/typed/TypedFormatModule;)Lio/karandash/api/module/ModuleScope;
+	public static fun getType (Lio/karandash/sdk/typed/TypedFormatModule;)Lio/karandash/api/ModuleType;
+	public static fun isDefaultInteractive (Lio/karandash/sdk/typed/TypedFormatModule;)Z
+	public static fun isDefaultPlatform (Lio/karandash/sdk/typed/TypedFormatModule;)Z
+	public static fun messages (Lio/karandash/sdk/typed/TypedFormatModule;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static fun newHandle (Lio/karandash/sdk/typed/TypedFormatModule;Lio/karandash/api/PluginContext;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static fun preserveKeys (Lio/karandash/sdk/typed/TypedFormatModule;)Ljava/util/Set;
+	public static fun registerPatterns (Lio/karandash/sdk/typed/TypedFormatModule;Lio/karandash/api/platform/PatternRegistry;)V
+	public static fun registerPredicates (Lio/karandash/sdk/typed/TypedFormatModule;Lio/karandash/api/platform/PredicateRegistry;)V
+	public static fun shutdown (Lio/karandash/sdk/typed/TypedFormatModule;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+}
+
+public final class io/karandash/sdk/typed/TypedIdsKt {
+	public static final fun toFormatId (Ljava/lang/String;)Ljava/lang/String;
+	public static final fun toModuleId (Ljava/lang/String;)Ljava/lang/String;
+	public static final fun toProviderId (Ljava/lang/String;)Ljava/lang/String;
+	public static final fun toRuleId (Ljava/lang/String;)Ljava/lang/String;
+}
+
+public abstract interface class io/karandash/sdk/typed/TypedModule : io/karandash/api/Module {
+	public fun configSchema (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun defaultConfig (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public abstract fun getConfigSerializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/karandash/sdk/typed/TypedModule$DefaultImpls {
+	public static fun configSchema (Lio/karandash/sdk/typed/TypedModule;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static fun defaultConfig (Lio/karandash/sdk/typed/TypedModule;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static fun getConfigKey (Lio/karandash/sdk/typed/TypedModule;)Ljava/lang/String;
+	public static fun getDefaultEnabled (Lio/karandash/sdk/typed/TypedModule;)Z
+	public static fun getDefaultPriority (Lio/karandash/sdk/typed/TypedModule;)I
+	public static fun getDescription (Lio/karandash/sdk/typed/TypedModule;)Ljava/lang/String;
+	public static fun getDslName (Lio/karandash/sdk/typed/TypedModule;)Ljava/lang/String;
+	public static fun getHoverDocumentation (Lio/karandash/sdk/typed/TypedModule;)Ljava/lang/String;
+	public static fun getMinApiLevel (Lio/karandash/sdk/typed/TypedModule;)I
+	public static fun getScope (Lio/karandash/sdk/typed/TypedModule;)Lio/karandash/api/module/ModuleScope;
+	public static fun messages (Lio/karandash/sdk/typed/TypedModule;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static fun newHandle (Lio/karandash/sdk/typed/TypedModule;Lio/karandash/api/PluginContext;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static fun preserveKeys (Lio/karandash/sdk/typed/TypedModule;)Ljava/util/Set;
+	public static fun registerPatterns (Lio/karandash/sdk/typed/TypedModule;Lio/karandash/api/platform/PatternRegistry;)V
+	public static fun registerPredicates (Lio/karandash/sdk/typed/TypedModule;Lio/karandash/api/platform/PredicateRegistry;)V
+	public static fun shutdown (Lio/karandash/sdk/typed/TypedModule;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+}
+
+public abstract interface class io/karandash/sdk/typed/TypedOutputModule : io/karandash/api/module/OutputModule, io/karandash/sdk/typed/TypedModule {
+	public fun output (Lio/karandash/api/finding/FormattedReport;Lkotlinx/serialization/json/JsonElement;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public abstract fun outputTyped (Lio/karandash/api/finding/FormattedReport;Ljava/lang/Object;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+}
+
+public final class io/karandash/sdk/typed/TypedOutputModule$DefaultImpls {
+	public static fun configSchema (Lio/karandash/sdk/typed/TypedOutputModule;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static fun configurePlatformContext (Lio/karandash/sdk/typed/TypedOutputModule;Lio/karandash/api/module/PlatformServiceModule;Ljava/lang/String;Ljava/lang/String;Lio/karandash/models/DiffRefs;Ljava/util/Map;)V
+	public static fun defaultConfig (Lio/karandash/sdk/typed/TypedOutputModule;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static fun getAcceptedFormats (Lio/karandash/sdk/typed/TypedOutputModule;)Ljava/util/Set;
+	public static fun getConfigKey (Lio/karandash/sdk/typed/TypedOutputModule;)Ljava/lang/String;
+	public static fun getDefaultEnabled (Lio/karandash/sdk/typed/TypedOutputModule;)Z
+	public static fun getDefaultPriority (Lio/karandash/sdk/typed/TypedOutputModule;)I
+	public static fun getDescription (Lio/karandash/sdk/typed/TypedOutputModule;)Ljava/lang/String;
+	public static fun getDslName (Lio/karandash/sdk/typed/TypedOutputModule;)Ljava/lang/String;
+	public static fun getHasExternalSideEffects (Lio/karandash/sdk/typed/TypedOutputModule;)Z
+	public static fun getHoverDocumentation (Lio/karandash/sdk/typed/TypedOutputModule;)Ljava/lang/String;
+	public static fun getMinApiLevel (Lio/karandash/sdk/typed/TypedOutputModule;)I
+	public static fun getPreferredFormat (Lio/karandash/sdk/typed/TypedOutputModule;)Ljava/lang/String;
+	public static fun getRequiresPlatformContext (Lio/karandash/sdk/typed/TypedOutputModule;)Z
+	public static fun getScope (Lio/karandash/sdk/typed/TypedOutputModule;)Lio/karandash/api/module/ModuleScope;
+	public static fun getSupportsFileOutput (Lio/karandash/sdk/typed/TypedOutputModule;)Z
+	public static fun getType (Lio/karandash/sdk/typed/TypedOutputModule;)Lio/karandash/api/ModuleType;
+	public static fun isDefaultInteractive (Lio/karandash/sdk/typed/TypedOutputModule;)Z
+	public static fun isDefaultPlatform (Lio/karandash/sdk/typed/TypedOutputModule;)Z
+	public static fun messages (Lio/karandash/sdk/typed/TypedOutputModule;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static fun newHandle (Lio/karandash/sdk/typed/TypedOutputModule;Lio/karandash/api/PluginContext;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static fun output (Lio/karandash/sdk/typed/TypedOutputModule;Lio/karandash/api/finding/FormattedReport;Lkotlinx/serialization/json/JsonElement;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static fun preserveKeys (Lio/karandash/sdk/typed/TypedOutputModule;)Ljava/util/Set;
+	public static fun registerPatterns (Lio/karandash/sdk/typed/TypedOutputModule;Lio/karandash/api/platform/PatternRegistry;)V
+	public static fun registerPredicates (Lio/karandash/sdk/typed/TypedOutputModule;Lio/karandash/api/platform/PredicateRegistry;)V
+	public static fun shutdown (Lio/karandash/sdk/typed/TypedOutputModule;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+}
+
+public abstract interface class io/karandash/sdk/typed/TypedPlatformServiceModule : io/karandash/api/module/PlatformServiceModule, io/karandash/sdk/typed/TypedModule {
+	public fun initialize (Lio/karandash/api/PluginContext;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public abstract fun initializeTyped (Lio/karandash/api/PluginContext;Ljava/lang/Object;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+}
+
+public final class io/karandash/sdk/typed/TypedPlatformServiceModule$DefaultImpls {
+	public static fun addReviewers-BWLJW6A (Lio/karandash/sdk/typed/TypedPlatformServiceModule;Ljava/lang/String;Ljava/lang/String;Ljava/util/List;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static fun aliases (Lio/karandash/sdk/typed/TypedPlatformServiceModule;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static fun authTokenHint (Lio/karandash/sdk/typed/TypedPlatformServiceModule;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static fun checkAuth (Lio/karandash/sdk/typed/TypedPlatformServiceModule;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static fun closeMr-0E7RQCE (Lio/karandash/sdk/typed/TypedPlatformServiceModule;Ljava/lang/String;Ljava/lang/String;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static fun configSchema (Lio/karandash/sdk/typed/TypedPlatformServiceModule;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static fun currentUsername (Lio/karandash/sdk/typed/TypedPlatformServiceModule;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static fun defaultApiUrl (Lio/karandash/sdk/typed/TypedPlatformServiceModule;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static fun defaultConfig (Lio/karandash/sdk/typed/TypedPlatformServiceModule;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static fun deleteComment (Lio/karandash/sdk/typed/TypedPlatformServiceModule;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static fun deleteMarkedInlineComments (Lio/karandash/sdk/typed/TypedPlatformServiceModule;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static fun detectCiEnvironment (Lio/karandash/sdk/typed/TypedPlatformServiceModule;Lkotlin/jvm/functions/Function1;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static fun detectConfidence (Lio/karandash/sdk/typed/TypedPlatformServiceModule;Lkotlin/jvm/functions/Function1;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static fun fetchApprovalSignals (Lio/karandash/sdk/typed/TypedPlatformServiceModule;Ljava/lang/String;Ljava/lang/String;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static fun fetchFileBlame (Lio/karandash/sdk/typed/TypedPlatformServiceModule;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static fun fetchFileContent (Lio/karandash/sdk/typed/TypedPlatformServiceModule;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static fun fetchFindingFeedback-0E7RQCE (Lio/karandash/sdk/typed/TypedPlatformServiceModule;Ljava/lang/String;Ljava/lang/String;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static fun fetchMergeRequest (Lio/karandash/sdk/typed/TypedPlatformServiceModule;Ljava/lang/String;Ljava/lang/String;Lio/karandash/api/platform/FetchOptions;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static fun fetchMergeRequestByUrl (Lio/karandash/sdk/typed/TypedPlatformServiceModule;Ljava/lang/String;Lio/karandash/api/platform/FetchOptions;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static fun findAllMatchingComments (Lio/karandash/sdk/typed/TypedPlatformServiceModule;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static fun findCommentBody (Lio/karandash/sdk/typed/TypedPlatformServiceModule;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static fun getConfigKey (Lio/karandash/sdk/typed/TypedPlatformServiceModule;)Ljava/lang/String;
+	public static fun getDefaultEnabled (Lio/karandash/sdk/typed/TypedPlatformServiceModule;)Z
+	public static fun getDefaultPriority (Lio/karandash/sdk/typed/TypedPlatformServiceModule;)I
+	public static fun getDescription (Lio/karandash/sdk/typed/TypedPlatformServiceModule;)Ljava/lang/String;
+	public static fun getDslName (Lio/karandash/sdk/typed/TypedPlatformServiceModule;)Ljava/lang/String;
+	public static fun getHoverDocumentation (Lio/karandash/sdk/typed/TypedPlatformServiceModule;)Ljava/lang/String;
+	public static fun getMinApiLevel (Lio/karandash/sdk/typed/TypedPlatformServiceModule;)I
+	public static fun getScope (Lio/karandash/sdk/typed/TypedPlatformServiceModule;)Lio/karandash/api/module/ModuleScope;
+	public static fun getSupportsFileContent (Lio/karandash/sdk/typed/TypedPlatformServiceModule;)Z
+	public static fun getType (Lio/karandash/sdk/typed/TypedPlatformServiceModule;)Lio/karandash/api/ModuleType;
+	public static fun initialize (Lio/karandash/sdk/typed/TypedPlatformServiceModule;Lio/karandash/api/PluginContext;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static fun isProjectMember (Lio/karandash/sdk/typed/TypedPlatformServiceModule;Ljava/lang/String;Ljava/lang/String;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static fun listDismissedInlineComments (Lio/karandash/sdk/typed/TypedPlatformServiceModule;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static fun listMarkedComments (Lio/karandash/sdk/typed/TypedPlatformServiceModule;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static fun listOpenMergeRequestIds (Lio/karandash/sdk/typed/TypedPlatformServiceModule;Ljava/lang/String;Ljava/lang/String;ILkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static fun listReviewThreads (Lio/karandash/sdk/typed/TypedPlatformServiceModule;Ljava/lang/String;Ljava/lang/String;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static fun mergeMr-BWLJW6A (Lio/karandash/sdk/typed/TypedPlatformServiceModule;Ljava/lang/String;Ljava/lang/String;Lio/karandash/api/platform/MergeOptions;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static fun messages (Lio/karandash/sdk/typed/TypedPlatformServiceModule;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static fun newHandle (Lio/karandash/sdk/typed/TypedPlatformServiceModule;Lio/karandash/api/PluginContext;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static fun notFoundGuidance (Lio/karandash/sdk/typed/TypedPlatformServiceModule;)Ljava/lang/String;
+	public static fun parseGitRemoteUrl (Lio/karandash/sdk/typed/TypedPlatformServiceModule;Ljava/lang/String;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static fun parseMergeRequestUrl (Lio/karandash/sdk/typed/TypedPlatformServiceModule;Ljava/lang/String;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static fun permissionScope (Lio/karandash/sdk/typed/TypedPlatformServiceModule;)Ljava/lang/String;
+	public static fun preserveKeys (Lio/karandash/sdk/typed/TypedPlatformServiceModule;)Ljava/util/Set;
+	public static fun rateLimitStatus (Lio/karandash/sdk/typed/TypedPlatformServiceModule;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static fun registerPatterns (Lio/karandash/sdk/typed/TypedPlatformServiceModule;Lio/karandash/api/platform/PatternRegistry;)V
+	public static fun registerPredicates (Lio/karandash/sdk/typed/TypedPlatformServiceModule;Lio/karandash/api/platform/PredicateRegistry;)V
+	public static fun removeReviewers-BWLJW6A (Lio/karandash/sdk/typed/TypedPlatformServiceModule;Ljava/lang/String;Ljava/lang/String;Ljava/util/List;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static fun renderSuggestionBlock (Lio/karandash/sdk/typed/TypedPlatformServiceModule;Ljava/lang/String;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static fun reopenMr-0E7RQCE (Lio/karandash/sdk/typed/TypedPlatformServiceModule;Ljava/lang/String;Ljava/lang/String;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static fun replyToThread-yxL6bBk (Lio/karandash/sdk/typed/TypedPlatformServiceModule;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static fun resolveMarkedInlineComments (Lio/karandash/sdk/typed/TypedPlatformServiceModule;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static fun resolveMarkedInlineCommentsForFiles (Lio/karandash/sdk/typed/TypedPlatformServiceModule;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/util/Set;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static fun resolveThread-yxL6bBk (Lio/karandash/sdk/typed/TypedPlatformServiceModule;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static fun searchMergeRequests (Lio/karandash/sdk/typed/TypedPlatformServiceModule;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;ILkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static fun shutdown (Lio/karandash/sdk/typed/TypedPlatformServiceModule;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static fun supports (Lio/karandash/sdk/typed/TypedPlatformServiceModule;Lio/karandash/api/platform/PlatformOperation;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static fun tokenLocationHint (Lio/karandash/sdk/typed/TypedPlatformServiceModule;)Ljava/lang/String;
+	public static fun unavailableMergeRequestFields (Lio/karandash/sdk/typed/TypedPlatformServiceModule;)Ljava/util/Set;
+	public static fun updateNote-hUnOzRk (Lio/karandash/sdk/typed/TypedPlatformServiceModule;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+}
+
+public abstract interface class io/karandash/sdk/typed/TypedReporterModule : io/karandash/api/module/ReporterModule, io/karandash/sdk/typed/TypedModule {
+	public fun fromCliParams (Lkotlinx/serialization/json/JsonElement;)Lkotlinx/serialization/json/JsonElement;
+	public fun report (Ljava/util/List;ZLkotlinx/serialization/json/JsonElement;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public abstract fun reportTyped (Ljava/util/List;ZLjava/lang/Object;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun runtimeReporterConfig (Lkotlinx/serialization/json/JsonElement;Lkotlinx/serialization/json/JsonElement;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+}
+
+public final class io/karandash/sdk/typed/TypedReporterModule$DefaultImpls {
+	public static fun configSchema (Lio/karandash/sdk/typed/TypedReporterModule;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static fun defaultConfig (Lio/karandash/sdk/typed/TypedReporterModule;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static fun fromCliParams (Lio/karandash/sdk/typed/TypedReporterModule;Lkotlinx/serialization/json/JsonElement;)Lkotlinx/serialization/json/JsonElement;
+	public static fun getConfigKey (Lio/karandash/sdk/typed/TypedReporterModule;)Ljava/lang/String;
+	public static fun getDefaultEnabled (Lio/karandash/sdk/typed/TypedReporterModule;)Z
+	public static fun getDefaultPriority (Lio/karandash/sdk/typed/TypedReporterModule;)I
+	public static fun getDescription (Lio/karandash/sdk/typed/TypedReporterModule;)Ljava/lang/String;
+	public static fun getDslName (Lio/karandash/sdk/typed/TypedReporterModule;)Ljava/lang/String;
+	public static fun getHasExternalSideEffects (Lio/karandash/sdk/typed/TypedReporterModule;)Z
+	public static fun getHoverDocumentation (Lio/karandash/sdk/typed/TypedReporterModule;)Ljava/lang/String;
+	public static fun getMinApiLevel (Lio/karandash/sdk/typed/TypedReporterModule;)I
+	public static fun getRequiresPlatformContext (Lio/karandash/sdk/typed/TypedReporterModule;)Z
+	public static fun getScope (Lio/karandash/sdk/typed/TypedReporterModule;)Lio/karandash/api/module/ModuleScope;
+	public static fun getSupportsFileOutput (Lio/karandash/sdk/typed/TypedReporterModule;)Z
+	public static fun getSupportsLiveMode (Lio/karandash/sdk/typed/TypedReporterModule;)Z
+	public static fun getType (Lio/karandash/sdk/typed/TypedReporterModule;)Lio/karandash/api/ModuleType;
+	public static fun isDefaultCI (Lio/karandash/sdk/typed/TypedReporterModule;)Z
+	public static fun isDefaultInteractive (Lio/karandash/sdk/typed/TypedReporterModule;)Z
+	public static fun isDefaultReporter (Lio/karandash/sdk/typed/TypedReporterModule;)Z
+	public static fun messages (Lio/karandash/sdk/typed/TypedReporterModule;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static fun newHandle (Lio/karandash/sdk/typed/TypedReporterModule;Lio/karandash/api/PluginContext;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static fun preserveKeys (Lio/karandash/sdk/typed/TypedReporterModule;)Ljava/util/Set;
+	public static fun registerPatterns (Lio/karandash/sdk/typed/TypedReporterModule;Lio/karandash/api/platform/PatternRegistry;)V
+	public static fun registerPredicates (Lio/karandash/sdk/typed/TypedReporterModule;Lio/karandash/api/platform/PredicateRegistry;)V
+	public static fun report (Lio/karandash/sdk/typed/TypedReporterModule;Ljava/util/List;ZLkotlinx/serialization/json/JsonElement;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static fun runtimeReporterConfig (Lio/karandash/sdk/typed/TypedReporterModule;Lkotlinx/serialization/json/JsonElement;Lkotlinx/serialization/json/JsonElement;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static fun shutdown (Lio/karandash/sdk/typed/TypedReporterModule;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+}
+
+public abstract interface class io/karandash/sdk/typed/TypedRuleModule : io/karandash/api/module/RuleModule, io/karandash/sdk/typed/TypedModule {
+	public fun validate (Ljava/lang/String;Lio/karandash/models/MergeRequest;Lkotlinx/serialization/json/JsonElement;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public abstract fun validateTyped (Ljava/lang/String;Lio/karandash/models/MergeRequest;Ljava/lang/Object;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+}
+
+public final class io/karandash/sdk/typed/TypedRuleModule$DefaultImpls {
+	public static fun configSchema (Lio/karandash/sdk/typed/TypedRuleModule;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static fun defaultConfig (Lio/karandash/sdk/typed/TypedRuleModule;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static fun getConfigKey (Lio/karandash/sdk/typed/TypedRuleModule;)Ljava/lang/String;
+	public static fun getDefaultEnabled (Lio/karandash/sdk/typed/TypedRuleModule;)Z
+	public static fun getDefaultPriority (Lio/karandash/sdk/typed/TypedRuleModule;)I
+	public static fun getDescription (Lio/karandash/sdk/typed/TypedRuleModule;)Ljava/lang/String;
+	public static fun getDslName (Lio/karandash/sdk/typed/TypedRuleModule;)Ljava/lang/String;
+	public static fun getExecutionTimeout-FghU774 (Lio/karandash/sdk/typed/TypedRuleModule;)Lkotlin/time/Duration;
+	public static fun getHoverDocumentation (Lio/karandash/sdk/typed/TypedRuleModule;)Ljava/lang/String;
+	public static fun getMinApiLevel (Lio/karandash/sdk/typed/TypedRuleModule;)I
+	public static fun getRequiredEnrichment (Lio/karandash/sdk/typed/TypedRuleModule;)Ljava/util/List;
+	public static fun getScope (Lio/karandash/sdk/typed/TypedRuleModule;)Lio/karandash/api/module/ModuleScope;
+	public static fun getSupportedEnrichment (Lio/karandash/sdk/typed/TypedRuleModule;)Ljava/util/List;
+	public static fun getType (Lio/karandash/sdk/typed/TypedRuleModule;)Lio/karandash/api/ModuleType;
+	public static fun getUsage (Lio/karandash/sdk/typed/TypedRuleModule;)Lio/karandash/api/module/ModuleUsage;
+	public static fun getUsesExtensionComputedConfig (Lio/karandash/sdk/typed/TypedRuleModule;)Z
+	public static fun initialize (Lio/karandash/sdk/typed/TypedRuleModule;Lio/karandash/api/PluginContext;Ljava/util/Map;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static fun logCostSummary (Lio/karandash/sdk/typed/TypedRuleModule;)V
+	public static fun messages (Lio/karandash/sdk/typed/TypedRuleModule;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static fun newHandle (Lio/karandash/sdk/typed/TypedRuleModule;Lio/karandash/api/PluginContext;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static fun preserveKeys (Lio/karandash/sdk/typed/TypedRuleModule;)Ljava/util/Set;
+	public static fun registerPatterns (Lio/karandash/sdk/typed/TypedRuleModule;Lio/karandash/api/platform/PatternRegistry;)V
+	public static fun registerPredicates (Lio/karandash/sdk/typed/TypedRuleModule;Lio/karandash/api/platform/PredicateRegistry;)V
+	public static fun requiredMergeRequestFields (Lio/karandash/sdk/typed/TypedRuleModule;Ljava/lang/String;)Ljava/util/Set;
+	public static fun requiredMergeRequestFields (Lio/karandash/sdk/typed/TypedRuleModule;Ljava/lang/String;Lkotlinx/serialization/json/JsonElement;)Ljava/util/Set;
+	public static fun ruleExplanation (Lio/karandash/sdk/typed/TypedRuleModule;Ljava/lang/String;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static fun shutdown (Lio/karandash/sdk/typed/TypedRuleModule;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static fun tokensConsumed (Lio/karandash/sdk/typed/TypedRuleModule;)Ljava/lang/Integer;
+	public static fun validate (Lio/karandash/sdk/typed/TypedRuleModule;Ljava/lang/String;Lio/karandash/models/MergeRequest;Lkotlinx/serialization/json/JsonElement;Lio/karandash/api/run/RunContext;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static fun validate (Lio/karandash/sdk/typed/TypedRuleModule;Ljava/lang/String;Lio/karandash/models/MergeRequest;Lkotlinx/serialization/json/JsonElement;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+}
+

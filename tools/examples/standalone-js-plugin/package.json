@@ -1,0 +1,15 @@
+{
+  "name": "karandash-example-js-plugin",
+  "version": "1.0.0",
+  "description": "Standalone JavaScript rule plugin example for Karandash",
+  "type": "module",
+  "main": "example-rule.mjs",
+  "keywords": [
+    "karandash",
+    "plugin",
+    "merge-request",
+    "validation"
+  ],
+  "author": "Your Name",
+  "license": "MIT"
+}

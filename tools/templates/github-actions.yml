@@ -1,0 +1,105 @@
+name: Karandash MR Validation
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: read          # Required for checking out the repository
+      pull-requests: write    # Required for posting PR comments
+      security-events: write  # Required for uploading SARIF results
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # Fetch full history for better diff analysis
+
+      - name: Run Karandash validation
+        uses: appKODE/karandash@v1.0.0
+        with:
+          sarif: 'true'
+          comment: 'true'
+
+# -----------------------------------------------------------------------------
+# Usage Instructions
+# -----------------------------------------------------------------------------
+#
+# This template uses the Karandash GitHub Action for the simplest setup.
+# Copy this file to .github/workflows/karandash.yml in your repository.
+#
+# Configuration options:
+#
+#   version: 'v1.0.0'        # Pin to specific version (default: 'latest')
+#   config-path: 'custom.yml' # Custom config location (default: auto-discover)
+#   format: 'sarif'          # Output format: console, json, sarif (default: console)
+#   sarif: 'true'            # Upload SARIF to Code Scanning (default: false)
+#   comment: 'true'          # Post results as PR comment (default: false)
+#   enrich: 'true'           # AI enrichment: generate title/description before validation (default: false)
+#
+# Example with custom configuration:
+#
+#   - name: Run Karandash validation
+#     uses: appKODE/karandash@v1.0.0
+#     with:
+#       version: 'v1.2.0'
+#       config-path: '.karandash/custom-rules.yml'
+#       sarif: 'true'
+#       comment: 'false'
+#
+# -----------------------------------------------------------------------------
+# Alternative: Manual JAR Download
+# -----------------------------------------------------------------------------
+#
+# If you prefer not to use the GitHub Action, you can download and run the
+# JAR directly. Replace the "Run Karandash validation" step with:
+#
+#   - name: Set up Java
+#     uses: actions/setup-java@v4
+#     with:
+#       distribution: 'temurin'
+#       java-version: '17'
+#
+#   - name: Download Karandash JAR
+#     run: |
+#       VERSION=$(curl -sL https://api.github.com/repos/appKODE/karandash/releases/latest | grep '"tag_name"' | sed -E 's/.*"([^"]+)".*/\1/')
+#       curl -sLf -o karandash.jar "https://github.com/appKODE/karandash/releases/download/${VERSION}/karandash.jar"
+#
+#   - name: Run validation
+#     run: |
+#       java -jar karandash.jar validate --format sarif --output karandash-results.sarif
+#     env:
+#       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#       PR_NUMBER: ${{ github.event.pull_request.number }}
+#       PR_TITLE: ${{ github.event.pull_request.title }}
+#       PR_AUTHOR: ${{ github.event.pull_request.user.login }}
+#       BASE_REF: ${{ github.event.pull_request.base.ref }}
+#       HEAD_REF: ${{ github.event.pull_request.head.ref }}
+#
+#   - name: Upload SARIF results
+#     if: always()
+#     uses: github/codeql-action/upload-sarif@v3
+#     with:
+#       sarif_file: karandash-results.sarif
+#       category: karandash
+#
+# -----------------------------------------------------------------------------
+# Next Steps
+# -----------------------------------------------------------------------------
+#
+# 1. Create .karandash.yml in your repository root with validation rules
+#    See: https://appkode.github.io/karandash
+#
+# 2. Commit and push this workflow file
+#
+# 3. The workflow will run automatically on all pull requests
+#
+# 4. View results in:
+#    - Actions tab (workflow run logs)
+#    - Security > Code scanning tab (if sarif: 'true')
+#    - PR comments (if comment: 'true')
+#

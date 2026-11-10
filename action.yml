@@ -1,0 +1,147 @@
+name: 'Karandash MR Validation'
+description: 'Validate merge requests and pull requests using configurable rules with Karandash. Supports console, JSON, SARIF, and reviewdog (rdjsonl/rdjson) output formats.'
+author: 'KODE'
+
+branding:
+  icon: 'check-circle'
+  color: 'green'
+
+inputs:
+  token:
+    description: 'Token used to read the pull request (exported to the CLI as GITHUB_TOKEN)'
+    required: false
+    default: ${{ github.token }}
+
+  version:
+    description: 'Release tag to download (e.g. "v1.0.0") or "latest"'
+    required: false
+    default: 'latest'
+
+  config:
+    description: 'Path to the karandash configuration file (auto-discovered if omitted)'
+    required: false
+    default: ''
+
+  config-path:
+    description: 'Same as config; used when config is empty'
+    required: false
+    default: ''
+
+  format:
+    description: 'Output format printed to the log: console, json, sarif, rdjsonl, rdjson'
+    required: false
+    default: 'console'
+
+  sarif:
+    description: 'Write karandash-results.sarif (--format sarif) and upload it to GitHub Code Scanning (needs security-events: write)'
+    required: false
+    default: 'false'
+
+  comment:
+    description: 'Post validation results as a PR comment (requires pull-requests: write permission)'
+    required: false
+    default: 'false'
+
+  reviewdog-format:
+    description: 'Also write karandash-results.<format> for reviewdog (rdjsonl or rdjson)'
+    required: false
+    default: ''
+
+outputs:
+  passed:
+    description: 'Whether validation passed (true/false)'
+    value: ${{ steps.validate.outputs.passed }}
+
+  findings-count:
+    description: 'Number of findings detected (length of findings in --format json)'
+    value: ${{ steps.validate.outputs.findings_count }}
+
+  sarif-file:
+    description: 'Path of the SARIF file; empty unless sarif is enabled'
+    value: ${{ steps.validate.outputs.sarif-file }}
+
+  reviewdog-enabled:
+    description: 'Whether reviewdog format is enabled'
+    value: ${{ steps.validate.outputs.reviewdog-enabled }}
+
+  reviewdog-file:
+    description: 'Path of the reviewdog file; empty unless reviewdog-format is set'
+    value: ${{ steps.validate.outputs.reviewdog-file }}
+
+runs:
+  using: 'composite'
+  steps:
+    - name: Set up Java 17
+      uses: actions/setup-java@v4
+      with:
+        distribution: 'temurin'
+        java-version: '17'
+
+    - name: Download Karandash
+      id: install
+      shell: bash
+      run: bash "${{ github.action_path }}/tools/action/install.sh"
+      env:
+        INPUT_VERSION: ${{ inputs.version }}
+        GITHUB_TOKEN: ${{ inputs.token }}
+
+    - name: Run Karandash validation
+      id: validate
+      shell: bash
+      run: bash "${{ github.action_path }}/tools/action/validate.sh"
+      env:
+        INPUT_TOKEN: ${{ inputs.token }}
+        INPUT_CONFIG: ${{ inputs.config || inputs.config-path }}
+        INPUT_FORMAT: ${{ inputs.format }}
+        INPUT_SARIF: ${{ inputs.sarif }}
+        INPUT_REVIEWDOG_FORMAT: ${{ inputs.reviewdog-format }}
+        PR_NUMBER: ${{ github.event.pull_request.number }}
+        PR_TITLE: ${{ github.event.pull_request.title }}
+        PR_AUTHOR: ${{ github.event.pull_request.user.login }}
+        BASE_REF: ${{ github.event.pull_request.base.ref }}
+        HEAD_REF: ${{ github.event.pull_request.head.ref }}
+
+    - name: Upload SARIF results
+      if: inputs.sarif == 'true' && always() && hashFiles('karandash-results.sarif') != ''
+      uses: github/codeql-action/upload-sarif@v3
+      with:
+        sarif_file: karandash-results.sarif
+        category: karandash
+
+    - name: Post PR comment
+      if: inputs.comment == 'true' && always() && github.event_name == 'pull_request' && steps.validate.outputs.passed != ''
+      uses: actions/github-script@v7
+      env:
+        PASSED: ${{ steps.validate.outputs.passed }}
+        FINDINGS_COUNT: ${{ steps.validate.outputs.findings_count }}
+        SARIF: ${{ inputs.sarif }}
+      with:
+        github-token: ${{ inputs.token }}
+        script: |
+          const passed = process.env.PASSED === 'true';
+          const findingsCount = parseInt(process.env.FINDINGS_COUNT || '0', 10);
+
+          let comment = `## Karandash Validation Results\n\n`;
+
+          if (passed) {
+            comment += `**Validation passed**\n\n`;
+            comment += findingsCount > 0
+              ? `Found ${findingsCount} finding(s) (all within acceptable thresholds)\n`
+              : `No issues found.\n`;
+          } else {
+            comment += `**Validation failed**\n\n`;
+            comment += `Found ${findingsCount} finding(s) that need attention\n`;
+          }
+
+          comment += `\nSee the [Actions run](${context.payload.repository.html_url}/actions/runs/${context.runId}) for details.`;
+
+          if (process.env.SARIF === 'true') {
+            comment += `\n\nCode scanning results are available in the [Security tab](${context.payload.repository.html_url}/security/code-scanning).`;
+          }
+
+          await github.rest.issues.createComment({
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            issue_number: context.issue.number,
+            body: comment
+          });

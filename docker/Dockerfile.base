@@ -1,0 +1,122 @@
+# Karandash Builder Toolchain Image
+#
+# Pre-built image with all dependencies for building and testing Karandash.
+# Push to registry once, use in all CI jobs and local builds.
+#
+# Targets: JVM tests, ktlint, detekt, shadowJar, jvmJar, native linuxX64
+#
+# Build:
+#   docker build -f docker/Dockerfile.base -t karandash/base .
+#
+# Usage in CI:
+#   image: ${CI_REGISTRY_IMAGE}/base:latest-amd64
+#
+# Usage locally (mount source, run build):
+#   docker run --rm -v $(pwd):/build -w /build karandash/base \
+#     ./gradlew :cli:shadowJar --no-daemon
+
+# Build files only (every build.gradle.kts outside build-logic): COPY --from checksums the content, so the
+# dependency prewarm below re-runs when build files change, not on every source edit.
+FROM gradle:9.3.1-jdk17-jammy AS build-files
+COPY . /src/
+RUN cd /src && mkdir /out && \
+    find . -name "build.gradle.kts" -not -path "./build-logic/*" -exec cp --parents {} /out/ \;
+
+FROM gradle:9.3.1-jdk17-jammy
+
+LABEL org.opencontainers.image.title="karandash-base"
+LABEL org.opencontainers.image.description="Builder toolchain for Karandash (Gradle + JDK 17 + native deps)"
+
+# Native build dependencies:
+#   libssl-dev        - OpenSSL for plugin signature verification
+#   libcurl4-openssl-dev - Ktor curl engine for native HTTP
+#   openjdk-17-jdk-headless - Gradle JDK 17 toolchain
+#   clang lld         - wasm32 cross-compile of the standalone WASM C example (:plugins:loader buildExampleWasm)
+#   gcc libc6-dev     - host C compiler for :plugins:inspector:buildBoobyTrapLib (booby_trap.c, native inspector tests)
+#
+# CI runners can sit behind aggressive HTTP proxies; force HTTPS sources and disable apt cache reuse
+# to avoid intermittent "invalid signature" errors on InRelease files.
+RUN set -eux; \
+    sed -i 's|http://|https://|g' /etc/apt/sources.list; \
+    apt-get -o Acquire::Retries=5 -o Acquire::http::No-Cache=true -o Acquire::https::No-Cache=true update; \
+    apt-get install -y --no-install-recommends \
+        libssl-dev \
+        libcurl4-openssl-dev \
+        openjdk-17-jdk-headless \
+        gcc \
+        clang \
+        lld \
+        libc6-dev \
+        bash \
+        coreutils \
+        curl \
+        git; \
+    rm -rf /var/lib/apt/lists/*
+
+# Rust + wasm32 target: :plugins:loader builds the standalone WASM Rust example for its tests
+# rustup-init is pinned by version and sha256 (no curl | sh); bump both together from
+# https://static.rust-lang.org/rustup/archive/<version>/<triple>/rustup-init.sha256
+ARG RUSTUP_VERSION=1.28.2
+ARG RUSTUP_SHA256_X86_64=20a06e644b0d9bd2fbdbfd52d42540bdde820ea7df86e92e533c073da0cdd43c
+ARG RUSTUP_SHA256_AARCH64=e3853c5a252fca15252d07cb23a1bdd9377a8c6f3efa01531109281ae47f841c
+RUN set -eux; \
+    case "$(uname -m)" in \
+        x86_64) triple=x86_64-unknown-linux-gnu; sha="$RUSTUP_SHA256_X86_64" ;; \
+        aarch64) triple=aarch64-unknown-linux-gnu; sha="$RUSTUP_SHA256_AARCH64" ;; \
+        *) echo "unsupported architecture $(uname -m)" >&2; exit 1 ;; \
+    esac; \
+    curl --proto '=https' --tlsv1.2 -sSfO "https://static.rust-lang.org/rustup/archive/${RUSTUP_VERSION}/${triple}/rustup-init"; \
+    echo "${sha}  rustup-init" | sha256sum -c -; \
+    chmod +x rustup-init; \
+    ./rustup-init -y --default-toolchain stable --profile minimal; \
+    rm rustup-init
+ENV PATH="/root/.cargo/bin:${PATH}"
+RUN rustup target add wasm32-unknown-unknown
+
+# UTF-8 locale: Kotlin/Native Char.isLetter() on Linux may delegate to the
+# C library which is locale-dependent. Without a UTF-8 locale, non-ASCII
+# letter detection fails silently (e.g. Cyrillic isLetter() returns false).
+ENV LANG=C.UTF-8
+ENV LC_ALL=C.UTF-8
+
+# Gradle JVM settings for large KMP builds
+ENV GRADLE_OPTS="-Xmx4g -XX:MaxMetaspaceSize=1g"
+
+# Kotlin/Native distribution baked in (docker/provision-konan.sh). KOTLIN_NATIVE_VERSION comes from
+# gradle/libs.versions.toml via --build-arg (docker-images.yml); a mismatch only costs a download, KGP fetches the
+# version it needs into the same KONAN_DATA_DIR.
+ARG KOTLIN_NATIVE_VERSION=2.4.21
+ARG MAVEN_MIRROR=https://repo1.maven.org/maven2
+ENV KONAN_DATA_DIR=/opt/konan
+COPY docker/provision-konan.sh /usr/local/bin/
+RUN provision-konan.sh "$KOTLIN_NATIVE_VERSION" "$MAVEN_MIRROR"
+
+# Gradle JDK toolchain paths are resolved at build time (arch-aware)
+
+WORKDIR /build
+
+# Pre-warm Gradle wrapper and dependencies.
+# Copy only build configuration files (not source) so this layer is cached
+# until build config changes.
+COPY gradle/ gradle/
+COPY gradlew .
+COPY gradle.properties .
+COPY settings.gradle.kts .
+COPY build.gradle.kts .
+COPY build-logic/ build-logic/
+
+COPY --from=build-files /out/ /build/
+
+# Resolve every configuration of every project into the Gradle cache.
+COPY tools/ci/resolve-all.init.gradle.kts /tmp/
+RUN ARCH=$(dpkg --print-architecture) && \
+    ./gradlew resolveAllDependencies --no-daemon --no-configuration-cache --continue -I /tmp/resolve-all.init.gradle.kts \
+        -Porg.gradle.java.installations.paths=/usr/lib/jvm/java-17-openjdk-${ARCH},/opt/java/openjdk || true; \
+    rm /tmp/resolve-all.init.gradle.kts
+
+# Clean up the stub source - actual source will be mounted or copied at runtime
+RUN find /build -name "build.gradle.kts" -not -path "/build/build.gradle.kts" -not -path "/build/build-logic/*" -delete && \
+    find /build -type d -empty -delete 2>/dev/null || true
+
+# Default: show Gradle version to verify image works
+CMD ["./gradlew", "--version", "--no-daemon"]

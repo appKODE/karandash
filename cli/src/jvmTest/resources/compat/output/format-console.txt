@@ -1,0 +1,10 @@
+exit=1
+MR
+  error         Missing required label: 'needs-review'  labels
+                How to fix: Add the required label via the MR sidebar.
+                Why: Labels help categorize and route MRs through review workflows.
+  error         MR title does not match required pattern.  titleFormat
+                How to fix: Change the title to match the format, e.g. `JIRA-0: feat: add runtime verification`.
+                Why: Title format rules ensure consistent MR naming for changelogs and automation.
+
+Validation FAILED · 2 errors

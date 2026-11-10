@@ -1,0 +1,128 @@
+{
+    "rules": {
+        "ruleConfigs": {
+            "titleFormat": {
+                "pattern": "^(feat|fix|docs|style|refactor|perf|test|chore|ci|build|wip|update|merge)(\\(.+\\))?:?\\s*.+",
+                "minLength": 5,
+                "maxLength": 100
+            },
+            "commitMessages": {
+                "pattern": ".+",
+                "maxLength": 100,
+                "minLength": 5
+            },
+            "branchNaming": {
+                "allowedPatterns": [
+                    ".*"
+                ],
+                "requireSourceMatch": false,
+                "requireTargetMatch": false
+            },
+            "sizeLimits": {
+                "maxFiles": 100,
+                "maxLines": 2000
+            },
+            "draftPrevention": {
+                "blockDraft": "off"
+            }
+        },
+        "ruleMeta": {
+            "titleFormat": {
+                "priority": 100,
+                "bailOnFail": false,
+                "when": null,
+                "mode": "normal",
+                "suggestion": "Prefix your title with a type like 'feat:', 'fix:', or 'docs:' for better traceability",
+                "explanation": "Type prefixes help categorize changes even in lenient configurations",
+                "concernArea": null,
+                "severity": null,
+                "excludePaths": []
+            },
+            "commitMessages": {
+                "priority": 100,
+                "bailOnFail": false,
+                "when": null,
+                "mode": "normal",
+                "suggestion": "Write a clear, concise description of what changed and why",
+                "explanation": "Even with relaxed validation, descriptive commit messages help reviewers understand the change",
+                "concernArea": null,
+                "severity": null,
+                "excludePaths": []
+            }
+        }
+    },
+    "platforms": null,
+    "reporters": null,
+    "profile": null,
+    "scripts": null,
+    "dangerfile": null,
+    "baseline": null,
+    "dryRun": false,
+    "dryRunScope": null,
+    "allowLocalhost": false,
+    "allowPrivateNetwork": false,
+    "enrichment": null,
+    "enrichmentProviders": null,
+    "ai": null,
+    "aiReports": null,
+    "aiMetrics": null,
+    "autoApprove": null,
+    "cache": null,
+    "limits": {
+        "maxFindings": 10000,
+        "fetchTimeout": "10s",
+        "expressions": {
+            "maxLength": 1000,
+            "maxNestingDepth": 50
+        },
+        "extends": {
+            "maxEntries": 10,
+            "maxDepth": 5,
+            "maxChainSize": 20
+        },
+        "glob": {
+            "maxExpansion": 10,
+            "maxDirectoryDepth": 5
+        },
+        "regex": {
+            "maxPatternLength": 500,
+            "maxQuantifierNesting": 1
+        },
+        "patterns": {
+            "maxExpansionDepth": 20
+        }
+    },
+    "http": {
+        "retry": null,
+        "pagination": null,
+        "responseCache": null
+    },
+    "patterns": {},
+    "timeouts": null,
+    "diagnostics": null,
+    "policies": [],
+    "profileOverrides": {
+        "title": {
+            "minLength": null,
+            "maxLength": null,
+            "maxSubjectLength": null
+        },
+        "size": {
+            "maxLines": null,
+            "maxCommits": null
+        }
+    },
+    "display": {
+        "git": {
+            "shortShaLength": 7
+        },
+        "watcher": {
+            "debounce": "500ms"
+        },
+        "console": {
+            "successMark": "✓",
+            "failureMark": "✗"
+        }
+    },
+    "ruleEnrichment": null
+}

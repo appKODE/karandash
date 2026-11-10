@@ -1,0 +1,9 @@
+# Karandash config for Layer 2b file-mode testing.
+# Uses only rules + reporters (no provider needed - MR data comes from --mr flag).
+rules:
+  title-format:
+    pattern: "^(feat|fix|chore|refactor|docs|test|ci):"
+
+reporters:
+  console: true
+  json: true

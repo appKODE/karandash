@@ -1,0 +1,4 @@
+# No findings on tools/integration-tests/fixtures/test-mr.json.
+rules:
+  title-format:
+    pattern: "^feat: .+"

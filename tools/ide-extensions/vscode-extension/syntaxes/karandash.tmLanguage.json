@@ -1,0 +1,174 @@
+{
+  "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+  "name": "Karandash",
+  "scopeName": "source.karandash",
+  "patterns": [
+    {
+      "include": "#comments"
+    },
+    {
+      "include": "#keywords"
+    },
+    {
+      "include": "#validators"
+    },
+    {
+      "include": "#properties"
+    },
+    {
+      "include": "#strings"
+    },
+    {
+      "include": "#numbers"
+    },
+    {
+      "include": "#booleans"
+    },
+    {
+      "include": "#regex"
+    },
+    {
+      "include": "#functions"
+    },
+    {
+      "include": "#operators"
+    }
+  ],
+  "repository": {
+    "comments": {
+      "patterns": [
+        {
+          "name": "comment.line.double-slash.karandash",
+          "match": "//.*$"
+        },
+        {
+          "name": "comment.block.karandash",
+          "begin": "/\\*",
+          "end": "\\*/"
+        }
+      ]
+    },
+    "keywords": {
+      "patterns": [
+        {
+          "name": "keyword.control.karandash",
+          "match": "\\b(rules|providers|reporters|validation)\\b"
+        }
+      ]
+    },
+    "validators": {
+      "patterns": [
+        {
+          "name": "entity.name.function.karandash",
+          "match": "\\b(titleFormat|commitMessages|jiraTicket|branchNaming|fileChanges|codeowners|approval|reviewer|cicdStatus|conflict|draft|labels|sizeLimits|security|conditional)\\b(?=\\s*\\{)"
+        }
+      ]
+    },
+    "properties": {
+      "patterns": [
+        {
+          "name": "variable.parameter.karandash",
+          "match": "\\b[a-zA-Z_][a-zA-Z0-9_]*\\b(?=\\s*=)"
+        }
+      ]
+    },
+    "strings": {
+      "patterns": [
+        {
+          "name": "string.quoted.double.karandash",
+          "begin": "\"",
+          "end": "\"",
+          "patterns": [
+            {
+              "name": "constant.character.escape.karandash",
+              "match": "\\\\([\"\\\\/bfnrt]|u[0-9a-fA-F]{4})"
+            }
+          ]
+        },
+        {
+          "name": "string.quoted.single.karandash",
+          "begin": "'",
+          "end": "'",
+          "patterns": [
+            {
+              "name": "constant.character.escape.karandash",
+              "match": "\\\\(['\\\\/bfnrt]|u[0-9a-fA-F]{4})"
+            }
+          ]
+        }
+      ]
+    },
+    "numbers": {
+      "patterns": [
+        {
+          "name": "constant.numeric.decimal.karandash",
+          "match": "\\b([0-9]+\\.[0-9]+([eE][+-]?[0-9]+)?)\\b"
+        },
+        {
+          "name": "constant.numeric.integer.karandash",
+          "match": "\\b([0-9]+)\\b"
+        }
+      ]
+    },
+    "booleans": {
+      "patterns": [
+        {
+          "name": "constant.language.boolean.karandash",
+          "match": "\\b(true|false)\\b"
+        }
+      ]
+    },
+    "regex": {
+      "patterns": [
+        {
+          "name": "string.regexp.karandash",
+          "match": "\\^[^\"']+\\$|\\^[^\"']+|[^\"']+\\$"
+        }
+      ]
+    },
+    "functions": {
+      "patterns": [
+        {
+          "name": "entity.name.function.karandash",
+          "match": "\\b(listOf|setOf|mapOf|arrayOf)\\b(?=\\s*\\()"
+        }
+      ]
+    },
+    "operators": {
+      "patterns": [
+        {
+          "name": "keyword.operator.assignment.karandash",
+          "match": "="
+        },
+        {
+          "name": "punctuation.section.block.begin.karandash",
+          "match": "\\{"
+        },
+        {
+          "name": "punctuation.section.block.end.karandash",
+          "match": "\\}"
+        },
+        {
+          "name": "punctuation.section.parens.begin.karandash",
+          "match": "\\("
+        },
+        {
+          "name": "punctuation.section.parens.end.karandash",
+          "match": "\\)"
+        },
+        {
+          "name": "punctuation.section.brackets.begin.karandash",
+          "match": "\\["
+        },
+        {
+          "name": "punctuation.section.brackets.end.karandash",
+          "match": "\\]"
+        },
+        {
+          "name": "punctuation.separator.comma.karandash",
+          "match": ","
+        }
+      ]
+    }
+  }
+}

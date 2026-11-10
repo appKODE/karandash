@@ -1,0 +1,169 @@
+scenarios:
+  - name: "Invalid: Cyrillic in MR title"
+    mr:
+      title: "Добавить экран профиля"
+    expect: fail
+    expected-rules: ["language-policy"]
+
+  - name: "Invalid: JIRA present but missing CHANGELOG"
+    mr:
+      title: "[PROJ-123] Add feature"
+      commits:
+        - subject: "[PROJ-123] Implement feature"
+          body: ""
+    expect: fail
+    expected-rules: ["commit-body"]
+
+  - name: "Invalid: CHANGELOG missing task ID"
+    mr:
+      title: "[PROJ-123] Add feature"
+      commits:
+        - subject: "[PROJ-123] Implement feature"
+          body: "CHANGELOG: Add feature."
+    expect: fail
+    expected-rules: ["commit-body"]
+
+  - name: "Invalid: commit task not a subset of MR title task"
+    mr:
+      title: "[PROJ-100] Implement feature A"
+      commits:
+        - subject: "[PROJ-999] Unrelated change"
+    expect: fail
+    expected-rules: ["cross-entity-consistency"]
+
+  - name: "Invalid: draft MR"
+    mr:
+      title: "Draft: Work in progress"
+      draft: true
+    expect: fail
+    expected-rules: ["draft-prevention"]
+
+  - name: "Invalid: title too short"
+    mr:
+      title: "Fix bug"
+    expect: fail
+    expected-rules: ["title-format"]
+
+  - name: "Invalid: Cyrillic in branch name"
+    mr:
+      title: "Fix auth issue"
+      commits:
+        - subject: "Fix token refresh"
+      branch: "fix/исправить-токен"
+    expect: fail
+    expected-rules: ["language-policy"]
+
+  - name: "Invalid: wrong JIRA key (WAL instead of PROJ)"
+    mr:
+      title: "[WAL-123] Add feature"
+      commits:
+        - subject: "[WAL-123] Implement feature"
+          body: "CHANGELOG: [WAL-123] Add feature."
+    expect: fail
+    expected-rules: ["jira-ticket"]
+
+  - name: "Invalid: Cyrillic in commit title"
+    mr:
+      title: "Fix login validation"
+      commits:
+        - subject: "Исправить валидацию при входе"
+    expect: fail
+    expected-rules: ["language-policy"]
+
+  - name: "Warning: title too long (over 120 chars)"
+    mr:
+      title: "[PROJ-123] This is an extremely verbose merge request title that definitely exceeds the one hundred and twenty character limit"
+      commits:
+        - subject: "[PROJ-123] Implement feature"
+          body: "CHANGELOG: [PROJ-123] Add feature."
+    expect: pass
+    expected-warnings: ["titleFormat"]
+
+  - name: "Warning: commit message too long (over 72 chars)"
+    mr:
+      title: "[PROJ-123] Add feature"
+      commits:
+        - subject: "[PROJ-123] This commit message is too long and easily exceeds the seventy-two character hard limit"
+          body: "CHANGELOG: [PROJ-123] Add feature."
+    expect: pass
+    expected-warnings: ["commitMessages"]
+
+  - name: "Invalid: WIP prefix triggers draft prevention"
+    mr:
+      title: "WIP: Experimental refactor"
+      draft: true
+    expect: fail
+    expected-rules: ["draft-prevention"]
+
+  - name: "Invalid: CHANGELOG references task not in MR title"
+    mr:
+      title: "[PROJ-100] Add feature"
+      commits:
+        - subject: "[PROJ-100] Implement feature"
+          body: "CHANGELOG: [PROJ-100] Add feature, [PROJ-999] Fix unrelated issue."
+    expect: fail
+    expected-rules: ["cross-entity-consistency"]
+
+  - name: "Invalid: too many commits exceeds size limit"
+    mr:
+      title: "Fix many things across modules"
+      commits:
+        - subject: "Fix issue 1"
+        - subject: "Fix issue 2"
+        - subject: "Fix issue 3"
+        - subject: "Fix issue 4"
+        - subject: "Fix issue 5"
+        - subject: "Fix issue 6"
+        - subject: "Fix issue 7"
+        - subject: "Fix issue 8"
+        - subject: "Fix issue 9"
+        - subject: "Fix issue 10"
+        - subject: "Fix issue 11"
+        - subject: "Fix issue 12"
+        - subject: "Fix issue 13"
+        - subject: "Fix issue 14"
+        - subject: "Fix issue 15"
+        - subject: "Fix issue 16"
+        - subject: "Fix issue 17"
+        - subject: "Fix issue 18"
+        - subject: "Fix issue 19"
+        - subject: "Fix issue 20"
+        - subject: "Fix issue 21"
+        - subject: "Fix issue 22"
+        - subject: "Fix issue 23"
+        - subject: "Fix issue 24"
+        - subject: "Fix issue 25"
+        - subject: "Fix issue 26"
+        - subject: "Fix issue 27"
+        - subject: "Fix issue 28"
+        - subject: "Fix issue 29"
+        - subject: "Fix issue 30"
+        - subject: "Fix issue 31"
+    expect: fail
+    expected-rules: ["size-limits"]
+
+  - name: "Invalid: mixed Latin and Cyrillic in title"
+    mr:
+      title: "Fix ошибку in login flow"
+    expect: fail
+    expected-rules: ["language-policy"]
+
+  - name: "Invalid: multi-ticket MR with one ticket lacking CHANGELOG entry"
+    mr:
+      title: "[PROJ-1] [PROJ-2] Implement combined feature"
+      commits:
+        - subject: "[PROJ-1] [PROJ-2] Implement combined feature"
+          body: "CHANGELOG: [PROJ-1] First piece only."
+    expect: fail
+    expected-rules: ["cross-entity-consistency"]
+
+  - name: "Invalid: anyCommit scope — no commit body has CHANGELOG"
+    mr:
+      title: "[PROJ-1] Implement feature"
+      commits:
+        - subject: "[PROJ-1] First piece"
+          body: "TASK: https://jira.example.com/browse/PROJ-1"
+        - subject: "[PROJ-1] Second piece"
+          body: "TASK: https://jira.example.com/browse/PROJ-1"
+    expect: fail
+    expected-rules: ["commit-body"]

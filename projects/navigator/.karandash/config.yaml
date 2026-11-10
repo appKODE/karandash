@@ -1,0 +1,73 @@
+# Navigator project config. Extends base, overrides maps-specific settings only.
+# Secrets (GITLAB_TOKEN, BIFROST_API_KEY, BIFROST_BASE_URL, KARANDASH_BASE_TOKEN) must be set in CI/CD.
+
+extends: "../../base/.karandash/config.yaml"
+
+env:
+  KARANDASH_JIRA_KEY: "NAV"
+  KARANDASH_AI_MAX_TOKENS: "30000"
+
+# Override patterns for maps
+patterns:
+  project-ticket: "@jira-ticket(@project:${KARANDASH_JIRA_KEY})"
+  project-tag: "@bracketed((?:ios|android|core))"
+  project-title: "@optional(@project-tickets)@project-tag .+"
+
+rules:
+  title-format:
+    pattern: "@project-title"
+    suggestion: "Examples: '[ios] Add login screen', '[NAV-123][ios] Add login screen', '[android] Fix map rendering', '[NAV-123][NAV-456][android] Fix two bugs'."
+    explanation: "Consistent MR titles make git history searchable by task ID and platform."
+
+  commit-messages:
+    pattern: "@project-title"
+    suggestion: "Examples: '[ios] Implement login UI', '[NAV-123][ios] Implement login UI', '[NAV-123][NAV-456][android] Fix tile and zoom bugs'. Max 72 chars."
+    explanation: "Uniform commit messages improve git log readability and enable per-platform release notes."
+
+  context-tag:
+    allowed: [ios, android, core]
+    delimiter: brackets
+    exactlyOne: true
+    caseSensitive: true
+    checkMrTitle: true
+    checkCommitTitles: true
+    suggestion: "Add exactly one tag: [ios] for iOS, [android] for Android, or [core] for shared C++ code. Place it after the task ID."
+    explanation: "Context tags route MRs to platform-specific reviewers and feed per-platform metrics dashboards."
+
+  cross-entity-consistency:
+    ticket-format: jira
+    ticket-projects: ["${KARANDASH_JIRA_KEY}"]
+
+  # Navigator also checks MR descriptions and commit descriptions (stricter than base which exempts them)
+  language-policy:
+    checkMrDescription: true
+    checkCommitDescription: true
+    suggestion: "Replace non-Latin characters with English equivalents in MR title, description, branch name, commit title and description."
+    explanation: "English-only text ensures all team members can read git-flow information regardless of native language."
+
+# CHANGELOG required only for android + NAV ticket. iOS and core exempt.
+# Overrides the base changelog-requirement condition; ai-draft-gating inherited automatically
+# (policies use merge-by-key on the `name` field by default).
+policies:
+  - name: changelog-requirement
+    when: 'title_matches("@any-ticket") && has_tag(android)'
+    override:
+      commit-body:
+        suggestion: "Commit body must contain: 'CHANGELOG: [NAV-123] Task name.' For multiple tasks: 'CHANGELOG: [NAV-123] Task one, [NAV-456] Task two.'"
+        explanation: "Structured commit bodies enable automated changelog generation."
+
+ai:
+  models:
+    review-thread-analysis: "openrouter/google/gemini-2.0-flash-001"
+    risk-scoring: "openrouter/google/gemini-2.0-flash-001"
+
+  scopes:
+    android:
+      paths: ["android/**/*.{kt,java}", "android/jni/**/*.{cpp,hpp,h}"]
+    ios:
+      paths: ["iphone/**/*.{swift,m,mm,h}"]
+    core:
+      paths:
+        - "glob:{map,routing,search,indexer,storage,drape,drape_frontend,base,coding,geometry,platform,transit,traffic,tracking,kml,editor,partners_api,network,descriptions}/**/*.{cpp,hpp,h}"
+    ci:
+      paths: ["ci/**", ".gitlab-ci.yml", ".github/**", "Makefile", "CMakeLists.txt"]

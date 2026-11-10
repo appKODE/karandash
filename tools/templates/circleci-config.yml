@@ -1,0 +1,26 @@
+version: 2.1
+
+jobs:
+  validate:
+    docker:
+      - image: cimg/openjdk:17.0
+    steps:
+      - checkout
+      - run:
+          name: Download Karandash
+          command: |
+            wget https://github.com/appKODE/karandash/releases/latest/download/karandash.jar
+      - run:
+          name: Run Validation
+          command: |
+            java -jar karandash.jar validate
+      - store_artifacts:
+          path: karandash-results.sarif
+          destination: validation-results
+
+workflows:
+  pr-validation:
+    jobs:
+      - validate
+    triggers:
+      - pull_request

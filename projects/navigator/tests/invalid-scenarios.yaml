@@ -1,0 +1,96 @@
+scenarios:
+  - name: "Invalid: wrong JIRA key (PROJ instead of NAV)"
+    mr:
+      title: "[PROJ-123][android] Add feature"
+      commits:
+        - subject: "[PROJ-123][android] Implement feature"
+          body: "CHANGELOG: [PROJ-123] Add feature."
+    expect: fail
+    expected-rules: ["jira-ticket"]
+
+  - name: "Invalid: missing platform tag"
+    mr:
+      title: "[NAV-123] Fix map rendering"
+    expect: fail
+    expected-rules: ["title-format", "context-tag"]
+
+  - name: "Invalid: unknown platform tag [backend]"
+    mr:
+      title: "[backend] Fix API endpoint"
+    expect: fail
+    expected-rules: ["title-format", "context-tag"]
+
+  - name: "Invalid: capitalised [Android] tag"
+    mr:
+      title: "[Android] Fix map crash"
+    expect: fail
+    expected-rules: ["title-format", "context-tag"]
+
+  - name: "Invalid: capitalised [Core] tag"
+    mr:
+      title: "[Core] Optimize tile cache"
+    expect: fail
+    expected-rules: ["title-format", "context-tag"]
+
+  - name: "Invalid: NAV android + JIRA but missing CHANGELOG"
+    mr:
+      title: "[NAV-123][android] Add offline map support"
+      commits:
+        - subject: "[NAV-123][android] Implement offline tile download"
+          body: ""
+    expect: fail
+    expected-rules: ["commit-body"]
+
+  - name: "Invalid: CHANGELOG missing task ID"
+    mr:
+      title: "[NAV-123][android] Add feature"
+      commits:
+        - subject: "[NAV-123][android] Implement feature"
+          body: "CHANGELOG: Add feature."
+    expect: fail
+    expected-rules: ["commit-body"]
+
+  - name: "Invalid: Cyrillic in MR title"
+    mr:
+      title: "[android] Исправить отображение карты"
+    expect: fail
+    expected-rules: ["language-policy"]
+
+  - name: "Invalid: Cyrillic in commit description (navigator checks commit body)"
+    mr:
+      title: "[android] Fix map rendering"
+      commits:
+        - subject: "[android] Fix tile rendering edge case"
+          body: "Исправить отображение тайлов на границе зума."
+    expect: fail
+    expected-rules: ["language-policy"]
+
+  - name: "Invalid: draft MR"
+    mr:
+      title: "Draft: [android] Implement new map layer"
+      draft: true
+    expect: fail
+    expected-rules: ["draft-prevention"]
+
+  - name: "Invalid: commit task not in MR title"
+    mr:
+      title: "[NAV-100][android] Fix rendering bug"
+      commits:
+        - subject: "[NAV-999][android] Unrelated change"
+    expect: fail
+    expected-rules: ["cross-entity-consistency"]
+
+  - name: "Invalid: both android and core tags"
+    mr:
+      title: "[android] [core] Fix shared issue"
+    expect: fail
+    expected-rules: ["context-tag"]
+
+  - name: "Invalid: CHANGELOG references task not in MR title"
+    mr:
+      title: "[NAV-100][android] Add feature"
+      commits:
+        - subject: "[NAV-100][android] Implement feature"
+          body: "CHANGELOG: [NAV-100] Add feature, [NAV-999] Fix unrelated issue."
+    expect: fail
+    expected-rules: ["cross-entity-consistency"]

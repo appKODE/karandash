@@ -1,0 +1,32 @@
+{
+  "responses": {
+    "code-suggestions": {
+      "suggestions": []
+    },
+    "review-thread-analysis": {
+      "issues": []
+    },
+    "description-quality": {
+      "qualityScore": 0.9,
+      "issues": [],
+      "summary": "Accurate and sufficient for a rename."
+    },
+    "outdated-docs": {
+      "issues": []
+    },
+    "review-comments": {
+      "comments": []
+    },
+    "risk-scoring": {
+      "riskScore": 0.02,
+      "riskLevel": "low",
+      "confidence": 0.95,
+      "factors": [],
+      "summary": "Test-only rename."
+    },
+    "similar-issues": {
+      "patterns": [],
+      "searchTerms": []
+    }
+  }
+}

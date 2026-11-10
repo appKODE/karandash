@@ -1,0 +1,9 @@
+# Source: docs/features/profiles.md + ProfileOverridesConfig KDoc.
+profile: conventional-commits
+
+profile-overrides:
+  title:
+    min-length: 10
+    max-length: 72
+  size:
+    max-lines: 800

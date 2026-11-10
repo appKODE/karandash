@@ -1,0 +1,18 @@
+# Karandash config for Layer 2c live-mode testing against mock GitLab API.
+# Exercises full pipeline: platform service fetch -> rule validation -> reporter -> comment posting -> mutation.
+allow_localhost: true
+
+platforms:
+  gitlab:
+    url: "http://localhost:${MOCK_PORT}"
+    token: "test-token"
+    allow_localhost: true
+    add-labels:
+      - "validated"
+
+rules:
+  title-format:
+    pattern: "^(feat|fix|chore|refactor|docs|test|ci):"
+
+reporters:
+  console: true

@@ -1,0 +1,32 @@
+{
+  "responses": {
+    "code-suggestions": {
+      "suggestions": []
+    },
+    "review-thread-analysis": {
+      "issues": []
+    },
+    "description-quality": {
+      "qualityScore": 0.9,
+      "issues": [],
+      "summary": "Accurate and sufficient for an import sort."
+    },
+    "outdated-docs": {
+      "issues": []
+    },
+    "review-comments": {
+      "comments": []
+    },
+    "risk-scoring": {
+      "riskScore": 0.01,
+      "riskLevel": "low",
+      "confidence": 0.97,
+      "factors": [],
+      "summary": "Import order only."
+    },
+    "similar-issues": {
+      "patterns": [],
+      "searchTerms": []
+    }
+  }
+}

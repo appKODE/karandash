@@ -1,0 +1,6 @@
+rules: commitMessages crossEntityConsistency draftPrevention jiraTicket labels languagePolicy sizeLimits titleFormat
+changelog-entry = \[ECHO-\d+\] .+
+changelog-line = ^CHANGELOG: \[ECHO-\d+\] .+(?:, \[ECHO-\d+\] .+)*\.$
+project-ticket = ECHO-\d+
+project-tickets = (?:\[ECHO-\d+\])+
+project-title = (?:(?:\[ECHO-\d+\])+)?.+

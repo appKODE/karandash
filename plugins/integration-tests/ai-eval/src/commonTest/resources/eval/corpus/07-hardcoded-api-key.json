@@ -1,0 +1,58 @@
+{
+  "id": "07-hardcoded-api-key",
+  "title": "Add payment gateway configuration",
+  "description": "Adds the payment gateway settings (PROJ-40).",
+  "sourceBranch": "feature/PROJ-40-gateway-config",
+  "commits": [
+    "feat(payments): add gateway config (PROJ-40)"
+  ],
+  "files": [
+    {
+      "path": "src/main/kotlin/payments/GatewayConfig.kt",
+      "diff": [
+        "@@ -3,3 +3,6 @@",
+        " package payments",
+        " ",
+        " object GatewayConfig {",
+        "+    const val API_KEY = \"sk_live_EXAMPLEEXAMPLE0000\"",
+        "+    const val BASE_URL = \"https://pay.example.com\"",
+        " }"
+      ]
+    }
+  ],
+  "analyzers": [
+    "review-comments",
+    "code-quality",
+    "risk-scoring",
+    "change-categorization",
+    "mr-summary"
+  ],
+  "expected": [
+    {
+      "analyzer": "review-comments",
+      "file": "src/main/kotlin/payments/GatewayConfig.kt",
+      "startLine": 6,
+      "category": "SEC"
+    },
+    {
+      "analyzer": "code-quality"
+    },
+    {
+      "analyzer": "code-quality",
+      "file": "src/main/kotlin/payments/GatewayConfig.kt",
+      "startLine": 6,
+      "category": "security"
+    },
+    {
+      "analyzer": "risk-scoring",
+      "category": "high"
+    },
+    {
+      "analyzer": "change-categorization",
+      "category": "feature"
+    },
+    {
+      "analyzer": "mr-summary"
+    }
+  ]
+}

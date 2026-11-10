@@ -1,0 +1,22 @@
+# Integration-test fixture for AI context-quality features.
+# Exercises the base config's ai.context-quality block end-to-end.
+#
+# The project-level config only adds JIRA key and token budget; everything else is
+# inherited from projects/base. If a regression ever turns off context-quality defaults,
+# this project's scenarios should fail first.
+
+extends: "../../base/.karandash/config.yaml"
+
+env:
+  KARANDASH_JIRA_KEY: "ACQ"
+  KARANDASH_AI_MAX_TOKENS: "10000"
+
+ai:
+  context-quality:
+    knowledge-context:
+      default-budget:
+        max-chars: 800
+      budgets:
+        "jira:tickets":             { max-chars: 1000 }
+        "jira:acceptance-criteria": { max-chars: 800 }
+        "local-git:file-frequency": { max-chars: 400 }

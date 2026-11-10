@@ -1,0 +1,602 @@
+{
+    "rules": {
+        "ruleConfigs": {
+            "titleFormat": {
+                "pattern": "@project-title",
+                "minLength": 10,
+                "maxLength": 120
+            },
+            "commitMessages": {
+                "pattern": "@project-title",
+                "minLength": 10,
+                "maxLength": 72
+            },
+            "jiraTicket": {
+                "projectKeys": [
+                    "PROJ"
+                ]
+            },
+            "crossEntityConsistency": {
+                "ticketFormat": "jira",
+                "ticketProjects": [
+                    "PROJ"
+                ],
+                "commitTasksSubsetOfMr": true,
+                "changelogConsistency": true,
+                "changelogPrefix": "CHANGELOG:",
+                "mrTaskSource": "title",
+                "changelogDuplicateRequiresMatchingText": true,
+                "changelogCoverage": true
+            },
+            "draftPrevention": {
+                "wipMarkers": [
+                    "WIP",
+                    "DRAFT",
+                    "DO NOT MERGE"
+                ]
+            },
+            "labels": {
+                "requiredLabels": []
+            },
+            "sizeLimits": {
+                "maxFiles": 75,
+                "maxLines": 2000,
+                "maxCommits": 30
+            },
+            "languagePolicy": {
+                "allowedScripts": [
+                    "latin"
+                ],
+                "checkMrTitle": true,
+                "checkCommitTitle": true,
+                "checkBranchName": true,
+                "checkMrDescription": false,
+                "checkCommitDescription": false
+            },
+            "contextTag": {
+                "allowed": [
+                    "android",
+                    "ios"
+                ],
+                "delimiter": "brackets",
+                "exactlyOne": true,
+                "caseSensitive": false,
+                "checkMrTitle": true,
+                "checkCommitTitles": true
+            },
+            "riskScoring": {},
+            "reviewComments": {},
+            "codeSuggestions": {},
+            "reviewThreadAnalysis": {},
+            "mrSummary": {}
+        },
+        "ruleMeta": {
+            "titleFormat": {
+                "priority": 100,
+                "bailOnFail": true,
+                "when": null,
+                "mode": "normal",
+                "suggestion": "Format: '[PROJ-123][android] Title' or '[ios] Title'. Examples: '[PROJ-42][android] Add login screen', '[ios] Fix OTP timer'. Length: 10–120 chars.",
+                "explanation": "Platform tag routes the MR to the correct reviewers and enables per-platform metrics.",
+                "concernArea": null,
+                "severity": null,
+                "excludePaths": []
+            },
+            "commitMessages": {
+                "priority": 100,
+                "bailOnFail": true,
+                "when": null,
+                "mode": "normal",
+                "suggestion": "Format: '[PROJ-123][android] Description' or '[ios] Description'. Examples: '[PROJ-42][android] Implement login UI', '[ios] Stop timer on background'. Max 72 chars.",
+                "explanation": "Platform-tagged commits enable per-platform release notes and route issues to the right team.",
+                "concernArea": null,
+                "severity": null,
+                "excludePaths": []
+            },
+            "jiraTicket": {
+                "priority": 100,
+                "bailOnFail": false,
+                "when": "title_matches(\"@any-ticket\")",
+                "mode": "normal",
+                "suggestion": "Use your project's JIRA key in the ticket reference. Example: '[PROJ-123]' not '[WAL-123]' in an PROJ project.",
+                "explanation": "JIRA references link code changes to project requirements for audit trails and sprint tracking.",
+                "concernArea": null,
+                "severity": null,
+                "excludePaths": []
+            },
+            "crossEntityConsistency": {
+                "priority": 100,
+                "bailOnFail": false,
+                "when": null,
+                "mode": "normal",
+                "suggestion": "All task IDs in commits must also appear in the MR title, and every MR title ticket must have a CHANGELOG entry. If a commit references [PROJ-999], the MR title must include [PROJ-999] too.",
+                "explanation": "Orphaned task references cause broken JIRA links; uncovered MR tickets cause incomplete release notes.",
+                "concernArea": null,
+                "severity": null,
+                "excludePaths": []
+            },
+            "draftPrevention": {
+                "priority": 100,
+                "bailOnFail": false,
+                "when": null,
+                "mode": "normal",
+                "suggestion": "In GitLab, click 'Mark as ready'. Remove 'WIP:', '[WIP]', or 'Draft:' from the title if present.",
+                "explanation": "Merging incomplete work can break the main branch and block other developers.",
+                "concernArea": null,
+                "severity": null,
+                "excludePaths": []
+            },
+            "labels": {
+                "priority": 100,
+                "bailOnFail": false,
+                "when": null,
+                "mode": "normal",
+                "suggestion": "No labels required currently. When labels are configured, apply them via the MR sidebar in GitLab.",
+                "explanation": "Labels categorize MRs for filtering, metrics, and automated workflow routing.",
+                "concernArea": null,
+                "severity": null,
+                "excludePaths": []
+            },
+            "sizeLimits": {
+                "priority": 100,
+                "bailOnFail": false,
+                "when": null,
+                "mode": "normal",
+                "suggestion": "Split large MRs into smaller focused ones. Aim for a single logical change per MR.",
+                "explanation": "Large MRs are harder to review thoroughly and increase the risk of bugs slipping through.",
+                "concernArea": null,
+                "severity": null,
+                "excludePaths": []
+            },
+            "languagePolicy": {
+                "priority": 100,
+                "bailOnFail": false,
+                "when": null,
+                "mode": "normal",
+                "suggestion": "Replace non-Latin characters with English equivalents in MR title, branch name, and commit title.",
+                "explanation": "English-only text ensures all team members can read git-flow information regardless of native language.",
+                "concernArea": null,
+                "severity": null,
+                "excludePaths": []
+            },
+            "contextTag": {
+                "priority": 100,
+                "bailOnFail": false,
+                "when": null,
+                "mode": "normal",
+                "suggestion": "Add exactly one tag: [android] for Android, or [ios] for iOS. Place it after the optional task ID in both MR title and each commit.",
+                "explanation": "Context tags route MRs to platform-specific reviewers and feed per-platform metrics dashboards.",
+                "concernArea": null,
+                "severity": null,
+                "excludePaths": []
+            },
+            "riskScoring": {
+                "priority": 200,
+                "bailOnFail": false,
+                "when": null,
+                "mode": "supplement",
+                "suggestion": null,
+                "explanation": null,
+                "concernArea": null,
+                "severity": null,
+                "excludePaths": []
+            },
+            "reviewComments": {
+                "priority": 200,
+                "bailOnFail": false,
+                "when": null,
+                "mode": "supplement",
+                "suggestion": null,
+                "explanation": null,
+                "concernArea": null,
+                "severity": null,
+                "excludePaths": []
+            },
+            "codeSuggestions": {
+                "priority": 200,
+                "bailOnFail": false,
+                "when": null,
+                "mode": "supplement",
+                "suggestion": null,
+                "explanation": null,
+                "concernArea": null,
+                "severity": null,
+                "excludePaths": []
+            },
+            "reviewThreadAnalysis": {
+                "priority": 200,
+                "bailOnFail": false,
+                "when": null,
+                "mode": "supplement",
+                "suggestion": null,
+                "explanation": null,
+                "concernArea": null,
+                "severity": null,
+                "excludePaths": []
+            },
+            "mrSummary": {
+                "priority": 200,
+                "bailOnFail": false,
+                "when": null,
+                "mode": "supplement",
+                "suggestion": null,
+                "explanation": null,
+                "concernArea": null,
+                "severity": null,
+                "excludePaths": []
+            }
+        }
+    },
+    "platforms": {
+        "gitlab": {
+            "url": "https://gitlab.example.com",
+            "token": ""
+        }
+    },
+    "reporters": {
+        "markdown": {},
+        "console": {
+            "__disabled": true
+        }
+    },
+    "profile": null,
+    "scripts": null,
+    "dangerfile": null,
+    "baseline": null,
+    "dryRun": false,
+    "dryRunScope": null,
+    "allowLocalhost": false,
+    "allowPrivateNetwork": false,
+    "enrichment": null,
+    "enrichmentProviders": {
+        "jira": {
+            "url": "",
+            "email": "",
+            "token": "",
+            "ticketKeys": {
+                "enabled": true
+            },
+            "tickets": {
+                "enabled": true,
+                "maxPerMr": 10
+            },
+            "acceptanceCriteria": {
+                "enabled": true
+            },
+            "linkedIssues": {
+                "enabled": true
+            }
+        },
+        "localGit": {
+            "fileFrequency": {
+                "enabled": true,
+                "period": "6m"
+            },
+            "subprocessBudget": {
+                "maxCalls": 60,
+                "maxWallMillis": 60000
+            }
+        }
+    },
+    "ai": {
+        "provider": "bifrost",
+        "model": "openrouter/moonshotai/kimi-k2.5",
+        "apiKey": "",
+        "baseUrl": "",
+        "maxTokenBudget": "20000",
+        "failOnError": false,
+        "timeout": "5m",
+        "executionTimeout": "6m",
+        "maxRetries": 1,
+        "stream": true,
+        "priority": 200,
+        "mode": "supplement",
+        "responseLanguage": "English",
+        "strictness": "standard",
+        "reasoningEffort": "none",
+        "crossFileContext": {
+            "enabled": true
+        },
+        "riskScoring": {
+            "enabled": true
+        },
+        "reviewComments": {
+            "enabled": true
+        },
+        "codeSuggestions": {
+            "enabled": true,
+            "mode": "inline",
+            "minSeverity": "warning"
+        },
+        "reviewThreadAnalysis": {
+            "enabled": true
+        },
+        "mrSummary": {
+            "enabled": true
+        },
+        "costBudget": {
+            "maxTokensPerRun": "80000",
+            "onBudgetExceeded": "skip-remaining"
+        },
+        "grounding": {
+            "checkSymbolExistence": true,
+            "checkCodeSnippets": true,
+            "autoDowngradeRefuted": true
+        },
+        "severityOverrides": [
+            {
+                "rule": "ai-review-comments",
+                "reclassify": {
+                    "error": "warning"
+                }
+            }
+        ],
+        "filter": {
+            "maxPerRule": 10,
+            "maxPerFile": 5,
+            "minConfidence": 0.6,
+            "deduplicate": true
+        },
+        "sizePolicy": {
+            "skip": {
+                "maxFiles": 500,
+                "maxTotalLines": 50000,
+                "maxCommits": 200
+            },
+            "exclude": {
+                "patterns": [
+                    "**/generated/**",
+                    "**/*.generated.*",
+                    "**/build/**",
+                    "**/.gradle/**",
+                    "**/Pods/**",
+                    "**/package-lock.json",
+                    "**/*.md"
+                ]
+            },
+            "partialReview": {
+                "maxFiles": 40,
+                "strategy": "most-changed"
+            },
+            "diffPreprocessor": {
+                "skipDeletedFiles": true,
+                "skipPureRenames": true,
+                "stripDiffMetadata": true,
+                "skipBinaryDiffs": true
+            }
+        },
+        "scopes": {
+            "android": {
+                "paths": [
+                    "android/**"
+                ]
+            },
+            "ci": {
+                "paths": [
+                    "ci/**",
+                    ".gitlab-ci.yml",
+                    ".github/**",
+                    "Makefile"
+                ]
+            },
+            "ios": {
+                "paths": [
+                    "ios/**/*.{swift,m,mm,h}"
+                ]
+            },
+            "shared": {
+                "paths": [
+                    "shared/**/*.kt"
+                ]
+            }
+        },
+        "contextLines": 10,
+        "contextQuality": {
+            "enabled": true,
+            "truncation": {
+                "strategy": "priority",
+                "tokenEstimator": "chars4",
+                "preserveHunkBoundaries": true,
+                "budgetAllocation": "proportional"
+            },
+            "relatedFiles": {
+                "enabled": true
+            },
+            "fullFileContext": {
+                "enabled": true,
+                "maxFileLines": 300,
+                "maxFiles": 3,
+                "mode": "target"
+            },
+            "conventions": {
+                "enabled": true
+            },
+            "findingValidator": {
+                "enabled": true,
+                "strict": true
+            },
+            "knowledgeContext": {
+                "defaultBudget": {
+                    "maxChars": 1500
+                },
+                "budgets": {
+                    "jira:tickets": {
+                        "maxChars": 2000
+                    },
+                    "jira:acceptance-criteria": {
+                        "maxChars": 1500
+                    },
+                    "jira:linked-issues": {
+                        "maxChars": 1000
+                    },
+                    "local-git:file-frequency": {
+                        "maxChars": 800
+                    }
+                }
+            }
+        }
+    },
+    "aiReports": null,
+    "aiMetrics": null,
+    "autoApprove": null,
+    "cache": {
+        "enabled": true,
+        "dir": "cache",
+        "responses": {
+            "enabled": true,
+            "ttl": "1m",
+            "persist": false
+        },
+        "downloads": {
+            "enabled": true,
+            "ttl": "1h"
+        },
+        "state": {
+            "enabled": true,
+            "ttl": "7d"
+        },
+        "memory": {
+            "maxEntries": 128,
+            "overrides": {}
+        },
+        "remote": null,
+        "defaultTtl": null,
+        "maxCacheSize": null,
+        "glob": {
+            "maxEntries": 1000
+        },
+        "regex": {
+            "maxEntries": 1000
+        },
+        "patterns": {
+            "maxEntries": 512
+        }
+    },
+    "limits": {
+        "maxFindings": 10000,
+        "fetchTimeout": "10s",
+        "expressions": {
+            "maxLength": 1000,
+            "maxNestingDepth": 50
+        },
+        "extends": {
+            "maxEntries": 10,
+            "maxDepth": 5,
+            "maxChainSize": 20
+        },
+        "glob": {
+            "maxExpansion": 10,
+            "maxDirectoryDepth": 5
+        },
+        "regex": {
+            "maxPatternLength": 500,
+            "maxQuantifierNesting": 1
+        },
+        "patterns": {
+            "maxExpansionDepth": 20
+        }
+    },
+    "http": {
+        "retry": null,
+        "pagination": null,
+        "responseCache": null
+    },
+    "patterns": {
+        "project-ticket": "@jira-ticket(@project:PROJ)",
+        "project-tickets": "@one-or-more(@bracketed(@project-ticket))",
+        "project-title": "@optional(@project-tickets)@project-tag .+",
+        "changelog-line": "pomsky:\nlet ticket = '[' 'PROJ-' [d]+ ']';\nlet scope = '[' ![']']+ ']';\n^ 'CHANGELOG:' [s]* ticket ([s]* scope)? [s]+ ![n]+ '.'? $",
+        "project-tag": "@bracketed((?:android|ios))"
+    },
+    "timeouts": null,
+    "diagnostics": null,
+    "policies": [
+        {
+            "when": "title_matches(\"@any-ticket\") && has_tag(android)",
+            "name": "changelog-requirement",
+            "modules": null,
+            "enabled": null,
+            "severity": null,
+            "override": {
+                "commitBody": {
+                    "pattern": "@changelog-line",
+                    "requiredWhenSubjectMatches": "@any-ticket",
+                    "matchMode": "anyLine",
+                    "scope": "anyCommit",
+                    "suggestion": "Add a CHANGELOG line in some commit body. Per-line shape: 'CHANGELOG: [PROJ-123] Description' (or with platform tag: 'CHANGELOG: [PROJ-123] [Android] Описание'). The space after 'CHANGELOG:' and the trailing period are optional. Recommended: one CHANGELOG line per ticket on its own line. Description can be in Russian.",
+                    "explanation": "CHANGELOG lines for Android changes enable per-platform release notes generation."
+                }
+            },
+            "autoApprove": null,
+            "autoFix": null,
+            "scripts": null,
+            "dangerfile": null
+        },
+        {
+            "when": "is_draft",
+            "name": "ai-draft-gating",
+            "modules": [
+                "riskScoring",
+                "reviewComments",
+                "codeSuggestions",
+                "reviewThreadAnalysis",
+                "mrSummary"
+            ],
+            "enabled": false,
+            "severity": null,
+            "override": null,
+            "autoApprove": null,
+            "autoFix": null,
+            "scripts": null,
+            "dangerfile": null
+        }
+    ],
+    "profileOverrides": {
+        "title": {
+            "minLength": null,
+            "maxLength": null,
+            "maxSubjectLength": null
+        },
+        "size": {
+            "maxLines": null,
+            "maxCommits": null
+        }
+    },
+    "display": {
+        "git": {
+            "shortShaLength": 7
+        },
+        "watcher": {
+            "debounce": "500ms"
+        },
+        "console": {
+            "successMark": "✓",
+            "failureMark": "✗"
+        }
+    },
+    "ruleEnrichment": {
+        "risk-scoring": {
+            "enrich": [
+                "jira:tickets",
+                "local-git:file-frequency"
+            ]
+        },
+        "review-comments": {
+            "enrich": [
+                "jira:tickets",
+                "jira:acceptance-criteria",
+                "local-git:file-frequency"
+            ]
+        },
+        "mr-summary": {
+            "enrich": [
+                "jira:tickets"
+            ]
+        },
+        "description-quality": {
+            "enrich": [
+                "jira:acceptance-criteria"
+            ]
+        }
+    }
+}

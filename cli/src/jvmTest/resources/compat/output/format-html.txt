@@ -1,0 +1,19 @@
+exit=1
+<!DOCTYPE html>
+<html>
+<head><meta charset="UTF-8"></head>
+<body style="font-family: -apple-system, Segoe UI, Arial, sans-serif; color: #24292f; line-height: 1.5;">
+<div style="max-width: 760px; margin: 0 auto; padding: 16px;">
+<div style="padding: 12px 16px; border-radius: 6px; color: #fff; background: #cf222e;">
+<strong>Failed · 2 errors</strong>
+</div>
+<p>#1 feat: add runtime verification</p>
+<table style="width: 100%; border-collapse: collapse;">
+<tr><th></th><th style="text-align: left;">Rule</th><th style="text-align: left;">Finding</th><th style="text-align: left;">How to fix</th></tr>
+<tr style="border-top: 1px solid #d0d7de;"><td>❌</td><td><code>labels</code></td><td>Missing required label: &#39;needs-review&#39;</td><td>Add the required label via the MR sidebar.</td></tr>
+<tr style="border-top: 1px solid #d0d7de;"><td>❌</td><td><code>titleFormat</code></td><td>MR title does not match required pattern.</td><td>Change the title to match the format, e.g. `JIRA-0: feat: add runtime verification`.</td></tr>
+</table>
+<p style="color: #57606a; font-size: 0.9em;">karandash <version></p>
+</div>
+</body>
+</html>

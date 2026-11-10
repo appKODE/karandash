@@ -1,0 +1,11 @@
+passing: 0
+failing: 1
+warnings-only: 0
+warnings-only --strict: 5
+policy severity: warning: 0
+format rdjsonl (listed in --help): 1
+malformed config: 2
+missing config file: 2
+missing MR file: 2
+unknown format: 2
+dry-run: 0

@@ -1,0 +1,4 @@
+# Source: docs/rules/ai-rules.md "DiffMode: ADDED_ONLY".
+ai:
+  provider: "anthropic"
+  reviewMode: "added_only"

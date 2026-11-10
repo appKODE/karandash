@@ -1,0 +1,9 @@
+[versions]
+kotlin = "2.3.10"
+kotlinxCoroutines = "1.10.2"
+
+[libraries]
+kotlinx-coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "kotlinxCoroutines" }
+
+[plugins]
+kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }

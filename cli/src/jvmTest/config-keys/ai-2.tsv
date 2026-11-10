@@ -1,0 +1,166 @@
+# ai-2 keys: key	test file	test name
+ai.macroDefinitions	plugins/plugins-ai/rules/ai/src/commonTest/kotlin/io/karandash/plugins/ai/pipeline/AiConfigFeatureApplicatorTest.kt	macro severity override changes severity only for matching files
+ai.macroDefinitions.rules	plugins/plugins-ai/rules/ai/src/commonTest/kotlin/io/karandash/plugins/ai/pipeline/AiConfigFeatureApplicatorTest.kt	macro severity override changes severity only for matching files
+ai.macroReferences	plugins/plugins-ai/rules/ai/src/commonTest/kotlin/io/karandash/plugins/ai/pipeline/AiConfigFeatureApplicatorTest.kt	macro severity override changes severity only for matching files
+ai.macroReferences.useMacro	plugins/plugins-ai/rules/ai/src/commonTest/kotlin/io/karandash/plugins/ai/pipeline/AiConfigFeatureApplicatorTest.kt	macro severity override changes severity only for matching files
+ai.macroReferences.whenFilesMatch	plugins/plugins-ai/rules/ai/src/commonTest/kotlin/io/karandash/plugins/ai/pipeline/AiConfigFeatureApplicatorTest.kt	macro severity override changes severity only for matching files
+ai.maxTokenBudget	plugins/plugins-ai/rules/ai/src/commonTest/kotlin/io/karandash/plugins/ai/AiAnalyzerMaxTokensTest.kt	per-analyzer values over a set max-token-budget keep the ceiling and warn naming the analyzers cut
+ai.model	plugins/plugins-ai/rules/ai/src/commonTest/kotlin/io/karandash/plugins/ai/AiProviderKeyBehaviourTest.kt	ai model reaches the provider request of a rule without an override
+ai.modelFallback	plugins/plugins-ai/rules/ai/src/commonTest/kotlin/io/karandash/plugins/ai/Dead18OneImplementationTest.kt	one provider chain applies model fallback then cache
+ai.models	plugins/plugins-ai/rules/ai/src/commonTest/kotlin/io/karandash/plugins/ai/AiProviderKeyBehaviourTest.kt	ai models entry overrides the model for that rule only
+ai.notifications	plugins/plugins-ai/rules/ai/src/commonTest/kotlin/io/karandash/plugins/ai/pipeline/AiReportGeneratorSectionsTest.kt	notification routing groups findings per channel
+ai.notifications.match	plugins/plugins-ai/rules/ai/src/commonTest/kotlin/io/karandash/plugins/ai/pipeline/AiReportGeneratorSectionsTest.kt	notification routing groups findings per channel
+ai.notifications.match.rule	plugins/plugins-ai/rules/ai/src/commonTest/kotlin/io/karandash/plugins/ai/pipeline/AiReportGeneratorSectionsTest.kt	notification routing groups findings per channel
+ai.notifications.match.severities	plugins/plugins-ai/rules/ai/src/commonTest/kotlin/io/karandash/plugins/ai/pipeline/AiReportGeneratorSectionsTest.kt	notification routing groups findings per channel
+ai.notifications.targets	plugins/plugins-ai/rules/ai/src/commonTest/kotlin/io/karandash/plugins/ai/pipeline/AiReportGeneratorSectionsTest.kt	notification routing groups findings per channel
+ai.notifications.targets.channel	plugins/plugins-ai/rules/ai/src/commonTest/kotlin/io/karandash/plugins/ai/pipeline/AiReportGeneratorSectionsTest.kt	notification routing groups findings per channel
+ai.notifications.targets.target	plugins/plugins-ai/rules/ai/src/commonTest/kotlin/io/karandash/plugins/ai/pipeline/AiReportGeneratorSectionsTest.kt	notification routing groups findings per channel
+ai.notifications.targets.url	plugins/plugins-ai/rules/ai/src/commonTest/kotlin/io/karandash/plugins/ai/pipeline/AiReportGeneratorSectionsTest.kt	notification routing names each target url next to its channel
+ai.ollama	plugins/plugins-ai/providers/src/commonTest/kotlin/io/karandash/plugins/ai/providers/OllamaHostPolicyTest.kt	a host on ai ollama allowHosts is reached and other public hosts stay refused
+ai.ollama.allowHosts	plugins/plugins-ai/providers/src/commonTest/kotlin/io/karandash/plugins/ai/providers/OllamaHostPolicyTest.kt	a host on ai ollama allowHosts is reached and other public hosts stay refused
+ai.pgoEnabled	plugins/plugins-ai/rules/ai/src/commonTest/kotlin/io/karandash/plugins/ai/pipeline/AiPipelineKeyBehaviourTest.kt	pgoEnabled adds the pgo profile report only when set
+ai.pipeline	plugins/plugins-ai/rules/ai/src/commonTest/kotlin/io/karandash/plugins/ai/AiPipelineExtensionProcessRiskTest.kt	the ai block of the full config reaches the pipeline thresholds
+ai.pipeline.cloneDetection	plugins/plugins-ai/rules/ai/src/commonTest/kotlin/io/karandash/plugins/ai/pipeline/AiPipelineKeyBehaviourTest.kt	pipeline cloneDetection maxFindings caps the clone findings
+ai.pipeline.cloneDetection.maxFindings	plugins/plugins-ai/rules/ai/src/commonTest/kotlin/io/karandash/plugins/ai/pipeline/AiPipelineKeyBehaviourTest.kt	pipeline cloneDetection maxFindings caps the clone findings
+ai.pipeline.priorFindings	plugins/plugins-ai/rules/ai/src/commonTest/kotlin/io/karandash/plugins/ai/dispatch/AiPromptAssemblerPriorFindingsTest.kt	prior findings block omitted when feature disabled
+ai.pipeline.priorFindings.enabled	plugins/plugins-ai/rules/ai/src/commonTest/kotlin/io/karandash/plugins/ai/dispatch/AiPromptAssemblerPriorFindingsTest.kt	prior findings block omitted when feature disabled
+ai.pipeline.priorFindings.maxForMrLevel	plugins/plugins-ai/ai-core/src/commonTest/kotlin/io/karandash/plugins/ai/core/PriorFindingsPromptEnricherTest.kt	maxForMrLevel caps MR-level section independently
+ai.pipeline.priorFindings.maxPerFile	plugins/plugins-ai/ai-core/src/commonTest/kotlin/io/karandash/plugins/ai/core/PriorFindingsPromptEnricherTest.kt	maxPerFile caps list and appends omission notice
+ai.pipeline.reports	plugins/plugins-ai/rules/ai/src/commonTest/kotlin/io/karandash/plugins/ai/pipeline/AiPipelineKeyBehaviourTest.kt	pipeline reports minRecordsRequired and minRecordsForCrossPlatform gate the trend reports
+ai.pipeline.reports.minRecordsForCrossPlatform	plugins/plugins-ai/rules/ai/src/commonTest/kotlin/io/karandash/plugins/ai/pipeline/AiPipelineKeyBehaviourTest.kt	pipeline reports minRecordsRequired and minRecordsForCrossPlatform gate the trend reports
+ai.pipeline.reports.minRecordsRequired	plugins/plugins-ai/rules/ai/src/commonTest/kotlin/io/karandash/plugins/ai/pipeline/AiPipelineKeyBehaviourTest.kt	pipeline reports minRecordsRequired and minRecordsForCrossPlatform gate the trend reports
+ai.pipeline.temporalEscalation	plugins/plugins-ai/rules/ai/src/commonTest/kotlin/io/karandash/plugins/ai/AiPipelineExtensionKeyBehaviourTest.kt	ai pipeline temporalEscalation turns on escalation of repeat violations
+ai.pipeline.thresholds	plugins/plugins-ai/rules/ai/src/commonTest/kotlin/io/karandash/plugins/ai/AiPipelineExtensionProcessRiskTest.kt	the ai block of the full config reaches the pipeline thresholds
+ai.pipeline.thresholds.highEntropy	plugins/plugins-ai/rules/ai/src/commonTest/kotlin/io/karandash/plugins/ai/pipeline/AiPipelineKeyBehaviourTest.kt	pipeline thresholds highEntropy decides when shotgun surgery is reported
+ai.pipeline.thresholds.highRisk	plugins/plugins-ai/rules/ai/src/commonTest/kotlin/io/karandash/plugins/ai/AiPipelineExtensionProcessRiskTest.kt	the ai block of the full config reaches the pipeline thresholds
+ai.pipeline.thresholds.highSurpriseTokens	plugins/plugins-ai/rules/ai/src/commonTest/kotlin/io/karandash/plugins/ai/pipeline/AiPipelineKeyBehaviourTest.kt	pipeline thresholds highSurpriseTokens decides when unusual patterns are reported
+ai.pricing	plugins/plugins-ai/ai-core/src/commonTest/kotlin/io/karandash/plugins/ai/core/AiCostEstimatorTest.kt	ai pricing entries are USD per MTok and override the defaults
+ai.pricing.input	plugins/plugins-ai/ai-core/src/commonTest/kotlin/io/karandash/plugins/ai/core/AiCostEstimatorTest.kt	ai pricing entries are USD per MTok and override the defaults
+ai.pricing.output	plugins/plugins-ai/ai-core/src/commonTest/kotlin/io/karandash/plugins/ai/core/AiCostEstimatorTest.kt	ai pricing entries are USD per MTok and override the defaults
+ai.priorities	plugins/plugins-ai/rules/ai/src/commonTest/kotlin/io/karandash/plugins/ai/dispatch/ChunkBudgetPlanTest.kt	a configured priority outranks the default order
+ai.processRisk	plugins/plugins-ai/rules/ai/src/commonTest/kotlin/io/karandash/plugins/ai/AiPipelineExtensionProcessRiskTest.kt	ai processRisk adds an INFO finding with the factor breakdown
+ai.processRisk.enabled	plugins/plugins-ai/rules/ai/src/commonTest/kotlin/io/karandash/plugins/ai/AiPipelineExtensionKeyBehaviourTest.kt	ai processRisk enabled false switches the assessment off
+ai.processRisk.factors	plugins/plugins-ai/rules/ai/src/commonTest/kotlin/io/karandash/plugins/ai/AiPipelineExtensionProcessRiskTest.kt	ai processRisk adds an INFO finding with the factor breakdown
+ai.processRisk.factors.authorFamiliarity	plugins/plugins-ai/ai-core/src/commonTest/kotlin/io/karandash/plugins/ai/core/TriageRiskTest.kt	processRisk authorFamiliarity true counts the factor and false drops it
+ai.processRisk.factors.changeChurn	plugins/plugins-ai/rules/ai/src/commonTest/kotlin/io/karandash/plugins/ai/AiPipelineExtensionKeyBehaviourTest.kt	ai processRisk factors changeChurn changeDensity and fileDiversity each drop out of the breakdown
+ai.processRisk.factors.changeDensity	plugins/plugins-ai/rules/ai/src/commonTest/kotlin/io/karandash/plugins/ai/AiPipelineExtensionKeyBehaviourTest.kt	ai processRisk factors changeChurn changeDensity and fileDiversity each drop out of the breakdown
+ai.processRisk.factors.fileDiversity	plugins/plugins-ai/rules/ai/src/commonTest/kotlin/io/karandash/plugins/ai/AiPipelineExtensionKeyBehaviourTest.kt	ai processRisk factors changeChurn changeDensity and fileDiversity each drop out of the breakdown
+ai.reasoningEffort	plugins/plugins-ai/providers/src/commonTest/kotlin/io/karandash/plugins/ai/providers/RunAiProviderSourceTest.kt	ai reasoningEffort is sent as the reasoning object only when set
+ai.promptCacheTtl	plugins/plugins-ai/providers/src/commonTest/kotlin/io/karandash/plugins/ai/providers/RunAiProviderSourceTest.kt	ai promptCacheTtl 1h reaches the anthropic cache breakpoint
+ai.promptOverrides	plugins/plugins-ai/rules/ai/src/commonTest/kotlin/io/karandash/plugins/ai/AiPromptKeysTest.kt	promptOverrides reaches the provider request
+ai.prompts	plugins/plugins-ai/rules/ai/src/commonTest/kotlin/io/karandash/plugins/ai/AiPromptKeysTest.kt	prompts reaches the provider request
+ai.provider	plugins/plugins-ai/rules/ai/src/commonTest/kotlin/io/karandash/plugins/ai/AiProviderKeyBehaviourTest.kt	ai provider selects the provider that receives the request
+ai.providers	plugins/plugins-ai/rules/ai/src/commonTest/kotlin/io/karandash/plugins/ai/AiProviderKeyBehaviourTest.kt	ai providers with ruleProviders sends that rule to the named provider
+ai.reasoning	plugins/plugins-ai/rules/ai/src/commonTest/kotlin/io/karandash/plugins/ai/dispatch/AiRuleDispatcherReasoningTest.kt	global reasoning applies when no per-analyzer override is set
+ai.reasonings	plugins/plugins-ai/rules/ai/src/commonTest/kotlin/io/karandash/plugins/ai/dispatch/AiRuleDispatcherReasoningTest.kt	per-analyzer reasoning overrides the global reasoning for that rule only
+ai.research	plugins/plugins-ai/ai-core/src/commonTest/kotlin/io/karandash/plugins/ai/core/metrics/CalibrationEngineTest.kt	configured evt confidence and min samples drive the engine
+ai.research.betweenness	plugins/plugins-ai/ai-core/src/commonTest/kotlin/io/karandash/plugins/ai/core/AiResearchRoutingKeyBehaviourTest.kt	research betweenness bottleneckThreshold decides which nodes are bottlenecks
+ai.research.betweenness.bottleneckThreshold	plugins/plugins-ai/ai-core/src/commonTest/kotlin/io/karandash/plugins/ai/core/AiResearchRoutingKeyBehaviourTest.kt	research betweenness bottleneckThreshold decides which nodes are bottlenecks
+ai.research.cognitiveComplexity	plugins/plugins-ai/rules/ai/src/commonTest/kotlin/io/karandash/plugins/ai/AiPipelineExtensionKeyBehaviourTest.kt	ai research cognitiveComplexity nestingWeight and controlFlowWeight change the reported delta
+ai.research.cognitiveComplexity.booleanOpWeight	plugins/plugins-ai/rules/ai/src/commonTest/kotlin/io/karandash/plugins/ai/pipeline/AiReportGeneratorResearchConfigTest.kt	configured cognitive complexity weights drive the complexity-delta report
+ai.research.cognitiveComplexity.controlFlowWeight	plugins/plugins-ai/rules/ai/src/commonTest/kotlin/io/karandash/plugins/ai/AiPipelineExtensionKeyBehaviourTest.kt	ai research cognitiveComplexity nestingWeight and controlFlowWeight change the reported delta
+ai.research.cognitiveComplexity.nestingWeight	plugins/plugins-ai/rules/ai/src/commonTest/kotlin/io/karandash/plugins/ai/AiPipelineExtensionKeyBehaviourTest.kt	ai research cognitiveComplexity nestingWeight and controlFlowWeight change the reported delta
+ai.research.evtAutoThreshold	plugins/plugins-ai/ai-core/src/commonTest/kotlin/io/karandash/plugins/ai/core/metrics/CalibrationEngineTest.kt	configured evt confidence and min samples drive the engine
+ai.research.evtAutoThreshold.confidence	plugins/plugins-ai/ai-core/src/commonTest/kotlin/io/karandash/plugins/ai/core/metrics/CalibrationEngineTest.kt	configured evt confidence and min samples drive the engine
+ai.research.evtAutoThreshold.minSamples	plugins/plugins-ai/ai-core/src/commonTest/kotlin/io/karandash/plugins/ai/core/metrics/CalibrationEngineTest.kt	configured evt confidence and min samples drive the engine
+ai.research.evtAutoThreshold.tailFraction	plugins/plugins-ai/ai-core/src/commonTest/kotlin/io/karandash/plugins/ai/core/AiResearchRoutingKeyBehaviourTest.kt	research evtAutoThreshold tailFraction moves the estimated return level
+ai.review	plugins/plugins-ai/rules/ai/src/commonTest/kotlin/io/karandash/plugins/ai/dispatch/AiReviewInstructionsTiersTest.kt	an instruction matches a changed file its paths include
+ai.review.bugChecklist	plugins/plugins-ai/analyzers/review-comments/src/commonTest/kotlin/io/karandash/plugins/ai/analyzers/reviewcomments/ReviewCommentsAnalyzeConfigTest.kt	bug checklist with the kotlin line is in the default prompt and review bugChecklist false drops it
+ai.review.duoInstructionsFile	plugins/plugins-ai/rules/ai/src/commonTest/kotlin/io/karandash/plugins/ai/AiDuoBaseInstructionsTest.kt	the duo file is off by default and asked for from the base only when enabled
+ai.review.instructions	plugins/plugins-ai/rules/ai/src/commonTest/kotlin/io/karandash/plugins/ai/dispatch/AiReviewInstructionsTiersTest.kt	an instruction matches a changed file its paths include
+ai.review.instructions.name	plugins/plugins-ai/ai-core/src/commonTest/kotlin/io/karandash/plugins/ai/core/AiResearchRoutingKeyBehaviourTest.kt	review instructions name and text are what the prompt block shows
+ai.review.instructions.paths	plugins/plugins-ai/rules/ai/src/commonTest/kotlin/io/karandash/plugins/ai/dispatch/AiReviewInstructionsTiersTest.kt	an instruction matches a changed file its paths include
+ai.review.instructions.text	plugins/plugins-ai/rules/ai/src/commonTest/kotlin/io/karandash/plugins/ai/dispatch/AiReviewInstructionsTiersTest.kt	matched instructions are sent whole and unmatched ones never whatever the prompt cap
+ai.reviewMode	plugins/plugins-ai/ai-core/src/commonTest/kotlin/io/karandash/plugins/ai/core/DiffContextBuilderPriorityTest.kt	reviewMode added_only strips removed lines on both truncation paths
+ai.routing	plugins/plugins-ai/rules/ai/src/commonTest/kotlin/io/karandash/plugins/ai/AiProviderKeyBehaviourTest.kt	ai routing enabled picks the strongest tier model when the risk is unknown
+ai.routing.enabled	plugins/plugins-ai/rules/ai/src/commonTest/kotlin/io/karandash/plugins/ai/AiProviderKeyBehaviourTest.kt	ai routing enabled picks the strongest tier model when the risk is unknown
+ai.routing.riskThreshold	plugins/plugins-ai/ai-core/src/commonTest/kotlin/io/karandash/plugins/ai/core/AiResearchRoutingKeyBehaviourTest.kt	routing riskThreshold sets the risk at which a rule escalates to the strongest tier
+ai.routing.rules	plugins/plugins-ai/ai-core/src/commonTest/kotlin/io/karandash/plugins/ai/core/router/ModelRouterTest.kt	high risk uses the tier a routing rule names
+ai.routing.rules.match	plugins/plugins-ai/ai-core/src/commonTest/kotlin/io/karandash/plugins/ai/core/router/ModelRouterTest.kt	high risk uses the tier a routing rule names
+ai.routing.rules.tier	plugins/plugins-ai/ai-core/src/commonTest/kotlin/io/karandash/plugins/ai/core/router/ModelRouterTest.kt	high risk uses the tier a routing rule names
+ai.routing.strategy	plugins/plugins-ai/ai-core/src/commonTest/kotlin/io/karandash/plugins/ai/core/router/ModelRouterTest.kt	quality-first ignores the risk
+ai.routing.tiers	plugins/plugins-ai/rules/ai/src/commonTest/kotlin/io/karandash/plugins/ai/AiProviderKeyBehaviourTest.kt	ai routing enabled picks the strongest tier model when the risk is unknown
+ai.routing.tiers.models	plugins/plugins-ai/rules/ai/src/commonTest/kotlin/io/karandash/plugins/ai/AiProviderKeyBehaviourTest.kt	ai routing enabled picks the strongest tier model when the risk is unknown
+ai.routing.tiers.name	plugins/plugins-ai/ai-core/src/commonTest/kotlin/io/karandash/plugins/ai/core/router/ModelRouterTest.kt	a routing rule finds its tier by name wherever the tier sits and an unknown name picks no model
+ai.ruleProviders	plugins/plugins-ai/rules/ai/src/commonTest/kotlin/io/karandash/plugins/ai/AiProviderKeyBehaviourTest.kt	ai providers with ruleProviders sends that rule to the named provider
+ai.rules	plugins/plugins-ai/rules/ai/src/commonTest/kotlin/io/karandash/plugins/ai/AiProviderKeyBehaviourTest.kt	ai rules fallback strategy skips the rule when a covered rule found enough
+ai.rules.covers	plugins/plugins-ai/rules/ai/src/commonTest/kotlin/io/karandash/plugins/ai/AiProviderKeyBehaviourTest.kt	ai rules fallback strategy skips the rule when a covered rule found enough
+ai.rules.minSeverity	plugins/plugins-ai/rules/ai/src/commonTest/kotlin/io/karandash/plugins/ai/AiProviderKeyBehaviourTest.kt	ai rules fallback strategy skips the rule when a covered rule found enough
+ai.rules.strategy	plugins/plugins-ai/rules/ai/src/commonTest/kotlin/io/karandash/plugins/ai/AiProviderKeyBehaviourTest.kt	ai rules fallback strategy skips the rule when a covered rule found enough
+ai.sandbox	cli-ai/src/commonTest/kotlin/io/karandash/cli/commands/HistoryFlagsTest.kt	test-rule takes replay count and metrics from ai sandbox
+ai.sandbox.historyWindow	cli-ai/src/commonTest/kotlin/io/karandash/cli/commands/HistoryFlagsTest.kt	test-rule takes replay count and metrics from ai sandbox
+ai.sandbox.reportMetrics	cli-ai/src/commonTest/kotlin/io/karandash/cli/commands/HistoryFlagsTest.kt	test-rule takes replay count and metrics from ai sandbox
+ai.scopes	plugins/plugins-ai/ai-core/src/commonTest/kotlin/io/karandash/plugins/ai/core/ScopeMatcherTest.kt	matches single scope from android files
+ai.scopes.bestPractices	plugins/plugins-ai/ai-core/src/commonTest/kotlin/io/karandash/plugins/ai/core/ScopeMatcherTest.kt	buildScopeInstructions with only bestPractices
+ai.scopes.instructions	plugins/plugins-ai/ai-core/src/commonTest/kotlin/io/karandash/plugins/ai/core/ScopeMatcherTest.kt	buildScopeInstructions combines instructions with headers
+ai.scopes.name	plugins/plugins-ai/ai-core/src/commonTest/kotlin/io/karandash/plugins/ai/core/ScopeMatcherTest.kt	matches single scope from android files
+ai.scopes.paths	plugins/plugins-ai/ai-core/src/commonTest/kotlin/io/karandash/plugins/ai/core/ScopeMatcherTest.kt	matches single scope from android files
+ai.seniorityTiers	plugins/plugins-ai/ai-core/src/commonTest/kotlin/io/karandash/plugins/ai/core/config/AuthorSeniorityResolverTest.kt	severityAdjustment replaces the level rule
+ai.seniorityTiers.adjustments	plugins/plugins-ai/rules/ai/src/commonTest/kotlin/io/karandash/plugins/ai/pipeline/AiConfigFeatureApplicatorTest.kt	seniority tier adjustments set the severity of the named rule only
+ai.seniorityTiers.level	plugins/plugins-ai/ai-core/src/commonTest/kotlin/io/karandash/plugins/ai/core/config/AuthorSeniorityResolverTest.kt	level junior downgrades an error that level senior keeps
+ai.seniorityTiers.matchAuthors	plugins/plugins-ai/ai-core/src/commonTest/kotlin/io/karandash/plugins/ai/core/config/AuthorSeniorityResolverTest.kt	matchAuthors matches a normalized username
+ai.seniorityTiers.matchTeams	plugins/plugins-ai/ai-core/src/commonTest/kotlin/io/karandash/plugins/ai/core/config/AuthorSeniorityResolverTest.kt	junior tier matched by label
+ai.seniorityTiers.severityAdjustment	plugins/plugins-ai/ai-core/src/commonTest/kotlin/io/karandash/plugins/ai/core/config/AuthorSeniorityResolverTest.kt	severityAdjustment replaces the level rule
+ai.severityOverrides	plugins/plugins-ai/ai-core/src/commonTest/kotlin/io/karandash/plugins/ai/core/config/SeverityReclassifierTest.kt	reclassify ERROR to WARNING
+ai.severityOverrides.minimumSeverity	plugins/plugins-ai/ai-core/src/commonTest/kotlin/io/karandash/plugins/ai/core/config/SeverityReclassifierTest.kt	wildcard minimumSeverity drops findings below it from every rule
+ai.severityOverrides.reason	plugins/plugins-ai/ai-core/src/commonTest/kotlin/io/karandash/plugins/ai/core/config/SeverityReclassifierTest.kt	audit metadata added when severity reclassified
+ai.severityOverrides.reclassify	plugins/plugins-ai/ai-core/src/commonTest/kotlin/io/karandash/plugins/ai/core/config/SeverityReclassifierTest.kt	reclassify ERROR to WARNING
+ai.severityOverrides.rule	plugins/plugins-ai/ai-core/src/commonTest/kotlin/io/karandash/plugins/ai/core/config/SeverityReclassifierTest.kt	reclassify ERROR to WARNING
+ai.severityOverrides.suppress	plugins/plugins-ai/ai-core/src/commonTest/kotlin/io/karandash/plugins/ai/core/config/SeverityReclassifierTest.kt	suppress removes finding from results
+ai.sharedSystemPrompt	plugins/plugins-ai/rules/ai/src/commonTest/kotlin/io/karandash/plugins/ai/dispatch/SharedContextPrefixTest.kt	sharedSystemPrompt makes the system prompt and shared blocks one prefix and moves instructions after them
+ai.severityOverrides.whenMessageContains	plugins/plugins-ai/ai-core/src/commonTest/kotlin/io/karandash/plugins/ai/core/config/SeverityReclassifierTest.kt	whenMessageContains filter only matches on message substring
+ai.statistics	plugins/plugins-ai/rules/ai/src/commonTest/kotlin/io/karandash/plugins/ai/AiStatisticsMaxHistoryTest.kt	ai statistics maxHistory bounds the recorded runs
+ai.statistics.dir	plugins/plugins-ai/ai-core/src/commonTest/kotlin/io/karandash/plugins/ai/statistics/StatisticsStoreTest.kt	resolveDir honours ai statistics dir and defaults to the documented dir
+ai.statistics.maxHistory	plugins/plugins-ai/rules/ai/src/commonTest/kotlin/io/karandash/plugins/ai/AiStatisticsMaxHistoryTest.kt	ai statistics maxHistory bounds the recorded runs
+ai.stream	plugins/integration-tests/providers/src/commonTest/kotlin/io/karandash/providers/ProviderContractTest.kt	ai stream true reaches the run handle
+ai.streamDeadline	plugins/plugins-ai/providers/src/commonTest/kotlin/io/karandash/plugins/ai/providers/RunAiProviderSourceTest.kt	ai streamDeadline bounds a streamed call that never finishes and the call is retried
+ai.streamStall	plugins/plugins-ai/providers/src/commonTest/kotlin/io/karandash/plugins/ai/providers/RunAiProviderSourceTest.kt	ai streamStall turns a silent stream into a retried call that names the key
+ai.strictness	plugins/plugins-ai/rules/ai/src/commonTest/kotlin/io/karandash/plugins/ai/dispatch/AiRuleDispatcherReasoningTest.kt	strictness low uses DirectStrategy over the global reasoning
+ai.structuredOutput	plugins/plugins-ai/providers/src/commonTest/kotlin/io/karandash/plugins/ai/providers/RunAiProviderSourceTest.kt	ai structuredOutput true reaches the run handle of an openai-compatible host
+ai.structuredOutputs	plugins/plugins-ai/rules/ai/src/commonTest/kotlin/io/karandash/plugins/ai/dispatch/StructuredOutputGateUnitTest.kt	per analyzer structuredOutput parses from the ai block
+ai.stub	plugins/integration-tests/providers/src/commonTest/kotlin/io/karandash/providers/ProviderContractTest.kt	ai provider stub answers from replyFile with usage 0
+ai.stub.replyFile	plugins/integration-tests/providers/src/commonTest/kotlin/io/karandash/providers/ProviderContractTest.kt	ai provider stub answers from replyFile with usage 0
+ai.systemPrompts	plugins/plugins-ai/rules/ai/src/commonTest/kotlin/io/karandash/plugins/ai/AiPromptKeysTest.kt	systemPrompts inline reaches the provider request
+ai.teams	plugins/plugins-ai/rules/ai/src/commonTest/kotlin/io/karandash/plugins/ai/pipeline/AiConfigFeatureApplicatorTest.kt	team rule override changes severity or drops by ownership
+ai.teams.name	plugins/plugins-ai/rules/ai/src/commonTest/kotlin/io/karandash/plugins/ai/pipeline/AiConfigFeatureApplicatorTest.kt	team rule override changes severity or drops by ownership
+ai.teams.owns	plugins/plugins-ai/rules/ai/src/commonTest/kotlin/io/karandash/plugins/ai/pipeline/AiConfigFeatureApplicatorTest.kt	team rule override changes severity or drops by ownership
+ai.teams.ruleOverrides	plugins/plugins-ai/rules/ai/src/commonTest/kotlin/io/karandash/plugins/ai/pipeline/AiConfigFeatureApplicatorTest.kt	team rule override changes severity or drops by ownership
+ai.temperatures	plugins/plugins-ai/rules/ai/src/commonTest/kotlin/io/karandash/plugins/ai/AiRuleTemperatureTest.kt	ai temperatures entry overrides the analyzer temperature for that rule
+ai.temporal	plugins/plugins-ai/rules/ai/src/commonTest/kotlin/io/karandash/plugins/ai/AiPipelineExtensionKeyBehaviourTest.kt	ai temporal enabled turns on escalation of repeat violations
+ai.temporal.enabled	plugins/plugins-ai/rules/ai/src/commonTest/kotlin/io/karandash/plugins/ai/AiPipelineExtensionKeyBehaviourTest.kt	ai temporal enabled turns on escalation of repeat violations
+ai.temporal.escalationFactor	plugins/plugins-ai/ai-core/src/commonTest/kotlin/io/karandash/plugins/ai/core/TemporalRuleTrackerTest.kt	escalationFactor divides the repeat and habitual thresholds
+ai.temporal.trackViolations	plugins/plugins-ai/rules/ai/src/commonTest/kotlin/io/karandash/plugins/ai/pipeline/CrossRunAiStateTest.kt	trackViolations false escalates without recording this run
+ai.temporal.violationMemory	plugins/plugins-ai/ai-core/src/commonTest/kotlin/io/karandash/plugins/ai/core/TemporalRuleTrackerTest.kt	violationMemory ignores violations older than the window
+ai.testGap	plugins/plugins-ai/rules/ai/src/commonTest/kotlin/io/karandash/plugins/ai/LargeMrSummaryTest.kt	at mr level a test changed in any unit means no test gap
+ai.testGap.level	plugins/plugins-ai/rules/ai/src/commonTest/kotlin/io/karandash/plugins/ai/LargeMrSummaryTest.kt	at mr level a test changed in any unit means no test gap
+ai.threadCommands	plugins/plugins-ai/rules/ai/src/commonTest/kotlin/io/karandash/plugins/ai/ThreadAnswerStageTest.kt	ask is disabled unless the key is set
+ai.threadCommands.ask	plugins/plugins-ai/rules/ai/src/commonTest/kotlin/io/karandash/plugins/ai/ThreadAnswerStageTest.kt	ask with the key set calls the model in the response language
+ai.tracks	plugins/plugins-ai/rules/ai/src/commonTest/kotlin/io/karandash/plugins/ai/pipeline/AiConfigFeatureApplicatorTest.kt	track minApprovals reports a missing approval
+ai.tracks.aiEnabled	plugins/plugins-ai/rules/ai/src/commonTest/kotlin/io/karandash/plugins/ai/AiPipelineExtensionKeyBehaviourTest.kt	ai tracks aiEnabled false skips the AI rule on the matching branch
+ai.tracks.disableRules	plugins/plugins-ai/rules/ai/src/commonTest/kotlin/io/karandash/plugins/ai/dispatch/CanaryTrackerTest.kt	environment track disableRules skips the AI rule
+ai.tracks.enableRules	plugins/plugins-ai/ai-core/src/commonTest/kotlin/io/karandash/plugins/ai/core/config/EnvironmentTrackResolverTest.kt	filterRules with enableRules keeps only matching rules
+ai.tracks.minApprovals	plugins/plugins-ai/rules/ai/src/commonTest/kotlin/io/karandash/plugins/ai/pipeline/AiConfigFeatureApplicatorTest.kt	track minApprovals reports a missing approval
+ai.tracks.name	plugins/plugins-ai/rules/ai/src/commonTest/kotlin/io/karandash/plugins/ai/pipeline/AiConfigFeatureApplicatorTest.kt	track minApprovals reports a missing approval
+ai.tracks.ruleOverrides	plugins/plugins-ai/rules/ai/src/commonTest/kotlin/io/karandash/plugins/ai/pipeline/AiConfigFeatureApplicatorTest.kt	environmentTracks rules apply on the matching target branch only
+ai.tracks.targetBranchPattern	plugins/plugins-ai/rules/ai/src/commonTest/kotlin/io/karandash/plugins/ai/pipeline/AiConfigFeatureApplicatorTest.kt	track minApprovals reports a missing approval
+ai.violationBudget	plugins/plugins-ai/ai-core/src/commonTest/kotlin/io/karandash/plugins/ai/core/config/ViolationBaselineTest.kt	incrementPerMonth raises the allowance per month since baselineDate
+ai.violationBudget.baselineDate	plugins/plugins-ai/ai-core/src/commonTest/kotlin/io/karandash/plugins/ai/core/config/ViolationBaselineTest.kt	incrementPerMonth raises the allowance per month since baselineDate
+ai.violationBudget.baselineFile	plugins/plugins-ai/rules/ai/src/commonTest/kotlin/io/karandash/plugins/ai/AiPipelineExtensionKeyBehaviourTest.kt	ai violationBudget enabled and baselineFile decide whether baselined files are downgraded
+ai.violationBudget.enabled	plugins/plugins-ai/rules/ai/src/commonTest/kotlin/io/karandash/plugins/ai/AiPipelineExtensionKeyBehaviourTest.kt	ai violationBudget enabled and baselineFile decide whether baselined files are downgraded
+ai.violationBudget.incrementPerMonth	plugins/plugins-ai/ai-core/src/commonTest/kotlin/io/karandash/plugins/ai/core/config/ViolationBaselineTest.kt	incrementPerMonth raises the allowance per month since baselineDate
+ai.violationBudgets	plugins/plugins-ai/ai-core/src/commonTest/kotlin/io/karandash/plugins/ai/core/config/ViolationBudgetEvaluatorTest.kt	A29 over budget the findings are kept at their severity
+ai.violationBudgets.baseline	plugins/plugins-ai/ai-core/src/commonTest/kotlin/io/karandash/plugins/ai/core/config/ViolationBudgetEvaluatorTest.kt	A29 over budget the findings are kept at their severity
+ai.violationBudgets.baselineDate	plugins/plugins-ai/ai-core/src/commonTest/kotlin/io/karandash/plugins/ai/core/config/ViolationBudgetEvaluatorTest.kt	decay reduces allowance over time
+ai.violationBudgets.decayPeriodMonths	plugins/plugins-ai/ai-core/src/commonTest/kotlin/io/karandash/plugins/ai/core/config/ViolationBudgetEvaluatorTest.kt	decayPeriodMonths sets how many months make one decay period
+ai.violationBudgets.decayRatePercent	plugins/plugins-ai/ai-core/src/commonTest/kotlin/io/karandash/plugins/ai/core/config/ViolationBudgetEvaluatorTest.kt	decayRatePercent sets how much allowance each period removes
+ai.violationBudgets.minimum	plugins/plugins-ai/ai-core/src/commonTest/kotlin/io/karandash/plugins/ai/core/config/ViolationBudgetEvaluatorTest.kt	minimum floor is respected
+ai.violationBudgets.rule	plugins/plugins-ai/ai-core/src/commonTest/kotlin/io/karandash/plugins/ai/core/config/ViolationBudgetEvaluatorTest.kt	A29 over budget the findings are kept at their severity
+ai.ranking	plugins/plugins-ai/ai-core/src/commonTest/kotlin/io/karandash/plugins/ai/core/pipeline/FindingCapTest.kt	ranking weights decide which finding the cap keeps
+ai.ranking.protect	plugins/plugins-ai/ai-core/src/commonTest/kotlin/io/karandash/plugins/ai/core/pipeline/FindingCapTest.kt	a confirmed BUG is protected past the cap
+ai.ranking.weights	plugins/plugins-ai/ai-core/src/commonTest/kotlin/io/karandash/plugins/ai/core/pipeline/FindingCapTest.kt	ranking weights decide which finding the cap keeps
+ai.ranking.weights.agreed	plugins/plugins-ai/ai-core/src/commonTest/kotlin/io/karandash/plugins/ai/core/pipeline/FindingCapTest.kt	ranking weights decide which finding the cap keeps
+ai.ranking.weights.grounded	plugins/plugins-ai/ai-core/src/commonTest/kotlin/io/karandash/plugins/ai/core/pipeline/FindingCapTest.kt	ranking weights decide which finding the cap keeps
+ai.ranking.weights.security	plugins/plugins-ai/ai-core/src/commonTest/kotlin/io/karandash/plugins/ai/core/pipeline/FindingCapTest.kt	ranking weights decide which finding the cap keeps
+ai.reviewSampling	plugins/plugins-ai/rules/ai/src/commonTest/kotlin/io/karandash/plugins/ai/dispatch/SampleAgreementTest.kt	the dispatcher asks twice at the sample temperature and dumps agreement json
+ai.reviewSampling.sampleTemperature	plugins/plugins-ai/rules/ai/src/commonTest/kotlin/io/karandash/plugins/ai/dispatch/SampleAgreementTest.kt	the dispatcher asks twice at the sample temperature and dumps agreement json
+ai.reviewSampling.samples	plugins/plugins-ai/rules/ai/src/commonTest/kotlin/io/karandash/plugins/ai/dispatch/SampleAgreementTest.kt	the dispatcher asks once with samples 1 and keeps findings unmarked

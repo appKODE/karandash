@@ -1,0 +1,244 @@
+# key	test file	test name (ai keys a..l, AiPluginConfig)
+ai.adrs	plugins/plugins-ai/ai-core/src/commonTest/kotlin/io/karandash/plugins/ai/core/architecture/AdrKeyBehaviourTest.kt	adrs affectedPaths limits the check to matching files
+ai.adrs.affectedPaths	plugins/plugins-ai/ai-core/src/commonTest/kotlin/io/karandash/plugins/ai/core/architecture/AdrKeyBehaviourTest.kt	adrs affectedPaths limits the check to matching files
+ai.adrs.allowedPatterns	plugins/plugins-ai/ai-core/src/commonTest/kotlin/io/karandash/plugins/ai/core/architecture/AdrKeyBehaviourTest.kt	adrs allowedPatterns exempts a forbidden match on the same line
+ai.adrs.forbiddenPatterns	plugins/plugins-ai/ai-core/src/commonTest/kotlin/io/karandash/plugins/ai/core/architecture/AdrKeyBehaviourTest.kt	adrs forbiddenPatterns reports a diff that contains the pattern
+ai.adrs.id	plugins/plugins-ai/ai-core/src/commonTest/kotlin/io/karandash/plugins/ai/core/architecture/AdrKeyBehaviourTest.kt	adrs id names the finding rule
+ai.adrs.name	plugins/plugins-ai/ai-core/src/commonTest/kotlin/io/karandash/plugins/ai/core/architecture/AdrKeyBehaviourTest.kt	adrs name is quoted in the finding message
+ai.adrs.rationale	plugins/plugins-ai/ai-core/src/commonTest/kotlin/io/karandash/plugins/ai/core/architecture/AdrKeyBehaviourTest.kt	adrs rationale becomes the finding explanation
+ai.adrs.requiredPatterns	plugins/plugins-ai/ai-core/src/commonTest/kotlin/io/karandash/plugins/ai/core/architecture/AdrKeyBehaviourTest.kt	adrs requiredPatterns reports a missing pattern in the affected files
+ai.adrs.severity	plugins/plugins-ai/ai-core/src/commonTest/kotlin/io/karandash/plugins/ai/core/architecture/AdrKeyBehaviourTest.kt	adrs severity sets the finding severity
+ai.analyzer	plugins/plugins-ai/ai-core/src/commonTest/kotlin/io/karandash/plugins/ai/core/AiDeadKeysTest.kt	analyzer tokens floor and ceiling bound the auto-scaled response
+ai.analyzer.tokens	plugins/plugins-ai/ai-core/src/commonTest/kotlin/io/karandash/plugins/ai/core/AiDeadKeysTest.kt	analyzer tokens floor and ceiling bound the auto-scaled response
+ai.analyzer.tokens.charsPerTokenEstimate	plugins/plugins-ai/ai-core/src/commonTest/kotlin/io/karandash/plugins/ai/core/rules/AiAnalyzerTokensKeyBehaviourTest.kt	analyzer tokens charsPerTokenEstimate scales the response budget with the prompt estimate
+ai.analyzer.tokens.maxAutoResponse	plugins/plugins-ai/ai-core/src/commonTest/kotlin/io/karandash/plugins/ai/core/AiDeadKeysTest.kt	analyzer tokens floor and ceiling bound the auto-scaled response
+ai.analyzer.tokens.maxSystemPromptChars	plugins/plugins-ai/rules/ai/src/commonTest/kotlin/io/karandash/plugins/ai/RuleCallOverrideWiringTest.kt	the wrapped service receives the overridden model tokens and system prompt cap
+ai.analyzer.tokens.minResponse	plugins/plugins-ai/ai-core/src/commonTest/kotlin/io/karandash/plugins/ai/core/AiDeadKeysTest.kt	analyzer tokens floor and ceiling bound the auto-scaled response
+ai.analyzerConsensus	plugins/plugins-ai/rules/ai/src/commonTest/kotlin/io/karandash/plugins/ai/dispatch/AiRuleDispatcherConsensusTest.kt	consensusStrategy intersection keeps only the findings every consensus model reports
+ai.analyzerMaxTokens	plugins/plugins-ai/rules/ai/src/commonTest/kotlin/io/karandash/plugins/ai/AiAnalyzerMaxTokensTest.kt	an explicit max-tokens wins and the other analyzers get their estimate
+ai.apiKey	plugins/plugins-ai/providers/src/commonTest/kotlin/io/karandash/plugins/ai/providers/RunAiProviderSourceTest.kt	main provider gets ai apiKey and baseUrl and identical requests hit the network once
+ai.bestPractices	plugins/plugins-ai/rules/ai/src/commonTest/kotlin/io/karandash/plugins/ai/dispatch/AiPromptAssemblerKeyBehaviourTest.kt	ai bestPractices is sent under a best practices heading
+ai.budget	plugins/plugins-ai/rules/ai/src/commonTest/kotlin/io/karandash/plugins/ai/AiBudgetSkipDisclosureTest.kt	a rule whose T0 prompt is over the input token cap is skipped naming the item
+ai.budget.maxInputTokens	plugins/plugins-ai/rules/ai/src/commonTest/kotlin/io/karandash/plugins/ai/AiBudgetSkipDisclosureTest.kt	a rule whose T0 prompt is over the input token cap is skipped naming the item
+ai.budget.reserveOutputTokens	plugins/plugins-ai/rules/ai/src/commonTest/kotlin/io/karandash/plugins/ai/AiBudgetSkipDisclosureTest.kt	the output reserve comes off the input cap before T0 is planned
+ai.budget.weights	plugins/plugins-ai/rules/ai/src/commonTest/kotlin/io/karandash/plugins/ai/dispatch/AiPromptAssemblerTiersTest.kt	ai budget weights override a context block priority by its enricher id
+ai.calibration	plugins/plugins-ai/ai-core/src/commonTest/kotlin/io/karandash/plugins/ai/core/metrics/CalibrationEngineTest.kt	report applies the per-rule target and the history window
+ai.calibration.enabled	plugins/plugins-ai/rules/ai/src/commonTest/kotlin/io/karandash/plugins/ai/AiCalibrationKeyBehaviourTest.kt	ai calibration enabled logs the rule calibration report
+ai.calibration.historyWindow	plugins/plugins-ai/ai-core/src/commonTest/kotlin/io/karandash/plugins/ai/core/metrics/CalibrationEngineTest.kt	report applies the per-rule target and the history window
+ai.calibration.rules	plugins/plugins-ai/ai-core/src/commonTest/kotlin/io/karandash/plugins/ai/core/metrics/CalibrationEngineTest.kt	report applies the per-rule target and the history window
+ai.calibration.rules.ruleId	plugins/plugins-ai/ai-core/src/commonTest/kotlin/io/karandash/plugins/ai/core/metrics/CalibrationEngineTest.kt	report applies the per-rule target and the history window
+ai.calibration.rules.targetFalsePositiveRate	plugins/plugins-ai/ai-core/src/commonTest/kotlin/io/karandash/plugins/ai/core/metrics/CalibrationEngineTest.kt	report applies the per-rule target and the history window
+ai.canary	plugins/plugins-ai/ai-core/src/commonTest/kotlin/io/karandash/plugins/ai/core/config/CanaryPromotionEvaluatorTest.kt	SHADOW auto-promotes to CANARY when all criteria met
+ai.canary.autoPromote	plugins/plugins-ai/ai-core/src/commonTest/kotlin/io/karandash/plugins/ai/core/config/CanaryPromotionEvaluatorTest.kt	SHADOW auto-promotes to CANARY when all criteria met
+ai.canary.autoPromote.afterDays	plugins/plugins-ai/ai-core/src/commonTest/kotlin/io/karandash/plugins/ai/core/config/CanaryPromotionEvaluatorTest.kt	SHADOW with insufficient days stays SHADOW
+ai.canary.autoPromote.maxFalsePositiveRate	plugins/plugins-ai/ai-core/src/commonTest/kotlin/io/karandash/plugins/ai/core/config/CanaryPromotionEvaluatorTest.kt	SHADOW with high false-positive rate stays SHADOW
+ai.canary.autoPromote.minSampleSize	plugins/plugins-ai/ai-core/src/commonTest/kotlin/io/karandash/plugins/ai/core/config/CanaryPromotionEvaluatorTest.kt	SHADOW with insufficient sample size stays SHADOW
+ai.canary.autoPromote.promoteTo	plugins/plugins-ai/ai-core/src/commonTest/kotlin/io/karandash/plugins/ai/core/config/CanaryPromotionEvaluatorTest.kt	CANARY auto-promotes to ENFORCE when all criteria met
+ai.canary.percentOfMrs	plugins/plugins-ai/ai-core/src/commonTest/kotlin/io/karandash/plugins/ai/core/config/CanaryPromotionEvaluatorTest.kt	percentOfMrs samples a stable share of MRs in the canary stage only
+ai.canary.stage	plugins/plugins-ai/ai-core/src/commonTest/kotlin/io/karandash/plugins/ai/core/config/CanaryPromotionEvaluatorTest.kt	SHADOW auto-promotes to CANARY when all criteria met
+ai.checks	plugins/plugins-ai/rules/ai/src/commonTest/kotlin/io/karandash/plugins/ai/rules/PreMergeChecksExecutorTest.kt	a failing warn check is a warning
+ai.checks.instruction	plugins/plugins-ai/rules/ai/src/commonTest/kotlin/io/karandash/plugins/ai/rules/PreMergeChecksExecutorTest.kt	a failing warn check is a warning
+ai.checks.instruction	plugins/plugins-ai/rules/ai/src/commonTest/kotlin/io/karandash/plugins/ai/rules/PreMergeChecksExecutorTest.kt	the prompt carries every instruction and the diff and the reply schema puts status before reason
+ai.checks.mode	plugins/plugins-ai/rules/ai/src/commonTest/kotlin/io/karandash/plugins/ai/rules/PreMergeChecksExecutorTest.kt	ai checks mode error makes the same failing check an error and warn makes it a warning
+ai.checks.name	plugins/plugins-ai/rules/ai/src/commonTest/kotlin/io/karandash/plugins/ai/rules/PreMergeChecksExecutorTest.kt	a failing warn check is a warning
+ai.checks.name	plugins/plugins-ai/rules/ai/src/commonTest/kotlin/io/karandash/plugins/ai/rules/PreMergeChecksExecutorTest.kt	the prompt carries every instruction and the diff and the reply schema puts status before reason
+ai.checks.paths	plugins/plugins-ai/rules/ai/src/commonTest/kotlin/io/karandash/plugins/ai/rules/PreMergeChecksExecutorTest.kt	a check whose paths match no changed file is n-a without a call
+ai.checks.paths	plugins/plugins-ai/rules/ai/src/commonTest/kotlin/io/karandash/plugins/ai/rules/PreMergeChecksExecutorTest.kt	a failing warn check is a warning
+ai.checksTicketCompliance	plugins/plugins-ai/rules/ai/src/commonTest/kotlin/io/karandash/plugins/ai/rules/PreMergeChecksExecutorTest.kt	ticket compliance turns each acceptance criterion into a row
+ai.chunking	plugins/plugins-ai/rules/ai/src/commonTest/kotlin/io/karandash/plugins/ai/dispatch/AiRuleDispatcherChunkingConfigTest.kt	ai chunking chunkSize splits the diff into one pass per chunk
+ai.chunking.chunkSize	plugins/plugins-ai/rules/ai/src/commonTest/kotlin/io/karandash/plugins/ai/dispatch/AiRuleDispatcherChunkingConfigTest.kt	ai chunking chunkSize splits the diff into one pass per chunk
+ai.chunking.enabled	plugins/plugins-ai/rules/ai/src/commonTest/kotlin/io/karandash/plugins/ai/dispatch/AiRuleDispatcherChunkingConfigTest.kt	ai chunking disabled reviews the diff in a single pass
+ai.chunking.maxChunks	plugins/plugins-ai/rules/ai/src/commonTest/kotlin/io/karandash/plugins/ai/dispatch/AiRuleDispatcherChunkingConfigTest.kt	ai chunking maxChunks caps the number of passes
+ai.chunking.overlapSize	plugins/plugins-ai/rules/ai/src/commonTest/kotlin/io/karandash/plugins/ai/dispatch/AiRuleDispatcherChunkingConfigTest.kt	ai chunking overlapSize repeats hunks across neighbouring passes
+ai.compositions	plugins/plugins-ai/ai-core/src/commonTest/kotlin/io/karandash/plugins/ai/core/config/RuleComposerTest.kt	composed finding severity uses specified severity
+ai.compositions.expression	plugins/plugins-ai/ai-core/src/commonTest/kotlin/io/karandash/plugins/ai/core/config/RuleComposerTest.kt	AND expression requires both sides true
+ai.compositions.message	plugins/plugins-ai/ai-core/src/commonTest/kotlin/io/karandash/plugins/ai/core/config/RuleComposerTest.kt	rule_failed matches when findings exist for rule
+ai.compositions.name	plugins/plugins-ai/ai-core/src/commonTest/kotlin/io/karandash/plugins/ai/core/config/RuleComposerTest.kt	composed finding has composed prefix in rule ID
+ai.compositions.severity	plugins/plugins-ai/ai-core/src/commonTest/kotlin/io/karandash/plugins/ai/core/config/RuleComposerTest.kt	composed finding severity uses specified severity
+ai.concurrency	plugins/plugins-ai/rules/ai/src/commonTest/kotlin/io/karandash/plugins/ai/AiRuleModuleKeyBehaviourTest.kt	ai concurrency sets the number of run permits
+ai.conditionalSections	plugins/plugins-ai/ai-core/src/commonTest/kotlin/io/karandash/plugins/ai/core/config/ConditionalSectionCheckerTest.kt	optional section yields INFO and description is appended
+ai.conditionalSections.description	plugins/plugins-ai/ai-core/src/commonTest/kotlin/io/karandash/plugins/ai/core/config/ConditionalSectionCheckerTest.kt	optional section yields INFO and description is appended
+ai.conditionalSections.required	plugins/plugins-ai/ai-core/src/commonTest/kotlin/io/karandash/plugins/ai/core/config/ConditionalSectionCheckerTest.kt	optional section yields INFO and description is appended
+ai.conditionalSections.section	plugins/plugins-ai/ai-core/src/commonTest/kotlin/io/karandash/plugins/ai/core/config/ConditionalSectionCheckerTest.kt	optional section yields INFO and description is appended
+ai.conditionalSections.severity	plugins/plugins-ai/ai-core/src/commonTest/kotlin/io/karandash/plugins/ai/core/config/ConditionalSectionCheckerTest.kt	severity from config is applied
+ai.conditionalSections.whenFilesChanged	plugins/plugins-ai/ai-core/src/commonTest/kotlin/io/karandash/plugins/ai/core/config/ConditionalSectionCheckerTest.kt	whenFilesChanged is a GlobMatcher path glob anchored at the repo root
+ai.consensusModels	plugins/plugins-ai/rules/ai/src/commonTest/kotlin/io/karandash/plugins/ai/dispatch/AiRuleDispatcherConsensusTest.kt	consensusStrategy intersection keeps only the findings every consensus model reports
+ai.consensusModels	plugins/integration-tests/contracts/src/commonTest/kotlin/io/karandash/contracts/ai/AiProviderEndToEndContractTest.kt	consensusModels with analyzerConsensus asks every model
+ai.consensusStrategy	plugins/plugins-ai/rules/ai/src/commonTest/kotlin/io/karandash/plugins/ai/dispatch/AiRuleDispatcherConsensusTest.kt	consensusStrategy majority keeps a finding two of three models report
+ai.consensusStrategy	plugins/plugins-ai/rules/ai/src/commonTest/kotlin/io/karandash/plugins/ai/dispatch/AiRuleDispatcherConsensusTest.kt	consensusStrategy first-agreement keeps a finding any two models report
+ai.constitution	plugins/plugins-ai/rules/ai/src/commonTest/kotlin/io/karandash/plugins/ai/pipeline/AiFindingPostProcessorConfigKeysTest.kt	constitution enabled false skips the pass despite principles
+ai.constitution.enabled	plugins/plugins-ai/rules/ai/src/commonTest/kotlin/io/karandash/plugins/ai/pipeline/AiFindingPostProcessorConfigKeysTest.kt	constitution enabled false skips the pass despite principles
+ai.constitution.failureMode	plugins/plugins-ai/rules/ai/src/commonTest/kotlin/io/karandash/plugins/ai/pipeline/AiFindingPostProcessorConfigKeysTest.kt	constitution failureMode downgrade keeps the finding as info
+ai.constitution.model	plugins/plugins-ai/rules/ai/src/commonTest/kotlin/io/karandash/plugins/ai/pipeline/AiFindingPostProcessorKeyBehaviourTest.kt	constitution model is the model of the review call
+ai.constitution.principles	plugins/plugins-ai/rules/ai/src/commonTest/kotlin/io/karandash/plugins/ai/pipeline/AiFindingPostProcessorKeyBehaviourTest.kt	constitution principles are sent in the review prompt
+ai.constitution.selfCritiqueRounds	plugins/plugins-ai/ai-core/src/commonTest/kotlin/io/karandash/plugins/ai/core/pipeline/ConstitutionalReviewerTest.kt	multiple self-critique rounds accumulate removed counts
+ai.context	plugins/plugins-ai/rules/ai/src/commonTest/kotlin/io/karandash/plugins/ai/dispatch/AiPromptAssemblerKeyBehaviourTest.kt	ai context values fill the variables of a configured prompt
+ai.context-lines	plugins/plugins-ai/rules/ai/src/commonTest/kotlin/io/karandash/plugins/ai/AiRuleModuleKeyBehaviourTest.kt	ai contextLines sets the context lines requested from the platform
+ai.contradictions	plugins/plugins-ai/rules/ai/src/commonTest/kotlin/io/karandash/plugins/ai/pipeline/CorrelationContradictionConfigTest.kt	contradictions enabled false keeps both findings
+ai.contradictions.enabled	plugins/plugins-ai/rules/ai/src/commonTest/kotlin/io/karandash/plugins/ai/pipeline/CorrelationContradictionConfigTest.kt	contradictions enabled false keeps both findings
+ai.contradictions.resolution	plugins/plugins-ai/rules/ai/src/commonTest/kotlin/io/karandash/plugins/ai/pipeline/CorrelationContradictionConfigTest.kt	contradictions keep-higher-severity keeps the error
+ai.correlation	plugins/plugins-ai/rules/ai/src/commonTest/kotlin/io/karandash/plugins/ai/pipeline/CorrelationContradictionConfigTest.kt	correlation false skips merging and patterns
+ai.correlation.enabled	plugins/plugins-ai/rules/ai/src/commonTest/kotlin/io/karandash/plugins/ai/pipeline/CorrelationContradictionConfigTest.kt	correlation false skips merging and patterns
+ai.correlation.patterns	plugins/plugins-ai/rules/ai/src/commonTest/kotlin/io/karandash/plugins/ai/pipeline/CorrelationContradictionConfigTest.kt	a pattern runs only when its when condition holds for the MR
+ai.correlation.patterns.findings	plugins/plugins-ai/rules/ai/src/commonTest/kotlin/io/karandash/plugins/ai/pipeline/CorrelationContradictionConfigTest.kt	a correlation pattern adds a meta-finding and upgrades the matched findings
+ai.correlation.patterns.message	plugins/plugins-ai/rules/ai/src/commonTest/kotlin/io/karandash/plugins/ai/pipeline/CorrelationContradictionConfigTest.kt	a correlation pattern message replaces the generated meta-finding message
+ai.correlation.patterns.name	plugins/plugins-ai/rules/ai/src/commonTest/kotlin/io/karandash/plugins/ai/pipeline/CorrelationContradictionConfigTest.kt	a correlation pattern adds a meta-finding and upgrades the matched findings
+ai.correlation.patterns.severity	plugins/plugins-ai/rules/ai/src/commonTest/kotlin/io/karandash/plugins/ai/pipeline/CorrelationContradictionConfigTest.kt	a correlation pattern adds a meta-finding and upgrades the matched findings
+ai.correlation.patterns.when	plugins/plugins-ai/rules/ai/src/commonTest/kotlin/io/karandash/plugins/ai/pipeline/CorrelationContradictionConfigTest.kt	a pattern runs only when its when condition holds for the MR
+ai.costBudget	plugins/plugins-ai/rules/ai/src/commonTest/kotlin/io/karandash/plugins/ai/dispatch/AiCostBudgetWarnTest.kt	warn action continues and logs a warning
+ai.costBudget.adaptiveAllocation	plugins/plugins-ai/rules/ai/src/commonTest/kotlin/io/karandash/plugins/ai/init/AiRuleInitializerBudgetTest.kt	adaptiveAllocation logs the per-rule allocation breakdown
+ai.costBudget.branchBudgets	plugins/plugins-ai/ai-core/src/commonTest/kotlin/io/karandash/plugins/ai/core/config/AiCostBudgetResolverTest.kt	branch-specific budget overrides default
+ai.costBudget.branchBudgets.maxTokensPerRun	plugins/plugins-ai/ai-core/src/commonTest/kotlin/io/karandash/plugins/ai/core/config/AiCostBudgetResolverTest.kt	branch-specific budget overrides default
+ai.costBudget.branchBudgets.pattern	plugins/plugins-ai/ai-core/src/commonTest/kotlin/io/karandash/plugins/ai/core/config/AiCostBudgetResolverTest.kt	branch-specific budget overrides default
+ai.costBudget.costEstimate	plugins/plugins-ai/rules/ai/src/commonTest/kotlin/io/karandash/plugins/ai/AiRuleCostLoggerTest.kt	alert fires only above a positive threshold with sendAlert on
+ai.costBudget.costEstimate.alertThreshold	plugins/plugins-ai/rules/ai/src/commonTest/kotlin/io/karandash/plugins/ai/AiRuleCostLoggerTest.kt	alert fires only above a positive threshold with sendAlert on
+ai.costBudget.costEstimate.enabled	plugins/plugins-ai/rules/ai/src/commonTest/kotlin/io/karandash/plugins/ai/AiRuleModuleKeyBehaviourTest.kt	ai costBudget costEstimate enabled false omits the cost summary
+ai.costBudget.costEstimate.sendAlert	plugins/plugins-ai/rules/ai/src/commonTest/kotlin/io/karandash/plugins/ai/AiRuleCostLoggerTest.kt	alert fires only above a positive threshold with sendAlert on
+ai.costBudget.maxCostPerRunUsd	plugins/plugins-ai/rules/ai/src/commonTest/kotlin/io/karandash/plugins/ai/RuleCallOverrideWiringTest.kt	maxCostPerRunUsd makes the evaluator skip the next rule
+ai.costBudget.maxCostPerRunUsd	plugins/plugins-ai/rules/ai/src/commonTest/kotlin/io/karandash/plugins/ai/dispatch/AiDeadKeysWiringTest.kt	maxCostPerRunUsd skips the rule once the spent USD reaches the cap
+ai.costBudget.maxTokensPerRun	plugins/plugins-ai/rules/ai/src/commonTest/kotlin/io/karandash/plugins/ai/AiAuxiliaryBudgetTest.kt	the max-tokens-per-run safety net skips an auxiliary stage with an info finding
+ai.costBudget.onBudgetExceeded	plugins/plugins-ai/rules/ai/src/commonTest/kotlin/io/karandash/plugins/ai/dispatch/AiCostBudgetWarnTest.kt	warn action continues and logs a warning
+ai.crossFileContext	plugins/plugins-ai/ai-core/src/commonTest/kotlin/io/karandash/plugins/ai/core/DependencyContextBuilderTest.kt	captureSignatures false sends the full redacted text
+ai.crossFileContext.captureSignatures	plugins/plugins-ai/ai-core/src/commonTest/kotlin/io/karandash/plugins/ai/core/DependencyContextBuilderTest.kt	captureSignatures false sends the full redacted text
+ai.crossFileContext.enabled	plugins/plugins-ai/rules/ai/src/commonTest/kotlin/io/karandash/plugins/ai/dispatch/AiPromptAssemblerKeyBehaviourTest.kt	ai crossFileContext enabled false drops the cross-file context part
+ai.crossFileContext.includeImports	plugins/plugins-ai/ai-core/src/commonTest/kotlin/io/karandash/plugins/ai/core/DependencyContextBuilderTest.kt	includeImports false keeps only the test files
+ai.crossFileContext.includeTests	plugins/plugins-ai/ai-core/src/commonTest/kotlin/io/karandash/plugins/ai/core/DependencyContextBuilderTest.kt	includeTests false keeps only the imported files
+ai.crossFileContext.maxContextFiles	plugins/plugins-ai/ai-core/src/commonTest/kotlin/io/karandash/plugins/ai/core/DependencyContextBuilderTest.kt	maxContextFiles and maxChars cap the section
+ai.crossFileContextMaxChars	plugins/plugins-ai/rules/ai/src/commonTest/kotlin/io/karandash/plugins/ai/dispatch/AiPromptAssemblerKeyBehaviourTest.kt	ai crossFileContextMaxChars cuts the cross-file context part
+ai.debug	plugins/plugins-ai/rules/ai/src/commonTest/kotlin/io/karandash/plugins/ai/RuleCallOverrideWiringTest.kt	debug prompt artifact writes the sent request of the rule under promptDir
+ai.debug.prompt	plugins/plugins-ai/rules/ai/src/commonTest/kotlin/io/karandash/plugins/ai/RuleCallOverrideWiringTest.kt	debug prompt artifact writes the sent request of the rule under promptDir
+ai.debug.promptDir	plugins/plugins-ai/rules/ai/src/commonTest/kotlin/io/karandash/plugins/ai/RuleCallOverrideWiringTest.kt	debug prompt artifact writes the sent request of the rule under promptDir
+ai.defectPredictor	plugins/plugins-ai/ai-core/src/commonTest/kotlin/io/karandash/plugins/ai/core/research/DefectPredictorKeyBehaviourTest.kt	defectPredictor weights size alone makes the probability the size factor
+ai.defectPredictor.thresholds	plugins/plugins-ai/ai-core/src/commonTest/kotlin/io/karandash/plugins/ai/core/research/DefectPredictorKeyBehaviourTest.kt	defectPredictor thresholds mediumRisk lowered turns the default low risk into medium
+ai.defectPredictor.thresholds.highRisk	plugins/plugins-ai/ai-core/src/commonTest/kotlin/io/karandash/plugins/ai/core/research/DefectPredictorKeyBehaviourTest.kt	defectPredictor thresholds highRisk lowered turns the default low risk into high
+ai.defectPredictor.thresholds.largeMrLines	plugins/plugins-ai/ai-core/src/commonTest/kotlin/io/karandash/plugins/ai/core/research/DefectPredictorKeyBehaviourTest.kt	defectPredictor thresholds largeMrLines sets the line count that saturates the size factor
+ai.defectPredictor.thresholds.manyFilesCount	plugins/plugins-ai/ai-core/src/commonTest/kotlin/io/karandash/plugins/ai/core/research/DefectPredictorKeyBehaviourTest.kt	defectPredictor thresholds manyFilesCount sets the file count that saturates the diffusion factor
+ai.defectPredictor.thresholds.mediumRisk	plugins/plugins-ai/ai-core/src/commonTest/kotlin/io/karandash/plugins/ai/core/research/DefectPredictorKeyBehaviourTest.kt	defectPredictor thresholds mediumRisk lowered turns the default low risk into medium
+ai.defectPredictor.thresholds.shortMessageChars	plugins/plugins-ai/ai-core/src/commonTest/kotlin/io/karandash/plugins/ai/core/research/DefectPredictorKeyBehaviourTest.kt	defectPredictor thresholds shortMessageChars below the commit length clears the purpose factor
+ai.defectPredictor.weights	plugins/plugins-ai/ai-core/src/commonTest/kotlin/io/karandash/plugins/ai/core/research/DefectPredictorKeyBehaviourTest.kt	defectPredictor weights size alone makes the probability the size factor
+ai.defectPredictor.weights.diffusion	plugins/plugins-ai/ai-core/src/commonTest/kotlin/io/karandash/plugins/ai/core/research/DefectPredictorKeyBehaviourTest.kt	defectPredictor weights diffusion alone makes the probability the diffusion factor
+ai.defectPredictor.weights.experience	plugins/plugins-ai/ai-core/src/commonTest/kotlin/io/karandash/plugins/ai/core/research/DefectPredictorKeyBehaviourTest.kt	defectPredictor weights experience alone makes the probability the missing description factor
+ai.defectPredictor.weights.history	plugins/plugins-ai/ai-core/src/commonTest/kotlin/io/karandash/plugins/ai/core/research/DefectPredictorKeyBehaviourTest.kt	defectPredictor weights history alone makes the probability the history factor
+ai.defectPredictor.weights.purpose	plugins/plugins-ai/ai-core/src/commonTest/kotlin/io/karandash/plugins/ai/core/research/DefectPredictorKeyBehaviourTest.kt	defectPredictor weights purpose alone makes the probability the purpose factor
+ai.defectPredictor.weights.review	plugins/plugins-ai/ai-core/src/commonTest/kotlin/io/karandash/plugins/ai/core/research/DefectPredictorKeyBehaviourTest.kt	defectPredictor weights review alone makes the probability the inverse description factor
+ai.defectPredictor.weights.size	plugins/plugins-ai/ai-core/src/commonTest/kotlin/io/karandash/plugins/ai/core/research/DefectPredictorKeyBehaviourTest.kt	defectPredictor weights size alone makes the probability the size factor
+ai.dryRun	plugins/plugins-ai/rules/ai/src/commonTest/kotlin/io/karandash/plugins/ai/AiRuleModuleValidateTest.kt	validate with dryRun returns info finding
+ai.enforcementSchedule	plugins/plugins-ai/rules/ai/src/commonTest/kotlin/io/karandash/plugins/ai/pipeline/AiConfigFeatureApplicatorTest.kt	partial enforcement keeps only blockSeverities blocking
+ai.enforcementSchedule.blockSeverities	plugins/plugins-ai/rules/ai/src/commonTest/kotlin/io/karandash/plugins/ai/pipeline/AiConfigFeatureApplicatorTest.kt	partial enforcement keeps only blockSeverities blocking
+ai.enforcementSchedule.from	plugins/plugins-ai/ai-core/src/commonTest/kotlin/io/karandash/plugins/ai/core/config/ProgressiveEnforcementTest.kt	phase before from date is not yet active
+ai.enforcementSchedule.mode	plugins/plugins-ai/ai-core/src/commonTest/kotlin/io/karandash/plugins/ai/core/config/ProgressiveEnforcementTest.kt	PARTIAL mode downgrades ERROR not in blockSeverities
+ai.enforcementSchedule.until	plugins/plugins-ai/ai-core/src/commonTest/kotlin/io/karandash/plugins/ai/core/config/ProgressiveEnforcementTest.kt	expired phase falls back to ENFORCE
+ai.enricher	plugins/plugins-ai/ai-core/src/commonTest/kotlin/io/karandash/plugins/ai/core/pipeline/AiFindingEnricherTest.kt	enabled flag from config decides whether the same reply is applied
+ai.enricher.enabled	plugins/plugins-ai/ai-core/src/commonTest/kotlin/io/karandash/plugins/ai/core/pipeline/AiFindingEnricherTest.kt	enabled flag from config decides whether the same reply is applied
+ai.enricher.enrichNonAiFindings	plugins/plugins-ai/ai-core/src/commonTest/kotlin/io/karandash/plugins/ai/core/pipeline/AiFindingEnricherTest.kt	enrichNonAiFindings false sends AI-rule findings to the LLM
+ai.enricher.maxFindings	plugins/plugins-ai/ai-core/src/commonTest/kotlin/io/karandash/plugins/ai/core/pipeline/AiFindingEnricherTest.kt	respects maxFindings cap
+ai.enricher.skipSeverities	plugins/plugins-ai/ai-core/src/commonTest/kotlin/io/karandash/plugins/ai/core/pipeline/AiFindingEnricherTest.kt	skipSeverities from config decides which severities reach the LLM
+ai.executionProfile	cli/src/commonTest/kotlin/io/karandash/cli/pipeline/ExecutionProfileRuleFilterTest.kt	a rule the execution profile excludes does not run
+ai.executionProfiles	cli/src/commonTest/kotlin/io/karandash/cli/pipeline/ExecutionProfileRuleFilterTest.kt	a rule the execution profile excludes does not run
+ai.executionProfiles.aiEnabled	plugins/plugins-ai/rules/ai/src/commonTest/kotlin/io/karandash/plugins/ai/AiExecutionProfileTest.kt	aiEnabled false on a custom profile runs no analyzers while true keeps them
+ai.executionProfiles.description	plugins/plugins-ai/rules/ai/src/commonTest/kotlin/io/karandash/plugins/ai/AiExecutionProfileTest.kt	a profile description is logged when the profile applies
+ai.executionProfiles.excludeRules	cli/src/commonTest/kotlin/io/karandash/cli/pipeline/ExecutionProfileRuleFilterTest.kt	a rule the execution profile excludes does not run
+ai.executionProfiles.exitOnError	plugins/plugins-ai/rules/ai/src/commonTest/kotlin/io/karandash/plugins/ai/AiExecutionProfileTest.kt	a custom profile warns that exitOnError and verbose have no effect
+ai.executionProfiles.includeRules	cli/src/commonTest/kotlin/io/karandash/cli/pipeline/ExecutionProfileRuleFilterTest.kt	a rule outside the execution profile include list does not run
+ai.executionProfiles.totalTimeout	plugins/plugins-ai/rules/ai/src/commonTest/kotlin/io/karandash/plugins/ai/AiExecutionTimeoutTest.kt	a rule that starts after the configured profile totalTimeout is skipped
+ai.executionProfiles.verbose	plugins/plugins-ai/rules/ai/src/commonTest/kotlin/io/karandash/plugins/ai/AiExecutionProfileTest.kt	a custom profile warns that exitOnError and verbose have no effect
+ai.executionTimeout	plugins/plugins-ai/rules/ai/src/commonTest/kotlin/io/karandash/plugins/ai/AiExecutionTimeoutTest.kt	timeout fires mid-dispatch — returns empty list
+ai.extraInstructions	plugins/plugins-ai/rules/ai/src/commonTest/kotlin/io/karandash/plugins/ai/dispatch/AiPromptAssemblerKeyBehaviourTest.kt	ai extraInstructions is sent as a prompt part
+ai.failOnError	plugins/plugins-ai/rules/ai/src/commonTest/kotlin/io/karandash/plugins/ai/AiRuleModuleKeyBehaviourTest.kt	ai failOnError true turns a provider failure into an error finding
+ai.features	plugins/plugins-ai/rules/ai/src/commonTest/kotlin/io/karandash/plugins/ai/AiRuleModuleValidateTest.kt	allowlist mode — 4 explicit enables run only those 4 rules
+ai.feedbackEnabled	plugins/plugins-ai/rules/ai/src/commonTest/kotlin/io/karandash/plugins/ai/ThreadAnswerStageTest.kt	feedbackEnabled set in the plugin config turns thread answers on
+ai.feedbackReplyJudge	plugins/plugins-ai/rules/ai/src/commonTest/kotlin/io/karandash/plugins/ai/AiThreadFeedbackTest.kt	reply judge off never calls the AI service for an undecidable reply
+ai.feedbackSkipRepeatFindingTypes	plugins/plugins-ai/rules/ai/src/commonTest/kotlin/io/karandash/plugins/ai/AiFeedbackConfigTest.kt	object form loads and skipRepeatFindingTypes skips a rule dismissed repeatedly
+ai.filter	plugins/plugins-ai/ai-core/src/commonTest/kotlin/io/karandash/plugins/ai/core/pipeline/AiFindingFilterKeysTest.kt	validateDiffLines false keeps line outside diff
+ai.filter.anchored	plugins/plugins-ai/ai-core/src/commonTest/kotlin/io/karandash/plugins/ai/core/pipeline/AiFindingFilterKeysTest.kt	anchored false keeps file outside diff
+ai.filter.attemptJsonRecovery	plugins/plugins-ai/rules/ai/src/commonTest/kotlin/io/karandash/plugins/ai/JsonRecoveryWiringTest.kt	attemptJsonRecovery false discards a truncated response before the analyzer sees it
+ai.filter.confidenceMetadata	plugins/plugins-ai/ai-core/src/commonTest/kotlin/io/karandash/plugins/ai/core/pipeline/AiFindingFilterKeysTest.kt	confidenceMetadata false strips the score after filtering
+ai.filter.deduplicate	plugins/plugins-ai/ai-core/src/commonTest/kotlin/io/karandash/plugins/ai/core/pipeline/AiFilterKeyBehaviourTest.kt	filter deduplicate false keeps findings with the same fingerprint
+ai.filter.deduplicateKey	plugins/plugins-ai/ai-core/src/commonTest/kotlin/io/karandash/plugins/ai/core/pipeline/AiFindingFilterKeysTest.kt	deduplicateKey rule file line merges different messages on one line
+ai.filter.dedupOpenThreads	plugins/plugins-ai/rules/ai/src/commonTest/kotlin/io/karandash/plugins/ai/pipeline/AiDuplicatesTest.kt	dedupOpenThreads false keeps the finding
+ai.filter.downgradeInvalidLines	plugins/plugins-ai/ai-core/src/commonTest/kotlin/io/karandash/plugins/ai/core/pipeline/AiFindingFilterKeysTest.kt	downgradeInvalidLines turns line outside diff into info
+ai.filter.dropHedged	plugins/plugins-ai/rules/ai/src/commonTest/kotlin/io/karandash/plugins/ai/pipeline/AiActionabilityFilterTest.kt	filter dropHedged false keeps hedged findings
+ai.filter.hedgeExemptConfidence	plugins/plugins-ai/rules/ai/src/commonTest/kotlin/io/karandash/plugins/ai/pipeline/AiActionabilityFilterTest.kt	hedged finding with high confidence survives unless the exemption is off
+ai.filter.maxPerFile	plugins/plugins-ai/ai-core/src/commonTest/kotlin/io/karandash/plugins/ai/core/pipeline/AiFindingFilterTest.kt	caps findings per file keeping highest severity
+ai.filter.maxPerRule	plugins/plugins-ai/ai-core/src/commonTest/kotlin/io/karandash/plugins/ai/core/pipeline/AiFindingFilterTest.kt	caps findings per rule keeping highest severity
+ai.filter.minConfidence	plugins/plugins-ai/ai-core/src/commonTest/kotlin/io/karandash/plugins/ai/core/pipeline/AiFilterKeyBehaviourTest.kt	filter minConfidence drops findings below the configured value
+ai.filter.minConfidenceByModel	plugins/plugins-ai/ai-core/src/commonTest/kotlin/io/karandash/plugins/ai/core/pipeline/AiFilterKeyBehaviourTest.kt	filter minConfidenceByModel lowers the bar for matching models only
+ai.filter.requireFileInDiff	plugins/plugins-ai/ai-core/src/commonTest/kotlin/io/karandash/plugins/ai/core/pipeline/AiFindingFilterKeysTest.kt	requireFileInDiff false downgrades file outside diff
+ai.filter.validateDiffLines	plugins/plugins-ai/ai-core/src/commonTest/kotlin/io/karandash/plugins/ai/core/pipeline/AiFindingFilterKeysTest.kt	validateDiffLines false keeps line outside diff
+ai.findingTemplate	plugins/plugins-ai/rules/ai/src/commonTest/kotlin/io/karandash/plugins/ai/pipeline/AiReportGeneratorSectionsTest.kt	annotated diff and custom findings render from the mr and template
+ai.gates	plugins/plugins-ai/ai-core/src/commonTest/kotlin/io/karandash/plugins/ai/core/RuleGateTest.kt	file pattern gate skips when no files match
+ai.gates.filePatterns	plugins/plugins-ai/ai-core/src/commonTest/kotlin/io/karandash/plugins/ai/core/RuleGateTest.kt	file pattern gate skips when no files match
+ai.gates.minChangedFiles	plugins/plugins-ai/ai-core/src/commonTest/kotlin/io/karandash/plugins/ai/core/RuleGateTest.kt	minChangedFiles gate skips when too few files
+ai.gates.minChangedLines	plugins/plugins-ai/ai-core/src/commonTest/kotlin/io/karandash/plugins/ai/core/RuleGateTest.kt	minChangedLines gate skips when too few lines
+ai.gates.requireLabel	plugins/plugins-ai/ai-core/src/commonTest/kotlin/io/karandash/plugins/ai/core/RuleGateTest.kt	requireLabel gates MR without that label
+ai.gates.requiredLabels	plugins/plugins-ai/ai-core/src/commonTest/kotlin/io/karandash/plugins/ai/core/RuleGateTest.kt	requiredLabels gate skips when label absent
+ai.gates.ruleId	plugins/plugins-ai/ai-core/src/commonTest/kotlin/io/karandash/plugins/ai/core/RuleGateTest.kt	gate for different ruleId does not affect other rules
+ai.gates.skipBranchPatterns	plugins/plugins-ai/ai-core/src/commonTest/kotlin/io/karandash/plugins/ai/core/RuleGateTest.kt	skipBranchPatterns gate skips when branch matches
+ai.gates.skipIfTitleMatches	plugins/plugins-ai/ai-core/src/commonTest/kotlin/io/karandash/plugins/ai/core/RuleGateTest.kt	skipIfTitleMatches skips MR whose title matches the regex
+ai.gates.skipLabels	plugins/plugins-ai/ai-core/src/commonTest/kotlin/io/karandash/plugins/ai/core/RuleGateTest.kt	skipLabels gate skips when skip label present
+ai.gracePeriod	plugins/plugins-ai/rules/ai/src/commonTest/kotlin/io/karandash/plugins/ai/pipeline/AiConfigFeatureApplicatorTest.kt	gracePeriod block with enabled true opens the window and enabled false closes it
+ai.gracePeriod.approvalRequired	plugins/plugins-ai/rules/ai/src/commonTest/kotlin/io/karandash/plugins/ai/pipeline/AiConfigFeatureApplicatorTest.kt	gracePeriod approvalRequired keeps the window shut until enough approvals
+ai.gracePeriod.auditLog	plugins/plugins-ai/rules/ai/src/commonTest/kotlin/io/karandash/plugins/ai/pipeline/AiDescriptionPoliciesTest.kt	gracePeriod auditLog false stays silent while the window still downgrades
+ai.gracePeriod.durationMinutes	plugins/plugins-ai/rules/ai/src/commonTest/kotlin/io/karandash/plugins/ai/pipeline/AiDescriptionPoliciesTest.kt	grace window downgrades everything once approved and before expiry
+ai.gracePeriod.enabled	plugins/plugins-ai/rules/ai/src/commonTest/kotlin/io/karandash/plugins/ai/pipeline/AiConfigFeatureApplicatorTest.kt	gracePeriod block with enabled true opens the window and enabled false closes it
+ai.gracePeriods	plugins/plugins-ai/ai-core/src/commonTest/kotlin/io/karandash/plugins/ai/core/config/GracePeriodEvaluatorTest.kt	label condition matches when MR carries label
+ai.gracePeriods.audit	plugins/plugins-ai/rules/ai/src/commonTest/kotlin/io/karandash/plugins/ai/pipeline/AiConfigFeatureApplicatorTest.kt	grace period audit false logs the active grace period at debug only
+ai.gracePeriods.condition	plugins/plugins-ai/ai-core/src/commonTest/kotlin/io/karandash/plugins/ai/core/config/GracePeriodEvaluatorTest.kt	label condition matches when MR carries label
+ai.gracePeriods.maxDuration	plugins/plugins-ai/rules/ai/src/commonTest/kotlin/io/karandash/plugins/ai/pipeline/AiConfigFeatureApplicatorTest.kt	grace period maxUsesPerDay and maxDuration are enforced from AI state
+ai.gracePeriods.maxUsesPerDay	plugins/plugins-ai/rules/ai/src/commonTest/kotlin/io/karandash/plugins/ai/pipeline/AiConfigFeatureApplicatorTest.kt	grace period maxUsesPerDay and maxDuration are enforced from AI state
+ai.gracePeriods.name	plugins/plugins-ai/ai-core/src/commonTest/kotlin/io/karandash/plugins/ai/core/config/GracePeriodEvaluatorTest.kt	first matching grace period is returned when multiple match
+ai.gracePeriods.overrideRules	plugins/plugins-ai/rules/ai/src/commonTest/kotlin/io/karandash/plugins/ai/pipeline/AiConfigFeatureApplicatorTest.kt	grace period override rule skip drops the rule
+ai.grounding	plugins/plugins-ai/ai-core/src/commonTest/kotlin/io/karandash/plugins/ai/core/pipeline/AiGroundingVerifierTest.kt	disabled config passes all findings unchanged
+ai.grounding.autoDowngradeRefuted	plugins/plugins-ai/ai-core/src/commonTest/kotlin/io/karandash/plugins/ai/core/pipeline/AiGroundingVerifierTest.kt	autoDowngradeRefuted false keeps a refuted finding while true drops it
+ai.grounding.checkCodeSnippets	plugins/plugins-ai/ai-core/src/commonTest/kotlin/io/karandash/plugins/ai/core/pipeline/AiGroundingVerifierTest.kt	checkCodeSnippets false lets an ungrounded snippet in the explanation pass while true refutes it
+ai.grounding.checkSymbolExistence	plugins/plugins-ai/ai-core/src/commonTest/kotlin/io/karandash/plugins/ai/core/pipeline/AiGroundingVerifierTest.kt	symbol check disabled passes finding with missing symbol
+ai.grounding.enabled	plugins/plugins-ai/ai-core/src/commonTest/kotlin/io/karandash/plugins/ai/core/pipeline/AiGroundingVerifierTest.kt	disabled config passes all findings unchanged
+ai.grounding.failureMode	plugins/plugins-ai/ai-core/src/commonTest/kotlin/io/karandash/plugins/ai/core/pipeline/AiGroundingVerifierTest.kt	failureMode remove drops refuted finding and keeps grounded one
+ai.grounding.verifier	plugins/plugins-ai/ai-core/src/commonTest/kotlin/io/karandash/plugins/ai/core/pipeline/FindingVerifierTest.kt	the request uses the given model and asks for the verdict before the reason
+ai.grounding.verifier.enabled	plugins/plugins-ai/rules/ai/src/commonTest/kotlin/io/karandash/plugins/ai/pipeline/AiFindingPostProcessorKeyBehaviourTest.kt	grounding verifier enabled asks the model and drops an invalid finding
+ai.grounding.verifier.model	plugins/plugins-ai/ai-core/src/commonTest/kotlin/io/karandash/plugins/ai/core/pipeline/FindingVerifierTest.kt	the request uses the given model and asks for the verdict before the reason
+ai.hooks	plugins/plugins-ai/ai-core/src/commonTest/kotlin/io/karandash/plugins/ai/hooks/AiHookExecutorTest.kt	prompt template is filled and model and provider are passed
+ai.hooks.action	plugins/plugins-ai/ai-core/src/commonTest/kotlin/io/karandash/plugins/ai/hooks/AiHookExecutorTest.kt	log action logs the reply and returns empty
+ai.hooks.model	plugins/plugins-ai/ai-core/src/commonTest/kotlin/io/karandash/plugins/ai/hooks/AiHookExecutorTest.kt	prompt template is filled and model and provider are passed
+ai.hooks.prompt	plugins/plugins-ai/ai-core/src/commonTest/kotlin/io/karandash/plugins/ai/hooks/AiHookExecutorTest.kt	prompt template is filled and model and provider are passed
+ai.hooks.provider	plugins/plugins-ai/ai-core/src/commonTest/kotlin/io/karandash/plugins/ai/hooks/AiHookExecutorTest.kt	prompt template is filled and model and provider are passed
+ai.incremental	plugins/plugins-ai/rules/ai/src/commonTest/kotlin/io/karandash/plugins/ai/AiPipelineExtensionIncrementalTest.kt	incremental false reviews everything and adds no summary
+ai.incremental.enabled	plugins/plugins-ai/rules/ai/src/commonTest/kotlin/io/karandash/plugins/ai/AiPipelineExtensionIncrementalTest.kt	incremental false reviews everything and adds no summary
+ai.inlineOverrides	plugins/plugins-ai/rules/ai/src/commonTest/kotlin/io/karandash/plugins/ai/pipeline/AiConfigFeatureApplicatorTest.kt	inlineOverrides allowed rejects unlisted rules and blank reasons
+ai.inlineOverrides.allowed	plugins/plugins-ai/rules/ai/src/commonTest/kotlin/io/karandash/plugins/ai/pipeline/AiConfigFeatureApplicatorTest.kt	inlineOverrides allowed rejects unlisted rules and blank reasons
+ai.inlineOverrides.allowed.fields	plugins/plugins-ai/ai-core/src/commonTest/kotlin/io/karandash/plugins/ai/core/config/InlineMrOverrideParserTest.kt	allowed fields reject an override of a field outside the list
+ai.inlineOverrides.allowed.maxValues	plugins/plugins-ai/ai-core/src/commonTest/kotlin/io/karandash/plugins/ai/core/config/InlineMrOverrideParserTest.kt	max value ceiling is enforced
+ai.inlineOverrides.allowed.requireReason	plugins/plugins-ai/rules/ai/src/commonTest/kotlin/io/karandash/plugins/ai/pipeline/AiConfigFeatureApplicatorTest.kt	inlineOverrides allowed rejects unlisted rules and blank reasons
+ai.inlineOverrides.allowed.rule	plugins/plugins-ai/rules/ai/src/commonTest/kotlin/io/karandash/plugins/ai/pipeline/AiConfigFeatureApplicatorTest.kt	inlineOverrides allowed rejects unlisted rules and blank reasons
+ai.inlineOverrides.auditLog	plugins/plugins-ai/rules/ai/src/commonTest/kotlin/io/karandash/plugins/ai/pipeline/AiDescriptionPoliciesTest.kt	override waive and exempt tags downgrade the named rule only
+ai.inlineOverrides.enabled	plugins/plugins-ai/rules/ai/src/commonTest/kotlin/io/karandash/plugins/ai/pipeline/AiConfigFeatureApplicatorTest.kt	inlineOverrides true shorthand reads description tags
+ai.inlineOverrides.overrideTag	plugins/plugins-ai/rules/ai/src/commonTest/kotlin/io/karandash/plugins/ai/pipeline/AiDescriptionPoliciesTest.kt	overrideTag names the tag that downgrades a rule
+ai.inlineOverrides.requireApproval	plugins/plugins-ai/rules/ai/src/commonTest/kotlin/io/karandash/plugins/ai/pipeline/AiDescriptionPoliciesTest.kt	tags need the block and an approval when requireApproval is set
+ai.largeMr	plugins/plugins-ai/rules/ai/src/commonTest/kotlin/io/karandash/plugins/ai/LargeMrSummaryTest.kt	an MR over max-units gets a split suggestion
+ai.largeMr.chunkContext	plugins/plugins-ai/rules/ai/src/commonTest/kotlin/io/karandash/plugins/ai/AiChunkContextTest.kt	chunk-context keeps cross-file context in chunked calls and false lets the diff crowd it out
+ai.largeMr.incremental	plugins/plugins-ai/rules/ai/src/commonTest/kotlin/io/karandash/plugins/ai/AiPipelineExtensionIncrementalTest.kt	large-mr incremental false reviews an oversized MR in full
+ai.largeMr.maxParallel	plugins/plugins-ai/rules/ai/src/commonTest/kotlin/io/karandash/plugins/ai/dispatch/AiRuleDispatcherParallelChunksTest.kt	chunks of one rule run in parallel up to max-parallel
+ai.largeMr.maxUnits	plugins/plugins-ai/rules/ai/src/commonTest/kotlin/io/karandash/plugins/ai/LargeMrSummaryTest.kt	an MR over max-units gets a split suggestion
+ai.largeMr.maxCallTokens	plugins/plugins-ai/rules/ai/src/commonTest/kotlin/io/karandash/plugins/ai/dispatch/ChunkBudgetPlanTest.kt	a call never exceeds the context or max-call-tokens
+ai.largeMr.mrMapMaxFiles	plugins/plugins-ai/rules/ai/src/commonTest/kotlin/io/karandash/plugins/ai/dispatch/MrMapTest.kt	a chunk is told the files of the other chunks and not its own
+ai.largeMr.scaleBudget	plugins/plugins-ai/rules/ai/src/commonTest/kotlin/io/karandash/plugins/ai/dispatch/AiRuleDispatcherBudgetDeterminismTest.kt	scale budget under a cost budget gives every chunk its own share so the whole MR is reviewed
+ai.largeMr.testGaps	plugins/plugins-ai/rules/ai/src/commonTest/kotlin/io/karandash/plugins/ai/LargeMrSummaryTest.kt	test-gaps false turns the test gap lines off
+ai.learnings	plugins/plugins-ai/rules/ai/src/commonTest/kotlin/io/karandash/plugins/ai/init/AiLearningsTest.kt	a custom learnings file replaces the default one and its entries are applied
+ai.learnings.enabled	plugins/plugins-ai/rules/ai/src/commonTest/kotlin/io/karandash/plugins/ai/init/AiLearningsTest.kt	the learnings file is read from the base by default and not when disabled
+ai.learnings.file	plugins/plugins-ai/rules/ai/src/commonTest/kotlin/io/karandash/plugins/ai/init/AiLearningsTest.kt	a custom learnings file replaces the default one and its entries are applied
+ai.learnings.minRejections	cli-ai/src/commonTest/kotlin/io/karandash/cli/commands/calibrate/CalibrateCorpusCommandTest.kt	calibrate learn minRejections above the evidence writes no learnings file
+ai.largeMr.maxRunTokens	plugins/plugins-ai/rules/ai/src/commonTest/kotlin/io/karandash/plugins/ai/dispatch/ChunkBudgetPlanTest.kt	without cost-budget max-run-tokens caps the growth and warns
+ai.agreement	plugins/plugins-ai/rules/ai/src/commonTest/kotlin/io/karandash/plugins/ai/dispatch/SampleAgreementTest.kt	agreed comments keep sample 1 and are marked agreed
+ai.agreement.lineWindow	plugins/plugins-ai/rules/ai/src/commonTest/kotlin/io/karandash/plugins/ai/dispatch/SampleAgreementTest.kt	lineWindow and minSimilarity change what matches
+ai.agreement.minSimilarity	plugins/plugins-ai/rules/ai/src/commonTest/kotlin/io/karandash/plugins/ai/dispatch/SampleAgreementTest.kt	lineWindow and minSimilarity change what matches
+ai.agreement.singleton	plugins/plugins-ai/rules/ai/src/commonTest/kotlin/io/karandash/plugins/ai/dispatch/SampleAgreementTest.kt	singleton drop removes it and keep leaves it as is but marked single
+ai.dedup	plugins/plugins-ai/ai-core/src/commonTest/kotlin/io/karandash/plugins/ai/core/pipeline/FindingDuplicatesTest.kt	a similar finding of another rule within the line window merges into the more severe one
+ai.dedup.crossRule	plugins/plugins-ai/ai-core/src/commonTest/kotlin/io/karandash/plugins/ai/core/pipeline/FindingDuplicatesTest.kt	similar text far away or from another rule with cross-rule off is no in-run duplicate
+ai.dedup.lineWindow	plugins/plugins-ai/ai-core/src/commonTest/kotlin/io/karandash/plugins/ai/core/pipeline/FindingDuplicatesTest.kt	a similar finding of another rule within the line window merges into the more severe one
+ai.grounding.evidenceCheck	plugins/plugins-ai/ai-core/src/commonTest/kotlin/io/karandash/plugins/ai/core/pipeline/LocalGroundingTest.kt	evidenceCheck false ignores the quoted evidence line
+ai.grounding.miss	plugins/plugins-ai/ai-core/src/commonTest/kotlin/io/karandash/plugins/ai/core/pipeline/LocalGroundingTest.kt	miss drop drops a demoted nit but never a BUG
+ai.grounding.negatedClaims	plugins/plugins-ai/ai-core/src/commonTest/kotlin/io/karandash/plugins/ai/core/pipeline/LocalGroundingTest.kt	negatedClaims false keeps an existence negation about a symbol in the MR
+ai.grounding.windowLines	plugins/plugins-ai/ai-core/src/commonTest/kotlin/io/karandash/plugins/ai/core/pipeline/LocalGroundingTest.kt	a wider window keeps the far symbol
+ai.hints	plugins/plugins-ai/rules/ai/src/commonTest/kotlin/io/karandash/plugins/ai/dispatch/ContextHintsTest.kt	the hints are a context block of the review-comments call and dumped as hints json
+ai.hints.enabled	plugins/plugins-ai/rules/ai/src/commonTest/kotlin/io/karandash/plugins/ai/dispatch/ContextHintsTest.kt	disabled hints other rules and no facts leave the call as is
+ai.hints.maxTokens	plugins/plugins-ai/rules/ai/src/commonTest/kotlin/io/karandash/plugins/ai/dispatch/ContextHintsTest.kt	maxTokens keeps only the hint lines that fit

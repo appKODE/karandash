@@ -1,0 +1,22 @@
+# Manual dry run of the release pipeline: builds everything but publishes nothing. Docker images are built without push,
+# the SDK goes to mavenLocal, no GitHub Release and no Pages deploy. No secret is read. A real release is a v* tag push
+# (release.yml).
+name: Release dry run
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  release:
+    # release-build.yml's publishing jobs (release, pages-deploy) are skipped on a dry run, but GitHub validates their
+    # permissions against this ceiling before the run starts, so it has to match release.yml
+    permissions:
+      contents: write
+      pages: write
+      id-token: write
+    uses: ./.github/workflows/release-build.yml
+    with:
+      dry_run: true

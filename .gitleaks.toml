@@ -1,0 +1,15 @@
+# Secret-detection and redaction tests carry fake tokens on purpose.
+[extend]
+useDefault = true
+
+[allowlist]
+description = "fake secrets in redaction and detection tests"
+paths = [
+  '''cli/src/commonTest/kotlin/io/karandash/cli/SecretsInLogsTest\.kt''',
+  '''core/http/src/commonTest/kotlin/io/karandash/http/HttpSecretsInMessagesTest\.kt''',
+  '''core/multipattern/src/commonTest/kotlin/io/karandash/security/(TextRedactor|TicketContentRedactor|UrlSanitizer)Test\.kt''',
+  '''plugins/plugins-ai/ai-core/src/commonTest/kotlin/io/karandash/plugins/ai/core/SecretRedactorTest\.kt''',
+  '''plugins/plugins-ai/ai-core/src/commonTest/kotlin/io/karandash/plugins/ai/core/pipeline/FindingVerifierTest\.kt''',
+  '''plugins/plugins-ai/rules/ai/src/commonTest/kotlin/io/karandash/plugins/ai/rules/PreMergeChecksExecutorTest\.kt''',
+  '''plugins/plugins-core/rules/security/src/commonTest/kotlin/io/karandash/validators/SecurityValidatorTest\.kt''',
+]

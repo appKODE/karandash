@@ -1,0 +1,60 @@
+{
+  "id": "02-payments-api-rename",
+  "title": "Rename charge to createCharge",
+  "sourceBranch": "refactor/payments-api",
+  "commits": [
+    "refactor(payments): rename charge to createCharge",
+    "fix: charge rounding bug introduced in 3f2a1c"
+  ],
+  "files": [
+    {
+      "path": "src/main/kotlin/payments/PaymentsApi.kt",
+      "diff": [
+        "@@ -20,6 +20,9 @@ class PaymentsApi(",
+        "     private val client: ApiClient,",
+        " ) {",
+        "-    suspend fun charge(amount: Money): Charge =",
+        "-        client.post(\"/charges\", amount)",
+        "+    suspend fun createCharge(amount: Money): Charge {",
+        "+        val raw = HttpClient().post(\"https://pay.example.com/charges\") { setBody(amount.rounded()) }",
+        "+        return raw.body()",
+        "+    }",
+        " }"
+      ]
+    }
+  ],
+  "repositoryFiles": {
+    "docs/payments.md": "# Payments\n\nCharge a customer with `PaymentsApi.charge(amount)`. It posts to `/charges` through `ApiClient`, which retries and authenticates the call.\n"
+  },
+  "designDoc": "## Networking\nAll outbound calls go through ApiClient, which owns retries, auth and timeouts.\n\n## Money\nAmounts are rounded with HALF_EVEN in Money.rounded().",
+  "analyzers": [
+    "outdated-docs",
+    "generate-description",
+    "description-quality",
+    "design-doc-drift",
+    "ownership-analysis"
+  ],
+  "expected": [
+    {
+      "analyzer": "outdated-docs",
+      "file": "docs/payments.md"
+    },
+    {
+      "analyzer": "generate-description"
+    },
+    {
+      "analyzer": "description-quality"
+    },
+    {
+      "analyzer": "design-doc-drift",
+      "category": "Networking"
+    },
+    {
+      "analyzer": "ownership-analysis"
+    },
+    {
+      "analyzer": "ownership-analysis",
+      "category": "src/main/kotlin/payments/PaymentsApi.kt"
+    }
+  ]
+}

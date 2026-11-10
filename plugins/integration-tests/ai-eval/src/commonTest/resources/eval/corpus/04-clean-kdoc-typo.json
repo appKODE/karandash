@@ -1,0 +1,35 @@
+{
+  "id": "04-clean-kdoc-typo",
+  "title": "Fix typo in Strings KDoc",
+  "description": "Fixes a typo in the KDoc of truncate().",
+  "commits": [
+    "docs: fix typo in truncate KDoc"
+  ],
+  "files": [
+    {
+      "path": "src/main/kotlin/util/Strings.kt",
+      "diff": [
+        "@@ -3,3 +3,3 @@",
+        "-/** Truncates the strnig to [max] characters. */",
+        "+/** Truncates the string to [max] characters. */",
+        " fun String.truncate(max: Int): String = take(max)"
+      ]
+    }
+  ],
+  "analyzers": [
+    "review-comments",
+    "code-suggestions",
+    "risk-scoring",
+    "outdated-docs",
+    "similar-issues",
+    "review-thread-analysis",
+    "description-quality",
+    "fix-suggestions",
+    "pr-split",
+    "design-doc-drift"
+  ],
+  "expected": [],
+  "cassette": {
+    "design-doc-drift": "{\"hasDrift\":false,\"driftScore\":0.0,\"divergedSections\":[],\"recommendations\":[],\"summary\":\"No design doc conflicts.\"}"
+  }
+}

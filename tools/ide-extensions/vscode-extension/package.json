@@ -1,0 +1,101 @@
+{
+  "name": "karandash",
+  "displayName": "Karandash",
+  "description": "Language support for Karandash MR validation configuration files",
+  "version": "1.6.0",
+  "publisher": "karandash",
+  "license": "MIT",
+  "engines": {
+    "vscode": "^1.75.0"
+  },
+  "categories": [
+    "Programming Languages"
+  ],
+  "keywords": [
+    "karandash",
+    "validation",
+    "merge request",
+    "mr",
+    "gitlab",
+    "github"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "languages": [
+      {
+        "id": "karandash",
+        "aliases": [
+          "Karandash",
+          "karandash"
+        ],
+        "filenamePatterns": [
+          "**/karandash.config.kts",
+          "**/.karandash/config.kts",
+          "**/.karandash/*.kts"
+        ],
+        "configuration": "./language-configuration.json"
+      }
+    ],
+    "grammars": [
+      {
+        "language": "karandash",
+        "scopeName": "source.karandash",
+        "path": "./syntaxes/karandash.tmLanguage.json"
+      }
+    ],
+    "configuration": {
+      "type": "object",
+      "title": "Karandash",
+      "properties": {
+        "karandash.lspServerPath": {
+          "scope": "machine",
+          "type": ["string", "null"],
+          "default": null,
+          "description": "Custom path to a server jar: karandash-lsp.jar, or karandash.jar (started with the lsp subcommand). Optional; by default the extension runs `karandash lsp`."
+        },
+        "karandash.cliPath": {
+          "scope": "machine",
+          "type": "string",
+          "default": "karandash",
+          "description": "Path to the karandash command (JVM distribution) that serves the language server as `karandash lsp`"
+        },
+        "karandash.javaPath": {
+          "scope": "machine",
+          "type": "string",
+          "default": "java",
+          "description": "Path to Java executable (must be Java 17+)"
+        },
+        "karandash.trace.server": {
+          "type": "string",
+          "enum": ["off", "messages", "verbose"],
+          "default": "off",
+          "description": "Traces the communication between VS Code and the language server"
+        }
+      }
+    }
+  },
+  "activationEvents": [
+    "onLanguage:karandash"
+  ],
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "esbuild ./src/extension.ts --bundle --outfile=out/extension.js --external:vscode --format=cjs --platform=node --sourcemap",
+    "watch": "esbuild ./src/extension.ts --bundle --outfile=out/extension.js --external:vscode --format=cjs --platform=node --sourcemap --watch",
+    "pretest": "npm run compile",
+    "lint": "eslint src --ext ts",
+    "package": "npm run compile && vsce package"
+  },
+  "dependencies": {
+    "vscode-languageclient": "^9.0.1"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "@types/vscode": "^1.75.0",
+    "@typescript-eslint/eslint-plugin": "^6.0.0",
+    "@typescript-eslint/parser": "^6.0.0",
+    "esbuild": "^0.19.0",
+    "eslint": "^8.40.0",
+    "typescript": "^5.0.0",
+    "@vscode/vsce": "^2.19.0"
+  }
+}

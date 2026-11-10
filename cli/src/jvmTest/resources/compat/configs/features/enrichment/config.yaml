@@ -1,0 +1,9 @@
+# Source: docs/features/enrichment.md "Sub-block Configuration".
+enrichment:
+  jira:
+    url: "https://acme.atlassian.net"
+    token: "compat-literal-token"
+    tickets:            { enabled: true, max-per-mr: 10 }
+    acceptance-criteria: { enabled: true }
+    linked-issues:      { enabled: true }
+    ticket-keys:        { enabled: true }

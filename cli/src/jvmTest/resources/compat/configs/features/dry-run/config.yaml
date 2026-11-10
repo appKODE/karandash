@@ -1,0 +1,7 @@
+# Source: Config.dryRun / dryRunScope (YAML_CONFIG.md `is_dry_run`, `--dry-run`).
+dry-run: true
+dry-run-scope: ai
+
+rules:
+  title-format:
+    min-length: 10

@@ -1,0 +1,9 @@
+# A matching policy with severity: warning. karandash parses ActivePolicy.forcedSeverity but never applies it, so the
+# labels finding stays an error (exit 1). Frozen as-is; see corpus README.
+rules:
+  labels:
+    required-labels: ["needs-review"]
+policies:
+  - when: 'target_branch_matches("^main$")'
+    modules: [labels]
+    severity: warning

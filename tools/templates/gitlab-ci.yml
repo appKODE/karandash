@@ -1,0 +1,73 @@
+# GitLab CI Template for karandash MR Validation
+#
+# Choose one of the options below to add karandash to your pipeline.
+# Releases: https://github.com/appKODE/karandash/releases (pin a tag, e.g. v1.0.0)
+
+# ── Option A: Docker image (recommended) ────────────────────────────────────
+#
+# Uses the karandash image from Docker Hub: rinekri/karandash:vX (native binary)
+# or rinekri/karandash:vX-jvm (JVM). No download or JRE needed.
+
+karandash-validate:
+  stage: test
+  image:
+    name: rinekri/karandash:v1.0.0
+    pull_policy: if-not-present
+  script:
+    - karandash validate --config .karandash/config.yaml
+    # SARIF output for GitLab Security Dashboard:
+    # - karandash validate --config .karandash/config.yaml --format sarif --output gl-sast-report.json
+    # AI enrichment (generate title/description before validation):
+    # - karandash validate --config .karandash/config.yaml --enrich
+    # AI suggestions are included in the comment reporter when AI rules produce metadata.
+  # artifacts:
+  #   reports:
+  #     sast: gl-sast-report.json
+  #   expire_in: 1 week
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
+
+# ── Option B: Include reusable template ──────────────────────────────────────
+#
+# Include the template straight from the GitHub repository at a release tag.
+# Provides configurable inputs and automatic SARIF integration.
+#
+# include:
+#   - remote: 'https://raw.githubusercontent.com/appKODE/karandash/v1.0.0/.gitlab/templates/validate.yml'
+#     inputs:
+#       config_path: '.karandash/config.yaml'
+#       format: 'sarif'
+
+# ── Option C: Download native binary ────────────────────────────────────────
+#
+# Downloads the native binary from GitHub Releases and checks it against SHA256SUMS.
+# No JRE needed, ~15MB binary.
+#
+# karandash-validate:
+#   stage: test
+#   image: debian:bookworm-slim
+#   variables:
+#     KARANDASH_URL: https://github.com/appKODE/karandash/releases/download/v1.0.0
+#   before_script:
+#     - apt-get update -qq && apt-get install -y -qq curl > /dev/null 2>&1
+#     - curl -fsSLO "$KARANDASH_URL/karandash-linux-x64" -fsSLO "$KARANDASH_URL/SHA256SUMS"
+#     - grep ' karandash-linux-x64$' SHA256SUMS | sha256sum -c -
+#     - install -m 755 karandash-linux-x64 /usr/local/bin/karandash
+#   script:
+#     - karandash validate --config .karandash/config.yaml
+#   rules:
+#     - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
+
+# ── Option D: Download fat JAR ──────────────────────────────────────────────
+#
+# Downloads the fat JAR from GitHub Releases. Requires Java 17+.
+#
+# karandash-validate:
+#   stage: test
+#   image: eclipse-temurin:17-jre-alpine
+#   before_script:
+#     - wget -q https://github.com/appKODE/karandash/releases/download/v1.0.0/karandash.jar
+#   script:
+#     - java -jar karandash.jar validate --config .karandash/config.yaml
+#   rules:
+#     - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'

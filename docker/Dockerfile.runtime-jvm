@@ -1,0 +1,34 @@
+# Karandash JVM Runtime Image
+#
+# Minimal image for running Karandash via fat JAR.
+# Receives the pre-built karandash.jar - does NOT compile from source.
+#
+# Build (after producing the JAR via build job or karandash.sh):
+#   docker build -f docker/Dockerfile.runtime-jvm \
+#     --build-arg JAR_FILE=cli/build/libs/karandash.jar \
+#     --build-arg VERSION=1.0.0 \
+#     -t karandash/runtime-jvm .
+#
+# Usage:
+#   docker run --rm karandash/runtime-jvm karandash validate --help
+
+FROM eclipse-temurin:17-jre-jammy
+
+ARG VERSION=0.0.0
+ARG JAR_FILE=cli/build/libs/karandash.jar
+
+LABEL org.opencontainers.image.title="karandash"
+LABEL org.opencontainers.image.description="Karandash MR validation tool (JVM)"
+LABEL org.opencontainers.image.version="${VERSION}"
+
+WORKDIR /app
+
+COPY ${JAR_FILE} /app/karandash.jar
+RUN printf '#!/bin/sh\nexec java -jar /app/karandash.jar "$@"\n' > /app/karandash && chmod +x /app/karandash
+
+ENV PATH="/app:${PATH}"
+
+RUN groupadd -r karandash && useradd -r -m -g karandash karandash
+USER karandash
+
+CMD ["karandash", "--help"]

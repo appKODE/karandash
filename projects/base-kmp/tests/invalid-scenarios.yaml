@@ -1,0 +1,90 @@
+scenarios:
+  - name: "Invalid: KMP — Cyrillic in MR title"
+    mr:
+      title: "[android] Добавить экран"
+    expect: fail
+    expected-rules: ["language-policy"]
+
+  - name: "Invalid: KMP — missing platform tag"
+    mr:
+      title: "[PROJ-123] Add shared domain model"
+    expect: fail
+    expected-rules: ["title-format", "context-tag"]
+
+  - name: "Invalid: KMP — android + JIRA but no CHANGELOG"
+    mr:
+      title: "[PROJ-123][android] Add payment feature"
+      commits:
+        - subject: "[PROJ-123][android] Implement payment screen"
+          body: ""
+    expect: fail
+    expected-rules: ["commit-body"]
+
+  - name: "Invalid: KMP — capitalised [Android] tag"
+    mr:
+      title: "[Android] Fix KMP shared model"
+    expect: fail
+    expected-rules: ["title-format"]  # context-tag is case-insensitive since base-kmp 1.45.0
+
+  - name: "Invalid: KMP — both android and ios tags"
+    mr:
+      title: "[android] [ios] Fix shared bug"
+    expect: fail
+    expected-rules: ["context-tag"]
+
+  - name: "Invalid: KMP — wrong JIRA key (WAL instead of PROJ)"
+    mr:
+      title: "[WAL-123][android] Add feature"
+      commits:
+        - subject: "[WAL-123][android] Implement feature"
+          body: "CHANGELOG: [WAL-123] Add feature."
+    expect: fail
+    expected-rules: ["jira-ticket"]
+
+  - name: "Invalid: KMP — CHANGELOG missing task ID"
+    mr:
+      title: "[PROJ-123][android] Add payment feature"
+      commits:
+        - subject: "[PROJ-123][android] Implement payment screen"
+          body: "CHANGELOG: Add payment feature."
+    expect: fail
+    expected-rules: ["commit-body"]
+
+  - name: "Invalid: KMP — commit task not in MR title"
+    mr:
+      title: "[PROJ-100][android] Implement feature A"
+      commits:
+        - subject: "[PROJ-999][android] Unrelated change"
+    expect: fail
+    expected-rules: ["cross-entity-consistency"]
+
+  - name: "Invalid: KMP — draft MR"
+    mr:
+      title: "Draft: [android] Implement new onboarding"
+      draft: true
+    expect: fail
+    expected-rules: ["draft-prevention"]
+
+  - name: "Invalid: KMP — Cyrillic in branch name"
+    mr:
+      title: "[android] Fix auth issue"
+      commits:
+        - subject: "[android] Fix token refresh"
+      branch: "fix/исправить-токен"
+    expect: fail
+    expected-rules: ["language-policy"]
+
+  - name: "Invalid: KMP — capitalised [IOS] tag"
+    mr:
+      title: "[IOS] Fix SwiftUI layout"
+    expect: fail
+    expected-rules: ["title-format"]  # context-tag is case-insensitive since base-kmp 1.45.0
+
+  - name: "Invalid: KMP — CHANGELOG references task not in MR title"
+    mr:
+      title: "[PROJ-100][android] Add feature"
+      commits:
+        - subject: "[PROJ-100][android] Implement feature"
+          body: "CHANGELOG: [PROJ-100] Add feature, [PROJ-999] Fix unrelated issue."
+    expect: fail
+    expected-rules: ["cross-entity-consistency"]

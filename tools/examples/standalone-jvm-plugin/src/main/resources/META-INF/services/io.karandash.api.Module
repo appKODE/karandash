@@ -1,0 +1,16 @@
+com.example.karandash.ExampleRulePlugin
+com.example.karandash.ExampleReporterPlugin
+com.example.karandash.ExampleProviderPlugin
+com.example.karandash.ExampleCliCommandPlugin
+com.example.karandash.ExampleProfilePlugin
+com.example.karandash.ExampleAiProviderPlugin
+com.example.karandash.ExampleAiInterceptorPlugin
+com.example.karandash.ExampleAiAnalyzerPlugin
+com.example.karandash.ExampleAiPromptProcessorPlugin
+com.example.karandash.ExampleAiResponseTransformerPlugin
+com.example.karandash.ExampleAiContextEnricherPlugin
+com.example.karandash.ExampleAiRedactorPlugin
+com.example.karandash.ExampleAiTokenAllocatorPlugin
+com.example.karandash.ExampleScriptPlugin
+com.example.karandash.ExampleConfigFormatPlugin
+com.example.karandash.ExampleCompositePlugin

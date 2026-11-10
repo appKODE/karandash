@@ -1,0 +1,68 @@
+scenarios:
+  - name: "Valid: NAV JIRA + android + CHANGELOG"
+    mr:
+      title: "[NAV-123][android] Fix map rendering crash"
+      commits:
+        - subject: "[NAV-123][android] Fix null pointer in MapView renderer"
+          body: "CHANGELOG: [NAV-123] Fix map rendering crash on empty tile set."
+      branch: "fix/NAV-123-map-render"
+    expect: pass
+
+  - name: "Valid: NAV JIRA + ios + no CHANGELOG required"
+    mr:
+      title: "[NAV-456][ios] Fix location permission dialog"
+      commits:
+        - subject: "[NAV-456][ios] Show permission rationale before request"
+          body: ""
+      branch: "fix/NAV-456-location-perm"
+    expect: pass
+
+  - name: "Valid: android tag only (no JIRA, no CHANGELOG required)"
+    mr:
+      title: "[android] Improve map gesture handling"
+      commits:
+        - subject: "[android] Smooth pinch-to-zoom with velocity tracking"
+      branch: "improve/map-gestures"
+    expect: pass
+
+  - name: "Valid: core tag (C++ shared code)"
+    mr:
+      title: "[core] Optimize tile cache eviction"
+      commits:
+        - subject: "[core] Use LRU eviction in TileCache"
+      branch: "perf/core-tile-cache"
+    expect: pass
+
+  - name: "Valid: NAV JIRA + core tag"
+    mr:
+      title: "[NAV-789][core] Fix route calculation memory leak"
+      commits:
+        - subject: "[NAV-789][core] Release route graph on calculation cancel"
+      branch: "fix/NAV-789-route-leak"
+    expect: pass
+
+  - name: "Valid: multiple NAV tickets in title + android + CHANGELOG"
+    mr:
+      title: "[NAV-100][NAV-101][android] Fix two map display bugs"
+      commits:
+        - subject: "[NAV-100][NAV-101][android] Fix tile gap and zoom level bugs"
+          body: "CHANGELOG: [NAV-100] Fix tile gap at zoom boundary, [NAV-101] Fix zoom level reset on rotation."
+      branch: "fix/NAV-100-NAV-101-display"
+    expect: pass
+
+  - name: "Valid: ios tag only (no JIRA)"
+    mr:
+      title: "[ios] Fix SwiftUI map overlay z-order"
+      commits:
+        - subject: "[ios] Correct overlay stacking order in MapView"
+      branch: "fix/ios-overlay-zorder"
+    expect: pass
+
+  - name: "Valid: NAV JIRA + android + CHANGELOG in English (trailing period)"
+    mr:
+      title: "[NAV-555][android] Add offline map download"
+      commits:
+        - subject: "[NAV-555][android] Implement offline tile download manager"
+          body: "CHANGELOG: [NAV-555] Add offline map download support."
+      branch: "feature/NAV-555-offline-download"
+    expect: pass

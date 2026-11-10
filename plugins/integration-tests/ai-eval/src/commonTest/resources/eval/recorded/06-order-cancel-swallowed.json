@@ -1,0 +1,82 @@
+{
+  "responses": {
+    "change-categorization": {
+      "suggestedLabels": [
+        "feature"
+      ],
+      "confidence": 0.9,
+      "reasoning": "Adds a new cancel operation."
+    },
+    "code-quality": {
+      "overallScore": 0.5,
+      "dimensions": {
+        "correctness": 0.4,
+        "errorHandling": 0.3,
+        "readability": 0.8,
+        "maintainability": 0.7,
+        "performance": 0.9,
+        "security": 0.9,
+        "design": 0.7
+      },
+      "issues": [
+        {
+          "file": "src/main/kotlin/orders/OrderService.kt",
+          "line": 13,
+          "dimension": "correctness",
+          "severity": "error",
+          "message": "Non-null assertion on a nullable lookup throws for unknown orders",
+          "suggestion": "Return early when the order is missing"
+        }
+      ],
+      "strengths": [
+        "Small focused function"
+      ],
+      "summary": "The cancel function asserts non-null and swallows every exception."
+    },
+    "mr-summary": {
+      "summary": "Adds OrderService.cancel.",
+      "keyChanges": [
+        "cancel(id)"
+      ],
+      "risks": [
+        "Swallowed exceptions",
+        "Non-null assertion"
+      ],
+      "reviewFocus": [
+        "OrderService.cancel"
+      ]
+    },
+    "review-comments": {
+      "comments": [
+        {
+          "file": "src/main/kotlin/orders/OrderService.kt",
+          "line": 13,
+          "category": "bug",
+          "severity": "error",
+          "confidence": 0.9,
+          "message": "`order!!` throws for an unknown id; the description promises no crash.",
+          "fix": "Return early with `val order = repo.find(id) ?: return`."
+        },
+        {
+          "file": "src/main/kotlin/orders/OrderService.kt",
+          "line": 14,
+          "category": "bug",
+          "severity": "warning",
+          "confidence": 0.85,
+          "message": "The empty catch hides every failure of `repo.delete`.",
+          "fix": "Log the exception or let it propagate."
+        }
+      ]
+    },
+    "risk-scoring": {
+      "riskScore": 0.5,
+      "riskLevel": "medium",
+      "confidence": 0.8,
+      "factors": [
+        "Swallowed exception hides delete failures",
+        "Crash path on unknown orders"
+      ],
+      "summary": "Medium risk."
+    }
+  }
+}

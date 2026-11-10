@@ -1,0 +1,8 @@
+[package]
+name = "karandash-plugin-common"
+version = "1.0.0"
+edition = "2021"
+
+# Shared by the native-plugin-rust and wasm-plugin-rust workspaces (a path dependency from each).
+[dependencies]
+serde = { version = "1", features = ["derive"] }

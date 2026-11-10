@@ -1,0 +1,196 @@
+name: MR Validation with Reviewdog
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+
+    # Permissions required for GitHub API access
+    permissions:
+      contents: read         # Required for checking out the repository
+      pull-requests: write   # Required for posting PR review comments
+      checks: write          # Required for posting check annotations
+
+    steps:
+      # Step 1: Checkout the repository code
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # Fetch full history for better diff analysis
+
+      # Step 2: Set up reviewdog for inline PR annotations
+      - name: Set up reviewdog
+        uses: reviewdog/action-setup@v1
+        with:
+          reviewdog_version: latest
+
+      # Step 3: Run Karandash validation and pipe output to reviewdog
+      # This step uses the rdjsonl format (newline-delimited JSON)
+      # Each finding is output as a single JSON line that reviewdog can parse
+      - name: Run Karandash validation with reviewdog
+        env:
+          REVIEWDOG_GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          karandash validate --format rdjsonl |
+            reviewdog -f=rdjsonl \
+              -name="karandash" \
+              -reporter=github-pr-review \
+              -fail-on-error=true
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Configuration Options
+# ─────────────────────────────────────────────────────────────────────────────
+#
+# Karandash output formats:
+#   --format rdjsonl  - Newline-delimited JSON (one diagnostic per line)
+#   --format rdjson   - Single JSON document with source and diagnostics array
+#
+# Reviewdog reporter options:
+#   -reporter=github-pr-review   - Post as review comments on changed lines
+#   -reporter=github-pr-check    - Post as GitHub Check annotations
+#   -reporter=github-check       - Post as Check Run (summary only)
+#
+# Additional Karandash options:
+#   --config <path>              - Custom config file path
+#   --mr <file>                  - Input merge request data file
+#   --explain                    - Show detailed explanations for findings
+#
+# ─────────────────────────────────────────────────────────────────────────────
+# Alternative: Using rdjson format (single JSON envelope)
+# ─────────────────────────────────────────────────────────────────────────────
+#
+# If you prefer the rdjson format (single JSON document with source metadata):
+#
+#   - name: Run Karandash validation with reviewdog
+#     env:
+#       REVIEWDOG_GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#     run: |
+#       karandash validate --format rdjson |
+#         reviewdog -f=rdjson \
+#           -name="karandash" \
+#           -reporter=github-pr-review
+#
+# ─────────────────────────────────────────────────────────────────────────────
+# Alternative: Using file output
+# ─────────────────────────────────────────────────────────────────────────────
+#
+# If you want to save the output to a file before piping to reviewdog:
+#
+#   - name: Run Karandash validation
+#     run: karandash validate --format rdjsonl --output karandash-results.jsonl
+#
+#   - name: Run reviewdog with saved results
+#     env:
+#       REVIEWDOG_GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#     run: |
+#       cat karandash-results.jsonl |
+#         reviewdog -f=rdjsonl -name="karandash" -reporter=github-pr-review
+#
+# ─────────────────────────────────────────────────────────────────────────────
+# Alternative: Using GitHub Check annotations (works better for non-file findings)
+# ─────────────────────────────────────────────────────────────────────────────
+#
+# For findings that don't have file locations, use github-pr-check reporter:
+#
+#   - name: Run Karandash validation with reviewdog
+#     env:
+#       REVIEWDOG_GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#     run: |
+#       karandash validate --format rdjsonl |
+#         reviewdog -f=rdjsonl \
+#           -name="karandash" \
+#           -reporter=github-pr-check
+#
+# ─────────────────────────────────────────────────────────────────────────────
+# Alternative: GitLab CI Setup
+# ─────────────────────────────────────────────────────────────────────────────
+#
+# If using GitLab CI instead of GitHub Actions:
+#
+#   validate:
+#     image: ubuntu:latest
+#     script:
+#       - apt-get update && apt-get install -y curl
+#       - curl -sfL https://raw.githubusercontent.com/reviewdog/reviewdog/master/install.sh | sh -s -- -b /usr/local/bin
+#       - karandash validate --format rdjsonl | reviewdog -f=rdjsonl -name="karandash" -reporter=gitlab-mr-discussion
+#     allow_failure: true
+#
+# GitLab CI reporter options:
+#   -reporter=gitlab-mr-discussion - Post as MR discussion comments
+#   -reporter=gitlab-mr-commit     - Post as commit comments
+#   -reporter=gitlab-note          - Post as notes
+#
+# ─────────────────────────────────────────────────────────────────────────────
+# Installation & Usage
+# ─────────────────────────────────────────────────────────────────────────────
+#
+# 1. Copy this file to .github/workflows/karandash-reviewdog.yml
+#
+# 2. Ensure you have a Karandash configuration file in your repo:
+#    - Default locations: .karandash.yml, karandash.yml, etc.
+#    - Or specify with: --config path/to/config.yml
+#
+# 3. Commit and push to your repository
+#
+# 4. Create a pull request to test the workflow
+#
+# 5. Review comments will appear:
+#    - As inline comments on changed lines (github-pr-review)
+#    - Or as check annotations (github-pr-check/github-check)
+#
+# ─────────────────────────────────────────────────────────────────────────────
+# Troubleshooting
+# ─────────────────────────────────────────────────────────────────────────────
+#
+# Issue: "karandash: command not found"
+# Solution: karandash must be installed in your CI environment. Either:
+#   a) Include karandash in your Docker image
+#   b) Install via package manager (apt, brew, etc.)
+#   c) Download JAR and run with: java -jar karandash.jar validate --format rdjsonl
+#
+# Issue: "reviewdog: command not found"
+# Solution: Ensure the "Set up reviewdog" step is included and runs before reviewdog is called
+#
+# Issue: Comments not appearing on PR
+# Check:
+#   a) Permissions include pull-requests: write and checks: write
+#   b) GITHUB_TOKEN secret is available (should be automatic in GitHub Actions)
+#   c) Validation actually found issues (empty output = no comments)
+#   d) Check the workflow run logs for errors
+#
+# Issue: Findings without file locations not appearing
+# Note: reviewdog with github-pr-review reporter only works with file-anchored findings.
+# For non-file findings (PR title, status, approvals), use github-pr-check reporter instead.
+#
+# ─────────────────────────────────────────────────────────────────────────────
+# Format Comparison
+# ─────────────────────────────────────────────────────────────────────────────
+#
+# rdjsonl (Recommended for piping to reviewdog):
+#   - One JSON diagnostic per line
+#   - Streaming-friendly (can be piped without buffering)
+#   - Lower memory usage
+#   - Example:
+#       {"message":"Title too short","location":{"path":"merge_request","range":{"start":{"line":1}}},"severity":"ERROR","code":{"value":"titleLength"}}
+#       {"message":"Missing approvers","location":{"path":"merge_request"},"severity":"WARNING","code":{"value":"approval"}}
+#
+# rdjson (Recommended for storing results):
+#   - Single JSON document with DiagnosticResult envelope
+#   - Includes source metadata (tool name, URL)
+#   - Pretty-printed for readability
+#   - Example:
+#       {
+#         "source": {
+#           "name": "karandash",
+#           "url": "https://github.com/appKODE/karandash"
+#         },
+#         "diagnostics": [
+#           {"message":"Title too short",...},
+#           {"message":"Missing approvers",...}
+#         ]
+#       }
+#

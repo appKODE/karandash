@@ -1,0 +1,135 @@
+{
+  "id": "01-user-lookup-bugs",
+  "title": "Add user lookup by name and display name",
+  "description": "Implements PROJ-12: look up users by name and render a display name that is null-safe for deleted users.\n\nNo behavior change for existing callers.",
+  "sourceBranch": "feature/PROJ-12-user-lookup",
+  "commits": [
+    "feat(users): add findByName and displayName (PROJ-12)"
+  ],
+  "files": [
+    {
+      "path": "src/main/kotlin/users/UserRepository.kt",
+      "diff": [
+        "@@ -10,4 +10,13 @@ class UserRepository(",
+        "     private val db: Database,",
+        " ) {",
+        "+    fun findByName(name: String): User? {",
+        "+        val sql = \"SELECT * FROM users WHERE name = '$name'\"",
+        "+        return db.queryOne(sql)",
+        "+    }",
+        "+",
+        "+    fun displayName(id: Long): String {",
+        "+        val user = db.find(id)",
+        "+        return user!!.name.uppercase()",
+        "+    }",
+        " ",
+        "     fun count(): Int = db.count()"
+      ]
+    }
+  ],
+  "pastMergeRequests": [
+    {
+      "id": "31",
+      "title": "Fix SQL injection in UserRepository.findByEmail queryOne",
+      "state": "merged",
+      "author": "alice"
+    },
+    {
+      "id": "27",
+      "title": "Bind order ids as query parameters",
+      "state": "merged",
+      "author": "bob"
+    }
+  ],
+  "priorFindings": [
+    {
+      "rule": "sql-injection",
+      "severity": "ERROR",
+      "message": "String-built SQL query in UserRepository.findByName"
+    }
+  ],
+  "reviewThreads": [
+    {
+      "id": "t1",
+      "notes": [
+        {
+          "id": "n1",
+          "body": "The description says no behavior change, but this adds public query methods?",
+          "author": "ann"
+        }
+      ]
+    }
+  ],
+  "analyzers": [
+    "review-comments",
+    "code-suggestions",
+    "code-quality",
+    "risk-scoring",
+    "change-categorization",
+    "mr-summary",
+    "fix-suggestions",
+    "similar-issues",
+    "review-thread-analysis",
+    "description-quality"
+  ],
+  "expected": [
+    {
+      "analyzer": "review-comments",
+      "file": "src/main/kotlin/users/UserRepository.kt",
+      "startLine": 13,
+      "category": "SEC"
+    },
+    {
+      "analyzer": "review-comments",
+      "file": "src/main/kotlin/users/UserRepository.kt",
+      "startLine": 19,
+      "category": "BUG"
+    },
+    {
+      "analyzer": "code-suggestions",
+      "file": "src/main/kotlin/users/UserRepository.kt",
+      "startLine": 13
+    },
+    {
+      "analyzer": "code-suggestions",
+      "file": "src/main/kotlin/users/UserRepository.kt",
+      "startLine": 19
+    },
+    {
+      "analyzer": "code-quality"
+    },
+    {
+      "analyzer": "code-quality",
+      "file": "src/main/kotlin/users/UserRepository.kt",
+      "startLine": 13,
+      "category": "security"
+    },
+    {
+      "analyzer": "code-quality",
+      "file": "src/main/kotlin/users/UserRepository.kt",
+      "startLine": 19,
+      "category": "correctness"
+    },
+    {
+      "analyzer": "risk-scoring",
+      "category": "high"
+    },
+    {
+      "analyzer": "change-categorization",
+      "category": "feature"
+    },
+    {
+      "analyzer": "mr-summary"
+    },
+    {
+      "analyzer": "fix-suggestions",
+      "category": "sql-injection"
+    },
+    {
+      "analyzer": "similar-issues"
+    },
+    {
+      "analyzer": "review-thread-analysis"
+    }
+  ]
+}

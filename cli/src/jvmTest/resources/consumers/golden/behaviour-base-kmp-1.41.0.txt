@@ -1,0 +1,13 @@
+changelog-without-period: FAIL
+  commitBody error Commit 0a1b2c3: no line matching `@changelog-line` in the body; first line "TASK: https://jira.example/browse/BRAVO-3158
+ticketless-follow-up-commit: FAIL
+  commitBody error Commit 0a1b2c3: no line matching `@changelog-line` in the body; first line "CHANGELOG: [BRAVO-3158] Fix crash" does not 
+  commitBody error Commit body is required but missing in commit 1a1b2c3
+catalog-tag-without-ticket: PASS
+capitalized-platform-tag: FAIL
+  commitMessages error Commit message does not match required pattern: 0a1b2c3
+  contextTag error Commit 0a1b2c3: tag [iOS] is not accepted — tags are case-sensitive here.
+  contextTag error MR title: tag [iOS] is not accepted — tags are case-sensitive here.
+  titleFormat error MR title does not match required pattern.
+subject-of-85-chars: PASS
+  commitMessages warning Commit 0a1b2c3 subject is 85 chars (limit 72).

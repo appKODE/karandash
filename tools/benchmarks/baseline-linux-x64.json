@@ -1,0 +1,33 @@
+{
+  "date": "2026-02-28T14:06:39Z",
+  "platform": "Linux x86_64 (Docker QEMU emulation on Apple Silicon)",
+  "iterations": 10,
+  "note": "QEMU emulation adds overhead; native Linux results will be faster",
+  "startup_ms": {
+    "karandash_native": { "mean": 248.5, "min": 152.4, "max": 438.2 },
+    "karandash_fatjar": { "mean": 1380.1, "min": 1351.1, "max": 1460.5 },
+    "danger_js": { "mean": 413.3, "min": 406.5, "max": 448.8 },
+    "danger_kotlin": { "mean": 19.7, "min": 18.5, "max": 20.8 },
+    "reviewdog": { "mean": 42.6, "min": 41.1, "max": 44.3 }
+  },
+  "validation_3rules_ms": {
+    "karandash_native": { "mean": 150.4, "min": 144.1, "max": 182.5 },
+    "karandash_fatjar": { "mean": 1501.5, "min": 1409.2, "max": 1699.3 },
+    "danger_js": { "mean": 2185.8, "min": 2122.2, "max": 2249.5 },
+    "danger_kotlin": { "mean": 1463.9, "min": 1382.6, "max": 1551.5 },
+    "reviewdog": { "mean": 64.8, "min": 62.3, "max": 68.5 }
+  },
+  "validation_21rules_ms": {
+    "karandash_native": { "mean": 148.3, "min": 146.8, "max": 150.3 },
+    "karandash_fatjar": { "mean": 1495.7, "min": 1447.4, "max": 1540.8 }
+  },
+  "thresholds": {
+    "description": "Regression thresholds for CI. Values are max acceptable mean_ms on native Linux (non-emulated). QEMU results should be ~2-3x these values.",
+    "startup_native_max_ms": 150,
+    "validation_3rules_native_max_ms": 100,
+    "validation_21rules_native_max_ms": 120,
+    "startup_jar_max_ms": 3000,
+    "validation_3rules_jar_max_ms": 3500,
+    "validation_21rules_jar_max_ms": 3500
+  }
+}

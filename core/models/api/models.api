@@ -1,0 +1,1658 @@
+public final class io/karandash/models/ActivePolicy {
+	public static final field Companion Lio/karandash/models/ActivePolicy$Companion;
+	public fun <init> (Ljava/lang/String;Ljava/lang/String;ZLjava/util/List;Ljava/lang/Boolean;Ljava/lang/String;Lkotlinx/serialization/json/JsonObject;Ljava/util/Map;)V
+	public synthetic fun <init> (Ljava/lang/String;Ljava/lang/String;ZLjava/util/List;Ljava/lang/Boolean;Ljava/lang/String;Lkotlinx/serialization/json/JsonObject;Ljava/util/Map;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun component1 ()Ljava/lang/String;
+	public final fun component2 ()Ljava/lang/String;
+	public final fun component3 ()Z
+	public final fun component4 ()Ljava/util/List;
+	public final fun component5 ()Ljava/lang/Boolean;
+	public final fun component6 ()Ljava/lang/String;
+	public final fun component7 ()Lkotlinx/serialization/json/JsonObject;
+	public final fun component8 ()Ljava/util/Map;
+	public final fun copy (Ljava/lang/String;Ljava/lang/String;ZLjava/util/List;Ljava/lang/Boolean;Ljava/lang/String;Lkotlinx/serialization/json/JsonObject;Ljava/util/Map;)Lio/karandash/models/ActivePolicy;
+	public static synthetic fun copy$default (Lio/karandash/models/ActivePolicy;Ljava/lang/String;Ljava/lang/String;ZLjava/util/List;Ljava/lang/Boolean;Ljava/lang/String;Lkotlinx/serialization/json/JsonObject;Ljava/util/Map;ILjava/lang/Object;)Lio/karandash/models/ActivePolicy;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getAffectedModules ()Ljava/util/List;
+	public final fun getCondition ()Ljava/lang/String;
+	public final fun getConfigOverrides ()Lkotlinx/serialization/json/JsonObject;
+	public final fun getDisplayLabel ()Ljava/lang/String;
+	public final fun getForcedEnabled ()Ljava/lang/Boolean;
+	public final fun getForcedSeverity ()Ljava/lang/String;
+	public final fun getMatched ()Z
+	public final fun getName ()Ljava/lang/String;
+	public final fun getStageOverrides ()Ljava/util/Map;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final synthetic class io/karandash/models/ActivePolicy$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lio/karandash/models/ActivePolicy$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lio/karandash/models/ActivePolicy;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lio/karandash/models/ActivePolicy;)V
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/karandash/models/ActivePolicy$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/karandash/models/Approval {
+	public static final field Companion Lio/karandash/models/Approval$Companion;
+	public fun <init> (Lio/karandash/models/User;Ljava/lang/String;Lio/karandash/models/ReviewState;Lio/karandash/models/ApprovalMethod;)V
+	public synthetic fun <init> (Lio/karandash/models/User;Ljava/lang/String;Lio/karandash/models/ReviewState;Lio/karandash/models/ApprovalMethod;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun component1 ()Lio/karandash/models/User;
+	public final fun component2 ()Ljava/lang/String;
+	public final fun component3 ()Lio/karandash/models/ReviewState;
+	public final fun component4 ()Lio/karandash/models/ApprovalMethod;
+	public final fun copy (Lio/karandash/models/User;Ljava/lang/String;Lio/karandash/models/ReviewState;Lio/karandash/models/ApprovalMethod;)Lio/karandash/models/Approval;
+	public static synthetic fun copy$default (Lio/karandash/models/Approval;Lio/karandash/models/User;Ljava/lang/String;Lio/karandash/models/ReviewState;Lio/karandash/models/ApprovalMethod;ILjava/lang/Object;)Lio/karandash/models/Approval;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getApprovedAt ()Ljava/lang/String;
+	public final fun getMethod ()Lio/karandash/models/ApprovalMethod;
+	public final fun getState ()Lio/karandash/models/ReviewState;
+	public final fun getUser ()Lio/karandash/models/User;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final synthetic class io/karandash/models/Approval$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lio/karandash/models/Approval$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lio/karandash/models/Approval;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lio/karandash/models/Approval;)V
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/karandash/models/Approval$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/karandash/models/ApprovalMethod : java/lang/Enum {
+	public static final field CODE_REVIEW Lio/karandash/models/ApprovalMethod;
+	public static final field COMMENT_KEYWORD Lio/karandash/models/ApprovalMethod;
+	public static final field Companion Lio/karandash/models/ApprovalMethod$Companion;
+	public static final field EMOJI_REACTION Lio/karandash/models/ApprovalMethod;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public static fun valueOf (Ljava/lang/String;)Lio/karandash/models/ApprovalMethod;
+	public static fun values ()[Lio/karandash/models/ApprovalMethod;
+}
+
+public final class io/karandash/models/ApprovalMethod$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/karandash/models/ApprovalSignal {
+	public static final field Companion Lio/karandash/models/ApprovalSignal$Companion;
+	public fun <init> (Lio/karandash/models/User;Lio/karandash/models/ApprovalMethod;Ljava/lang/String;Ljava/lang/String;)V
+	public synthetic fun <init> (Lio/karandash/models/User;Lio/karandash/models/ApprovalMethod;Ljava/lang/String;Ljava/lang/String;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun component1 ()Lio/karandash/models/User;
+	public final fun component2 ()Lio/karandash/models/ApprovalMethod;
+	public final fun component3 ()Ljava/lang/String;
+	public final fun component4 ()Ljava/lang/String;
+	public final fun copy (Lio/karandash/models/User;Lio/karandash/models/ApprovalMethod;Ljava/lang/String;Ljava/lang/String;)Lio/karandash/models/ApprovalSignal;
+	public static synthetic fun copy$default (Lio/karandash/models/ApprovalSignal;Lio/karandash/models/User;Lio/karandash/models/ApprovalMethod;Ljava/lang/String;Ljava/lang/String;ILjava/lang/Object;)Lio/karandash/models/ApprovalSignal;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getMethod ()Lio/karandash/models/ApprovalMethod;
+	public final fun getSignaledAt ()Ljava/lang/String;
+	public final fun getText ()Ljava/lang/String;
+	public final fun getUser ()Lio/karandash/models/User;
+	public fun hashCode ()I
+	public final fun toApproval (Ljava/util/List;Ljava/util/List;)Lio/karandash/models/Approval;
+	public static synthetic fun toApproval$default (Lio/karandash/models/ApprovalSignal;Ljava/util/List;Ljava/util/List;ILjava/lang/Object;)Lio/karandash/models/Approval;
+	public fun toString ()Ljava/lang/String;
+}
+
+public final synthetic class io/karandash/models/ApprovalSignal$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lio/karandash/models/ApprovalSignal$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lio/karandash/models/ApprovalSignal;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lio/karandash/models/ApprovalSignal;)V
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/karandash/models/ApprovalSignal$Companion {
+	public final fun getDEFAULT_EMOJIS ()Ljava/util/List;
+	public final fun getDEFAULT_KEYWORDS ()Ljava/util/List;
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/karandash/models/BlameCommit {
+	public static final field Companion Lio/karandash/models/BlameCommit$Companion;
+	public fun <init> (Ljava/lang/String;Lio/karandash/models/CommitAuthor;Ljava/lang/String;Ljava/lang/String;)V
+	public final fun component1 ()Ljava/lang/String;
+	public final fun component2 ()Lio/karandash/models/CommitAuthor;
+	public final fun component3 ()Ljava/lang/String;
+	public final fun component4 ()Ljava/lang/String;
+	public final fun copy (Ljava/lang/String;Lio/karandash/models/CommitAuthor;Ljava/lang/String;Ljava/lang/String;)Lio/karandash/models/BlameCommit;
+	public static synthetic fun copy$default (Lio/karandash/models/BlameCommit;Ljava/lang/String;Lio/karandash/models/CommitAuthor;Ljava/lang/String;Ljava/lang/String;ILjava/lang/Object;)Lio/karandash/models/BlameCommit;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getAuthor ()Lio/karandash/models/CommitAuthor;
+	public final fun getMessage ()Ljava/lang/String;
+	public final fun getSha ()Ljava/lang/String;
+	public final fun getTimestamp ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final synthetic class io/karandash/models/BlameCommit$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lio/karandash/models/BlameCommit$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lio/karandash/models/BlameCommit;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lio/karandash/models/BlameCommit;)V
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/karandash/models/BlameCommit$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/karandash/models/BlameEntry {
+	public static final field Companion Lio/karandash/models/BlameEntry$Companion;
+	public fun <init> (IILio/karandash/models/BlameCommit;)V
+	public final fun component1 ()I
+	public final fun component2 ()I
+	public final fun component3 ()Lio/karandash/models/BlameCommit;
+	public final fun copy (IILio/karandash/models/BlameCommit;)Lio/karandash/models/BlameEntry;
+	public static synthetic fun copy$default (Lio/karandash/models/BlameEntry;IILio/karandash/models/BlameCommit;ILjava/lang/Object;)Lio/karandash/models/BlameEntry;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getCommit ()Lio/karandash/models/BlameCommit;
+	public final fun getEndLine ()I
+	public final fun getStartLine ()I
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final synthetic class io/karandash/models/BlameEntry$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lio/karandash/models/BlameEntry$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lio/karandash/models/BlameEntry;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lio/karandash/models/BlameEntry;)V
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/karandash/models/BlameEntry$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/karandash/models/ChangeType : java/lang/Enum {
+	public static final field ADDED Lio/karandash/models/ChangeType;
+	public static final field Companion Lio/karandash/models/ChangeType$Companion;
+	public static final field DELETED Lio/karandash/models/ChangeType;
+	public static final field MODIFIED Lio/karandash/models/ChangeType;
+	public static final field RENAMED Lio/karandash/models/ChangeType;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public static fun valueOf (Ljava/lang/String;)Lio/karandash/models/ChangeType;
+	public static fun values ()[Lio/karandash/models/ChangeType;
+}
+
+public final class io/karandash/models/ChangeType$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/karandash/models/CiJobStatus {
+	public static final field Companion Lio/karandash/models/CiJobStatus$Companion;
+	public fun <init> (Ljava/lang/String;Ljava/lang/String;)V
+	public final fun component1 ()Ljava/lang/String;
+	public final fun component2 ()Ljava/lang/String;
+	public final fun copy (Ljava/lang/String;Ljava/lang/String;)Lio/karandash/models/CiJobStatus;
+	public static synthetic fun copy$default (Lio/karandash/models/CiJobStatus;Ljava/lang/String;Ljava/lang/String;ILjava/lang/Object;)Lio/karandash/models/CiJobStatus;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getName ()Ljava/lang/String;
+	public final fun getStatus ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final synthetic class io/karandash/models/CiJobStatus$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lio/karandash/models/CiJobStatus$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lio/karandash/models/CiJobStatus;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lio/karandash/models/CiJobStatus;)V
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/karandash/models/CiJobStatus$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/karandash/models/Commit {
+	public static final field Companion Lio/karandash/models/Commit$Companion;
+	public fun <init> (Ljava/lang/String;Ljava/lang/String;Lio/karandash/models/CommitAuthor;Ljava/lang/String;)V
+	public final fun component1 ()Ljava/lang/String;
+	public final fun component2 ()Ljava/lang/String;
+	public final fun component3 ()Lio/karandash/models/CommitAuthor;
+	public final fun component4 ()Ljava/lang/String;
+	public final fun copy (Ljava/lang/String;Ljava/lang/String;Lio/karandash/models/CommitAuthor;Ljava/lang/String;)Lio/karandash/models/Commit;
+	public static synthetic fun copy$default (Lio/karandash/models/Commit;Ljava/lang/String;Ljava/lang/String;Lio/karandash/models/CommitAuthor;Ljava/lang/String;ILjava/lang/Object;)Lio/karandash/models/Commit;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getAuthor ()Lio/karandash/models/CommitAuthor;
+	public final fun getMessage ()Ljava/lang/String;
+	public final fun getSha ()Ljava/lang/String;
+	public final fun getTimestamp ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final synthetic class io/karandash/models/Commit$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lio/karandash/models/Commit$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lio/karandash/models/Commit;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lio/karandash/models/Commit;)V
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/karandash/models/Commit$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/karandash/models/CommitAuthor {
+	public static final field Companion Lio/karandash/models/CommitAuthor$Companion;
+	public fun <init> (Ljava/lang/String;Ljava/lang/String;)V
+	public final fun component1 ()Ljava/lang/String;
+	public final fun component2 ()Ljava/lang/String;
+	public final fun copy (Ljava/lang/String;Ljava/lang/String;)Lio/karandash/models/CommitAuthor;
+	public static synthetic fun copy$default (Lio/karandash/models/CommitAuthor;Ljava/lang/String;Ljava/lang/String;ILjava/lang/Object;)Lio/karandash/models/CommitAuthor;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getEmail ()Ljava/lang/String;
+	public final fun getName ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final synthetic class io/karandash/models/CommitAuthor$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lio/karandash/models/CommitAuthor$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lio/karandash/models/CommitAuthor;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lio/karandash/models/CommitAuthor;)V
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/karandash/models/CommitAuthor$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/karandash/models/DiffRefs {
+	public static final field Companion Lio/karandash/models/DiffRefs$Companion;
+	public fun <init> (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V
+	public synthetic fun <init> (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun component1 ()Ljava/lang/String;
+	public final fun component2 ()Ljava/lang/String;
+	public final fun component3 ()Ljava/lang/String;
+	public final fun copy (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)Lio/karandash/models/DiffRefs;
+	public static synthetic fun copy$default (Lio/karandash/models/DiffRefs;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;ILjava/lang/Object;)Lio/karandash/models/DiffRefs;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getBaseSha ()Ljava/lang/String;
+	public final fun getHeadSha ()Ljava/lang/String;
+	public final fun getStartSha ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final synthetic class io/karandash/models/DiffRefs$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lio/karandash/models/DiffRefs$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lio/karandash/models/DiffRefs;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lio/karandash/models/DiffRefs;)V
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/karandash/models/DiffRefs$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/karandash/models/FileChange {
+	public static final field Companion Lio/karandash/models/FileChange$Companion;
+	public fun <init> (Ljava/lang/String;Lio/karandash/models/ChangeType;IILjava/lang/String;Ljava/lang/String;Ljava/util/List;Ljava/lang/String;)V
+	public synthetic fun <init> (Ljava/lang/String;Lio/karandash/models/ChangeType;IILjava/lang/String;Ljava/lang/String;Ljava/util/List;Ljava/lang/String;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun component1 ()Ljava/lang/String;
+	public final fun component2 ()Lio/karandash/models/ChangeType;
+	public final fun component3 ()I
+	public final fun component4 ()I
+	public final fun component5 ()Ljava/lang/String;
+	public final fun component6 ()Ljava/lang/String;
+	public final fun component7 ()Ljava/util/List;
+	public final fun component8 ()Ljava/lang/String;
+	public final fun copy (Ljava/lang/String;Lio/karandash/models/ChangeType;IILjava/lang/String;Ljava/lang/String;Ljava/util/List;Ljava/lang/String;)Lio/karandash/models/FileChange;
+	public static synthetic fun copy$default (Lio/karandash/models/FileChange;Ljava/lang/String;Lio/karandash/models/ChangeType;IILjava/lang/String;Ljava/lang/String;Ljava/util/List;Ljava/lang/String;ILjava/lang/Object;)Lio/karandash/models/FileChange;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getAdditions ()I
+	public final fun getBlameData ()Ljava/util/List;
+	public final fun getChangeType ()Lio/karandash/models/ChangeType;
+	public final fun getDeletions ()I
+	public final fun getDiffContent ()Ljava/lang/String;
+	public final fun getNewContent ()Ljava/lang/String;
+	public final fun getOldPath ()Ljava/lang/String;
+	public final fun getPath ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final synthetic class io/karandash/models/FileChange$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lio/karandash/models/FileChange$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lio/karandash/models/FileChange;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lio/karandash/models/FileChange;)V
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/karandash/models/FileChange$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/karandash/models/MergeRequest {
+	public static final field Companion Lio/karandash/models/MergeRequest$Companion;
+	public fun <init> (Ljava/lang/String;ILjava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lio/karandash/models/User;Lio/karandash/models/MergeRequestState;ZLjava/util/List;Ljava/util/List;Ljava/util/List;Ljava/util/List;Ljava/util/List;Ljava/lang/String;Ljava/lang/Boolean;Ljava/lang/String;Ljava/util/List;Lio/karandash/models/DiffRefs;ZLjava/lang/Integer;)V
+	public synthetic fun <init> (Ljava/lang/String;ILjava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lio/karandash/models/User;Lio/karandash/models/MergeRequestState;ZLjava/util/List;Ljava/util/List;Ljava/util/List;Ljava/util/List;Ljava/util/List;Ljava/lang/String;Ljava/lang/Boolean;Ljava/lang/String;Ljava/util/List;Lio/karandash/models/DiffRefs;ZLjava/lang/Integer;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun component1 ()Ljava/lang/String;
+	public final fun component10 ()Ljava/util/List;
+	public final fun component11 ()Ljava/util/List;
+	public final fun component12 ()Ljava/util/List;
+	public final fun component13 ()Ljava/util/List;
+	public final fun component14 ()Ljava/util/List;
+	public final fun component15 ()Ljava/lang/String;
+	public final fun component16 ()Ljava/lang/Boolean;
+	public final fun component17 ()Ljava/lang/String;
+	public final fun component18 ()Ljava/util/List;
+	public final fun component19 ()Lio/karandash/models/DiffRefs;
+	public final fun component2 ()I
+	public final fun component20 ()Z
+	public final fun component21 ()Ljava/lang/Integer;
+	public final fun component3 ()Ljava/lang/String;
+	public final fun component4 ()Ljava/lang/String;
+	public final fun component5 ()Ljava/lang/String;
+	public final fun component6 ()Ljava/lang/String;
+	public final fun component7 ()Lio/karandash/models/User;
+	public final fun component8 ()Lio/karandash/models/MergeRequestState;
+	public final fun component9 ()Z
+	public final fun copy (Ljava/lang/String;ILjava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lio/karandash/models/User;Lio/karandash/models/MergeRequestState;ZLjava/util/List;Ljava/util/List;Ljava/util/List;Ljava/util/List;Ljava/util/List;Ljava/lang/String;Ljava/lang/Boolean;Ljava/lang/String;Ljava/util/List;Lio/karandash/models/DiffRefs;ZLjava/lang/Integer;)Lio/karandash/models/MergeRequest;
+	public static synthetic fun copy$default (Lio/karandash/models/MergeRequest;Ljava/lang/String;ILjava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lio/karandash/models/User;Lio/karandash/models/MergeRequestState;ZLjava/util/List;Ljava/util/List;Ljava/util/List;Ljava/util/List;Ljava/util/List;Ljava/lang/String;Ljava/lang/Boolean;Ljava/lang/String;Ljava/util/List;Lio/karandash/models/DiffRefs;ZLjava/lang/Integer;ILjava/lang/Object;)Lio/karandash/models/MergeRequest;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getApprovals ()Ljava/util/List;
+	public final fun getAuthor ()Lio/karandash/models/User;
+	public final fun getChanges ()Ljava/util/List;
+	public final fun getCiJobs ()Ljava/util/List;
+	public final fun getCiStatus ()Ljava/lang/String;
+	public final fun getCommits ()Ljava/util/List;
+	public final fun getCommitsTotal ()Ljava/lang/Integer;
+	public final fun getCommitsTruncated ()Z
+	public final fun getDescription ()Ljava/lang/String;
+	public final fun getDiffRefs ()Lio/karandash/models/DiffRefs;
+	public final fun getDraft ()Z
+	public final fun getHasConflicts ()Ljava/lang/Boolean;
+	public final fun getId ()Ljava/lang/String;
+	public final fun getIid ()I
+	public final fun getLabels ()Ljava/util/List;
+	public final fun getMergeStatus ()Ljava/lang/String;
+	public final fun getReviewers ()Ljava/util/List;
+	public final fun getSourceBranch ()Ljava/lang/String;
+	public final fun getState ()Lio/karandash/models/MergeRequestState;
+	public final fun getTargetBranch ()Ljava/lang/String;
+	public final fun getTitle ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final synthetic class io/karandash/models/MergeRequest$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lio/karandash/models/MergeRequest$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lio/karandash/models/MergeRequest;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lio/karandash/models/MergeRequest;)V
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/karandash/models/MergeRequest$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/karandash/models/MergeRequestState : java/lang/Enum {
+	public static final field CLOSED Lio/karandash/models/MergeRequestState;
+	public static final field Companion Lio/karandash/models/MergeRequestState$Companion;
+	public static final field LOCKED Lio/karandash/models/MergeRequestState;
+	public static final field MERGED Lio/karandash/models/MergeRequestState;
+	public static final field OPENED Lio/karandash/models/MergeRequestState;
+	public static final field UNKNOWN Lio/karandash/models/MergeRequestState;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public final fun getValue ()Ljava/lang/String;
+	public static fun valueOf (Ljava/lang/String;)Lio/karandash/models/MergeRequestState;
+	public static fun values ()[Lio/karandash/models/MergeRequestState;
+}
+
+public final class io/karandash/models/MergeRequestState$Companion {
+	public final fun fromPlatformStatus (Ljava/lang/String;Ljava/lang/String;)Lio/karandash/models/MergeRequestState;
+	public final fun fromString (Ljava/lang/String;)Lio/karandash/models/MergeRequestState;
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/karandash/models/MrCacheKey {
+	public static final field INSTANCE Lio/karandash/models/MrCacheKey;
+	public final fun buildKey (Lio/karandash/models/MergeRequest;)Ljava/lang/String;
+}
+
+public final class io/karandash/models/ReviewState : java/lang/Enum {
+	public static final field APPROVED Lio/karandash/models/ReviewState;
+	public static final field CHANGES_REQUESTED Lio/karandash/models/ReviewState;
+	public static final field COMMENTED Lio/karandash/models/ReviewState;
+	public static final field Companion Lio/karandash/models/ReviewState$Companion;
+	public static final field DISMISSED Lio/karandash/models/ReviewState;
+	public static final field PENDING Lio/karandash/models/ReviewState;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public static fun valueOf (Ljava/lang/String;)Lio/karandash/models/ReviewState;
+	public static fun values ()[Lio/karandash/models/ReviewState;
+}
+
+public final class io/karandash/models/ReviewState$Companion {
+	public final fun fromPlatformState (Ljava/lang/String;)Lio/karandash/models/ReviewState;
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/karandash/models/User {
+	public static final field Companion Lio/karandash/models/User$Companion;
+	public fun <init> (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V
+	public synthetic fun <init> (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun component1 ()Ljava/lang/String;
+	public final fun component2 ()Ljava/lang/String;
+	public final fun component3 ()Ljava/lang/String;
+	public final fun copy (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)Lio/karandash/models/User;
+	public static synthetic fun copy$default (Lio/karandash/models/User;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;ILjava/lang/Object;)Lio/karandash/models/User;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getEmail ()Ljava/lang/String;
+	public final fun getName ()Ljava/lang/String;
+	public final fun getUsername ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final synthetic class io/karandash/models/User$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lio/karandash/models/User$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lio/karandash/models/User;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lio/karandash/models/User;)V
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/karandash/models/User$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/karandash/models/finding/Attachment {
+	public static final field Companion Lio/karandash/models/finding/Attachment$Companion;
+	public fun <init> (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V
+	public synthetic fun <init> (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun component1 ()Ljava/lang/String;
+	public final fun component2 ()Ljava/lang/String;
+	public final fun component3 ()Ljava/lang/String;
+	public final fun copy (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)Lio/karandash/models/finding/Attachment;
+	public static synthetic fun copy$default (Lio/karandash/models/finding/Attachment;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;ILjava/lang/Object;)Lio/karandash/models/finding/Attachment;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getContent ()Ljava/lang/String;
+	public final fun getContentType ()Ljava/lang/String;
+	public final fun getFilename ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final synthetic class io/karandash/models/finding/Attachment$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lio/karandash/models/finding/Attachment$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lio/karandash/models/finding/Attachment;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lio/karandash/models/finding/Attachment;)V
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/karandash/models/finding/Attachment$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/karandash/models/finding/CodeChange {
+	public static final field Companion Lio/karandash/models/finding/CodeChange$Companion;
+	public fun <init> (Ljava/lang/String;IILjava/lang/String;Ljava/lang/String;)V
+	public synthetic fun <init> (Ljava/lang/String;IILjava/lang/String;Ljava/lang/String;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun component1 ()Ljava/lang/String;
+	public final fun component2 ()I
+	public final fun component3 ()I
+	public final fun component4 ()Ljava/lang/String;
+	public final fun component5 ()Ljava/lang/String;
+	public final fun copy (Ljava/lang/String;IILjava/lang/String;Ljava/lang/String;)Lio/karandash/models/finding/CodeChange;
+	public static synthetic fun copy$default (Lio/karandash/models/finding/CodeChange;Ljava/lang/String;IILjava/lang/String;Ljava/lang/String;ILjava/lang/Object;)Lio/karandash/models/finding/CodeChange;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getEndLine ()I
+	public final fun getExistingCode ()Ljava/lang/String;
+	public final fun getPath ()Ljava/lang/String;
+	public final fun getStartLine ()I
+	public final fun getSuggestedCode ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final synthetic class io/karandash/models/finding/CodeChange$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lio/karandash/models/finding/CodeChange$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lio/karandash/models/finding/CodeChange;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lio/karandash/models/finding/CodeChange;)V
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/karandash/models/finding/CodeChange$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/karandash/models/finding/Finding {
+	public static final field Companion Lio/karandash/models/finding/Finding$Companion;
+	public static final field DEFAULT_PRIORITY I
+	public fun <init> (Lio/karandash/models/finding/Severity;Ljava/lang/String;Ljava/lang/String;Lio/karandash/models/finding/Location;Ljava/lang/String;Ljava/lang/String;Ljava/util/Map;Ljava/util/List;Ljava/util/List;Ljava/lang/String;ILjava/lang/Float;Ljava/util/List;Lio/karandash/models/finding/FindingCategory;Ljava/lang/String;)V
+	public synthetic fun <init> (Lio/karandash/models/finding/Severity;Ljava/lang/String;Ljava/lang/String;Lio/karandash/models/finding/Location;Ljava/lang/String;Ljava/lang/String;Ljava/util/Map;Ljava/util/List;Ljava/util/List;Ljava/lang/String;ILjava/lang/Float;Ljava/util/List;Lio/karandash/models/finding/FindingCategory;Ljava/lang/String;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun component1 ()Lio/karandash/models/finding/Severity;
+	public final fun component10 ()Ljava/lang/String;
+	public final fun component11 ()I
+	public final fun component12 ()Ljava/lang/Float;
+	public final fun component13 ()Ljava/util/List;
+	public final fun component14 ()Lio/karandash/models/finding/FindingCategory;
+	public final fun component15 ()Ljava/lang/String;
+	public final fun component2 ()Ljava/lang/String;
+	public final fun component3 ()Ljava/lang/String;
+	public final fun component4 ()Lio/karandash/models/finding/Location;
+	public final fun component5 ()Ljava/lang/String;
+	public final fun component6 ()Ljava/lang/String;
+	public final fun component7 ()Ljava/util/Map;
+	public final fun component8 ()Ljava/util/List;
+	public final fun component9 ()Ljava/util/List;
+	public final fun copy (Lio/karandash/models/finding/Severity;Ljava/lang/String;Ljava/lang/String;Lio/karandash/models/finding/Location;Ljava/lang/String;Ljava/lang/String;Ljava/util/Map;Ljava/util/List;Ljava/util/List;Ljava/lang/String;ILjava/lang/Float;Ljava/util/List;Lio/karandash/models/finding/FindingCategory;Ljava/lang/String;)Lio/karandash/models/finding/Finding;
+	public static synthetic fun copy$default (Lio/karandash/models/finding/Finding;Lio/karandash/models/finding/Severity;Ljava/lang/String;Ljava/lang/String;Lio/karandash/models/finding/Location;Ljava/lang/String;Ljava/lang/String;Ljava/util/Map;Ljava/util/List;Ljava/util/List;Ljava/lang/String;ILjava/lang/Float;Ljava/util/List;Lio/karandash/models/finding/FindingCategory;Ljava/lang/String;ILjava/lang/Object;)Lio/karandash/models/finding/Finding;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getAttachments ()Ljava/util/List;
+	public final fun getCategory ()Lio/karandash/models/finding/FindingCategory;
+	public final fun getConfidence ()Ljava/lang/Float;
+	public final fun getErrorCode ()Ljava/lang/String;
+	public final fun getExplanation ()Ljava/lang/String;
+	public final fun getFingerprint ()Ljava/lang/String;
+	public final fun getFixSuggestions ()Ljava/util/List;
+	public final fun getLocation ()Lio/karandash/models/finding/Location;
+	public final fun getMessage ()Ljava/lang/String;
+	public final fun getMetadata ()Ljava/util/Map;
+	public final fun getPriority ()I
+	public final fun getRelatedFindings ()Ljava/util/List;
+	public final fun getRule ()Ljava/lang/String;
+	public final fun getSeverity ()Lio/karandash/models/finding/Severity;
+	public final fun getSuggestion ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final synthetic class io/karandash/models/finding/Finding$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lio/karandash/models/finding/Finding$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lio/karandash/models/finding/Finding;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lio/karandash/models/finding/Finding;)V
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/karandash/models/finding/Finding$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/karandash/models/finding/FindingCategory : java/lang/Enum {
+	public static final field CI_CD Lio/karandash/models/finding/FindingCategory;
+	public static final field CONVENTION Lio/karandash/models/finding/FindingCategory;
+	public static final field CORRECTNESS Lio/karandash/models/finding/FindingCategory;
+	public static final field Companion Lio/karandash/models/finding/FindingCategory$Companion;
+	public static final field DEPENDENCY Lio/karandash/models/finding/FindingCategory;
+	public static final field DOCUMENTATION Lio/karandash/models/finding/FindingCategory;
+	public static final field PERFORMANCE Lio/karandash/models/finding/FindingCategory;
+	public static final field SECURITY Lio/karandash/models/finding/FindingCategory;
+	public static final field STYLE Lio/karandash/models/finding/FindingCategory;
+	public static final field WORKFLOW Lio/karandash/models/finding/FindingCategory;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public static fun valueOf (Ljava/lang/String;)Lio/karandash/models/finding/FindingCategory;
+	public static fun values ()[Lio/karandash/models/finding/FindingCategory;
+}
+
+public final class io/karandash/models/finding/FindingCategory$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/karandash/models/finding/FindingCodeChangeKt {
+	public static final fun codeChange (Lio/karandash/models/finding/Finding;)Lio/karandash/models/finding/CodeChange;
+}
+
+public final class io/karandash/models/finding/FindingExtensionsKt {
+	public static final fun bySeverity (Ljava/util/List;)Ljava/util/Map;
+	public static final fun deduplicated (Ljava/util/List;)Ljava/util/List;
+	public static final fun errorsCount (Ljava/util/List;)I
+	public static final fun groupedByFingerprint (Ljava/util/List;)Ljava/util/Map;
+	public static final fun groupedByRule (Ljava/util/List;)Ljava/util/Map;
+	public static final fun hasErrors (Ljava/util/List;)Z
+	public static final fun inCategory (Ljava/util/List;Lio/karandash/models/finding/FindingCategory;)Ljava/util/List;
+	public static final fun sortedByPriority (Ljava/util/List;)Ljava/util/List;
+}
+
+public final class io/karandash/models/finding/FindingField : java/lang/Enum {
+	public static final field ATTACHMENTS Lio/karandash/models/finding/FindingField;
+	public static final field CATEGORY Lio/karandash/models/finding/FindingField;
+	public static final field CODE_CHANGE Lio/karandash/models/finding/FindingField;
+	public static final field CONFIDENCE Lio/karandash/models/finding/FindingField;
+	public static final field Companion Lio/karandash/models/finding/FindingField$Companion;
+	public static final field END_LINE Lio/karandash/models/finding/FindingField;
+	public static final field ERROR_CODE Lio/karandash/models/finding/FindingField;
+	public static final field EXPLANATION Lio/karandash/models/finding/FindingField;
+	public static final field FINGERPRINT Lio/karandash/models/finding/FindingField;
+	public static final field FIX_SUGGESTIONS Lio/karandash/models/finding/FindingField;
+	public static final field LOCATION Lio/karandash/models/finding/FindingField;
+	public static final field MESSAGE Lio/karandash/models/finding/FindingField;
+	public static final field METADATA Lio/karandash/models/finding/FindingField;
+	public static final field PRIORITY Lio/karandash/models/finding/FindingField;
+	public static final field RELATED_FINDINGS Lio/karandash/models/finding/FindingField;
+	public static final field RULE Lio/karandash/models/finding/FindingField;
+	public static final field SEVERITY Lio/karandash/models/finding/FindingField;
+	public static final field SUGGESTION Lio/karandash/models/finding/FindingField;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public final fun getHideable ()Z
+	public final fun getKey ()Ljava/lang/String;
+	public static fun valueOf (Ljava/lang/String;)Lio/karandash/models/finding/FindingField;
+	public static fun values ()[Lio/karandash/models/finding/FindingField;
+}
+
+public final class io/karandash/models/finding/FindingField$Companion {
+	public final fun getRENDERED_METADATA_KEYS ()Ljava/util/Set;
+	public final fun parse (Ljava/util/List;)Lio/karandash/models/finding/HiddenFields;
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/karandash/models/finding/FindingFieldKt {
+	public static final fun without (Lio/karandash/models/finding/Finding;Ljava/util/Set;)Lio/karandash/models/finding/Finding;
+}
+
+public final class io/karandash/models/finding/FindingFixHintKt {
+	public static final fun codeSpan (Ljava/lang/String;)Ljava/lang/String;
+	public static final fun expectedFormat (Lio/karandash/models/finding/Finding;)Ljava/lang/String;
+	public static final fun fixHintLines (Lio/karandash/models/finding/Finding;Ljava/lang/String;)Ljava/util/List;
+	public static synthetic fun fixHintLines$default (Lio/karandash/models/finding/Finding;Ljava/lang/String;ILjava/lang/Object;)Ljava/util/List;
+	public static final fun getFIX_HINT_METADATA_KEYS ()Ljava/util/Set;
+	public static final fun mismatch (Lio/karandash/models/finding/Finding;)Lio/karandash/models/finding/Mismatch;
+}
+
+public final class io/karandash/models/finding/FixHintText : java/lang/Enum, io/karandash/models/finding/LocalizedText {
+	public static final field AFTER Lio/karandash/models/finding/FixHintText;
+	public static final field AT_START Lio/karandash/models/finding/FixHintText;
+	public static final field EXPECTED Lio/karandash/models/finding/FixHintText;
+	public static final field FORMAT Lio/karandash/models/finding/FixHintText;
+	public static final field FOUND Lio/karandash/models/finding/FixHintText;
+	public static final field HOW_TO_FIX Lio/karandash/models/finding/FixHintText;
+	public static final field NOTHING Lio/karandash/models/finding/FixHintText;
+	public static final field PART Lio/karandash/models/finding/FixHintText;
+	public static final field WHERE Lio/karandash/models/finding/FixHintText;
+	public static final field WHITESPACE Lio/karandash/models/finding/FixHintText;
+	public fun getEn ()Ljava/lang/String;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public fun of ([Ljava/lang/Object;)Lio/karandash/models/finding/LocalizedString;
+	public final fun text (Ljava/lang/String;)Ljava/lang/String;
+	public static synthetic fun text$default (Lio/karandash/models/finding/FixHintText;Ljava/lang/String;ILjava/lang/Object;)Ljava/lang/String;
+	public static fun valueOf (Ljava/lang/String;)Lio/karandash/models/finding/FixHintText;
+	public static fun values ()[Lio/karandash/models/finding/FixHintText;
+}
+
+public abstract class io/karandash/models/finding/FixSuggestion {
+	public static final field Companion Lio/karandash/models/finding/FixSuggestion$Companion;
+	public synthetic fun <init> (ILkotlinx/serialization/internal/SerializationConstructorMarker;)V
+	public static final synthetic fun write$Self (Lio/karandash/models/finding/FixSuggestion;Lkotlinx/serialization/encoding/CompositeEncoder;Lkotlinx/serialization/descriptors/SerialDescriptor;)V
+}
+
+public final class io/karandash/models/finding/FixSuggestion$AddLabel : io/karandash/models/finding/FixSuggestion {
+	public static final field Companion Lio/karandash/models/finding/FixSuggestion$AddLabel$Companion;
+	public fun <init> (Ljava/lang/String;)V
+	public final fun component1 ()Ljava/lang/String;
+	public final fun copy (Ljava/lang/String;)Lio/karandash/models/finding/FixSuggestion$AddLabel;
+	public static synthetic fun copy$default (Lio/karandash/models/finding/FixSuggestion$AddLabel;Ljava/lang/String;ILjava/lang/Object;)Lio/karandash/models/finding/FixSuggestion$AddLabel;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getLabel ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final synthetic class io/karandash/models/finding/FixSuggestion$AddLabel$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lio/karandash/models/finding/FixSuggestion$AddLabel$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lio/karandash/models/finding/FixSuggestion$AddLabel;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lio/karandash/models/finding/FixSuggestion$AddLabel;)V
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/karandash/models/finding/FixSuggestion$AddLabel$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/karandash/models/finding/FixSuggestion$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/karandash/models/finding/FixSuggestion$Custom : io/karandash/models/finding/FixSuggestion {
+	public static final field Companion Lio/karandash/models/finding/FixSuggestion$Custom$Companion;
+	public fun <init> (Ljava/lang/String;Lkotlinx/serialization/json/JsonElement;Ljava/lang/String;)V
+	public synthetic fun <init> (Ljava/lang/String;Lkotlinx/serialization/json/JsonElement;Ljava/lang/String;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun component1 ()Ljava/lang/String;
+	public final fun component2 ()Lkotlinx/serialization/json/JsonElement;
+	public final fun component3 ()Ljava/lang/String;
+	public final fun copy (Ljava/lang/String;Lkotlinx/serialization/json/JsonElement;Ljava/lang/String;)Lio/karandash/models/finding/FixSuggestion$Custom;
+	public static synthetic fun copy$default (Lio/karandash/models/finding/FixSuggestion$Custom;Ljava/lang/String;Lkotlinx/serialization/json/JsonElement;Ljava/lang/String;ILjava/lang/Object;)Lio/karandash/models/finding/FixSuggestion$Custom;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getData ()Lkotlinx/serialization/json/JsonElement;
+	public final fun getDescription ()Ljava/lang/String;
+	public final fun getType ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final synthetic class io/karandash/models/finding/FixSuggestion$Custom$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lio/karandash/models/finding/FixSuggestion$Custom$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lio/karandash/models/finding/FixSuggestion$Custom;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lio/karandash/models/finding/FixSuggestion$Custom;)V
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/karandash/models/finding/FixSuggestion$Custom$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/karandash/models/finding/FixSuggestion$RemoveLabel : io/karandash/models/finding/FixSuggestion {
+	public static final field Companion Lio/karandash/models/finding/FixSuggestion$RemoveLabel$Companion;
+	public fun <init> (Ljava/lang/String;)V
+	public final fun component1 ()Ljava/lang/String;
+	public final fun copy (Ljava/lang/String;)Lio/karandash/models/finding/FixSuggestion$RemoveLabel;
+	public static synthetic fun copy$default (Lio/karandash/models/finding/FixSuggestion$RemoveLabel;Ljava/lang/String;ILjava/lang/Object;)Lio/karandash/models/finding/FixSuggestion$RemoveLabel;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getLabel ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final synthetic class io/karandash/models/finding/FixSuggestion$RemoveLabel$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lio/karandash/models/finding/FixSuggestion$RemoveLabel$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lio/karandash/models/finding/FixSuggestion$RemoveLabel;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lio/karandash/models/finding/FixSuggestion$RemoveLabel;)V
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/karandash/models/finding/FixSuggestion$RemoveLabel$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/karandash/models/finding/FixSuggestion$SetDescription : io/karandash/models/finding/FixSuggestion {
+	public static final field Companion Lio/karandash/models/finding/FixSuggestion$SetDescription$Companion;
+	public fun <init> (Ljava/lang/String;)V
+	public final fun component1 ()Ljava/lang/String;
+	public final fun copy (Ljava/lang/String;)Lio/karandash/models/finding/FixSuggestion$SetDescription;
+	public static synthetic fun copy$default (Lio/karandash/models/finding/FixSuggestion$SetDescription;Ljava/lang/String;ILjava/lang/Object;)Lio/karandash/models/finding/FixSuggestion$SetDescription;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getDescription ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final synthetic class io/karandash/models/finding/FixSuggestion$SetDescription$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lio/karandash/models/finding/FixSuggestion$SetDescription$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lio/karandash/models/finding/FixSuggestion$SetDescription;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lio/karandash/models/finding/FixSuggestion$SetDescription;)V
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/karandash/models/finding/FixSuggestion$SetDescription$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/karandash/models/finding/FixSuggestion$SetDraft : io/karandash/models/finding/FixSuggestion {
+	public static final field Companion Lio/karandash/models/finding/FixSuggestion$SetDraft$Companion;
+	public fun <init> (Z)V
+	public final fun component1 ()Z
+	public final fun copy (Z)Lio/karandash/models/finding/FixSuggestion$SetDraft;
+	public static synthetic fun copy$default (Lio/karandash/models/finding/FixSuggestion$SetDraft;ZILjava/lang/Object;)Lio/karandash/models/finding/FixSuggestion$SetDraft;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getDraft ()Z
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final synthetic class io/karandash/models/finding/FixSuggestion$SetDraft$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lio/karandash/models/finding/FixSuggestion$SetDraft$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lio/karandash/models/finding/FixSuggestion$SetDraft;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lio/karandash/models/finding/FixSuggestion$SetDraft;)V
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/karandash/models/finding/FixSuggestion$SetDraft$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/karandash/models/finding/FixSuggestion$SetTitle : io/karandash/models/finding/FixSuggestion {
+	public static final field Companion Lio/karandash/models/finding/FixSuggestion$SetTitle$Companion;
+	public fun <init> (Ljava/lang/String;)V
+	public final fun component1 ()Ljava/lang/String;
+	public final fun copy (Ljava/lang/String;)Lio/karandash/models/finding/FixSuggestion$SetTitle;
+	public static synthetic fun copy$default (Lio/karandash/models/finding/FixSuggestion$SetTitle;Ljava/lang/String;ILjava/lang/Object;)Lio/karandash/models/finding/FixSuggestion$SetTitle;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getTitle ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final synthetic class io/karandash/models/finding/FixSuggestion$SetTitle$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lio/karandash/models/finding/FixSuggestion$SetTitle$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lio/karandash/models/finding/FixSuggestion$SetTitle;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lio/karandash/models/finding/FixSuggestion$SetTitle;)V
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/karandash/models/finding/FixSuggestion$SetTitle$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/karandash/models/finding/HiddenFields {
+	public static final field Companion Lio/karandash/models/finding/HiddenFields$Companion;
+	public fun <init> ()V
+	public fun <init> (Ljava/util/Set;Ljava/util/List;)V
+	public synthetic fun <init> (Ljava/util/Set;Ljava/util/List;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun component1 ()Ljava/util/Set;
+	public final fun component2 ()Ljava/util/List;
+	public final fun copy (Ljava/util/Set;Ljava/util/List;)Lio/karandash/models/finding/HiddenFields;
+	public static synthetic fun copy$default (Lio/karandash/models/finding/HiddenFields;Ljava/util/Set;Ljava/util/List;ILjava/lang/Object;)Lio/karandash/models/finding/HiddenFields;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getFields ()Ljava/util/Set;
+	public final fun getWarnings ()Ljava/util/List;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final synthetic class io/karandash/models/finding/HiddenFields$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lio/karandash/models/finding/HiddenFields$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lio/karandash/models/finding/HiddenFields;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lio/karandash/models/finding/HiddenFields;)V
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/karandash/models/finding/HiddenFields$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/karandash/models/finding/LocalizedString {
+	public static final field Companion Lio/karandash/models/finding/LocalizedString$Companion;
+	public fun <init> (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/util/List;)V
+	public synthetic fun <init> (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/util/List;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun component1 ()Ljava/lang/String;
+	public final fun component2 ()Ljava/lang/String;
+	public final fun component3 ()Ljava/lang/String;
+	public final fun component4 ()Ljava/lang/String;
+	public final fun component5 ()Ljava/util/List;
+	public final fun copy (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/util/List;)Lio/karandash/models/finding/LocalizedString;
+	public static synthetic fun copy$default (Lio/karandash/models/finding/LocalizedString;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/util/List;ILjava/lang/Object;)Lio/karandash/models/finding/LocalizedString;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getArgs ()Ljava/util/List;
+	public final fun getEn ()Ljava/lang/String;
+	public final fun getPl ()Ljava/lang/String;
+	public final fun getRu ()Ljava/lang/String;
+	public final fun getTemplate ()Ljava/lang/String;
+	public fun hashCode ()I
+	public final fun plus (Lio/karandash/models/finding/LocalizedString;)Lio/karandash/models/finding/LocalizedString;
+	public final fun text (Ljava/lang/String;)Ljava/lang/String;
+	public static synthetic fun text$default (Lio/karandash/models/finding/LocalizedString;Ljava/lang/String;ILjava/lang/Object;)Ljava/lang/String;
+	public fun toString ()Ljava/lang/String;
+}
+
+public final synthetic class io/karandash/models/finding/LocalizedString$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lio/karandash/models/finding/LocalizedString$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lio/karandash/models/finding/LocalizedString;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lio/karandash/models/finding/LocalizedString;)V
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/karandash/models/finding/LocalizedString$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public abstract interface class io/karandash/models/finding/LocalizedText {
+	public abstract fun getEn ()Ljava/lang/String;
+	public fun of ([Ljava/lang/Object;)Lio/karandash/models/finding/LocalizedString;
+}
+
+public final class io/karandash/models/finding/LocalizedText$DefaultImpls {
+	public static fun of (Lio/karandash/models/finding/LocalizedText;[Ljava/lang/Object;)Lio/karandash/models/finding/LocalizedString;
+}
+
+public final class io/karandash/models/finding/LocalizedTextKt {
+	public static final fun inLanguage (Lio/karandash/models/finding/Finding;Ljava/lang/String;)Lio/karandash/models/finding/Finding;
+	public static final fun outputLanguage (Ljava/lang/String;)Ljava/lang/String;
+	public static final fun withFixedText (Lio/karandash/models/finding/Finding;Ljava/lang/Iterable;)Lio/karandash/models/finding/Finding;
+	public static final fun withText (Lio/karandash/models/finding/Finding;Lio/karandash/models/finding/LocalizedString;Lio/karandash/models/finding/LocalizedString;Lio/karandash/models/finding/LocalizedString;)Lio/karandash/models/finding/Finding;
+	public static synthetic fun withText$default (Lio/karandash/models/finding/Finding;Lio/karandash/models/finding/LocalizedString;Lio/karandash/models/finding/LocalizedString;Lio/karandash/models/finding/LocalizedString;ILjava/lang/Object;)Lio/karandash/models/finding/Finding;
+}
+
+public abstract class io/karandash/models/finding/Location {
+	public static final field Companion Lio/karandash/models/finding/Location$Companion;
+	public synthetic fun <init> (ILkotlinx/serialization/internal/SerializationConstructorMarker;)V
+	public static final synthetic fun write$Self (Lio/karandash/models/finding/Location;Lkotlinx/serialization/encoding/CompositeEncoder;Lkotlinx/serialization/descriptors/SerialDescriptor;)V
+}
+
+public final class io/karandash/models/finding/Location$CommitRef : io/karandash/models/finding/Location {
+	public static final field Companion Lio/karandash/models/finding/Location$CommitRef$Companion;
+	public fun <init> (Ljava/lang/String;)V
+	public final fun component1 ()Ljava/lang/String;
+	public final fun copy (Ljava/lang/String;)Lio/karandash/models/finding/Location$CommitRef;
+	public static synthetic fun copy$default (Lio/karandash/models/finding/Location$CommitRef;Ljava/lang/String;ILjava/lang/Object;)Lio/karandash/models/finding/Location$CommitRef;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getSha ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final synthetic class io/karandash/models/finding/Location$CommitRef$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lio/karandash/models/finding/Location$CommitRef$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lio/karandash/models/finding/Location$CommitRef;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lio/karandash/models/finding/Location$CommitRef;)V
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/karandash/models/finding/Location$CommitRef$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/karandash/models/finding/Location$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/karandash/models/finding/Location$FileRef : io/karandash/models/finding/Location {
+	public static final field Companion Lio/karandash/models/finding/Location$FileRef$Companion;
+	public fun <init> (Ljava/lang/String;Ljava/lang/Integer;Ljava/lang/Integer;)V
+	public synthetic fun <init> (Ljava/lang/String;Ljava/lang/Integer;Ljava/lang/Integer;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun component1 ()Ljava/lang/String;
+	public final fun component2 ()Ljava/lang/Integer;
+	public final fun component3 ()Ljava/lang/Integer;
+	public final fun copy (Ljava/lang/String;Ljava/lang/Integer;Ljava/lang/Integer;)Lio/karandash/models/finding/Location$FileRef;
+	public static synthetic fun copy$default (Lio/karandash/models/finding/Location$FileRef;Ljava/lang/String;Ljava/lang/Integer;Ljava/lang/Integer;ILjava/lang/Object;)Lio/karandash/models/finding/Location$FileRef;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getEndLine ()Ljava/lang/Integer;
+	public final fun getLine ()Ljava/lang/Integer;
+	public final fun getPath ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final synthetic class io/karandash/models/finding/Location$FileRef$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lio/karandash/models/finding/Location$FileRef$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lio/karandash/models/finding/Location$FileRef;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lio/karandash/models/finding/Location$FileRef;)V
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/karandash/models/finding/Location$FileRef$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/karandash/models/finding/Mismatch {
+	public static final field Companion Lio/karandash/models/finding/Mismatch$Companion;
+	public fun <init> (Ljava/lang/String;ILjava/lang/String;Ljava/lang/String;)V
+	public synthetic fun <init> (Ljava/lang/String;ILjava/lang/String;Ljava/lang/String;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun component1 ()Ljava/lang/String;
+	public final fun component2 ()I
+	public final fun component3 ()Ljava/lang/String;
+	public final fun component4 ()Ljava/lang/String;
+	public final fun copy (Ljava/lang/String;ILjava/lang/String;Ljava/lang/String;)Lio/karandash/models/finding/Mismatch;
+	public static synthetic fun copy$default (Lio/karandash/models/finding/Mismatch;Ljava/lang/String;ILjava/lang/String;Ljava/lang/String;ILjava/lang/Object;)Lio/karandash/models/finding/Mismatch;
+	public final fun describe (Ljava/lang/String;Lkotlin/jvm/functions/Function1;)Ljava/lang/String;
+	public static synthetic fun describe$default (Lio/karandash/models/finding/Mismatch;Ljava/lang/String;Lkotlin/jvm/functions/Function1;ILjava/lang/Object;)Ljava/lang/String;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getExpected ()Ljava/lang/String;
+	public final fun getGroup ()Ljava/lang/String;
+	public final fun getMatchedPrefix ()Ljava/lang/String;
+	public final fun getPosition ()I
+	public final fun getValue ()Ljava/lang/String;
+	public fun hashCode ()I
+	public final fun toMetadataValue ()Ljava/lang/String;
+	public fun toString ()Ljava/lang/String;
+}
+
+public final synthetic class io/karandash/models/finding/Mismatch$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lio/karandash/models/finding/Mismatch$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lio/karandash/models/finding/Mismatch;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lio/karandash/models/finding/Mismatch;)V
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/karandash/models/finding/Mismatch$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/karandash/models/finding/PluralRule : java/lang/Enum {
+	public static final field EAST_SLAVIC Lio/karandash/models/finding/PluralRule;
+	public static final field ONE_OTHER Lio/karandash/models/finding/PluralRule;
+	public static final field WEST_SLAVIC Lio/karandash/models/finding/PluralRule;
+	public final fun count (Ljava/lang/String;I)Ljava/lang/String;
+	public final fun form (I)I
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public static fun valueOf (Ljava/lang/String;)Lio/karandash/models/finding/PluralRule;
+	public static fun values ()[Lio/karandash/models/finding/PluralRule;
+}
+
+public final class io/karandash/models/finding/PresentationKeys {
+	public static final field INSTANCE Lio/karandash/models/finding/PresentationKeys;
+	public static final field SECTION Ljava/lang/String;
+	public static final field SECTION_ORDER Ljava/lang/String;
+	public static final field SECTION_TITLE Ljava/lang/String;
+	public final fun sections (Ljava/util/List;)Ljava/util/List;
+}
+
+public final class io/karandash/models/finding/Severity : java/lang/Enum {
+	public static final field Companion Lio/karandash/models/finding/Severity$Companion;
+	public static final field ERROR Lio/karandash/models/finding/Severity;
+	public static final field INFO Lio/karandash/models/finding/Severity;
+	public static final field WARNING Lio/karandash/models/finding/Severity;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public static fun valueOf (Ljava/lang/String;)Lio/karandash/models/finding/Severity;
+	public static fun values ()[Lio/karandash/models/finding/Severity;
+}
+
+public final class io/karandash/models/finding/Severity$Companion {
+	public final fun fromString (Ljava/lang/String;Lio/karandash/models/finding/Severity;)Lio/karandash/models/finding/Severity;
+	public static synthetic fun fromString$default (Lio/karandash/models/finding/Severity$Companion;Ljava/lang/String;Lio/karandash/models/finding/Severity;ILjava/lang/Object;)Lio/karandash/models/finding/Severity;
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/karandash/models/finding/SeverityFormat {
+	public static final field INSTANCE Lio/karandash/models/finding/SeverityFormat;
+	public final fun toAnsiColor (Lio/karandash/models/finding/Severity;)Ljava/lang/String;
+	public final fun toEmoji (Lio/karandash/models/finding/Severity;)Ljava/lang/String;
+	public final fun toJson (Lio/karandash/models/finding/Severity;)Ljava/lang/String;
+	public final fun toReviewdog (Lio/karandash/models/finding/Severity;)Ljava/lang/String;
+	public final fun toSarif (Lio/karandash/models/finding/Severity;)Ljava/lang/String;
+	public final fun toTag (Lio/karandash/models/finding/Severity;)Ljava/lang/String;
+}
+
+public final class io/karandash/models/finding/TranslationPack {
+	public fun <init> (Ljava/lang/String;Lio/karandash/models/finding/PluralRule;Ljava/util/Map;)V
+	public final fun getLanguage ()Ljava/lang/String;
+	public final fun getPluralRule ()Lio/karandash/models/finding/PluralRule;
+	public final fun getTranslations ()Ljava/util/Map;
+}
+
+public final class io/karandash/models/finding/Translations {
+	public static final field INSTANCE Lio/karandash/models/finding/Translations;
+	public final fun all ()Ljava/util/Collection;
+	public final fun clear ()V
+	public final fun pack (Ljava/lang/String;)Lio/karandash/models/finding/TranslationPack;
+	public final fun register (Lio/karandash/models/finding/TranslationPack;)V
+	public final fun text (Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
+	public final fun translate (Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
+}
+
+public final class io/karandash/models/report/CountsView {
+	public static final field Companion Lio/karandash/models/report/CountsView$Companion;
+	public fun <init> ()V
+	public fun <init> (IIIILjava/lang/String;)V
+	public synthetic fun <init> (IIIILjava/lang/String;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun component1 ()I
+	public final fun component2 ()I
+	public final fun component3 ()I
+	public final fun component4 ()I
+	public final fun component5 ()Ljava/lang/String;
+	public final fun copy (IIIILjava/lang/String;)Lio/karandash/models/report/CountsView;
+	public static synthetic fun copy$default (Lio/karandash/models/report/CountsView;IIIILjava/lang/String;ILjava/lang/Object;)Lio/karandash/models/report/CountsView;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getErrors ()I
+	public final fun getInfos ()I
+	public final fun getText ()Ljava/lang/String;
+	public final fun getTotal ()I
+	public final fun getWarnings ()I
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final synthetic class io/karandash/models/report/CountsView$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lio/karandash/models/report/CountsView$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lio/karandash/models/report/CountsView;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lio/karandash/models/report/CountsView;)V
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/karandash/models/report/CountsView$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/karandash/models/report/DeltaView {
+	public static final field Companion Lio/karandash/models/report/DeltaView$Companion;
+	public fun <init> ()V
+	public fun <init> (IIILjava/lang/String;)V
+	public synthetic fun <init> (IIILjava/lang/String;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun component1 ()I
+	public final fun component2 ()I
+	public final fun component3 ()I
+	public final fun component4 ()Ljava/lang/String;
+	public final fun copy (IIILjava/lang/String;)Lio/karandash/models/report/DeltaView;
+	public static synthetic fun copy$default (Lio/karandash/models/report/DeltaView;IIILjava/lang/String;ILjava/lang/Object;)Lio/karandash/models/report/DeltaView;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getFixed ()I
+	public final fun getNew ()I
+	public final fun getText ()Ljava/lang/String;
+	public final fun getUnchanged ()I
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final synthetic class io/karandash/models/report/DeltaView$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lio/karandash/models/report/DeltaView$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lio/karandash/models/report/DeltaView;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lio/karandash/models/report/DeltaView;)V
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/karandash/models/report/DeltaView$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/karandash/models/report/DetailsView {
+	public static final field Companion Lio/karandash/models/report/DetailsView$Companion;
+	public fun <init> ()V
+	public fun <init> (Ljava/lang/Integer;Ljava/util/List;Ljava/util/List;Ljava/lang/String;Ljava/lang/String;Ljava/util/List;Z)V
+	public synthetic fun <init> (Ljava/lang/Integer;Ljava/util/List;Ljava/util/List;Ljava/lang/String;Ljava/lang/String;Ljava/util/List;ZILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun component1 ()Ljava/lang/Integer;
+	public final fun component2 ()Ljava/util/List;
+	public final fun component3 ()Ljava/util/List;
+	public final fun component4 ()Ljava/lang/String;
+	public final fun component5 ()Ljava/lang/String;
+	public final fun component6 ()Ljava/util/List;
+	public final fun component7 ()Z
+	public final fun copy (Ljava/lang/Integer;Ljava/util/List;Ljava/util/List;Ljava/lang/String;Ljava/lang/String;Ljava/util/List;Z)Lio/karandash/models/report/DetailsView;
+	public static synthetic fun copy$default (Lio/karandash/models/report/DetailsView;Ljava/lang/Integer;Ljava/util/List;Ljava/util/List;Ljava/lang/String;Ljava/lang/String;Ljava/util/List;ZILjava/lang/Object;)Lio/karandash/models/report/DetailsView;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getAiCoverage ()Ljava/lang/String;
+	public final fun getAny ()Z
+	public final fun getFixed ()Ljava/lang/String;
+	public final fun getLines ()Ljava/util/List;
+	public final fun getPassedRules ()Ljava/util/List;
+	public final fun getRisk ()Ljava/lang/Integer;
+	public final fun getSkipped ()Ljava/util/List;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final synthetic class io/karandash/models/report/DetailsView$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lio/karandash/models/report/DetailsView$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lio/karandash/models/report/DetailsView;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lio/karandash/models/report/DetailsView;)V
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/karandash/models/report/DetailsView$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/karandash/models/report/FileGroupView {
+	public static final field Companion Lio/karandash/models/report/FileGroupView$Companion;
+	public fun <init> (Ljava/lang/String;Ljava/util/List;)V
+	public final fun component1 ()Ljava/lang/String;
+	public final fun component2 ()Ljava/util/List;
+	public final fun copy (Ljava/lang/String;Ljava/util/List;)Lio/karandash/models/report/FileGroupView;
+	public static synthetic fun copy$default (Lio/karandash/models/report/FileGroupView;Ljava/lang/String;Ljava/util/List;ILjava/lang/Object;)Lio/karandash/models/report/FileGroupView;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getFindings ()Ljava/util/List;
+	public final fun getName ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final synthetic class io/karandash/models/report/FileGroupView$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lio/karandash/models/report/FileGroupView$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lio/karandash/models/report/FileGroupView;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lio/karandash/models/report/FileGroupView;)V
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/karandash/models/report/FileGroupView$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/karandash/models/report/FindingView {
+	public static final field Companion Lio/karandash/models/report/FindingView$Companion;
+	public fun <init> (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;ZZZLjava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/Integer;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V
+	public synthetic fun <init> (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;ZZZLjava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/Integer;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun component1 ()Ljava/lang/String;
+	public final fun component10 ()Ljava/lang/String;
+	public final fun component11 ()Ljava/lang/Integer;
+	public final fun component12 ()Ljava/lang/String;
+	public final fun component13 ()Ljava/lang/String;
+	public final fun component14 ()Ljava/lang/String;
+	public final fun component15 ()Ljava/lang/String;
+	public final fun component16 ()Ljava/lang/String;
+	public final fun component2 ()Ljava/lang/String;
+	public final fun component3 ()Ljava/lang/String;
+	public final fun component4 ()Z
+	public final fun component5 ()Z
+	public final fun component6 ()Z
+	public final fun component7 ()Ljava/lang/String;
+	public final fun component8 ()Ljava/lang/String;
+	public final fun component9 ()Ljava/lang/String;
+	public final fun copy (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;ZZZLjava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/Integer;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)Lio/karandash/models/report/FindingView;
+	public static synthetic fun copy$default (Lio/karandash/models/report/FindingView;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;ZZZLjava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/Integer;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;ILjava/lang/Object;)Lio/karandash/models/report/FindingView;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getError ()Z
+	public final fun getFingerprint ()Ljava/lang/String;
+	public final fun getFix ()Ljava/lang/String;
+	public final fun getIcon ()Ljava/lang/String;
+	public final fun getInfo ()Z
+	public final fun getLine ()Ljava/lang/Integer;
+	public final fun getLink ()Ljava/lang/String;
+	public final fun getMessage ()Ljava/lang/String;
+	public final fun getPath ()Ljava/lang/String;
+	public final fun getRule ()Ljava/lang/String;
+	public final fun getSeverity ()Ljava/lang/String;
+	public final fun getShortWhere ()Ljava/lang/String;
+	public final fun getTag ()Ljava/lang/String;
+	public final fun getWarning ()Z
+	public final fun getWhere ()Ljava/lang/String;
+	public final fun getWhy ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final synthetic class io/karandash/models/report/FindingView$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lio/karandash/models/report/FindingView$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lio/karandash/models/report/FindingView;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lio/karandash/models/report/FindingView;)V
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/karandash/models/report/FindingView$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/karandash/models/report/LabelsView {
+	public static final field Companion Lio/karandash/models/report/LabelsView$Companion;
+	public fun <init> ()V
+	public fun <init> (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V
+	public synthetic fun <init> (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun component1 ()Ljava/lang/String;
+	public final fun component2 ()Ljava/lang/String;
+	public final fun component3 ()Ljava/lang/String;
+	public final fun component4 ()Ljava/lang/String;
+	public final fun component5 ()Ljava/lang/String;
+	public final fun component6 ()Ljava/lang/String;
+	public final fun component7 ()Ljava/lang/String;
+	public final fun copy (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)Lio/karandash/models/report/LabelsView;
+	public static synthetic fun copy$default (Lio/karandash/models/report/LabelsView;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;ILjava/lang/Object;)Lio/karandash/models/report/LabelsView;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getDetails ()Ljava/lang/String;
+	public final fun getFinding ()Ljava/lang/String;
+	public final fun getFix ()Ljava/lang/String;
+	public final fun getMore ()Ljava/lang/String;
+	public final fun getRule ()Ljava/lang/String;
+	public final fun getWhere ()Ljava/lang/String;
+	public final fun getWhy ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final synthetic class io/karandash/models/report/LabelsView$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lio/karandash/models/report/LabelsView$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lio/karandash/models/report/LabelsView;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lio/karandash/models/report/LabelsView;)V
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/karandash/models/report/LabelsView$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/karandash/models/report/MrView {
+	public static final field Companion Lio/karandash/models/report/MrView$Companion;
+	public fun <init> ()V
+	public fun <init> (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/util/Map;)V
+	public synthetic fun <init> (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/util/Map;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun component1 ()Ljava/lang/String;
+	public final fun component2 ()Ljava/lang/String;
+	public final fun component3 ()Ljava/lang/String;
+	public final fun component4 ()Ljava/util/Map;
+	public final fun copy (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/util/Map;)Lio/karandash/models/report/MrView;
+	public static synthetic fun copy$default (Lio/karandash/models/report/MrView;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/util/Map;ILjava/lang/Object;)Lio/karandash/models/report/MrView;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getLineLinks ()Ljava/util/Map;
+	public final fun getRef ()Ljava/lang/String;
+	public final fun getTitle ()Ljava/lang/String;
+	public final fun getUrl ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final synthetic class io/karandash/models/report/MrView$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lio/karandash/models/report/MrView$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lio/karandash/models/report/MrView;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lio/karandash/models/report/MrView;)V
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/karandash/models/report/MrView$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/karandash/models/report/ReportStyle : java/lang/Enum {
+	public static final field Companion Lio/karandash/models/report/ReportStyle$Companion;
+	public static final field QUIET Lio/karandash/models/report/ReportStyle;
+	public static final field STANDARD Lio/karandash/models/report/ReportStyle;
+	public static final field VERBOSE Lio/karandash/models/report/ReportStyle;
+	public final fun apply (Lio/karandash/models/finding/Finding;)Lio/karandash/models/finding/Finding;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public final fun getHiddenFields ()Ljava/util/Set;
+	public final fun getHiddenMetadataKeys ()Ljava/util/Set;
+	public final fun getKey ()Ljava/lang/String;
+	public final fun getLegacyLayout ()Z
+	public static fun valueOf (Ljava/lang/String;)Lio/karandash/models/report/ReportStyle;
+	public static fun values ()[Lio/karandash/models/report/ReportStyle;
+}
+
+public final class io/karandash/models/report/ReportStyle$Companion {
+	public final fun getDEFAULT ()Lio/karandash/models/report/ReportStyle;
+	public final fun of (Ljava/lang/String;)Lio/karandash/models/report/ReportStyle;
+	public final fun parse (Ljava/lang/String;)Lio/karandash/models/report/ReportStyle;
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/karandash/models/report/ReportView {
+	public static final field Companion Lio/karandash/models/report/ReportView$Companion;
+	public fun <init> (ZLjava/lang/String;Ljava/lang/String;Lio/karandash/models/report/CountsView;Lio/karandash/models/report/DeltaView;Ljava/util/List;ILjava/util/List;Lio/karandash/models/report/DetailsView;Lio/karandash/models/report/MrView;Ljava/lang/String;Ljava/lang/Integer;Ljava/lang/String;Lio/karandash/models/report/LabelsView;)V
+	public synthetic fun <init> (ZLjava/lang/String;Ljava/lang/String;Lio/karandash/models/report/CountsView;Lio/karandash/models/report/DeltaView;Ljava/util/List;ILjava/util/List;Lio/karandash/models/report/DetailsView;Lio/karandash/models/report/MrView;Ljava/lang/String;Ljava/lang/Integer;Ljava/lang/String;Lio/karandash/models/report/LabelsView;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun component1 ()Z
+	public final fun component10 ()Lio/karandash/models/report/MrView;
+	public final fun component11 ()Ljava/lang/String;
+	public final fun component12 ()Ljava/lang/Integer;
+	public final fun component13 ()Ljava/lang/String;
+	public final fun component14 ()Lio/karandash/models/report/LabelsView;
+	public final fun component2 ()Ljava/lang/String;
+	public final fun component3 ()Ljava/lang/String;
+	public final fun component4 ()Lio/karandash/models/report/CountsView;
+	public final fun component5 ()Lio/karandash/models/report/DeltaView;
+	public final fun component6 ()Ljava/util/List;
+	public final fun component7 ()I
+	public final fun component8 ()Ljava/util/List;
+	public final fun component9 ()Lio/karandash/models/report/DetailsView;
+	public final fun copy (ZLjava/lang/String;Ljava/lang/String;Lio/karandash/models/report/CountsView;Lio/karandash/models/report/DeltaView;Ljava/util/List;ILjava/util/List;Lio/karandash/models/report/DetailsView;Lio/karandash/models/report/MrView;Ljava/lang/String;Ljava/lang/Integer;Ljava/lang/String;Lio/karandash/models/report/LabelsView;)Lio/karandash/models/report/ReportView;
+	public static synthetic fun copy$default (Lio/karandash/models/report/ReportView;ZLjava/lang/String;Ljava/lang/String;Lio/karandash/models/report/CountsView;Lio/karandash/models/report/DeltaView;Ljava/util/List;ILjava/util/List;Lio/karandash/models/report/DetailsView;Lio/karandash/models/report/MrView;Ljava/lang/String;Ljava/lang/Integer;Ljava/lang/String;Lio/karandash/models/report/LabelsView;ILjava/lang/Object;)Lio/karandash/models/report/ReportView;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getCounts ()Lio/karandash/models/report/CountsView;
+	public final fun getDelta ()Lio/karandash/models/report/DeltaView;
+	public final fun getDetails ()Lio/karandash/models/report/DetailsView;
+	public final fun getFiles ()Ljava/util/List;
+	public final fun getFindings ()Ljava/util/List;
+	public final fun getFooter ()Ljava/lang/String;
+	public final fun getHeadline ()Ljava/lang/String;
+	public final fun getLabels ()Lio/karandash/models/report/LabelsView;
+	public final fun getMore ()I
+	public final fun getMr ()Lio/karandash/models/report/MrView;
+	public final fun getPassed ()Z
+	public final fun getRunNumber ()Ljava/lang/Integer;
+	public final fun getVerdict ()Ljava/lang/String;
+	public final fun getVersion ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final synthetic class io/karandash/models/report/ReportView$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lio/karandash/models/report/ReportView$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lio/karandash/models/report/ReportView;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lio/karandash/models/report/ReportView;)V
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/karandash/models/report/ReportView$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/karandash/models/report/SkippedView {
+	public static final field Companion Lio/karandash/models/report/SkippedView$Companion;
+	public fun <init> (Ljava/lang/String;Ljava/lang/String;)V
+	public synthetic fun <init> (Ljava/lang/String;Ljava/lang/String;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun component1 ()Ljava/lang/String;
+	public final fun component2 ()Ljava/lang/String;
+	public final fun copy (Ljava/lang/String;Ljava/lang/String;)Lio/karandash/models/report/SkippedView;
+	public static synthetic fun copy$default (Lio/karandash/models/report/SkippedView;Ljava/lang/String;Ljava/lang/String;ILjava/lang/Object;)Lio/karandash/models/report/SkippedView;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getReason ()Ljava/lang/String;
+	public final fun getRule ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final synthetic class io/karandash/models/report/SkippedView$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lio/karandash/models/report/SkippedView$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lio/karandash/models/report/SkippedView;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lio/karandash/models/report/SkippedView;)V
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/karandash/models/report/SkippedView$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/karandash/models/support/KarandashJson {
+	public static final field INSTANCE Lio/karandash/models/support/KarandashJson;
+	public final fun getConfigDecoder ()Lkotlinx/serialization/json/Json;
+	public final fun getConfigEncoder ()Lkotlinx/serialization/json/Json;
+	public final fun getConfigFile ()Lkotlinx/serialization/json/Json;
+	public final fun getDefault ()Lkotlinx/serialization/json/Json;
+	public final fun getIgnoreUnknown ()Lkotlinx/serialization/json/Json;
+	public final fun getLenient ()Lkotlinx/serialization/json/Json;
+	public final fun getPlain ()Lkotlinx/serialization/json/Json;
+	public final fun getPretty ()Lkotlinx/serialization/json/Json;
+	public final fun getPrettyIgnoreUnknown ()Lkotlinx/serialization/json/Json;
+	public final fun getPrettyWithDefaults ()Lkotlinx/serialization/json/Json;
+	public final fun getReport ()Lkotlinx/serialization/json/Json;
+	public final fun getRuleConfig ()Lkotlinx/serialization/json/Json;
+	public final fun getStrict ()Lkotlinx/serialization/json/Json;
+	public final fun getWire ()Lkotlinx/serialization/json/Json;
+}
+
+public abstract interface class io/karandash/models/support/PatternAwareCompiler {
+	public abstract fun compile (Ljava/lang/String;Ljava/lang/String;Ljava/util/List;)Lkotlin/text/Regex;
+}
+
+public final class io/karandash/models/support/WellKnownMetadataKeys {
+	public static final field AI_DURATION_MS Ljava/lang/String;
+	public static final field AI_MODEL Ljava/lang/String;
+	public static final field AI_SUGGESTION_BAKED Ljava/lang/String;
+	public static final field AI_SUMMARY Ljava/lang/String;
+	public static final field AI_TOKENS_USED Ljava/lang/String;
+	public static final field ANCHOR_FINGERPRINT Ljava/lang/String;
+	public static final field BUG_INTRODUCED_BY Ljava/lang/String;
+	public static final field CACHED Ljava/lang/String;
+	public static final field CATEGORY Ljava/lang/String;
+	public static final field COMPLIANCE_SCORE Ljava/lang/String;
+	public static final field CONFIDENCE Ljava/lang/String;
+	public static final field DIMENSION Ljava/lang/String;
+	public static final field DRIFT_SCORE Ljava/lang/String;
+	public static final field ERROR Ljava/lang/String;
+	public static final field EXISTING_CODE Ljava/lang/String;
+	public static final field EXPECTED_FORMAT Ljava/lang/String;
+	public static final field FILE Ljava/lang/String;
+	public static final field FIXED_BY Ljava/lang/String;
+	public static final field FORMAT_DIAGRAM Ljava/lang/String;
+	public static final field FORMAT_EXPLAIN Ljava/lang/String;
+	public static final field FULFILLED_REQUIREMENTS Ljava/lang/String;
+	public static final field INSTANCE Lio/karandash/models/support/WellKnownMetadataKeys;
+	public static final field ISSUE_COUNT Ljava/lang/String;
+	public static final field IS_CATEGORIZATION Ljava/lang/String;
+	public static final field IS_DESCRIPTION_QUALITY Ljava/lang/String;
+	public static final field IS_FIX_SUGGESTION Ljava/lang/String;
+	public static final field IS_GENERATED_DESCRIPTION Ljava/lang/String;
+	public static final field IS_MR_SUMMARY Ljava/lang/String;
+	public static final field IS_PR_SPLIT Ljava/lang/String;
+	public static final field IS_RISK_ADVISORY Ljava/lang/String;
+	public static final field IS_TICKET_COMPLIANCE Ljava/lang/String;
+	public static final field LINE_DEMOTED Ljava/lang/String;
+	public static final field LOCALIZED_TEXT Ljava/lang/String;
+	public static final field MISMATCH Ljava/lang/String;
+	public static final field MISSING_REQUIREMENTS Ljava/lang/String;
+	public static final field ORIGINAL_MESSAGE Ljava/lang/String;
+	public static final field ORIGINAL_RULE Ljava/lang/String;
+	public static final field OVERALL_SCORE Ljava/lang/String;
+	public static final field PARTIAL_REQUIREMENTS Ljava/lang/String;
+	public static final field PATTERN Ljava/lang/String;
+	public static final field PATTERN_EXAMPLES Ljava/lang/String;
+	public static final field PROCESS_RISK Ljava/lang/String;
+	public static final field QUALITY_SCORE Ljava/lang/String;
+	public static final field REASONING Ljava/lang/String;
+	public static final field RECLASSIFIED_FROM Ljava/lang/String;
+	public static final field RELATED_PATTERNS Ljava/lang/String;
+	public static final field RISK_FACTORS Ljava/lang/String;
+	public static final field RISK_LEVEL Ljava/lang/String;
+	public static final field RISK_SCORE Ljava/lang/String;
+	public static final field SEARCH_TERMS Ljava/lang/String;
+	public static final field SHOULD_SPLIT Ljava/lang/String;
+	public static final field SPLIT_COUNT Ljava/lang/String;
+	public static final field SUGGESTED_CODE Ljava/lang/String;
+	public static final field SUGGESTED_DESCRIPTION Ljava/lang/String;
+	public static final field SUGGESTED_FIX Ljava/lang/String;
+	public static final field SUGGESTED_LABELS Ljava/lang/String;
+	public static final field SUGGESTED_TITLE Ljava/lang/String;
+	public static final field WALKTHROUGH Ljava/lang/String;
+	public static final field WHY Ljava/lang/String;
+}
+
+public final class io/karandash/models/template/Mustache {
+	public static final field DEFAULT_MAX_OUTPUT_CHARS I
+	public static final field INSTANCE Lio/karandash/models/template/Mustache;
+	public final fun render (Ljava/lang/String;Lkotlinx/serialization/json/JsonElement;Ljava/util/Map;Lkotlin/jvm/functions/Function1;I)Ljava/lang/String;
+	public static synthetic fun render$default (Lio/karandash/models/template/Mustache;Ljava/lang/String;Lkotlinx/serialization/json/JsonElement;Ljava/util/Map;Lkotlin/jvm/functions/Function1;IILjava/lang/Object;)Ljava/lang/String;
+	public final fun validate (Ljava/lang/String;)V
+}
+
+public final class io/karandash/models/template/TemplateEscapes {
+	public static final field INSTANCE Lio/karandash/models/template/TemplateEscapes;
+	public final fun byName (Ljava/lang/String;)Lkotlin/jvm/functions/Function1;
+	public final fun getBY_NAME ()Ljava/util/Map;
+	public final fun getLAMBDAS ()Ljava/util/Map;
+	public final fun html (Ljava/lang/String;)Ljava/lang/String;
+	public final fun json (Ljava/lang/String;)Ljava/lang/String;
+	public final fun markdown (Ljava/lang/String;)Ljava/lang/String;
+	public final fun none (Ljava/lang/String;)Ljava/lang/String;
+	public final fun slack (Ljava/lang/String;)Ljava/lang/String;
+}
+

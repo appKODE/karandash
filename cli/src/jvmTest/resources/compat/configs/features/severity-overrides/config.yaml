@@ -1,0 +1,13 @@
+# Source: docs/configuration/YAML_CONFIG.md "Policies" (severity override per module).
+rules:
+  title-format:
+    min-length: 10
+  labels:
+    required-labels: ["needs-review"]
+
+policies:
+  - when: 'is_draft'
+    modules: [title-format, labels]
+    severity: warning
+  - when: 'is_dry_run'
+    severity: info

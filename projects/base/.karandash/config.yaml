@@ -1,0 +1,335 @@
+# Base Karandash config for all Android/KMP projects.
+# Secrets must be set in CI/CD; defaults below are used when not set.
+
+env:
+  KARANDASH_GITLAB_TOKEN: null
+  BIFROST_API_KEY: null
+  BIFROST_BASE_URL: null
+  KARANDASH_BASE_TOKEN: null
+  KARANDASH_JIRA_KEY: "PROJ"
+  KARANDASH_JIRA_URL: null
+  JIRA_EMAIL: null
+  JIRA_TOKEN: null
+  KARANDASH_CONFIG: ".karandash"
+  KARANDASH_AI_MAX_TOKENS: "20000"
+  # Hard run ceiling: a chunked diff grows the review budget one share per chunk up to this (ai.large-mr.scale-budget).
+  KARANDASH_AI_MAX_TOKENS_CAP: "80000"
+
+# Reusable named patterns, referenced as @project-ticket, @project-title, etc.
+# Child configs can override any of these via extends.
+patterns:
+  project-ticket: "@jira-ticket(@project:${KARANDASH_JIRA_KEY})"
+  project-tickets: "@one-or-more(@bracketed(@project-ticket))"
+  project-title: "@optional(@project-tickets ).+"
+  # Per-line CHANGELOG shape, used with matchMode: anyLine on the commit-body rule.
+  # Accepts: optional whitespace after ':', a [PROJECT-NN] ticket, an optional secondary
+  # bracket tag like [Android]/[AND]/[iOS], description, optional trailing period.
+  # Written in Pomsky for readability; project key is inlined from KARANDASH_JIRA_KEY
+  # at config-load time (env interpolation runs before pattern resolution).
+  changelog-line: |-
+    pomsky:
+    let ticket = '[' '${KARANDASH_JIRA_KEY}-' [d]+ ']';
+    let scope = '[' ![']']+ ']';
+    ^ 'CHANGELOG:' [s]* ticket ([s]* scope)? [s]+ ![n]+ '.'? $
+
+platforms:
+  gitlab:
+    url: "https://gitlab.example.com"
+    token: "${KARANDASH_GITLAB_TOKEN}"
+
+reporters:
+  markdown: true
+  console: false
+
+rules:
+  # Android-only projects: no platform tag required, all commits are Android by definition.
+  # KMP and multi-platform projects override these patterns and add context-tag via extends.
+  title-format:
+    pattern: "@project-title"
+    min-length: 10
+    max-length: 120
+    bail-on-fail: true
+    suggestion: "Format: '[${KARANDASH_JIRA_KEY}-123] Title' or just 'Title'. Examples: '[${KARANDASH_JIRA_KEY}-42] Add device profile screen', 'Fix null pointer in login flow'. Length: 10–120 chars."
+    explanation: "Consistent MR titles make git history searchable by task ID and enable automated changelog generation."
+
+  commit-messages:
+    pattern: "@project-title"
+    min-length: 10
+    max-length: 72
+    bail-on-fail: true
+    suggestion: "Format: '[${KARANDASH_JIRA_KEY}-123] Description' or just 'Description'. Examples: '[${KARANDASH_JIRA_KEY}-42] Implement device profile UI', 'Fix null pointer in login'. Max 72 chars."
+    explanation: "Consistent commit messages improve git log readability and enable per-task release notes."
+
+  jira-ticket:
+    when: 'title_matches("@any-ticket")'
+    projectKeys: ["${KARANDASH_JIRA_KEY}"]
+    suggestion: "Use your project's JIRA key in the ticket reference. Example: '[${KARANDASH_JIRA_KEY}-123]' not '[WAL-123]' in an ${KARANDASH_JIRA_KEY} project."
+    explanation: "JIRA references link code changes to project requirements for audit trails and sprint tracking."
+
+  cross-entity-consistency:
+    ticket-format: jira
+    ticket-projects: ["${KARANDASH_JIRA_KEY}"]
+    commitTasksSubsetOfMr: true
+    changelogConsistency: true
+    changelogPrefix: "CHANGELOG:"
+    mrTaskSource: "title"
+    changelogDuplicateRequiresMatchingText: true
+    changelogCoverage: true
+    suggestion: "All task IDs in commits must also appear in the MR title, and every MR title ticket must have a CHANGELOG entry. If a commit references [${KARANDASH_JIRA_KEY}-999], the MR title must include [${KARANDASH_JIRA_KEY}-999] too."
+    explanation: "Orphaned task references cause broken JIRA links; uncovered MR tickets cause incomplete release notes."
+
+  draft-prevention:
+    wip-markers: ["WIP", "DRAFT", "DO NOT MERGE"]
+    suggestion: "In GitLab, click 'Mark as ready'. Remove 'WIP:', '[WIP]', or 'Draft:' from the title if present."
+    explanation: "Merging incomplete work can break the main branch and block other developers."
+
+  labels:
+    requiredLabels: []
+    suggestion: "No labels required currently. When labels are configured, apply them via the MR sidebar in GitLab."
+    explanation: "Labels categorize MRs for filtering, metrics, and automated workflow routing."
+
+  size-limits:
+    maxFiles: 75
+    maxLines: 2000
+    maxCommits: 30
+    suggestion: "Split large MRs into smaller focused ones. Aim for a single logical change per MR."
+    explanation: "Large MRs are harder to review thoroughly and increase the risk of bugs slipping through."
+
+  language-policy:
+    allowedScripts: ["latin"]
+    checkMrTitle: true
+    checkCommitTitle: true
+    checkBranchName: true
+    checkMrDescription: false
+    checkCommitDescription: false
+    suggestion: "Replace non-Latin characters with English equivalents in MR title, branch name, and commit title."
+    explanation: "English-only text ensures all team members can read git-flow information regardless of native language."
+
+# CHANGELOG required whenever a JIRA ticket appears in the MR title.
+# Android-only projects: all changes are Android, so any JIRA ticket triggers this.
+# KMP and multi-platform projects override the condition to be platform-specific
+# by matching on the `name` field (policies use merge-by-key by default).
+# Recommended shape: one CHANGELOG line per ticket, e.g.
+#   CHANGELOG: [PROJ-123] [Android] Description
+#   CHANGELOG: [PROJ-456] [Android] Description
+# At least one commit body in the MR must carry a valid CHANGELOG line; other
+# commits are not required to repeat it (scope: anyCommit).
+policies:
+  # ── Rule config overrides ──────────────────────────────────────────────
+  # When a JIRA ticket appears in the MR title, require at least one CHANGELOG
+  # line in some commit body of the MR (scope: anyCommit). The platform tag
+  # (e.g. [Android], [AND], [iOS]) is optional. Trailing period is optional.
+  - name: changelog-requirement
+    when: 'title_matches("@any-ticket")'
+    override:
+      commit-body:
+        pattern: "@changelog-line"
+        required-when-subject-matches: "@any-ticket"
+        matchMode: "anyLine"
+        scope: "anyCommit"
+        suggestion: "Add a CHANGELOG line in some commit body. Per-line shape: 'CHANGELOG: [${KARANDASH_JIRA_KEY}-123] Description' (or with platform tag: 'CHANGELOG: [${KARANDASH_JIRA_KEY}-123] [Android] Описание'). The space after 'CHANGELOG:' and the trailing period are optional. Recommended: one CHANGELOG line per ticket on its own line. Description can be in Russian."
+        explanation: "CHANGELOG lines enable per-platform release notes generation."
+
+  # ── AI gating ──────────────────────────────────────────────────────────
+  # Skip all AI analysis modules on draft/WIP MRs to save API tokens.
+  # Uses modules: to target only AI modules; all other rules still run.
+  - name: ai-draft-gating
+    when: 'is_draft'
+    modules:
+      - risk-scoring
+      - review-comments
+      - code-suggestions
+      - review-thread-analysis
+      - mr-summary
+    enabled: false
+
+cache:
+  dir: "cache"
+  state:
+    ttl: "7d"
+  responses:
+    enabled: true
+    ttl: "60s"
+  memory:
+    max-entries: 128
+
+# ── Enrichment providers ───────────────────────────────────────────────────
+# Providers degrade gracefully: if URL or token env vars are not set,
+# initialize() returns false and the provider is skipped silently.
+# Set KARANDASH_JIRA_URL + JIRA_EMAIL + JIRA_TOKEN in CI to activate Jira.
+enrichment:
+  jira:
+    url: "${KARANDASH_JIRA_URL}"
+    email: "${JIRA_EMAIL}"
+    token: "${JIRA_TOKEN}"
+    ticket-keys:
+      enabled: true
+    tickets:
+      enabled: true
+      max-per-mr: 10
+    acceptance-criteria:
+      enabled: true
+    linked-issues:
+      enabled: true
+
+  local-git:
+    file-frequency:
+      enabled: true
+      period: "6m"
+    subprocess-budget:
+      max-calls: 60
+      max-wall-millis: 60000
+
+# ── Rule-to-enrichment bindings ────────────────────────────────────────────
+# Additive to each rule's code-declared supportedEnrichment.
+rule-enrichment:
+  risk-scoring:
+    enrich: ["jira:tickets", "local-git:file-frequency"]
+  review-comments:
+    enrich: ["jira:tickets", "jira:acceptance-criteria", "local-git:file-frequency"]
+  mr-summary:
+    enrich: ["jira:tickets"]
+  description-quality:
+    enrich: ["jira:acceptance-criteria"]
+
+ai:
+  provider: "bifrost"
+  model: "openrouter/moonshotai/kimi-k2.5"
+  api-key: "${BIFROST_API_KEY}"
+  base-url: "${BIFROST_BASE_URL}"
+  max-token-budget: "${KARANDASH_AI_MAX_TOKENS}"
+  fail-on-error: false
+  timeout: "5m"
+  execution-timeout: "6m"
+  max-retries: 1
+  # Matches the eval config of s15/s16, the runs this preset was tuned on.
+  stream: true
+  priority: 200
+  mode: supplement
+  response-language: "English"
+  strictness: "standard"
+  # kimi-k2.5 with reasoning on spends the whole output cap on hidden reasoning and returns an
+  # empty reply; with "none" it answers in 30-100s with valid JSON.
+  reasoning-effort: "none"
+  # Related files (imports, tests) for the line-anchored analyzers: recall 5/5 in 3/3 runs (eval s16).
+  cross-file-context:
+    enabled: true
+
+  # No per-analyzer model: qwen3.5-35b-a3b spent the whole 1500-token cap on hidden reasoning and
+  # returned empty replies for risk-scoring, mr-summary and review-thread-analysis.
+  risk-scoring:
+    enabled: true
+
+  review-comments:
+    enabled: true
+    # max-comments: the code default (10). At 5 the cap pushed caught GT bugs (B2, H8) out of the posted set (s18 replay).
+
+  code-suggestions:
+    enabled: true
+    mode: "inline"
+    min-severity: "warning"
+
+  review-thread-analysis:
+    enabled: true
+
+  mr-summary:
+    enabled: true
+
+  cost-budget:
+    max-tokens-per-run: "${KARANDASH_AI_MAX_TOKENS_CAP}"
+    on-budget-exceeded: "skip-remaining"
+
+  grounding:
+    check-symbol-existence: true
+    check-code-snippets: true
+    auto-downgrade-refuted: true
+
+  # Cap all AI review ERRORs to WARNING so they don't break CI at --fail-level=error
+  severity-overrides:
+    - rule: ai-review-comments
+      reclassify:
+        error: warning
+
+  filter:
+    max-per-rule: 10
+    max-per-file: 5
+    min-confidence: 0.6
+    deduplicate: true
+
+  size-policy:
+    skip:
+      maxFiles: 500
+      maxTotalLines: 50000
+      maxCommits: 200
+    exclude:
+      patterns:
+        - "**/generated/**"
+        - "**/*.generated.*"
+        - "**/build/**"
+        - "**/.gradle/**"
+        - "**/Pods/**"
+        - "**/package-lock.json"
+        - "**/*.md"
+    partial-review:
+      maxFiles: 40
+      strategy: "most-changed"
+    diff-preprocessor:
+      skip-deleted-files: true
+      skip-pure-renames: true
+      strip-diff-metadata: true
+      skip-binary-diffs: true
+
+  scopes:
+    android:
+      paths: ["**/*.kt", "**/*.java", "**/*.xml", "**/*.gradle.kts"]
+    ci:
+      paths: ["ci/**", ".gitlab-ci.yml", ".github/**", "Makefile"]
+
+  # Unified diff context lines requested from platforms. Default is 3 (unified-diff
+  # historical default). Set to 10 for richer LLM context around each changed hunk.
+  context-lines: 10
+
+  # AI context-quality features: smart truncation, enricher-contributed context blocks,
+  # and a post-dispatch finding validator that drops hallucinated findings. All projects
+  # inheriting this base pick up the defaults below; override per-project via
+  # `extends:` + local YAML.
+  context-quality:
+    enabled: true
+    truncation:
+      strategy: "priority"
+      token-estimator: "chars4"
+      preserve-hunk-boundaries: true
+      budget-allocation: "proportional"
+    # Related-file discovery: finds test files matching each changed source. Cheap and
+    # high signal for the AI reviewer.
+    related-files:
+      enabled: true
+    # Full-file-context sends complete content for small high-priority files so the AI
+    # sees full class structure, not just diff lines. Capped at 300 lines / 3 files to
+    # keep token overhead under ~4,500 tokens per run.
+    full-file-context:
+      enabled: true
+      max-file-lines: 300
+      max-files: 3
+      mode: "target"
+    # Auto-detects .editorconfig, CONTRIBUTING.md, CODEOWNERS, linter configs so the
+    # reviewer knows the project's conventions without a hand-written prompt.
+    conventions:
+      enabled: true
+    # Drops findings whose file path is not in the MR diff and whose line is not inside
+    # a changed hunk (strict mode). Eliminates hallucinated file paths and off-hunk
+    # line references before findings reach reporters.
+    finding-validator:
+      enabled: true
+      strict: true
+    # Enrichment-block budgets: controls how many chars of each provider's formatted
+    # block reach the AI prompt. max-chars: 0 skips that ID for the rule entirely.
+    # With a 20k max-token-budget these defaults leave ~14k chars for the diff.
+    knowledge-context:
+      default-budget:
+        max-chars: 1500
+      budgets:
+        "jira:tickets":              { max-chars: 2000 }
+        "jira:acceptance-criteria":  { max-chars: 1500 }
+        "jira:linked-issues":        { max-chars: 1000 }
+        "local-git:file-frequency":  { max-chars: 800 }

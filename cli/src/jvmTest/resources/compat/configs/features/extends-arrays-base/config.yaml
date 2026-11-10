@@ -1,0 +1,11 @@
+# Source: configuration-schema.md "extends" merge rules; the parent of extends-arrays.
+scripts:
+  - path: .karandash/base-checks.js
+rules:
+  jira-ticket:
+    project-keys: [BASE, CORE]
+policies:
+  - name: drafts-warn
+    when: 'mr.draft'
+    modules: [title-format]
+    severity: warning

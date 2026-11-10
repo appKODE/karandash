@@ -1,0 +1,42 @@
+{
+  "responses": {
+    "change-categorization": {
+      "suggestedLabels": [
+        "feature"
+      ],
+      "confidence": 0.9,
+      "reasoning": "Adds a new helper with a test."
+    },
+    "description-quality": {
+      "qualityScore": 0.8,
+      "issues": [
+        {
+          "type": "missing-context",
+          "message": "The description does not say why an Int helper is needed.",
+          "severity": "info"
+        }
+      ],
+      "summary": "Short but accurate description."
+    },
+    "mr-summary": {
+      "summary": "Adds Int.clampTo and a unit test.",
+      "keyChanges": [
+        "Int.clampTo"
+      ],
+      "risks": [],
+      "reviewFocus": [
+        "clampTo bounds handling"
+      ]
+    },
+    "review-comments": {
+      "comments": []
+    },
+    "risk-scoring": {
+      "riskScore": 0.1,
+      "riskLevel": "low",
+      "confidence": 0.9,
+      "factors": [],
+      "summary": "Small pure helper."
+    }
+  }
+}

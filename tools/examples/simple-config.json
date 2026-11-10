@@ -1,0 +1,40 @@
+{
+  "rules": {
+    "title-format": {
+      "pattern": "^(feat|fix|docs|style|refactor|test|chore): .+",
+      "min-length": 10,
+      "max-length": 72
+    },
+    "commit-messages": {
+      "max-length": 72
+    },
+    "branch-naming": {
+      "pattern": "^(feature|bugfix|hotfix|release)/[a-z0-9-]+$"
+    },
+    "jira-ticket": {
+      "project-keys": ["PROJ", "TASK", "BUG"],
+      "pattern": "([A-Z]+-\\d+)"
+    },
+    "approval": {
+      "min-approvals": 1
+    }
+  },
+  "reporters": {
+    "markdown": true,
+    "console": true
+  },
+  "ai": {
+    "provider": "anthropic",
+    "model": "claude-sonnet-4-20250514",
+    "review-comments": {
+      "enabled": true
+    },
+    "mr-summary": {
+      "enabled": true
+    },
+    "filter": {
+      "min-confidence": 0.5,
+      "deduplicate": true
+    }
+  }
+}

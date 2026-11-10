@@ -1,0 +1,26 @@
+rules:
+  title-format:
+    pattern: "^(feat|fix|chore|docs|refactor|test|ci)(\\(.*\\))?: .+"
+  commit-messages:
+    pattern: "^(feat|fix|chore|docs|refactor|test|ci)(\\(.*\\))?: .{10,}"
+  branch-naming:
+    pattern: "^(feature|bugfix|hotfix|release|chore)/[a-z0-9][a-z0-9-]+$"
+  draft-prevention: true
+  size-limits:
+    max-files: 50
+    max-lines: 1000
+  labels:
+    required-labels:
+      - "type:*"
+  conflict: true
+  security: true
+  approval:
+    min-approvals: 1
+  reviewer:
+    required-reviewers:
+      - "alice"
+
+reporters:
+  console: true
+  json:
+    output: "/dev/null"

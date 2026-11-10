@@ -1,0 +1,87 @@
+scenarios:
+  - name: "Invalid: wrong JIRA key (GRD instead of TEL)"
+    mr:
+      title: "[GRD-123] Add feature"
+      commits:
+        - subject: "[GRD-123] Implement feature"
+          body: "CHANGELOG: [GRD-123] Add feature."
+    expect: fail
+    expected-rules: ["jira-ticket"]
+
+  - name: "Invalid: Cyrillic in MR title"
+    mr:
+      title: "Добавить экран профиля Telecom"
+    expect: fail
+    expected-rules: ["language-policy"]
+
+  - name: "Invalid: TEL JIRA present but missing CHANGELOG"
+    mr:
+      title: "[TEL-123] Add Telecom package screen"
+      commits:
+        - subject: "[TEL-123] Implement package browse UI"
+          body: ""
+    expect: fail
+    expected-rules: ["commit-body"]
+
+  - name: "Invalid: CHANGELOG missing task ID"
+    mr:
+      title: "[TEL-123] Add feature"
+      commits:
+        - subject: "[TEL-123] Implement feature"
+          body: "CHANGELOG: Add feature."
+    expect: fail
+    expected-rules: ["commit-body"]
+
+  - name: "Invalid: draft MR"
+    mr:
+      title: "Draft: Add Telecom state sync"
+      draft: true
+    expect: fail
+    expected-rules: ["draft-prevention"]
+
+  - name: "Invalid: Cyrillic in commit title"
+    mr:
+      title: "Fix Telecom activation error"
+      commits:
+        - subject: "Исправить ошибку активации Telecom"
+    expect: fail
+    expected-rules: ["language-policy"]
+
+  - name: "Invalid: Cyrillic in branch name"
+    mr:
+      title: "Fix Telecom QR scan"
+      commits:
+        - subject: "Fix QR scan timeout"
+      branch: "fix/исправить-qr-скан"
+    expect: fail
+    expected-rules: ["language-policy"]
+
+  - name: "Invalid: commit task not in MR title"
+    mr:
+      title: "[TEL-100] Implement feature A"
+      commits:
+        - subject: "[TEL-999] Unrelated change"
+    expect: fail
+    expected-rules: ["cross-entity-consistency"]
+
+  - name: "Invalid: title too short"
+    mr:
+      title: "Fix bug"
+    expect: fail
+    expected-rules: ["title-format"]
+
+  - name: "Invalid: WIP prefix triggers draft prevention"
+    mr:
+      title: "WIP: Add Telecom activation"
+      draft: true
+    expect: fail
+    expected-rules: ["draft-prevention"]
+
+  - name: "Invalid: CHANGELOG references task not in MR title"
+    mr:
+      title: "[TEL-100] Add feature"
+      commits:
+        - subject: "[TEL-100] Implement feature"
+          body: "CHANGELOG: [TEL-100] Add feature, [TEL-999] Fix unrelated issue."
+    expect: fail
+    expected-rules: ["cross-entity-consistency"]

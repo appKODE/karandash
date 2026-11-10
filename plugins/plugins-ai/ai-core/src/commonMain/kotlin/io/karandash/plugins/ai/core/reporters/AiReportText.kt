@@ -1,0 +1,116 @@
+package io.karandash.plugins.ai.core.reporters
+
+import io.karandash.models.finding.Translations
+
+/**
+ * The fixed texts of the static AI reports (digest, annotated diff, team scorecard, risk heatmap, DORA, ROI,
+ * developer growth, compliance evidence, flaky rules, policy drift, cross-platform consistency, rule predictions) in English; other
+ * languages (`report.language`, via `ai.responseLanguage`) come from a pack. `%1`, `%2`, ... are values; an English
+ * value (a status or a severity name) without an entry passes through [label].
+ */
+internal enum class AiReportText(
+    val en: String,
+) {
+    DIGEST_DEVELOPER_TITLE("## Validation Summary"),
+    DIGEST_COUNTS("%1 finding(s): %2 error(s), %3 warning(s), %4 info(s)"),
+    DIGEST_TOP_RULES("Top rules: %1"),
+    DIGEST_MANAGER_TITLE("## Risk Assessment"),
+    DIGEST_PASS_RATE("Pass rate: %1%"),
+    DIGEST_BLOCKING("%1 blocking issue(s) found across %2 rule(s)"),
+    DIGEST_SECURITY_TITLE("## Security Status"),
+    DIGEST_SECURITY_FINDINGS("Security-related findings: %1"),
+    DIGEST_TOTAL("Total findings: %1 (%2 critical)"),
+    DIFF_TITLE("Karandash Report: %1"),
+    DIFF_FINDINGS("%1 finding(s)"),
+    SCORECARD_TITLE("## Team Hygiene Scorecard"),
+    SCORECARD_COMPOSITE("Composite Score: %1/100"),
+    SCORECARD_RUNS("Runs: %1 | Total Findings: %2"),
+    SCORECARD_HEADER("| Rule | Score | Fire Rate | Findings |"),
+    HEATMAP_TITLE("## Risk Heatmap"),
+    HEATMAP_FILES("### Hottest Files"),
+    HEATMAP_HEADER("| File | Risk Score | Findings |"),
+    HEATMAP_DIRECTORIES("### Hottest Directories"),
+    HEATMAP_DIRECTORY("- %1: risk=%2"),
+    DORA_TITLE("## DORA Metrics (%1-day window)"),
+    DORA_FAILURE_RATE("- Change failure rate: %1%"),
+    DORA_DEPLOY_FREQUENCY("- Deploy frequency: %1/day"),
+    DORA_AVERAGE("- Avg findings/run: %1"),
+    DORA_RUNS("- Total runs: %1 (%2 failed)"),
+    ROI_TITLE("## ROI Report"),
+    ROI_RUNS("- Runs analyzed: %1"),
+    ROI_FINDINGS("- Total findings caught: %1"),
+    ROI_HOURS("- Estimated time saved: %1 hours"),
+    ROI_COST("- Estimated cost saved: \$%1"),
+    ROI_RATE("  (at \$%1/hr developer rate)"),
+    GROWTH_TITLE("## Developer Growth Report: %1"),
+    GROWTH_TREND("Trend: %1 (%2% change)"),
+    GROWTH_RUNS("Runs: %1 | Avg findings/run: %2"),
+    GROWTH_PERSISTENT("Persistent issues: %1"),
+    GROWTH_IMPROVING("IMPROVING"),
+    GROWTH_STABLE("STABLE"),
+    GROWTH_DECLINING("DECLINING"),
+    COMPLIANCE_TITLE("## Compliance Evidence Pack"),
+    COMPLIANCE_MR("MR: %1 | Time: %2"),
+    COMPLIANCE_INTEGRITY("Integrity: %1"),
+    COMPLIANCE_CHECKLIST("### Checklist"),
+    COMPLIANCE_HEADER("| Rule | Status | Findings | Max Severity |"),
+    COMPLIANCE_PASS("PASS"),
+    COMPLIANCE_FAIL("FAIL"),
+    SEVERITY_ERROR("ERROR"),
+    SEVERITY_WARNING("WARNING"),
+    SEVERITY_INFO("INFO"),
+    FLAKY_TITLE("## Flaky Rule Analysis"),
+    FLAKY_COUNTS("Rules analyzed: %1 | Runs: %2"),
+    FLAKY_NONE("No flaky rules detected."),
+    FLAKY_ISSUES("Issues found: %1"),
+    FLAKY_FLIP_FLOP_DESCRIPTION("Rule flips between firing/not-firing (transition rate: %1%)"),
+    FLAKY_NEVER_FIRES_DESCRIPTION("Rule has never fired across %1 runs"),
+    FLAKY_ALWAYS_FIRES_DESCRIPTION("Rule fires on %1% of runs — may be too sensitive"),
+    FLAKY_FLIP_FLOP("FLIP_FLOP"),
+    FLAKY_NEVER_FIRES("NEVER_FIRES"),
+    FLAKY_ALWAYS_FIRES("ALWAYS_FIRES"),
+    DRIFT_TITLE("## Policy Drift Analysis"),
+    DRIFT_COUNTS("Recent: %1 runs | Baseline: %2 runs"),
+    DRIFT_NONE("No significant drift detected."),
+    DRIFT_WARNING("**WARNING: Regressions detected — review rule thresholds.**"),
+    DRIFT_REGRESSION("REGRESSION"),
+    DRIFT_IMPROVEMENT("IMPROVEMENT"),
+    DRIFT_NEW_RULE("NEW_RULE"),
+    DRIFT_MISSING_RULE("MISSING_RULE"),
+    CONSISTENCY_TITLE("## Cross-Platform Consistency"),
+    CONSISTENCY_PLATFORMS("Platforms: %1"),
+    CONSISTENCY_YES("Consistent: YES"),
+    CONSISTENCY_NO("Consistent: NO — drift detected"),
+    CONSISTENCY_DRIFT("- DRIFT: %1"),
+    CONSISTENCY_DRIFT_DESCRIPTION("%1 avg %2 findings vs %3 avg %4 findings"),
+    PREDICTION_TITLE("## Rule Failure Predictions"),
+    PREDICTION_NONE("Insufficient history for predictions."),
+    PREDICTION_HEADER("| Rule | Probability | Confidence |"),
+    PREDICTION_HIGH("HIGH"),
+    PREDICTION_MEDIUM("MEDIUM"),
+    PREDICTION_LOW("LOW"),
+    PROVENANCE_TITLE("## Validation Provenance Chain"),
+    PROVENANCE_CHAIN_HASH("Chain hash: %1"),
+    PROVENANCE_CONFIG_HASH("Config hash: %1"),
+    PROVENANCE_MR_HASH("MR snapshot hash: %1"),
+    PROVENANCE_TOOL_VERSION("Tool version: %1"),
+    PROVENANCE_FINDINGS("Findings: %1"),
+    PGO_TITLE("## PGO Profile Report"),
+    PGO_TOTAL("Total path executions: %1"),
+    PGO_UNIQUE("Unique paths: %1"),
+    PGO_TOP("Top hot paths:"),
+    ;
+
+    fun of(
+        language: String?,
+        vararg values: Any,
+    ): String = values.foldIndexed(Translations.text(en, language)) { i, acc, v -> acc.replace("%${i + 1}", v.toString()) }
+
+    companion object {
+        /** The label of the English [value] (a status, trend or severity name of this table) in [language]; other values pass through. */
+        fun label(
+            value: String,
+            language: String?,
+        ): String = entries.firstOrNull { it.en == value }?.of(language) ?: value
+    }
+}

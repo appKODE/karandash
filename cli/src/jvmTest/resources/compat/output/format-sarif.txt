@@ -1,0 +1,79 @@
+exit=1
+{
+    "version": "2.1.0",
+    "$schema": "https://json.schemastore.org/sarif-2.1.0.json",
+    "runs": [
+        {
+            "tool": {
+                "driver": {
+                    "name": "karandash",
+                    "version": "<version>",
+                    "informationUri": "https://github.com/appKODE/karandash",
+                    "rules": [
+                        {
+                            "id": "labels",
+                            "shortDescription": {
+                                "text": "Rule: labels"
+                            },
+                            "fullDescription": {
+                                "text": "Labels help categorize and organize merge requests, making it easier to track, filter, and report on different types of changes across the project."
+                            },
+                            "helpUri": "https://appkode.github.io/karandash/reference/error-codes/#e0202"
+                        },
+                        {
+                            "id": "titleFormat",
+                            "shortDescription": {
+                                "text": "Rule: titleFormat"
+                            },
+                            "fullDescription": {
+                                "text": "The merge request title should follow a specific format to ensure consistency and traceability. A well-formatted title helps team members quickly understand the purpose of the change."
+                            },
+                            "helpUri": "https://appkode.github.io/karandash/reference/error-codes/#e0200"
+                        }
+                    ]
+                }
+            },
+            "results": [
+                {
+                    "ruleId": "labels",
+                    "level": "error",
+                    "message": {
+                        "text": "Missing required label: 'needs-review'\n\nHow to fix: Add the required label via the MR sidebar."
+                    },
+                    "locations": [],
+                    "partialFingerprints": {
+                        "karandashFingerprint/v1": "6c7083707cbaef03"
+                    },
+                    "properties": {
+                        "errorCode": "E0202",
+                        "fixSuggestions": "add label 'needs-review'"
+                    }
+                },
+                {
+                    "ruleId": "titleFormat",
+                    "level": "error",
+                    "message": {
+                        "text": "MR title does not match required pattern.\n\nWhere: `feat: add runtime verification` — at the start expected `\"JIRA-\"` — found `feat`\nHow to fix: Change the title to match the format, e.g. `JIRA-0: feat: add runtime verification`.\nFormat: `Start 'JIRA-' ['0'-'9']+ ': ' .+`"
+                    },
+                    "locations": [],
+                    "partialFingerprints": {
+                        "karandashFingerprint/v1": "7046752bc194af19"
+                    },
+                    "properties": {
+                        "expectedFormat": "Start 'JIRA-' ['0'-'9']+ ': ' .+",
+                        "mismatch": "{\"value\":\"feat: add runtime verification\",\"position\":0,\"expected\":\"\\\"JIRA-\\\"\"}",
+                        "formatExplain": "start of string, followed by \"JIRA-\", followed by one or more digits (0-9), followed by \": \", followed by one or more of any character",
+                        "formatDiagram": "── START ────── \"JIRA-\" ────── [0-9] ── +──── \": \" ────── . ── +",
+                        "pattern": "Start 'JIRA-' ['0'-'9']+ ': ' .+",
+                        "errorCode": "E0200"
+                    }
+                }
+            ],
+            "invocations": [
+                {
+                    "executionSuccessful": true
+                }
+            ]
+        }
+    ]
+}

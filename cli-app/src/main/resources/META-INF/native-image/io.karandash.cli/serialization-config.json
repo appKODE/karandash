@@ -1,0 +1,32 @@
+[
+  {
+    "name": "io.karandash.config.Config",
+    "condition": {
+      "typeReachable": "kotlinx.serialization.Serializable"
+    }
+  },
+  {
+    "name": "io.karandash.config.RulesConfig",
+    "condition": {
+      "typeReachable": "kotlinx.serialization.Serializable"
+    }
+  },
+  {
+    "name": "io.karandash.models.MergeRequest",
+    "condition": {
+      "typeReachable": "kotlinx.serialization.Serializable"
+    }
+  },
+  {
+    "name": "io.karandash.models.Finding",
+    "condition": {
+      "typeReachable": "kotlinx.serialization.Serializable"
+    }
+  },
+  {
+    "name": "io.karandash.models.Severity",
+    "condition": {
+      "typeReachable": "kotlinx.serialization.Serializable"
+    }
+  }
+]

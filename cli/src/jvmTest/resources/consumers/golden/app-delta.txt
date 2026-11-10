@@ -1,0 +1,7 @@
+rules: commitMessages contextTag crossEntityConsistency draftPrevention jiraTicket labels languagePolicy sizeLimits titleFormat
+changelog-entry = \[MAPS-\d+\] .+
+changelog-line = ^CHANGELOG: \[MAPS-\d+\] .+(?:, \[MAPS-\d+\] .+)*\.$
+project-tag = \[(?:ios|android|core)\]
+project-ticket = MAPS-\d+
+project-tickets = (?:\[MAPS-\d+\])+
+project-title = (?:Draft:\s)?(?:(?:\[MAPS-\d+\])+)?\[(?:ios|android|core)\] .+

@@ -1,0 +1,80 @@
+{
+  "responses": {
+    "change-categorization": {
+      "suggestedLabels": [
+        "feature",
+        "refactor",
+        "chore"
+      ],
+      "confidence": 0.8,
+      "reasoning": "Mixed feature, cleanup and build changes."
+    },
+    "code-quality": {
+      "overallScore": 0.7,
+      "dimensions": {
+        "correctness": 0.8,
+        "errorHandling": 0.7,
+        "readability": 0.8,
+        "maintainability": 0.6,
+        "performance": 0.9,
+        "security": 0.6,
+        "design": 0.6
+      },
+      "issues": [],
+      "strengths": [
+        "Small diffs"
+      ],
+      "summary": "Mostly mechanical changes."
+    },
+    "mr-summary": {
+      "summary": "Persists the auth token, tidies invoice formatting and bumps plugins.",
+      "keyChanges": [
+        "TokenStore.save"
+      ],
+      "risks": [],
+      "reviewFocus": [
+        "TokenStore"
+      ]
+    },
+    "pr-split": {
+      "shouldSplit": true,
+      "confidence": 0.85,
+      "suggestedSplits": [
+        {
+          "name": "auth",
+          "rationale": "Token persistence is independent",
+          "files": [
+            "src/main/kotlin/auth/TokenStore.kt",
+            "src/main/kotlin/auth/LoginViewModel.kt"
+          ]
+        },
+        {
+          "name": "billing",
+          "rationale": "Formatter cleanup",
+          "files": [
+            "src/main/kotlin/billing/InvoiceFormatter.kt",
+            "src/main/kotlin/billing/InvoiceRepository.kt"
+          ]
+        },
+        {
+          "name": "build",
+          "rationale": "Plugin bumps",
+          "files": [
+            "build.gradle.kts"
+          ]
+        }
+      ],
+      "summary": "Three unrelated concerns."
+    },
+    "risk-scoring": {
+      "riskScore": 0.5,
+      "riskLevel": "medium",
+      "confidence": 0.7,
+      "factors": [
+        "Touches auth",
+        "Unrelated changes mixed"
+      ],
+      "summary": "Medium risk."
+    }
+  }
+}

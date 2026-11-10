@@ -1,0 +1,158 @@
+# key	test file	test name
+$schema	core/config-pipeline/src/commonTest/kotlin/io/karandash/config/pipeline/ExtendsKeyBehaviourTest.kt	schema key is read by the loader so it is not reported as an unknown key
+allowLocalhost	cli/src/commonTest/kotlin/io/karandash/cli/cache/RemoteCacheWiringTest.kt	loopback http remote cache url is wired under allow-localhost
+allowLocalhost	core/config-pipeline/src/commonTest/kotlin/io/karandash/config/pipeline/ConfigChainResolverTest.kt	a parent's allowLocalhost lets its own parent come from a loopback host
+allowPrivateNetwork	cli/src/commonTest/kotlin/io/karandash/cli/commands/validate/AllowPrivateNetworkWiringTest.kt	root config enables it for the run
+allowPrivateNetwork	cli/src/commonTest/kotlin/io/karandash/cli/commands/validate/AllowPrivateNetworkWiringTest.kt	an extends parent enables it and a root false overrides it
+auth	core/config-pipeline/src/commonTest/kotlin/io/karandash/config/pipeline/ExtendsKeyBehaviourTest.kt	extends auth names a top level auth entry whose token is sent to that parent only
+auth	core/config-pipeline/src/commonTest/kotlin/io/karandash/config/pipeline/ExtendsKeyBehaviourTest.kt	an extends entry without auth is fetched without credentials even when an auth block exists
+autoApprove	cli/src/commonTest/kotlin/io/karandash/cli/pipeline/AutoApproveHandlerTest.kt	clean MR is approved and not merged by default
+autoApprove	cli/src/commonTest/kotlin/io/karandash/cli/pipeline/AutoApproveHandlerTest.kt	disabled config without the flag and dry run do nothing
+autoApprove.enabled	cli/src/commonTest/kotlin/io/karandash/cli/pipeline/AutoApproveHandlerTest.kt	clean MR is approved and not merged by default
+autoApprove.enabled	cli/src/commonTest/kotlin/io/karandash/cli/pipeline/AutoApproveHandlerTest.kt	disabled config without the flag and dry run do nothing
+autoApprove.maxSeverity	cli/src/commonTest/kotlin/io/karandash/cli/pipeline/AutoApproveHandlerTest.kt	findings above the threshold unapprove and never merge
+autoApprove.maxSeverity	cli/src/commonTest/kotlin/io/karandash/cli/pipeline/AutoApproveHandlerTest.kt	maxSeverity warning still approves a warning
+autoApprove.merge	cli/src/commonTest/kotlin/io/karandash/cli/pipeline/AutoApproveHandlerTest.kt	merge true merges after the approval
+baseline	cli/src/commonTest/kotlin/io/karandash/cli/pipeline/FindingSuppressionTest.kt	baseline suppresses known findings and counts new resolved unchanged
+cache	cli/src/commonTest/kotlin/io/karandash/cli/pipeline/CacheKeyBehaviourTest.kt	cache enabled false builds no rule cache and true builds one
+cache.defaultTtl	cli/src/commonTest/kotlin/io/karandash/cli/pipeline/ResponseTtlTest.kt	cache defaultTtl applies when nothing more specific is set
+cache.dir	cli/src/commonTest/kotlin/io/karandash/cli/commands/cache/CacheDirConfigTest.kt	cache stats uses cache dir of the config
+cache.dir	cli/src/commonTest/kotlin/io/karandash/cli/commands/cache/CacheDirConfigTest.kt	cache stats expands the home prefix of cache dir
+cache.downloads	cli/src/commonTest/kotlin/io/karandash/cli/config/CacheLayerTest.kt	cache downloads enabled false fetches every time
+cache.downloads	core/config-pipeline/src/commonTest/kotlin/io/karandash/config/pipeline/ConfigChainResolverTest.kt	a parent's cache downloads applies to fetching its own parents
+cache.downloads.enabled	cli/src/commonTest/kotlin/io/karandash/cli/config/CacheLayerTest.kt	cache downloads enabled false fetches every time
+cache.downloads.enabled	core/config-pipeline/src/commonTest/kotlin/io/karandash/config/pipeline/ConfigChainResolverTest.kt	a parent's cache downloads applies to fetching its own parents
+cache.downloads.ttl	core/config-pipeline/src/commonTest/kotlin/io/karandash/config/pipeline/ConfigChainResolverTest.kt	a parent's cache downloads ttl applies to fetching its own parents
+cache.downloads.ttl	core/config-pipeline/src/commonTest/kotlin/io/karandash/config/pipeline/ConfigChainResolverTest.kt	a parent's cache downloads ttl applies to fetching its own parents
+cache.enabled	cli/src/commonTest/kotlin/io/karandash/cli/pipeline/CacheKeyBehaviourTest.kt	cache enabled false builds no rule cache and true builds one
+cache.glob	core/cache/src/commonTest/kotlin/io/karandash/cache/CacheKeyBehaviourTest.kt	glob maxEntries 4 caps the glob pattern cache
+cache.glob.maxEntries	core/cache/src/commonTest/kotlin/io/karandash/cache/CacheKeyBehaviourTest.kt	glob maxEntries 4 caps the glob pattern cache
+cache.maxCacheSize	core/cache/src/commonTest/kotlin/io/karandash/cache/CacheKeyBehaviourTest.kt	maxCacheSize 10 bytes evicts old entries on gc and unset keeps them
+cache.memory	core/cache/src/commonTest/kotlin/io/karandash/cache/CacheKeyBehaviourTest.kt	memory maxEntries 3 caps a cache sized through memoryMaxEntries
+cache.memory.maxEntries	core/cache/src/commonTest/kotlin/io/karandash/cache/CacheKeyBehaviourTest.kt	memory maxEntries 3 caps a cache sized through memoryMaxEntries
+cache.memory.overrides	core/cache/src/commonTest/kotlin/io/karandash/cache/CacheKeyBehaviourTest.kt	memory overrides maxEntries 2 caps only the named cache
+cache.memory.overrides.maxEntries	core/cache/src/commonTest/kotlin/io/karandash/cache/CacheKeyBehaviourTest.kt	memory overrides maxEntries 2 caps only the named cache
+cache.patterns	core/cache/src/commonTest/kotlin/io/karandash/cache/CacheKeyBehaviourTest.kt	patterns maxEntries 6 caps the pattern resolver cache
+cache.patterns.maxEntries	core/cache/src/commonTest/kotlin/io/karandash/cache/CacheKeyBehaviourTest.kt	patterns maxEntries 6 caps the pattern resolver cache
+cache.regex	core/cache/src/commonTest/kotlin/io/karandash/cache/CacheKeyBehaviourTest.kt	regex maxEntries 5 caps the safe regex cache
+cache.regex.maxEntries	core/cache/src/commonTest/kotlin/io/karandash/cache/CacheKeyBehaviourTest.kt	regex maxEntries 5 caps the safe regex cache
+cache.remote	cli/src/jvmTest/kotlin/io/karandash/cli/commands/cache/CacheRemoteEndToEndTest.kt	cache remote in the config pushes blobs and the run stats are saved
+cache.remote	cli/src/commonTest/kotlin/io/karandash/cli/cache/RemoteCacheWiringTest.kt	safe remote cache url is wired and auth never logged
+cache.remote.accessKeyId	core/cache/src/commonTest/kotlin/io/karandash/cache/remote/RemoteCacheBackendFactoryTest.kt	s3 with explicit keys signs every operation and encodes the prefix
+cache.remote.auth	cli/src/commonTest/kotlin/io/karandash/cli/cache/RemoteCacheWiringTest.kt	bare token is sent as a bearer token
+cache.remote.auth	cli/src/commonTest/kotlin/io/karandash/cli/cache/RemoteCacheWiringTest.kt	auth naming a scheme is sent verbatim
+cache.remote.backend	cli/src/jvmTest/kotlin/io/karandash/cli/commands/cache/CacheRemoteEndToEndTest.kt	cache remote in the config pushes blobs and the run stats are saved
+cache.remote.backend	cli/src/commonTest/kotlin/io/karandash/cli/cache/RemoteCacheWiringTest.kt	safe remote cache url is wired and auth never logged
+cache.remote.exclude	core/cache/src/commonTest/kotlin/io/karandash/cache/remote/CacheManagerRemoteTest.kt	excluded namespace is neither pushed nor pulled
+cache.remote.include	core/cache/src/commonTest/kotlin/io/karandash/cache/remote/CacheManagerRemoteTest.kt	namespace outside include is neither pushed nor pulled
+cache.remote.maxBlobSize	core/cache/src/commonTest/kotlin/io/karandash/cache/CacheKeyBehaviourTest.kt	remote maxBlobSize 5 bytes keeps a larger blob local while 1 megabyte uploads it
+cache.remote.prefix	core/cache/src/commonTest/kotlin/io/karandash/cache/remote/RemoteCacheBackendFactoryTest.kt	s3 with explicit keys signs every operation and encodes the prefix
+cache.remote.profile	core/cache/src/commonTest/kotlin/io/karandash/cache/CacheKeyBehaviourTest.kt	remote profile selects the shared credentials section that signs requests
+cache.remote.pull	core/cache/src/commonTest/kotlin/io/karandash/cache/CacheKeyBehaviourTest.kt	remote pull false never asks the remote for a missing blob
+cache.remote.pullTimeout	core/cache/src/commonTest/kotlin/io/karandash/cache/CacheKeyBehaviourTest.kt	remote pullTimeout 1 second gives up on a slow download and 120 seconds waits for it
+cache.remote.push	core/cache/src/commonTest/kotlin/io/karandash/cache/CacheKeyBehaviourTest.kt	remote push false never uploads a stored blob
+cache.remote.pushTimeout	core/cache/src/commonTest/kotlin/io/karandash/cache/CacheKeyBehaviourTest.kt	remote pushTimeout 1 second abandons a slow upload and 120 seconds waits for it
+cache.remote.region	core/cache/src/commonTest/kotlin/io/karandash/cache/remote/RemoteCacheBackendFactoryTest.kt	s3 with explicit keys signs every operation and encodes the prefix
+cache.remote.secretAccessKey	core/cache/src/commonTest/kotlin/io/karandash/cache/remote/RemoteCacheBackendFactoryTest.kt	s3 signature is computed from the configured secret access key
+cache.remote.sessionToken	core/cache/src/commonTest/kotlin/io/karandash/cache/remote/RemoteCacheBackendFactoryTest.kt	s3 with explicit keys signs every operation and encodes the prefix
+cache.remote.ttl	cli/src/commonTest/kotlin/io/karandash/cli/commands/cache/CacheDirConfigTest.kt	cache gc remote expires entries older than cache remote ttl and deletes their blobs on the remote
+cache.remote.url	cli/src/jvmTest/kotlin/io/karandash/cli/commands/cache/CacheRemoteEndToEndTest.kt	cache remote in the config pushes blobs and the run stats are saved
+cache.remote.url	cli/src/commonTest/kotlin/io/karandash/cli/cache/RemoteCacheWiringTest.kt	safe remote cache url is wired and auth never logged
+cache.responses	cli/src/commonTest/kotlin/io/karandash/cli/pipeline/CacheKeyBehaviourTest.kt	cache responses enabled false builds no response cache
+cache.responses	cli/src/commonTest/kotlin/io/karandash/cli/pipeline/CacheKeyBehaviourTest.kt	cache responses enabled false builds no response cache
+cache.responses.enabled	cli/src/commonTest/kotlin/io/karandash/cli/pipeline/CacheKeyBehaviourTest.kt	cache responses enabled false builds no response cache
+cache.responses.enabled	cli/src/commonTest/kotlin/io/karandash/cli/pipeline/CacheKeyBehaviourTest.kt	cache responses enabled false builds no response cache
+cache.responses.persist	cli/src/commonTest/kotlin/io/karandash/cli/pipeline/ResponseCachePersistTest.kt	persist true serves the second run from the disk tier
+cache.responses.ttl	cli/src/commonTest/kotlin/io/karandash/cli/pipeline/ResponseTtlTest.kt	responses ttl and timeouts cacheTtl win over cache defaultTtl
+cache.state	cli/src/commonTest/kotlin/io/karandash/cli/pipeline/CacheKeyBehaviourTest.kt	cache state enabled false builds no state store
+cache.state.enabled	cli/src/commonTest/kotlin/io/karandash/cli/pipeline/CacheKeyBehaviourTest.kt	cache state enabled false builds no state store
+cache.state.ttl	cli/src/commonTest/kotlin/io/karandash/cli/pipeline/CacheKeyBehaviourTest.kt	cache state ttl 5 minutes is the ttl the modules see
+dangerfile	cli/src/commonTest/kotlin/io/karandash/cli/pipeline/DangerfileKeyBehaviourTest.kt	dangerfile names a script outside the config directory that then runs
+dryRun	cli/src/commonTest/kotlin/io/karandash/cli/pipeline/ConfigLoaderDryRunScopeTest.kt	scope ai sets dryRun in the ai block
+dryRun	cli/src/commonTest/kotlin/io/karandash/cli/pipeline/ConfigLoaderDryRunScopeTest.kt	dry-run without scope makes an ai dry run and warns once
+dryRunScope	cli/src/commonTest/kotlin/io/karandash/cli/pipeline/ConfigLoaderDryRunScopeTest.kt	each dry-run-scope value loads as its own active scope
+dryRunScope	cli/src/commonTest/kotlin/io/karandash/cli/pipeline/ConfigLoaderDryRunScopeTest.kt	each dry-run-scope value loads as its own active scope
+env	core/config-pipeline/src/commonTest/kotlin/io/karandash/config/pipeline/ConfigMapParserEnvBlockTest.kt	env block default fills an unset variable in a rule value and without the block it is missing
+env	core/config-pipeline/src/commonTest/kotlin/io/karandash/config/pipeline/ConfigMapParserEnvBlockTest.kt	env block default fills an unset variable in a rule value and without the block it is missing
+env	core/config-pipeline/src/commonTest/kotlin/io/karandash/config/pipeline/ConfigMapParserEnvBlockTest.kt	env block accepts a name outside the denylist where the same block with a denylisted name is rejected
+extends	cli/src/commonTest/kotlin/io/karandash/cli/config/ExtendsInheritanceKeyBehaviourTest.kt	extends url brings a base only key into the child and the child value wins on a clash
+extends	cli/src/commonTest/kotlin/io/karandash/cli/config/ExtendsInheritanceKeyBehaviourTest.kt	a three level chain resolves root over middle over grandparent
+extends.auth	core/config-pipeline/src/commonTest/kotlin/io/karandash/config/pipeline/ExtendsKeyBehaviourTest.kt	extends auth names a top level auth entry whose token is sent to that parent only
+extends.auth	core/config-pipeline/src/commonTest/kotlin/io/karandash/config/pipeline/ExtendsKeyBehaviourTest.kt	an extends entry without auth is fetched without credentials even when an auth block exists
+extends.cache	core/config-pipeline/src/commonTest/kotlin/io/karandash/config/pipeline/ExtendsKeyBehaviourTest.kt	extends cache ttl sets how long that parent is cached and ttl 0 bypasses the cache
+extends.cache.ttl	core/config-pipeline/src/commonTest/kotlin/io/karandash/config/pipeline/ExtendsKeyBehaviourTest.kt	extends cache ttl sets how long that parent is cached and ttl 0 bypasses the cache
+extends.fileResolution	core/config-pipeline/src/commonTest/kotlin/io/karandash/config/pipeline/AuthFileResolutionTest.kt	extends entry fileResolution strict reads the remote file and local fails on the same chain
+extends.if	cli/src/commonTest/kotlin/io/karandash/cli/config/ExtendsEntryWiringTest.kt	if condition on platform includes or skips the entry
+extends.if	core/config-pipeline/src/commonTest/kotlin/io/karandash/config/pipeline/ExtendsEntryResolverTest.kt	entries whose if condition is false are skipped
+extends.mergeStrategy	cli/src/commonTest/kotlin/io/karandash/cli/config/ExtendsInheritanceKeyBehaviourTest.kt	extends mergeStrategy deep merges nested sections
+extends.mergeStrategy	cli/src/commonTest/kotlin/io/karandash/cli/config/ExtendsInheritanceKeyBehaviourTest.kt	extends mergeStrategy shallow replaces a whole section but keeps other base keys
+extends.mergeStrategy	cli/src/commonTest/kotlin/io/karandash/cli/config/ExtendsInheritanceKeyBehaviourTest.kt	extends mergeStrategy replace drops every base key
+extends.mergeStrategy	cli/src/commonTest/kotlin/io/karandash/cli/config/ExtendsInheritanceKeyBehaviourTest.kt	extends mergeStrategy map modes decide how each array path combines
+extends.mergeStrategy	cli/src/commonTest/kotlin/io/karandash/cli/config/ExtendsInheritanceKeyBehaviourTest.kt	extends mergeStrategy map prepend puts the child items first
+extends.pattern	cli/src/commonTest/kotlin/io/karandash/cli/config/ExtendsEntryWiringTest.kt	extends entry pattern key expands a brace pattern and a missing match adds nothing
+extends.trust	core/config-pipeline/src/commonTest/kotlin/io/karandash/config/pipeline/RemoteLayerLocalPathTest.kt	chain with trust true merges a file above the project root and without trust it throws
+extends.url	cli/src/commonTest/kotlin/io/karandash/cli/config/ExtendsInheritanceKeyBehaviourTest.kt	extends url brings a base only key into the child and the child value wins on a clash
+extensions	cli/src/commonTest/kotlin/io/karandash/cli/pipeline/ModuleOwnedConfigTest.kt	runtime module resolution falls back to the module-owned block
+http	core/http/src/commonTest/kotlin/io/karandash/http/HttpClientSettingsTest.kt	http pagination maxPages caps paginators per run and falls back to the client cap
+http.pagination	core/http/src/commonTest/kotlin/io/karandash/http/HttpClientSettingsTest.kt	http pagination maxPages caps paginators per run and falls back to the client cap
+http.pagination.maxPages	core/http/src/commonTest/kotlin/io/karandash/http/HttpClientSettingsTest.kt	http pagination maxPages caps paginators per run and falls back to the client cap
+http.responseCache	cli/src/commonTest/kotlin/io/karandash/cli/pipeline/CacheKeyBehaviourTest.kt	http responseCache maxEntries 2 keeps only two provider responses
+http.responseCache.maxEntries	cli/src/commonTest/kotlin/io/karandash/cli/pipeline/CacheKeyBehaviourTest.kt	http responseCache maxEntries 2 keeps only two provider responses
+http.retry	core/http/src/commonTest/kotlin/io/karandash/http/HttpClientSettingsTest.kt	configured retry repeats a GET that got a 5xx
+http.retry	core/http/src/commonTest/kotlin/io/karandash/http/HttpClientSettingsTest.kt	http retry with zero attempts retries nothing
+http.retry.baseDelay	core/http/src/commonTest/kotlin/io/karandash/http/HttpClientSettingsTest.kt	http retry baseDelay is the virtual backoff before the first retry
+http.retry.baseDelay	core/http/src/commonTest/kotlin/io/karandash/http/HttpClientSettingsTest.kt	http retry baseDelay is the virtual backoff before the first retry
+http.retry.maxAttempts	core/http/src/commonTest/kotlin/io/karandash/http/HttpClientSettingsTest.kt	configured retry repeats a GET that got a 5xx
+http.retry.maxAttempts	core/http/src/commonTest/kotlin/io/karandash/http/HttpClientSettingsTest.kt	http retry with zero attempts retries nothing
+limits	core/validation/src/commonTest/kotlin/io/karandash/engine/ValidationEngineTruncationTest.kt	error survives truncation after a warning flood
+limits.expressions	core/validation/src/commonTest/kotlin/io/karandash/engine/PolicyKeyBehaviourTest.kt	limits expressions maxLength 100 rejects a long condition and 10000 accepts it
+limits.expressions.maxLength	core/validation/src/commonTest/kotlin/io/karandash/engine/PolicyKeyBehaviourTest.kt	limits expressions maxLength 100 rejects a long condition and 10000 accepts it
+limits.expressions.maxNestingDepth	core/validation/src/commonTest/kotlin/io/karandash/engine/PolicyKeyBehaviourTest.kt	limits expressions maxNestingDepth 5 rejects deep parentheses and 50 accepts them
+limits.extends	cli/src/commonTest/kotlin/io/karandash/cli/config/ExtendsInheritanceKeyBehaviourTest.kt	limits extends maxEntries 2 rejects a list of three parents and 3 accepts it
+limits.extends.maxChainSize	core/config-pipeline/src/commonTest/kotlin/io/karandash/config/pipeline/ConfigChainResolverTest.kt	root limits extends maxDepth and maxChainSize bound the chain
+limits.extends.maxDepth	core/config-pipeline/src/commonTest/kotlin/io/karandash/config/pipeline/ConfigChainResolverTest.kt	root limits extends maxDepth and maxChainSize bound the chain
+limits.extends.maxEntries	cli/src/commonTest/kotlin/io/karandash/cli/config/ExtendsInheritanceKeyBehaviourTest.kt	limits extends maxEntries 2 rejects a list of three parents and 3 accepts it
+limits.fetchTimeout	core/config-pipeline/src/commonTest/kotlin/io/karandash/config/pipeline/ConfigChainResolverTest.kt	a parent's fetchTimeout applies to fetching its own parents and a child override wins
+limits.glob	cli/src/commonTest/kotlin/io/karandash/cli/config/ExtendsInheritanceKeyBehaviourTest.kt	limits glob maxDirectoryDepth 0 hides a parent below the top directory and 5 finds it
+limits.glob.maxDirectoryDepth	cli/src/commonTest/kotlin/io/karandash/cli/config/ExtendsInheritanceKeyBehaviourTest.kt	limits glob maxDirectoryDepth 0 hides a parent below the top directory and 5 finds it
+limits.glob.maxExpansion	cli/src/commonTest/kotlin/io/karandash/cli/config/ExtendsEntryWiringTest.kt	brace expansion over limits glob maxExpansion fails with E0015
+limits.maxFindings	core/validation/src/commonTest/kotlin/io/karandash/engine/ValidationEngineTruncationTest.kt	error survives truncation after a warning flood
+limits.patterns	cli/src/commonTest/kotlin/io/karandash/cli/pipeline/CompileLimitsOverlapTest.kt	strictest active run wins and each undo restores the remaining runs
+limits.patterns.maxExpansionDepth	cli/src/commonTest/kotlin/io/karandash/cli/pipeline/CompileLimitsOverlapTest.kt	strictest active run wins and each undo restores the remaining runs
+limits.regex	core/config-pipeline/src/commonTest/kotlin/io/karandash/config/pipeline/ConditionExpressionCheckTest.kt	a field regex is capped by limits regex maxPatternLength
+limits.regex.maxPatternLength	core/config-pipeline/src/commonTest/kotlin/io/karandash/config/pipeline/ConditionExpressionCheckTest.kt	a field regex is capped by limits regex maxPatternLength
+limits.regex.maxQuantifierNesting	cli/src/commonTest/kotlin/io/karandash/cli/pipeline/CompileLimitsOverlapTest.kt	limits regex maxQuantifierNesting decides whether nested quantifiers compile
+options	core/config-pipeline/src/commonTest/kotlin/io/karandash/config/pipeline/ConfigMapParserDeadKeysTest.kt	options block applies like top level keys
+options	core/config-pipeline/src/commonTest/kotlin/io/karandash/config/pipeline/ConfigMapParserDeadKeysTest.kt	top level key wins over options
+patterns	cli/src/jvmTest/kotlin/io/karandash/cli/pipeline/RunLifecycleTest.kt	overlapping runs with different configs each keep their own named patterns
+plugins	cli/src/commonTest/kotlin/io/karandash/cli/pipeline/ConfigLoaderPluginsBlockTest.kt	config plugins block on-missing fail rejects an uninstalled declared plugin
+policies	core/validation/src/commonTest/kotlin/io/karandash/engine/PolicyKeyBehaviourTest.kt	policies when decides whether the entry applies
+policies.autoApprove	core/validation/src/commonTest/kotlin/io/karandash/engine/PolicyKeyBehaviourTest.kt	policies autoApprove false switches the stage off and an unmatched entry leaves it unset
+policies.autoFix	core/validation/src/commonTest/kotlin/io/karandash/engine/PolicyKeyBehaviourTest.kt	policies autoFix false switches the stage off and an unmatched entry leaves it unset
+policies.dangerfile	core/validation/src/commonTest/kotlin/io/karandash/engine/PolicyKeyBehaviourTest.kt	policies dangerfile false switches the stage off and an unmatched entry leaves it unset
+policies.enabled	core/validation/src/commonTest/kotlin/io/karandash/engine/PolicyKeyBehaviourTest.kt	policies enabled false switches every configured rule off
+policies.modules	core/validation/src/commonTest/kotlin/io/karandash/engine/PolicyKeyBehaviourTest.kt	policies modules scopes enabled false to the listed rule only
+policies.name	core/validation/src/commonTest/kotlin/io/karandash/engine/PolicyKeyBehaviourTest.kt	policies name labels the entry in the skipped override report
+policies.override	core/validation/src/commonTest/kotlin/io/karandash/engine/PolicyKeyBehaviourTest.kt	policies override max 99 replaces the rule value only when the entry matches
+policies.scripts	core/validation/src/commonTest/kotlin/io/karandash/engine/PolicyKeyBehaviourTest.kt	policies scripts false switches the stage off and an unmatched entry leaves it unset
+policies.severity	core/validation/src/commonTest/kotlin/io/karandash/engine/PolicyKeyBehaviourTest.kt	policies severity error forces that severity on the scoped rule
+policies.when	core/validation/src/commonTest/kotlin/io/karandash/engine/PolicyKeyBehaviourTest.kt	policies when decides whether the entry applies
+profileOverrides	core/config-pipeline/src/commonTest/kotlin/io/karandash/config/pipeline/ProfileOverridesKeyBehaviourTest.kt	profileOverrides title minLength 10 and maxLength 72 replace the profile title thresholds
+profileOverrides.size	core/config-pipeline/src/commonTest/kotlin/io/karandash/config/pipeline/ProfileOverridesKeyBehaviourTest.kt	profileOverrides size maxLines 800 and maxCommits 7 replace the profile size thresholds
+profileOverrides.size.maxCommits	core/config-pipeline/src/commonTest/kotlin/io/karandash/config/pipeline/ProfileOverridesKeyBehaviourTest.kt	profileOverrides size maxLines 800 and maxCommits 7 replace the profile size thresholds
+profileOverrides.size.maxLines	core/config-pipeline/src/commonTest/kotlin/io/karandash/config/pipeline/ProfileOverridesKeyBehaviourTest.kt	profileOverrides size maxLines 800 and maxCommits 7 replace the profile size thresholds
+profileOverrides.title	core/config-pipeline/src/commonTest/kotlin/io/karandash/config/pipeline/ProfileOverridesKeyBehaviourTest.kt	profileOverrides title minLength 10 and maxLength 72 replace the profile title thresholds
+profileOverrides.title.maxLength	core/config-pipeline/src/commonTest/kotlin/io/karandash/config/pipeline/ProfileOverridesKeyBehaviourTest.kt	profileOverrides title minLength 10 and maxLength 72 replace the profile title thresholds
+profileOverrides.title.maxSubjectLength	core/config-pipeline/src/commonTest/kotlin/io/karandash/config/pipeline/ProfileOverridesKeyBehaviourTest.kt	profileOverrides title maxSubjectLength 50 replaces the commit subject threshold
+profileOverrides.title.minLength	core/config-pipeline/src/commonTest/kotlin/io/karandash/config/pipeline/ProfileOverridesKeyBehaviourTest.kt	profileOverrides title minLength 10 and maxLength 72 replace the profile title thresholds
+severityCap	cli/src/jvmTest/kotlin/io/karandash/cli/pipeline/SeverityCapPipelineTest.kt	severity-cap warning reports the error as a warning and passes
+timeouts	cli/src/commonTest/kotlin/io/karandash/cli/pipeline/TimeoutsKeyBehaviourTest.kt	timeouts global 1 second in the config cuts a 5 second run under a 600 second watchdog
+timeouts.cacheTtl	cli/src/commonTest/kotlin/io/karandash/cli/pipeline/ResponseTtlTest.kt	responses ttl and timeouts cacheTtl win over cache defaultTtl
+timeouts.dangerfile	cli/src/commonTest/kotlin/io/karandash/cli/pipeline/JsDangerfileTest.kt	a hanging Dangerfile is killed at its timeout with a warning
+timeouts.enrichment	cli/src/commonTest/kotlin/io/karandash/cli/pipeline/TimeoutsKeyBehaviourTest.kt	timeouts enrichment 1 second fails a 5 second provider and 30 seconds lets it finish
+timeouts.global	cli/src/commonTest/kotlin/io/karandash/cli/pipeline/TimeoutsKeyBehaviourTest.kt	timeouts global 1 second in the config cuts a 5 second run under a 600 second watchdog
+timeouts.http	core/http/src/commonTest/kotlin/io/karandash/http/HttpClientSettingsTest.kt	timeouts http is the default request timeout and an explicit timeout wins
+timeouts.pluginShutdown	plugins/bootstrap/src/commonTest/kotlin/io/karandash/bootstrap/BuiltInPluginLoaderLifecycleTest.kt	timeouts pluginShutdown 3 seconds bounds a hanging module shutdown to 3 seconds
+timeouts.ruleExecution	core/validation/src/commonTest/kotlin/io/karandash/engine/ValidationEngineTimeoutTest.kt	timed-out rule gives no findings of its own and one engine warning
+timeouts.scripts	cli/src/commonTest/kotlin/io/karandash/cli/pipeline/ScriptSubprocessBudgetTest.kt	an explicit timeouts scripts value enforces the wall budget
+version	core/config-pipeline/src/commonTest/kotlin/io/karandash/config/pipeline/ConfigSchemaVersionTest.kt	a version newer than the supported one fails the load naming karandash

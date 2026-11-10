@@ -1,0 +1,84 @@
+# Karandash Reusable CI Template
+#
+# Include in downstream GitLab projects straight from the GitHub repository (pin the tag):
+#   include:
+#     - remote: 'https://raw.githubusercontent.com/appKODE/karandash/v1.0.0/.gitlab/templates/validate.yml'
+#
+# With inputs (GitLab 15.11+):
+#   include:
+#     - remote: 'https://raw.githubusercontent.com/appKODE/karandash/v1.0.0/.gitlab/templates/validate.yml'
+#       inputs:
+#         config_path: '.karandash/config.yaml'
+#         format: 'sarif'
+#         stage: 'test'
+#         image: 'rinekri/karandash:v1.0.0'
+
+spec:
+  inputs:
+    config_path:
+      default: '.karandash/config.yaml'
+      description: 'Path to karandash configuration file'
+    format:
+      default: 'sarif'
+      description: 'Output format: console, json, sarif'
+      options:
+        - console
+        - json
+        - sarif
+    stage:
+      default: 'test'
+      description: 'Pipeline stage to run in'
+    image:
+      default: 'rinekri/karandash:v1.0.0'
+      description: 'Karandash Docker image to use (Docker Hub; native binary on PATH as karandash)'
+    allow_failure:
+      type: boolean
+      default: false
+      description: 'Allow job to fail without blocking pipeline'
+    global_timeout:
+      default: '10m'
+      description: 'Global watchdog timeout (e.g. 5m, 600s). 0 = no timeout.'
+    diagnostic:
+      default: ''
+      description: 'Path for JSON diagnostic output (memory/CPU snapshots). Empty = disabled.'
+    binary:
+      default: 'karandash'
+      description: 'Karandash executable to run (a path to a binary built earlier in the pipeline, or the one on PATH).'
+    dry_run:
+      type: boolean
+      default: false
+      description: 'Only check that the config loads: no MR fetch, no validation, no MR note.'
+
+---
+
+karandash-validate:
+  stage: $[[ inputs.stage ]]
+  image: $[[ inputs.image ]]
+  # The CLI needs no Gradle setup, and a host pipeline's default before_script may write where the image user cannot.
+  before_script: []
+  script:
+    - |
+      ARGS="validate --config $[[ inputs.config_path ]] --global-timeout=$[[ inputs.global_timeout ]]"
+      if [ -n "$[[ inputs.diagnostic ]]" ]; then
+        ARGS="${ARGS} --diagnostic $[[ inputs.diagnostic ]]"
+      fi
+      if [ "$[[ inputs.dry_run ]]" = "true" ]; then
+        ARGS="${ARGS} --dry-run"
+      fi
+      if [ "$[[ inputs.format ]]" = "sarif" ]; then
+        $[[ inputs.binary ]] ${ARGS} --format sarif --output gl-sast-report.json
+      elif [ "$[[ inputs.format ]]" = "json" ]; then
+        $[[ inputs.binary ]] ${ARGS} --format json
+      else
+        $[[ inputs.binary ]] ${ARGS}
+      fi
+  artifacts:
+    paths:
+      - diagnostics/
+    reports:
+      sast: gl-sast-report.json
+    expire_in: 1 week
+    when: always
+  allow_failure: $[[ inputs.allow_failure ]]
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"

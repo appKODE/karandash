@@ -1,0 +1,26 @@
+# v* tag: native binaries, GitHub Release with SHA256SUMS, Docker Hub images, Maven Central, Pages, compat-diff.
+# Publishing secrets come from the protected `release` environment (v* tags only, required reviewer), not the repository.
+name: Release
+
+on:
+  push:
+    tags: ['v*']
+
+permissions:
+  contents: read
+
+concurrency:
+  group: release-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  release:
+    # the ceiling for release-build.yml: its jobs default to contents: read and raise only where they publish
+    # (release: contents: write, pages-deploy: pages: write + id-token: write)
+    permissions:
+      contents: write
+      pages: write
+      id-token: write
+    uses: ./.github/workflows/release-build.yml
+    with:
+      dry_run: false

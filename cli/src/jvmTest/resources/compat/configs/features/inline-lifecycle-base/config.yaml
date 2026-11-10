@@ -1,0 +1,6 @@
+# Source: PlatformOutputConfig / InlineLifecycleConfig KDoc (plugins-core/outputs/platform-output).
+reporters:
+  platform:
+    inline:
+      publish: each
+      max-per-run: 3

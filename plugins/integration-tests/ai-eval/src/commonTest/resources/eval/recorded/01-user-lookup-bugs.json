@@ -1,0 +1,151 @@
+{
+  "responses": {
+    "change-categorization": {
+      "suggestedLabels": [
+        "feature"
+      ],
+      "confidence": 0.9,
+      "reasoning": "Adds two new repository methods."
+    },
+    "code-quality": {
+      "overallScore": 0.45,
+      "dimensions": {
+        "correctness": 0.4,
+        "errorHandling": 0.5,
+        "readability": 0.8,
+        "maintainability": 0.7,
+        "performance": 0.8,
+        "security": 0.2,
+        "design": 0.7
+      },
+      "issues": [
+        {
+          "file": "src/main/kotlin/users/UserRepository.kt",
+          "line": 13,
+          "dimension": "security",
+          "severity": "error",
+          "message": "SQL injection through string interpolation",
+          "suggestion": "Use a bound parameter"
+        },
+        {
+          "file": "src/main/kotlin/users/UserRepository.kt",
+          "line": 19,
+          "dimension": "correctness",
+          "severity": "warning",
+          "message": "Non-null assertion on a nullable lookup",
+          "suggestion": "Return a fallback for missing users"
+        }
+      ],
+      "strengths": [
+        "Small focused functions"
+      ],
+      "summary": "Two defects: an injectable query and an unsafe null assertion."
+    },
+    "code-suggestions": {
+      "suggestions": [
+        {
+          "file": "src/main/kotlin/users/UserRepository.kt",
+          "line": 13,
+          "existingCode": "val sql = \"SELECT * FROM users WHERE name = '$name'\"",
+          "suggestedCode": "val sql = \"SELECT * FROM users WHERE name = ?\"",
+          "explanation": "Bind the name as a parameter.",
+          "category": "security"
+        }
+      ]
+    },
+    "review-thread-analysis": {
+      "issues": [
+        {
+          "message": "Description claims no behavior change but adds new public query methods.",
+          "category": "accuracy",
+          "severity": "warning",
+          "confidence": 0.8,
+          "suggestion": "Drop the 'no behavior change' line."
+        }
+      ]
+    },
+    "description-quality": {
+      "qualityScore": 0.85,
+      "issues": [],
+      "summary": "Clear description with a ticket reference."
+    },
+    "fix-suggestions": {
+      "fixes": [
+        {
+          "findingRule": "sql-injection",
+          "findingMessage": "String-built SQL query in UserRepository.findByName",
+          "suggestedFix": "Use db.queryOne(\"SELECT * FROM users WHERE name = ?\", name)",
+          "confidence": 0.9
+        }
+      ]
+    },
+    "mr-summary": {
+      "summary": "Adds findByName and displayName to UserRepository.",
+      "keyChanges": [
+        "findByName query",
+        "displayName helper"
+      ],
+      "risks": [
+        "String-built SQL",
+        "Non-null assertion"
+      ],
+      "reviewFocus": [
+        "UserRepository.findByName"
+      ]
+    },
+    "review-comments": {
+      "comments": [
+        {
+          "file": "src/main/kotlin/users/UserRepository.kt",
+          "line": 13,
+          "category": "security",
+          "severity": "error",
+          "confidence": 0.95,
+          "message": "SQL built by string interpolation of `name` allows SQL injection.",
+          "fix": "Pass `name` as a bound `?` parameter to `db.queryOne`.",
+          "existingCode": "val sql = \"SELECT * FROM users WHERE name = '$name'\"",
+          "suggestedCode": "return db.queryOne(\"SELECT * FROM users WHERE name = ?\", name)"
+        },
+        {
+          "file": "src/main/kotlin/users/UserRepository.kt",
+          "line": 17,
+          "category": "style",
+          "severity": "info",
+          "confidence": 0.7,
+          "message": "Consider naming this `displayNameOf` to read better at call sites."
+        },
+        {
+          "file": "src/main/kotlin/users/UserRepository.kt",
+          "line": 19,
+          "category": "bug",
+          "severity": "error",
+          "confidence": 0.9,
+          "message": "`user!!` throws for deleted users; the description promises a null-safe display name.",
+          "fix": "Replace `user!!` with `user?.displayName ?: \"(deleted)\"`."
+        }
+      ]
+    },
+    "risk-scoring": {
+      "riskScore": 0.78,
+      "riskLevel": "high",
+      "confidence": 0.85,
+      "factors": [
+        "SQL injection in a data-access method",
+        "Crash path on deleted users"
+      ],
+      "summary": "High risk: injectable SQL in the repository layer."
+    },
+    "similar-issues": {
+      "patterns": [
+        {
+          "description": "String-interpolated SQL in repository classes",
+          "confidence": 0.8
+        }
+      ],
+      "searchTerms": [
+        "SQL injection",
+        "queryOne interpolation"
+      ]
+    }
+  }
+}

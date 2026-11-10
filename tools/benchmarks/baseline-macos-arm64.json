@@ -1,0 +1,26 @@
+{
+  "date": "2026-10-19T08:20:00Z",
+  "platform": "macOS ARM64 (Apple Silicon), native kexe + JVM fat jar; perl timer; load average ~9 (parallel Gradle builds)",
+  "iterations": 30,
+  "startup_ms": {
+    "karandash_native": { "mean": 52, "min": 39, "max": 102 },
+    "karandash_jar": { "mean": 717, "min": 648, "max": 879 }
+  },
+  "validation_3rules_ms": {
+    "karandash_native": { "mean": 87, "min": 67, "max": 155 },
+    "karandash_jar": { "mean": 810, "min": 712, "max": 997 }
+  },
+  "validation_21rules_ms": {
+    "karandash_native": { "mean": 71, "min": 63, "max": 138 },
+    "karandash_jar": { "mean": 843, "min": 786, "max": 917 }
+  },
+  "thresholds": {
+    "description": "Regression thresholds for CI on macOS ARM64 hardware (native kexe and java -jar).",
+    "startup_native_max_ms": 500,
+    "validation_3rules_native_max_ms": 500,
+    "validation_21rules_native_max_ms": 1000,
+    "startup_jar_max_ms": 2500,
+    "validation_3rules_jar_max_ms": 3000,
+    "validation_21rules_jar_max_ms": 3000
+  }
+}

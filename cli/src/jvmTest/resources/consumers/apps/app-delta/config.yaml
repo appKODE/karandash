@@ -1,0 +1,92 @@
+# Synthetic sample consumer: a maps app; extends base, overrides maps-specific settings only.
+# Secrets (GITLAB_TOKEN, BIFROST_API_KEY, BIFROST_BASE_URL, KARANDASH_BASE_TOKEN) must be set in CI/CD.
+
+extends:
+  url: "https://gitlab.example.com/api/v4/projects/1234/repository/files/base%2F.karandash%2Fconfig.yaml/raw?ref=1.38.0"
+  auth:
+    type: custom-header
+    name: "PRIVATE-TOKEN"
+    value: "${KARANDASH_GITLAB_TOKEN}"
+
+env:
+  KARANDASH_JIRA_KEY: "MAPS"
+  KARANDASH_AI_MAX_TOKENS: "30000"
+
+# Override patterns for maps
+patterns:
+  project-ticket: "@jira-ticket(@project:${KARANDASH_JIRA_KEY})"
+  project-tag: "@bracketed((?:ios|android|core))"
+  project-title: "@optional(Draft:\\s)@optional(@project-tickets)@project-tag .+"
+
+rules:
+  title-format:
+    pattern: "@project-title"
+    suggestion: "Examples: '[ios] Add login screen', '[${KARANDASH_JIRA_KEY}-TASK_NUMBER][ios] Add login screen', '[android] Fix map rendering', '[${KARANDASH_JIRA_KEY}-TASK_NUMBER_1][${KARANDASH_JIRA_KEY}-TASK_NUMBER_2][android] Fix two bugs'."
+    explanation: "Consistent MR titles make git history searchable by task ID and platform."
+
+  commit-messages:
+    pattern: "@project-title"
+    suggestion: "Examples: '[ios] Implement login UI', '[${KARANDASH_JIRA_KEY}-TASK_NUMBER][ios] Implement login UI', '[${KARANDASH_JIRA_KEY}-TASK_NUMBER_1][${KARANDASH_JIRA_KEY}-TASK_NUMBER_2][android] Fix tile and zoom bugs'. Max 72 chars."
+    explanation: "Uniform commit messages improve git log readability and enable per-platform release notes."
+
+  context-tag:
+    allowed: [ ios, android, core ]
+    delimiter: brackets
+    exactlyOne: true
+    caseSensitive: true
+    checkMrTitle: true
+    checkCommitTitles: true
+    suggestion: "Add exactly one tag: [ios] for iOS, [android] for Android, or [core] for shared C++ code. Place it after the task ID."
+    explanation: "Context tags route MRs to platform-specific reviewers and feed per-platform metrics dashboards."
+
+  cross-entity-consistency:
+    ticket-format: jira
+    ticket-projects: [ "${KARANDASH_JIRA_KEY}" ]
+    suggestion: "All task IDs in commits must also appear in the MR title. If a commit references [${KARANDASH_JIRA_KEY}-TASK_NUMBER], the MR title must include [${KARANDASH_JIRA_KEY}-TASK_NUMBER] too."
+
+  # This app also checks commit descriptions (stricter than base which exempts them)
+  language-policy:
+    checkMrDescription: false
+    checkCommitDescription: true
+    suggestion: "Replace non-Latin characters with English equivalents in MR title, branch name, commit title and description."
+    explanation: "Mostly English-only text ensures all team members can read git-flow information regardless of native language."
+
+# CHANGELOG required only for android + ${KARANDASH_JIRA_KEY} ticket. iOS and core exempt.
+# Overrides the base changelog-requirement condition; ai-draft-gating inherited automatically
+# (policies use merge-by-key on the `name` field by default).
+policies:
+  - name: changelog-requirement
+    when: 'title_matches("@any-ticket") && has_tag(android)'
+    override:
+      commit-body:
+        suggestion: "Commit body must contain: 'CHANGELOG: [${KARANDASH_JIRA_KEY}-TASK_NUMBER] Task name.' For multiple tasks: 'CHANGELOG: [${KARANDASH_JIRA_KEY}-TASK_NUMBER_1] Task one, [${KARANDASH_JIRA_KEY}-TASK_NUMBER_2] Task two.'"
+        explanation: "Structured commit bodies enable automated changelog generation."
+
+ai:
+  models:
+    review-thread-analysis: "openrouter/google/gemini-2.0-flash-001"
+    risk-scoring: "openrouter/google/gemini-2.0-flash-001"
+
+  scopes:
+    android:
+      paths: [ "android/**/*.{kt,java}", "android/jni/**/*.{cpp,hpp,h}" ]
+      instructions: { file: "scopes/android-instructions.md" }
+      best-practices: { file: "scopes/android-best-practices.md" }
+    ios:
+      paths: [ "iphone/**/*.{swift,m,mm,h}" ]
+      instructions: { file: "scopes/ios-instructions.md" }
+      best-practices: { file: "scopes/ios-best-practices.md" }
+    core:
+      paths:
+        - "glob:{map,routing,search,indexer,storage,drape,drape_frontend,base,coding,geometry,platform,transit,traffic,tracking,kml,editor,partners_api,network,descriptions}/**/*.{cpp,hpp,h}"
+      instructions: { file: "scopes/core-instructions.md" }
+      best-practices: { file: "scopes/core-best-practices.md" }
+    database:
+      paths:
+        - "android/**/db-*/**/*.sq"
+        - "android/**/db-*/**/*.sqm"
+        - "android/**/src/**/*DataModule.kt"
+      instructions: { file: "scopes/database-instructions.md" }
+    ci:
+      paths: [ "ci/**", ".gitlab-ci.yml", ".github/**", "Makefile", "CMakeLists.txt", "android/proguard-mwm.txt", "android/**/proguard*.pro" ]
+      instructions: { file: "scopes/ci-instructions.md" }

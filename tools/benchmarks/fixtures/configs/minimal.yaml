@@ -1,0 +1,9 @@
+rules:
+  title-format:
+    pattern: "^(feat|fix|chore|docs|refactor|test|ci)(\\(.*\\))?: .+"
+  branch-naming:
+    pattern: "^(feature|bugfix|hotfix|release|chore)/[a-z0-9][a-z0-9-]+$"
+  draft-prevention: true
+
+reporters:
+  console: true

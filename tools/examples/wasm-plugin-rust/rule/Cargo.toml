@@ -1,0 +1,13 @@
+[package]
+name = "karandash-wasm-rule"
+version = "1.0.0"
+edition = "2021"
+
+[lib]
+crate-type = ["cdylib"]
+
+[dependencies]
+karandash-wasm-common = { workspace = true }
+karandash-plugin-common = { workspace = true }
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"

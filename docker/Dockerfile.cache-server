@@ -1,0 +1,41 @@
+# Karandash Cache Server Image
+#
+# Self-hosted remote cache for `cache.remote` (backend: http). Opt-in; see docs/guides/self-hosted-cache-server.md.
+# Receives the pre-built karandash-cache-server.jar - does NOT compile from source.
+#
+# Build (after `./gradlew :tools:cache-server:shadowJar`):
+#   docker build -f docker/Dockerfile.cache-server \
+#     --build-arg JAR_FILE=tools/cache-server/build/libs/karandash-cache-server.jar \
+#     --build-arg VERSION=1.0.0 \
+#     -t karandash/cache-server .
+#
+# Usage:
+#   docker run -d -p 5071:5071 -v karandash-cache:/data -e KARANDASH_CACHE_TOKENS=<token> karandash/cache-server
+
+FROM eclipse-temurin:17-jre-jammy
+
+ARG VERSION=0.0.0
+ARG JAR_FILE=tools/cache-server/build/libs/karandash-cache-server.jar
+
+LABEL org.opencontainers.image.title="karandash-cache-server"
+LABEL org.opencontainers.image.description="Karandash self-hosted remote cache server"
+LABEL org.opencontainers.image.version="${VERSION}"
+
+WORKDIR /app
+
+COPY ${JAR_FILE} /app/karandash-cache-server.jar
+
+RUN groupadd -r karandash && useradd -r -g karandash karandash \
+    && mkdir -p /data && chown karandash:karandash /data
+
+ENV KARANDASH_CACHE_DATA_DIR=/data \
+    KARANDASH_CACHE_PORT=5071 \
+    KARANDASH_CACHE_HOST=0.0.0.0
+
+VOLUME ["/data"]
+EXPOSE 5071
+
+USER karandash
+
+# exec form: java is PID 1 and gets SIGTERM from `docker stop`, so in-flight requests drain before exit
+ENTRYPOINT ["java", "-XX:+ExitOnOutOfMemoryError", "-jar", "/app/karandash-cache-server.jar"]

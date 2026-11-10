@@ -1,0 +1,2 @@
+plugin-init: [E0301] Plugin 'broken-plugin' initialization failed: bad config
+provider: token=null jobToken=false

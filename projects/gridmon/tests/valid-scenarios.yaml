@@ -1,0 +1,64 @@
+scenarios:
+  - name: "Valid: GRD JIRA + English title + CHANGELOG"
+    mr:
+      title: "[GRD-456] Add statement download feature"
+      commits:
+        - subject: "[GRD-456] Implement statement PDF download"
+          body: "CHANGELOG: [GRD-456] Add statement PDF download."
+      branch: "feature/GRD-456-statement-download"
+    expect: pass
+
+  - name: "Valid: no JIRA — no CHANGELOG required"
+    mr:
+      title: "Fix login session expiry handling"
+      commits:
+        - subject: "Refresh token on 401 response"
+      branch: "fix/login-session"
+    expect: pass
+
+  - name: "Valid: GRD JIRA + CHANGELOG in Russian"
+    mr:
+      title: "[GRD-789] Improve profile update flow"
+      commits:
+        - subject: "[GRD-789] Validate fields before profile update"
+          body: "CHANGELOG: [GRD-789] Улучшить процесс обновления профиля."
+      branch: "feature/GRD-789-profile-update"
+    expect: pass
+
+  - name: "Valid: multi-task CHANGELOG — both tickets in title and commit"
+    mr:
+      title: "[GRD-100] [GRD-101] Fix statement and subscription issues"
+      commits:
+        - subject: "[GRD-100] [GRD-101] Fix draft state and subscription reload"
+          body: "CHANGELOG: [GRD-100] Fix statement draft state transition, [GRD-101] Fix subscription list reload."
+      branch: "fix/GRD-100-GRD-101-batch"
+    expect: pass
+
+  - name: "Valid: JIRA in title, mixed commits — only JIRA commit needs CHANGELOG"
+    mr:
+      title: "[GRD-200] Add meter reading submission"
+      commits:
+        - subject: "[GRD-200] Implement meter reading form"
+          body: "CHANGELOG: [GRD-200] Add meter reading submission feature."
+        - subject: "Add missing input validation string"
+          body: ""
+      branch: "feature/GRD-200-meter-reading"
+    expect: pass
+
+  - name: "Valid: GRD JIRA + CHANGELOG English with trailing period"
+    mr:
+      title: "[GRD-300] Add payment history export"
+      commits:
+        - subject: "[GRD-300] Implement CSV export for payment history"
+          body: "CHANGELOG: [GRD-300] Add payment history export to CSV."
+      branch: "feature/GRD-300-payment-export"
+    expect: pass
+
+  - name: "Valid: commit task is subset of MR title tasks"
+    mr:
+      title: "[GRD-400] Refactor notifications module"
+      commits:
+        - subject: "[GRD-400] Extract NotificationRepository"
+          body: "CHANGELOG: [GRD-400] Refactor notifications module for testability."
+      branch: "refactor/GRD-400-notifications"
+    expect: pass

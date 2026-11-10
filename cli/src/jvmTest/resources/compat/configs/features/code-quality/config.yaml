@@ -1,0 +1,10 @@
+# Source: docs/rules/ai-rules.md "Code Quality Rule (ai-code-quality)" configuration example.
+ai:
+  provider: anthropic
+  model: claude-sonnet-4-20250514
+  features:
+    codeQuality: true
+  thresholds:
+    codeQualityWarning: 0.6
+    codeQualityError: 0.3
+  codeQualityIncludeMaturityLevel: true

@@ -1,0 +1,1118 @@
+[
+  {
+    "enum": "FixHintText",
+    "entry": "HOW_TO_FIX",
+    "en": "How to fix",
+    "ru": "Как исправить"
+  },
+  {
+    "enum": "FixHintText",
+    "entry": "WHERE",
+    "en": "Where",
+    "ru": "Где"
+  },
+  {
+    "enum": "FixHintText",
+    "entry": "FORMAT",
+    "en": "Format",
+    "ru": "Формат"
+  },
+  {
+    "enum": "FixHintText",
+    "entry": "AFTER",
+    "en": "after",
+    "ru": "после"
+  },
+  {
+    "enum": "FixHintText",
+    "entry": "AT_START",
+    "en": "at the start",
+    "ru": "в начале"
+  },
+  {
+    "enum": "FixHintText",
+    "entry": "EXPECTED",
+    "en": "expected",
+    "ru": "ожидается"
+  },
+  {
+    "enum": "FixHintText",
+    "entry": "PART",
+    "en": "part",
+    "ru": "часть"
+  },
+  {
+    "enum": "FixHintText",
+    "entry": "FOUND",
+    "en": "found",
+    "ru": "найдено"
+  },
+  {
+    "enum": "FixHintText",
+    "entry": "NOTHING",
+    "en": "nothing",
+    "ru": "ничего"
+  },
+  {
+    "enum": "FixHintText",
+    "entry": "WHITESPACE",
+    "en": "whitespace",
+    "ru": "пробел"
+  },
+  {
+    "enum": "ViewText",
+    "entry": "FAILED",
+    "en": "Failed",
+    "ru": "Не пройдено"
+  },
+  {
+    "enum": "ViewText",
+    "entry": "PASSED",
+    "en": "Passed",
+    "ru": "Пройдено"
+  },
+  {
+    "enum": "ViewText",
+    "entry": "ERRORS",
+    "en": "%d error|%d errors|%d errors",
+    "ru": "%d ошибка|%d ошибки|%d ошибок"
+  },
+  {
+    "enum": "ViewText",
+    "entry": "WARNINGS",
+    "en": "%d warning|%d warnings|%d warnings",
+    "ru": "%d предупреждение|%d предупреждения|%d предупреждений"
+  },
+  {
+    "enum": "ViewText",
+    "entry": "INFOS",
+    "en": "%d info|%d info|%d info",
+    "ru": "%d заметка|%d заметки|%d заметок"
+  },
+  {
+    "enum": "ViewText",
+    "entry": "NEW",
+    "en": "%d new|%d new|%d new",
+    "ru": "%d новая|%d новых|%d новых"
+  },
+  {
+    "enum": "ViewText",
+    "entry": "FIXED",
+    "en": "%d fixed|%d fixed|%d fixed",
+    "ru": "%d исправлена|%d исправлено|%d исправлено"
+  },
+  {
+    "enum": "ViewText",
+    "entry": "SINCE_LAST_RUN",
+    "en": "since last run",
+    "ru": "с прошлого запуска"
+  },
+  {
+    "enum": "ViewText",
+    "entry": "RISK",
+    "en": "Risk %s",
+    "ru": "Риск %s"
+  },
+  {
+    "enum": "ViewText",
+    "entry": "SKIPPED",
+    "en": "%d rule skipped|%d rules skipped|%d rules skipped",
+    "ru": "%d правило пропущено|%d правила пропущено|%d правил пропущено"
+  },
+  {
+    "enum": "ViewText",
+    "entry": "PASSED_RULES",
+    "en": "Passed: %s",
+    "ru": "Пройдены: %s"
+  },
+  {
+    "enum": "ViewText",
+    "entry": "AI_COVERAGE",
+    "en": "AI reviewed %s files",
+    "ru": "AI проверил файлов: %s"
+  },
+  {
+    "enum": "ViewText",
+    "entry": "RUN_OF_MR",
+    "en": "run %s of this MR",
+    "ru": "запуск %s этого MR"
+  },
+  {
+    "enum": "ViewText",
+    "entry": "MR",
+    "en": "MR",
+    "ru": "MR"
+  },
+  {
+    "enum": "ViewText",
+    "entry": "WHERE",
+    "en": "Where",
+    "ru": "Где"
+  },
+  {
+    "enum": "ViewText",
+    "entry": "RULE",
+    "en": "Rule",
+    "ru": "Правило"
+  },
+  {
+    "enum": "ViewText",
+    "entry": "FINDING",
+    "en": "Finding",
+    "ru": "Замечание"
+  },
+  {
+    "enum": "ViewText",
+    "entry": "FIX",
+    "en": "How to fix",
+    "ru": "Как исправить"
+  },
+  {
+    "enum": "ViewText",
+    "entry": "WHY",
+    "en": "Why",
+    "ru": "Почему"
+  },
+  {
+    "enum": "ViewText",
+    "entry": "DETAILS",
+    "en": "Details",
+    "ru": "Подробности"
+  },
+  {
+    "enum": "ViewText",
+    "entry": "MORE",
+    "en": "more",
+    "ru": "ещё"
+  },
+  {
+    "enum": "CorrelationText",
+    "entry": "HIGH_RISK_UNREVIEWED",
+    "en": "High-risk: large MR with insufficient approval coverage",
+    "ru": "Высокий риск: большой MR без достаточного числа одобрений"
+  },
+  {
+    "enum": "CorrelationText",
+    "entry": "HIGH_RISK_UNREVIEWED_FIX",
+    "en": "Add an approval rule (approval) requiring a reviewer, or split the MR into smaller ones.",
+    "ru": "Добавьте правило одобрений (approval) с обязательным ревьюером или разбейте MR на части поменьше."
+  },
+  {
+    "enum": "CorrelationText",
+    "entry": "LARGE_UNDOCUMENTED",
+    "en": "Large MR with description issues — consider adding context for reviewers",
+    "ru": "Большой MR с проблемами в описании — добавьте контекст для ревьюеров"
+  },
+  {
+    "enum": "CorrelationText",
+    "entry": "LARGE_UNDOCUMENTED_FIX",
+    "en": "Describe what changed and why in the MR description, or split the MR into smaller ones.",
+    "ru": "Опишите в описании MR, что изменилось и зачем, или разбейте MR на части поменьше."
+  },
+  {
+    "enum": "CorrelationText",
+    "entry": "SECURITY_WITHOUT_REVIEW",
+    "en": "Security findings detected without approval requirements — escalate for review",
+    "ru": "Есть замечания по безопасности, но одобрения не требуются — передайте MR на ревью"
+  },
+  {
+    "enum": "CorrelationText",
+    "entry": "SECURITY_WITHOUT_REVIEW_FIX",
+    "en": "Add an approval rule (approval) requiring a reviewer, or resolve the security finding(s).",
+    "ru": "Добавьте правило одобрений (approval) с обязательным ревьюером или устраните замечания по безопасности."
+  },
+  {
+    "enum": "PreMergeChecksText",
+    "entry": "SECTION_TITLE",
+    "en": "Pre-merge checklist",
+    "ru": "Чек-лист перед слиянием"
+  },
+  {
+    "enum": "PreMergeChecksText",
+    "entry": "TICKET_ROW",
+    "en": "Ticket compliance",
+    "ru": "Соответствие задаче"
+  },
+  {
+    "enum": "PreMergeChecksText",
+    "entry": "NO_PATH_MATCH",
+    "en": "no changed file matches its paths",
+    "ru": "ни один изменённый файл не подходит под её пути"
+  },
+  {
+    "enum": "PreMergeChecksText",
+    "entry": "TICKET_SUMMARY",
+    "en": "%d of %m ticket requirements met",
+    "ru": "выполнено требований задачи: %d из %m"
+  },
+  {
+    "enum": "PreMergeChecksText",
+    "entry": "NO_TICKET",
+    "en": "no linked ticket",
+    "ru": "нет связанной задачи"
+  },
+  {
+    "enum": "PreMergeChecksText",
+    "entry": "MORE_TICKETS",
+    "en": "%d more ticket rows not checked (limit %m)",
+    "ru": "ещё не проверено строк задач: %d (лимит %m)"
+  },
+  {
+    "enum": "PreMergeChecksText",
+    "entry": "NO_SERVICE",
+    "en": "not evaluated: no AI service",
+    "ru": "не проверено: нет AI-сервиса"
+  },
+  {
+    "enum": "PreMergeChecksText",
+    "entry": "CALL_FAILED",
+    "en": "not evaluated: the AI call failed",
+    "ru": "не проверено: вызов AI не удался"
+  },
+  {
+    "enum": "PreMergeChecksText",
+    "entry": "NO_VERDICT",
+    "en": "not evaluated: no verdict in the reply",
+    "ru": "не проверено: в ответе нет вердикта"
+  },
+  {
+    "enum": "SummaryText",
+    "entry": "HEADING_PASSED",
+    "en": "## Karandash Compliance: PASSED",
+    "ru": "## Проверка Karandash: ПРОЙДЕНА"
+  },
+  {
+    "enum": "SummaryText",
+    "entry": "HEADING_FAILED",
+    "en": "## Karandash Compliance: FAILED",
+    "ru": "## Проверка Karandash: НЕ ПРОЙДЕНА"
+  },
+  {
+    "enum": "SummaryText",
+    "entry": "ALL_PASSED",
+    "en": "All validation checks passed. No issues found.",
+    "ru": "Все проверки пройдены. Замечаний нет."
+  },
+  {
+    "enum": "SummaryText",
+    "entry": "CHANGES_SUMMARY",
+    "en": "### Changes Summary",
+    "ru": "### Сводка изменений"
+  },
+  {
+    "enum": "SummaryText",
+    "entry": "RISK_ASSESSMENT",
+    "en": "Risk Assessment",
+    "ru": "Оценка риска"
+  },
+  {
+    "enum": "SummaryText",
+    "entry": "SCORE",
+    "en": "score",
+    "ru": "балл"
+  },
+  {
+    "enum": "SummaryText",
+    "entry": "RISK_FACTORS",
+    "en": "Risk factors",
+    "ru": "Факторы риска"
+  },
+  {
+    "enum": "SummaryText",
+    "entry": "DESCRIPTION_QUALITY",
+    "en": "Description Quality",
+    "ru": "Качество описания"
+  },
+  {
+    "enum": "SummaryText",
+    "entry": "SUGGESTED_LABELS",
+    "en": "Suggested Labels",
+    "ru": "Предлагаемые метки"
+  },
+  {
+    "enum": "SummaryText",
+    "entry": "TICKET_COMPLIANCE",
+    "en": "Ticket Compliance",
+    "ru": "Соответствие задаче"
+  },
+  {
+    "enum": "SummaryText",
+    "entry": "AI_FIX_SUGGESTIONS",
+    "en": "### AI Fix Suggestions",
+    "ru": "### Исправления от AI"
+  },
+  {
+    "enum": "SummaryText",
+    "entry": "FIX_FOR",
+    "en": "Fix for `%s`:",
+    "ru": "Исправление для `%s`:"
+  },
+  {
+    "enum": "SummaryText",
+    "entry": "SEVERITY_TABLE_HEADER",
+    "en": "| Severity | Count |",
+    "ru": "| Серьёзность | Количество |"
+  },
+  {
+    "enum": "SummaryText",
+    "entry": "ERRORS",
+    "en": "Error",
+    "ru": "Ошибки"
+  },
+  {
+    "enum": "SummaryText",
+    "entry": "WARNINGS",
+    "en": "Warning",
+    "ru": "Предупреждения"
+  },
+  {
+    "enum": "SummaryText",
+    "entry": "INFOS",
+    "en": "Info",
+    "ru": "Информация"
+  },
+  {
+    "enum": "SummaryText",
+    "entry": "INLINE_COMMENTS",
+    "en": "Inline comments",
+    "ru": "Inline-комментарии"
+  },
+  {
+    "enum": "SummaryText",
+    "entry": "FINDINGS",
+    "en": "Findings",
+    "ru": "Замечания"
+  },
+  {
+    "enum": "SummaryText",
+    "entry": "FINDINGS_TABLE_HEADER",
+    "en": "| Severity | Rule | Message | How to fix |",
+    "ru": "| Серьёзность | Правило | Сообщение | Как исправить |"
+  },
+  {
+    "enum": "SummaryText",
+    "entry": "FINDINGS_NOT_SHOWN",
+    "en": "_… %d more findings not shown; see the inline comments or the full report._",
+    "ru": "_… ещё не показано замечаний: %d; см. inline-комментарии или полный отчёт._"
+  },
+  {
+    "enum": "SummaryText",
+    "entry": "ALL_INLINE",
+    "en": "All issues have been posted as inline comments on the affected files.",
+    "ru": "Все замечания опубликованы inline-комментариями к файлам."
+  },
+  {
+    "enum": "SummaryText",
+    "entry": "UNVERIFIED_ANCHOR",
+    "en": "unverified anchor in",
+    "ru": "непроверенная привязка в"
+  },
+  {
+    "enum": "SummaryText",
+    "entry": "PR_SPLIT",
+    "en": "PR Split Analysis",
+    "ru": "Анализ разделения MR"
+  },
+  {
+    "enum": "SummaryText",
+    "entry": "SUGGESTED_DESCRIPTION",
+    "en": "Suggested Description",
+    "ru": "Предлагаемое описание"
+  },
+  {
+    "enum": "SummaryText",
+    "entry": "SUGGESTED_TITLE",
+    "en": "Suggested title",
+    "ru": "Предлагаемый заголовок"
+  },
+  {
+    "enum": "SummaryText",
+    "entry": "CHECKLIST",
+    "en": "### Compliance Checklist",
+    "ru": "### Чек-лист соответствия"
+  },
+  {
+    "enum": "SummaryText",
+    "entry": "WARNINGS_MARK",
+    "en": "(warnings)",
+    "ru": "(предупреждения)"
+  },
+  {
+    "enum": "SummaryText",
+    "entry": "SKIPPED_MARK",
+    "en": "(skipped)",
+    "ru": "(пропущено)"
+  },
+  {
+    "enum": "SummaryText",
+    "entry": "SKIPPED_RULES",
+    "en": "Skipped rules (%d)",
+    "ru": "Пропущенные правила (%d)"
+  },
+  {
+    "enum": "SummaryText",
+    "entry": "POLICIES_NOT_APPLIED",
+    "en": "Policies not applied (%d)",
+    "ru": "Неприменённые политики (%d)"
+  },
+  {
+    "enum": "SummaryText",
+    "entry": "UNNAMED_POLICY",
+    "en": "unnamed policy",
+    "ru": "политика без имени"
+  },
+  {
+    "enum": "SummaryText",
+    "entry": "MORE",
+    "en": "… %d more",
+    "ru": "… ещё %d"
+  },
+  {
+    "enum": "SummaryText",
+    "entry": "AI_COVERAGE",
+    "en": "AI coverage",
+    "ru": "Покрытие AI"
+  },
+  {
+    "enum": "SummaryText",
+    "entry": "CONTRIBUTORS",
+    "en": "%d contributors, top contributor share %d%, commits per contributor: %s",
+    "ru": "Авторов: %d, доля самого активного: %d%, коммитов у каждого: %s"
+  },
+  {
+    "enum": "SummaryText",
+    "entry": "GENERATED_BY",
+    "en": "Generated by",
+    "ru": "Создано"
+  },
+  {
+    "enum": "SummaryText",
+    "entry": "FEEDBACK_HINT",
+    "en": "React 👎 on a finding to mark it as a false positive.",
+    "ru": "Поставьте 👎 замечанию, чтобы отметить его как ложное срабатывание."
+  },
+  {
+    "enum": "SummaryText",
+    "entry": "TRUNCATED",
+    "en": "Summary truncated to fit the comment size limit; see the full report.",
+    "ru": "Сводка сокращена до лимита размера комментария; см. полный отчёт."
+  },
+  {
+    "enum": "SummaryText",
+    "entry": "RULES_SKIPPED",
+    "en": "%d rules skipped; see the full report.",
+    "ru": "Пропущено правил: %d; см. полный отчёт."
+  },
+  {
+    "enum": "SummaryText",
+    "entry": "WALKTHROUGH",
+    "en": "Walkthrough",
+    "ru": "Обзор изменений"
+  },
+  {
+    "enum": "SummaryText",
+    "entry": "WHY",
+    "en": "Why",
+    "ru": "Почему"
+  },
+  {
+    "enum": "SummaryText",
+    "entry": "PROVENANCE_TITLE",
+    "en": "How this review was made",
+    "ru": "Как проводилась проверка"
+  },
+  {
+    "enum": "SummaryText",
+    "entry": "PROVENANCE_OMITTED",
+    "en": "Review provenance is too large for this comment; see the job log and the `review-flow.md` job artifact.",
+    "ru": "Сведения о проверке не помещаются в комментарий; см. лог задачи и артефакт `review-flow.md`."
+  },
+  {
+    "enum": "SummaryText",
+    "entry": "PROVENANCE_COVERAGE",
+    "en": "Coverage",
+    "ru": "Покрытие"
+  },
+  {
+    "enum": "SummaryText",
+    "entry": "ENRICHER_TABLE_HEADER",
+    "en": "| Enricher | Status | Details |",
+    "ru": "| Обогащение | Статус | Подробности |"
+  },
+  {
+    "enum": "SummaryText",
+    "entry": "ANALYZER_TABLE_HEADER",
+    "en": "| Analyzer | Model | Tokens in/out | Cost | Findings |",
+    "ru": "| Анализатор | Модель | Токены вход/выход | Стоимость | Замечания |"
+  },
+  {
+    "enum": "SummaryText",
+    "entry": "FILTER_TABLE_HEADER",
+    "en": "| Filter | Removed |",
+    "ru": "| Фильтр | Удалено |"
+  },
+  {
+    "enum": "SummaryText",
+    "entry": "TOKENS",
+    "en": "~%d tokens",
+    "ru": "~%d токенов"
+  },
+  {
+    "enum": "SummaryText",
+    "entry": "STATUS_OK",
+    "en": "ok",
+    "ru": "ок"
+  },
+  {
+    "enum": "SummaryText",
+    "entry": "STATUS_SKIPPED",
+    "en": "skipped",
+    "ru": "пропущено"
+  },
+  {
+    "enum": "SummaryText",
+    "entry": "STATUS_FAILED",
+    "en": "failed",
+    "ru": "ошибка"
+  },
+  {
+    "enum": "SummaryText",
+    "entry": "FLOW_MR_DIFF",
+    "en": "MR diff",
+    "ru": "Дифф MR"
+  },
+  {
+    "enum": "SummaryText",
+    "entry": "FLOW_CONTEXT",
+    "en": "Context",
+    "ru": "Контекст"
+  },
+  {
+    "enum": "SummaryText",
+    "entry": "FLOW_ENRICHER",
+    "en": "Enricher %s",
+    "ru": "Обогащение %s"
+  },
+  {
+    "enum": "SummaryText",
+    "entry": "FLOW_ANALYZER",
+    "en": "Analyzer %s",
+    "ru": "Анализатор %s"
+  },
+  {
+    "enum": "SummaryText",
+    "entry": "FLOW_ON_MODEL",
+    "en": "on",
+    "ru": "на"
+  },
+  {
+    "enum": "SummaryText",
+    "entry": "FLOW_FILTER",
+    "en": "Filter %s",
+    "ru": "Фильтр %s"
+  },
+  {
+    "enum": "SummaryText",
+    "entry": "FLOW_ANALYZERS",
+    "en": "Analyzers",
+    "ru": "Анализаторы"
+  },
+  {
+    "enum": "SummaryText",
+    "entry": "FLOW_POSTED",
+    "en": "Posted",
+    "ru": "Опубликовано"
+  },
+  {
+    "enum": "SummaryText",
+    "entry": "FLOW_TABLE_HEADER",
+    "en": "| Stage | Findings |",
+    "ru": "| Этап | Замечания |"
+  },
+  {
+    "enum": "InlineLifecycleText",
+    "entry": "DELTA",
+    "en": "**Inline review:** %1 open, %2 fixed",
+    "ru": "**Inline-ревью:** открытых — %1, исправлено — %2"
+  },
+  {
+    "enum": "InlineLifecycleText",
+    "entry": "OVERFLOW",
+    "en": "%1 more not posted inline",
+    "ru": "Не опубликовано inline: %1"
+  },
+  {
+    "enum": "InlineLifecycleText",
+    "entry": "INLINE_ONLY",
+    "en": "+%1 in inline comments",
+    "ru": "+%1 — в inline-комментариях"
+  },
+  {
+    "enum": "InlineLifecycleText",
+    "entry": "UPDATED",
+    "en": "updated",
+    "ru": "обновлено"
+  },
+  {
+    "enum": "InlineLifecycleText",
+    "entry": "LISTING_FAILED",
+    "en": "**Inline review:** Inline comments were skipped this run: review threads could not be listed.",
+    "ru": "**Inline-ревью:** inline-комментарии в этом запуске пропущены: не удалось получить список обсуждений."
+  },
+  {
+    "enum": "BranchNamingText",
+    "entry": "EXPLANATION",
+    "en": "Branch naming conventions help identify work type at a glance.",
+    "ru": "Соглашения об именах веток помогают сразу понять тип работы."
+  },
+  {
+    "enum": "BranchNamingText",
+    "entry": "BOTH_PATTERNS",
+    "en": "Both pattern and allowedPatterns are set; allowedPatterns is used and pattern is ignored.",
+    "ru": "Заданы и pattern, и allowedPatterns; используется allowedPatterns, pattern игнорируется."
+  },
+  {
+    "enum": "BranchNamingText",
+    "entry": "REMOVE_PATTERN",
+    "en": "Remove pattern, or move it into allowedPatterns.",
+    "ru": "Удалите pattern или перенесите его в allowedPatterns."
+  },
+  {
+    "enum": "CommitBodyText",
+    "entry": "EXPLANATION",
+    "en": "Structured commit bodies improve review quality and release note generation.",
+    "ru": "Структурированные тела коммитов улучшают ревью и генерацию release notes."
+  },
+  {
+    "enum": "CommitBodyText",
+    "entry": "NO_MATCHING_BODY",
+    "en": "No commit body in this MR contains a line matching the configured pattern.",
+    "ru": "Ни в одном теле коммита этого MR нет строки, подходящей под заданный шаблон."
+  },
+  {
+    "enum": "CommitMessagesText",
+    "entry": "SUGGESTION",
+    "en": "Follow the configured commit message format.",
+    "ru": "Следуйте заданному формату сообщений коммитов."
+  },
+  {
+    "enum": "CommitMessagesText",
+    "entry": "EXPLANATION",
+    "en": "Consistent commit messages improve git history readability.",
+    "ru": "Единообразные сообщения коммитов делают историю git понятнее."
+  },
+  {
+    "enum": "CommitMessagesText",
+    "entry": "NO_PATTERN_MATCH",
+    "en": "Commit message does not match required pattern: {0}",
+    "ru": "Сообщение коммита не соответствует требуемому шаблону: {0}"
+  },
+  {
+    "enum": "CommitMessagesText",
+    "entry": "NOT_CONVENTIONAL",
+    "en": "Commit message does not follow conventional format: {0}",
+    "ru": "Сообщение коммита не в формате conventional commits: {0}"
+  },
+  {
+    "enum": "DraftText",
+    "entry": "IS_DRAFT",
+    "en": "MR is marked as draft and cannot be merged",
+    "ru": "MR помечен как черновик и не может быть влит"
+  },
+  {
+    "enum": "DraftText",
+    "entry": "WIP_TITLE",
+    "en": "MR title contains WIP indicator and cannot be merged",
+    "ru": "Заголовок MR содержит признак WIP, MR не может быть влит"
+  },
+  {
+    "enum": "DraftText",
+    "entry": "MARK_READY",
+    "en": "Mark the MR as ready.",
+    "ru": "Отметьте MR как готовый."
+  },
+  {
+    "enum": "DraftText",
+    "entry": "REMOVE_MARKER",
+    "en": "Remove '{0}' from the MR title.",
+    "ru": "Удалите '{0}' из заголовка MR."
+  },
+  {
+    "enum": "DraftText",
+    "entry": "EXPLANATION",
+    "en": "Draft MRs indicate work in progress and should not be merged.",
+    "ru": "Черновик MR означает незавершённую работу, его не следует вливать."
+  },
+  {
+    "enum": "FileChangesText",
+    "entry": "SUGGESTION",
+    "en": "Request approval from the listed owners before merging.",
+    "ru": "Перед слиянием запросите одобрение у перечисленных владельцев."
+  },
+  {
+    "enum": "FileChangesText",
+    "entry": "EXPLANATION",
+    "en": "Sensitive files require explicit approval to prevent unintended changes.",
+    "ru": "Чувствительные файлы требуют явного одобрения, чтобы избежать нежелательных изменений."
+  },
+  {
+    "enum": "FileChangesText",
+    "entry": "DRAFT_BLOCKED",
+    "en": "Draft MR is blocked by file changes rule",
+    "ru": "Черновик MR заблокирован правилом изменений файлов"
+  },
+  {
+    "enum": "FileChangesText",
+    "entry": "REMOVE_FILE",
+    "en": "Remove this file from the MR.",
+    "ru": "Уберите этот файл из MR."
+  },
+  {
+    "enum": "FileChangesText",
+    "entry": "FORBIDDEN_PATH",
+    "en": "The file matches a path this project does not allow in merge requests.",
+    "ru": "Файл подходит под путь, который этот проект не допускает в merge request."
+  },
+  {
+    "enum": "FileChangesText",
+    "entry": "REQUIRED_PATHS",
+    "en": "Every MR must touch the paths listed in fileChanges.requiredPaths.",
+    "ru": "Каждый MR должен затрагивать пути из fileChanges.requiredPaths."
+  },
+  {
+    "enum": "FileChangesText",
+    "entry": "ADD_TESTS",
+    "en": "Add tests covering the listed lines.",
+    "ru": "Добавьте тесты, покрывающие указанные строки."
+  },
+  {
+    "enum": "FileChangesText",
+    "entry": "UNCOVERED",
+    "en": "Changed lines without test coverage are more likely to regress.",
+    "ru": "Изменённые строки без покрытия тестами чаще ломаются."
+  },
+  {
+    "enum": "LabelsText",
+    "entry": "MISSING",
+    "en": "Missing required label: '{0}'",
+    "ru": "Нет обязательной метки: '{0}'"
+  },
+  {
+    "enum": "LabelsText",
+    "entry": "FORBIDDEN",
+    "en": "Forbidden label present: '{0}'",
+    "ru": "Есть запрещённая метка: '{0}'"
+  },
+  {
+    "enum": "LabelsText",
+    "entry": "SUGGESTION",
+    "en": "Add the required label via the MR sidebar.",
+    "ru": "Добавьте нужную метку на боковой панели MR."
+  },
+  {
+    "enum": "LabelsText",
+    "entry": "EXPLANATION",
+    "en": "Labels help categorize and route MRs through review workflows.",
+    "ru": "Метки помогают классифицировать MR и направлять их по процессу ревью."
+  },
+  {
+    "enum": "SecurityText",
+    "entry": "SUGGESTION",
+    "en": "Move secrets to environment variables or a secrets vault.",
+    "ru": "Перенесите секреты в переменные окружения или хранилище секретов."
+  },
+  {
+    "enum": "SecurityText",
+    "entry": "LARGE_DIFF_SUGGESTION",
+    "en": "The diff exceeds scan.maxDiffSize; raise the limit or split the change.",
+    "ru": "Diff больше scan.maxDiffSize; увеличьте лимит или разделите изменение."
+  },
+  {
+    "enum": "SecurityText",
+    "entry": "LARGE_DIFF_EXPLANATION",
+    "en": "Diffs above the size limit are not scanned, so secrets in them would go unnoticed.",
+    "ru": "Diff больше лимита не сканируется, и секреты в нём останутся незамеченными."
+  },
+  {
+    "enum": "SecurityText",
+    "entry": "EXPLANATION",
+    "en": "Secrets in source control can be leaked and are hard to revoke.",
+    "ru": "Секреты в системе контроля версий могут утечь, а отозвать их трудно."
+  },
+  {
+    "enum": "SecurityText",
+    "entry": "SECRET_IN_ADDED_LINE",
+    "en": "Potential secret in an added line",
+    "ru": "В добавленной строке, возможно, есть секрет"
+  },
+  {
+    "enum": "SecurityText",
+    "entry": "SECRET_IN_TITLE",
+    "en": "Potential secret detected in MR title",
+    "ru": "В заголовке MR, возможно, есть секрет"
+  },
+  {
+    "enum": "SecurityText",
+    "entry": "SECRET_IN_DESCRIPTION",
+    "en": "Potential secret detected in MR description",
+    "ru": "В описании MR, возможно, есть секрет"
+  },
+  {
+    "enum": "SizeLimitsText",
+    "entry": "EXPLANATION",
+    "en": "Smaller MRs are easier to review and less likely to introduce bugs.",
+    "ru": "Небольшие MR проще ревьюить, и они реже вносят ошибки."
+  },
+  {
+    "enum": "SizeLimitsText",
+    "entry": "WARN_THRESHOLD",
+    "en": "Set severities.warnThreshold to a value between 50% and 99%, e.g. 80%.",
+    "ru": "Задайте severities.warnThreshold от 50% до 99%, например 80%."
+  },
+  {
+    "enum": "TitleFormatText",
+    "entry": "SUGGESTION",
+    "en": "Adjust title length to meet requirements.",
+    "ru": "Измените длину заголовка в соответствии с требованиями."
+  },
+  {
+    "enum": "TitleFormatText",
+    "entry": "EXPLANATION",
+    "en": "Title format rules ensure consistent MR naming for changelogs and automation.",
+    "ru": "Правила формата заголовка дают единообразные имена MR для changelog и автоматизации."
+  },
+  {
+    "enum": "TitleFormatText",
+    "entry": "NO_PATTERN_MATCH",
+    "en": "MR title does not match required pattern.",
+    "ru": "Заголовок MR не соответствует требуемому шаблону."
+  },
+  {
+    "enum": "TitleFormatText",
+    "entry": "NO_TICKET",
+    "en": "MR title has no ticket reference.",
+    "ru": "В заголовке MR нет ссылки на задачу."
+  },
+  {
+    "enum": "TitleFormatText",
+    "entry": "TRAILING_PERIOD",
+    "en": "MR title must not end with a period.",
+    "ru": "Заголовок MR не должен заканчиваться точкой."
+  },
+  {
+    "enum": "TitleFormatText",
+    "entry": "REMOVE_PERIOD",
+    "en": "Remove the trailing period from the title.",
+    "ru": "Уберите точку в конце заголовка."
+  },
+  {
+    "enum": "ApprovalText",
+    "entry": "SUGGESTION",
+    "en": "Request review from the required approvers.",
+    "ru": "Запросите ревью у обязательных согласующих."
+  },
+  {
+    "enum": "ApprovalText",
+    "entry": "EXPLANATION",
+    "en": "Approval requirements ensure adequate code review before merging.",
+    "ru": "Требования к одобрениям обеспечивают достаточное ревью кода перед слиянием."
+  },
+  {
+    "enum": "CicdStatusText",
+    "entry": "SUGGESTION",
+    "en": "Check the pipeline logs and fix failing jobs.",
+    "ru": "Проверьте логи пайплайна и исправьте упавшие джобы."
+  },
+  {
+    "enum": "CicdStatusText",
+    "entry": "EXPLANATION",
+    "en": "Passing CI/CD pipelines prevent broken code from reaching production.",
+    "ru": "Успешные пайплайны CI/CD не дают сломанному коду попасть в продакшн."
+  },
+  {
+    "enum": "CicdStatusText",
+    "entry": "UNAVAILABLE",
+    "en": "CI/CD status is unavailable; unable to verify required passing pipeline",
+    "ru": "Статус CI/CD недоступен; нельзя проверить, что обязательный пайплайн прошёл"
+  },
+  {
+    "enum": "CodeownersText",
+    "entry": "REQUEST_REVIEW",
+    "en": "Request review from the listed code owners.",
+    "ru": "Запросите ревью у перечисленных владельцев кода."
+  },
+  {
+    "enum": "CodeownersText",
+    "entry": "EXPLANATION",
+    "en": "Code owners review changes in areas they maintain.",
+    "ru": "Владельцы кода ревьюят изменения в областях, за которые отвечают."
+  },
+  {
+    "enum": "CodeownersText",
+    "entry": "ADD_FILE",
+    "en": "Add a CODEOWNERS file, point 'codeowners.path' at it, or turn the rule off.",
+    "ru": "Добавьте файл CODEOWNERS, укажите его в 'codeowners.path' или выключите правило."
+  },
+  {
+    "enum": "CodeownersText",
+    "entry": "NO_FILE",
+    "en": "Without a readable CODEOWNERS file the rule cannot tell who owns the changed files.",
+    "ru": "Без читаемого файла CODEOWNERS правило не может определить владельцев изменённых файлов."
+  },
+  {
+    "enum": "ConflictText",
+    "entry": "HAS_CONFLICTS",
+    "en": "MR has merge conflicts that must be resolved before merging",
+    "ru": "В MR есть конфликты слияния, их нужно разрешить до слияния"
+  },
+  {
+    "enum": "ConflictText",
+    "entry": "REBASE",
+    "en": "Rebase or merge the target branch to resolve conflicts.",
+    "ru": "Сделайте rebase или влейте целевую ветку, чтобы разрешить конфликты."
+  },
+  {
+    "enum": "ConflictText",
+    "entry": "EXPLANATION",
+    "en": "Merge conflicts must be resolved before merging.",
+    "ru": "Конфликты слияния нужно разрешить до слияния."
+  },
+  {
+    "enum": "ContextTagText",
+    "entry": "EXPLANATION",
+    "en": "Context tags categorize changes for routing and reporting.",
+    "ru": "Теги контекста классифицируют изменения для маршрутизации и отчётов."
+  },
+  {
+    "enum": "CrossEntityText",
+    "entry": "EXPLANATION",
+    "en": "Consistent task references ensure traceability across MR components.",
+    "ru": "Единообразные ссылки на задачи обеспечивают прослеживаемость между частями MR."
+  },
+  {
+    "enum": "CrossEntityText",
+    "entry": "RELEASE_NOTE",
+    "en": "Each ticket in the MR scope should produce a release-note entry.",
+    "ru": "Каждая задача в рамках MR должна дать запись в release notes."
+  },
+  {
+    "enum": "CrossEntityText",
+    "entry": "ONCE",
+    "en": "Each task ID should appear in CHANGELOG only once across all commits.",
+    "ru": "Каждый ID задачи должен встречаться в CHANGELOG только один раз по всем коммитам."
+  },
+  {
+    "enum": "CrossEntityText",
+    "entry": "DUPLICATE",
+    "en": "Duplicate CHANGELOG entries for the same task ID indicate redundant or conflicting changelog notes.",
+    "ru": "Повторные записи CHANGELOG для одного ID задачи означают лишние или противоречивые заметки."
+  },
+  {
+    "enum": "DependencyText",
+    "entry": "PIN",
+    "en": "Pin to an exact version to ensure reproducible builds.",
+    "ru": "Зафиксируйте точную версию для воспроизводимых сборок."
+  },
+  {
+    "enum": "DependencyText",
+    "entry": "UNPINNED",
+    "en": "Unpinned versions can introduce unexpected changes when dependencies are updated.",
+    "ru": "Незафиксированные версии могут принести неожиданные изменения при обновлении зависимостей."
+  },
+  {
+    "enum": "DependencyText",
+    "entry": "OLD",
+    "en": "Older versions may contain known vulnerabilities or lack required features.",
+    "ru": "Старые версии могут содержать известные уязвимости или не иметь нужных функций."
+  },
+  {
+    "enum": "DependencyText",
+    "entry": "REMOVE",
+    "en": "Remove or replace this dependency.",
+    "ru": "Удалите или замените эту зависимость."
+  },
+  {
+    "enum": "DependencyText",
+    "entry": "BLOCKED",
+    "en": "This dependency version matches a configured blocked pattern.",
+    "ru": "Эта версия зависимости подходит под заблокированный шаблон."
+  },
+  {
+    "enum": "DescriptionFormatText",
+    "entry": "EXPLANATION",
+    "en": "Structured descriptions ensure reviewers have the context they need.",
+    "ru": "Структурированные описания дают ревьюерам нужный контекст."
+  },
+  {
+    "enum": "JiraTicketText",
+    "entry": "EXPLANATION",
+    "en": "Linking JIRA tickets provides traceability between code and requirements.",
+    "ru": "Ссылки на задачи JIRA связывают код с требованиями."
+  },
+  {
+    "enum": "JiraTicketText",
+    "entry": "CUSTOM_NEEDS_PATTERN",
+    "en": "format 'custom' requires a pattern; falling back to the default JIRA key shape.",
+    "ru": "для format 'custom' нужен pattern; используется стандартный вид ключа JIRA."
+  },
+  {
+    "enum": "JiraTicketText",
+    "entry": "SET_PATTERN",
+    "en": "Set pattern in jira-ticket config.",
+    "ru": "Задайте pattern в конфигурации jira-ticket."
+  },
+  {
+    "enum": "JiraTicketText",
+    "entry": "CONFIGURE_PROVIDER",
+    "en": "Configure the jira enrichment provider so ticket details are fetched.",
+    "ru": "Настройте провайдер обогащения jira, чтобы получать данные задач."
+  },
+  {
+    "enum": "JiraTicketText",
+    "entry": "SET_URL_STATUS",
+    "en": "Set jiraUrl in jira-ticket config to enable status validation.",
+    "ru": "Задайте jiraUrl в конфигурации jira-ticket, чтобы включить проверку статуса."
+  },
+  {
+    "enum": "JiraTicketText",
+    "entry": "SET_URL_ASSIGNEE",
+    "en": "Set jiraUrl in jira-ticket config to enable assignee validation.",
+    "ru": "Задайте jiraUrl в конфигурации jira-ticket, чтобы включить проверку исполнителя."
+  },
+  {
+    "enum": "LanguagePolicyText",
+    "entry": "UNKNOWN_SCRIPTS",
+    "en": "Unknown scripts are ignored and do not expand the allowed character set.",
+    "ru": "Неизвестные письменности игнорируются и не расширяют набор допустимых символов."
+  },
+  {
+    "enum": "LanguagePolicyText",
+    "entry": "RANGE_FORMAT",
+    "en": "Write each range as two hex code points, e.g. '0x0400-0x04FF'.",
+    "ru": "Записывайте каждый диапазон как две hex-кодовые точки, например '0x0400-0x04FF'."
+  },
+  {
+    "enum": "LanguagePolicyText",
+    "entry": "INVALID_RANGES",
+    "en": "Invalid ranges are ignored and do not expand the allowed character set.",
+    "ru": "Неверные диапазоны игнорируются и не расширяют набор допустимых символов."
+  },
+  {
+    "enum": "LanguagePolicyText",
+    "entry": "EXPLANATION",
+    "en": "Language policy ensures consistent character encoding across the codebase.",
+    "ru": "Языковая политика обеспечивает единообразие символов во всём коде."
+  },
+  {
+    "enum": "ReviewerText",
+    "entry": "SUGGESTION",
+    "en": "Add the listed reviewers via the MR sidebar.",
+    "ru": "Добавьте перечисленных ревьюеров на боковой панели MR."
+  },
+  {
+    "enum": "ReviewerText",
+    "entry": "EXPLANATION",
+    "en": "Reviewer requirements ensure proper knowledge sharing.",
+    "ru": "Требования к ревьюерам обеспечивают обмен знаниями."
+  }
+]

@@ -1,0 +1,4 @@
+Warning: [E0022] Environment variable 'KARANDASH_PROJECT_TOKEN' is referenced in config but not set.
+Warning: [E0022] Environment variable 'BIFROST_API_KEY' is referenced in config but not set.
+Warning: [E0022] Environment variable 'BIFROST_BASE_URL' is referenced in config but not set.
+Config validation failed: unresolved environment variable(s): BIFROST_API_KEY, BIFROST_BASE_URL, KARANDASH_PROJECT_TOKEN

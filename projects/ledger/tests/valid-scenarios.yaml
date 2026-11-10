@@ -1,0 +1,64 @@
+scenarios:
+  - name: "Valid: LDG JIRA + English title + CHANGELOG"
+    mr:
+      title: "[LDG-321] Add offline shelf sync"
+      commits:
+        - subject: "[LDG-321] Implement offline book cache sync"
+          body: "CHANGELOG: [LDG-321] Add offline shelf sync."
+      branch: "feature/LDG-321-offline-sync"
+    expect: pass
+
+  - name: "Valid: no JIRA — no CHANGELOG required"
+    mr:
+      title: "Fix book download progress indicator"
+      commits:
+        - subject: "Show correct progress for multi-part downloads"
+      branch: "fix/download-progress"
+    expect: pass
+
+  - name: "Valid: LDG JIRA + CHANGELOG in Russian"
+    mr:
+      title: "[LDG-500] Improve search results ranking"
+      commits:
+        - subject: "[LDG-500] Add relevance sorting to search"
+          body: "CHANGELOG: [LDG-500] Улучшить сортировку результатов поиска."
+      branch: "feature/LDG-500-search-ranking"
+    expect: pass
+
+  - name: "Valid: multi-task CHANGELOG — both tickets in title and commit"
+    mr:
+      title: "[LDG-100] [LDG-101] Fix download and shelf issues"
+      commits:
+        - subject: "[LDG-100] [LDG-101] Fix download state and shelf access"
+          body: "CHANGELOG: [LDG-100] Fix download state management, [LDG-101] Fix offline shelf access check."
+      branch: "fix/LDG-100-LDG-101-batch"
+    expect: pass
+
+  - name: "Valid: JIRA in title, mixed commits — only JIRA commit needs CHANGELOG"
+    mr:
+      title: "[LDG-200] Add reader night mode"
+      commits:
+        - subject: "[LDG-200] Implement dark background in reader"
+          body: "CHANGELOG: [LDG-200] Add night mode to book reader."
+        - subject: "Fix missing string in reader settings"
+          body: ""
+      branch: "feature/LDG-200-night-mode"
+    expect: pass
+
+  - name: "Valid: LDG JIRA + CHANGELOG English with trailing period"
+    mr:
+      title: "[LDG-300] Add bookmarks export feature"
+      commits:
+        - subject: "[LDG-300] Implement bookmarks export to JSON"
+          body: "CHANGELOG: [LDG-300] Add bookmarks export to JSON file."
+      branch: "feature/LDG-300-bookmark-export"
+    expect: pass
+
+  - name: "Valid: commit task is subset of MR title tasks"
+    mr:
+      title: "[LDG-400] Refactor library sync module"
+      commits:
+        - subject: "[LDG-400] Extract LibrarySyncRepository"
+          body: "CHANGELOG: [LDG-400] Refactor library sync for better testability."
+      branch: "refactor/LDG-400-library-sync"
+    expect: pass

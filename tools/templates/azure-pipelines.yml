@@ -1,0 +1,32 @@
+trigger: none
+
+pr:
+  - main
+  - master
+  - develop
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+steps:
+- task: JavaToolInstaller@0
+  displayName: 'Set up JDK 17'
+  inputs:
+    versionSpec: '17'
+    jdkArchitectureOption: 'x64'
+    jdkSourceOption: 'PreInstalled'
+
+- script: |
+    wget https://github.com/appKODE/karandash/releases/latest/download/karandash.jar
+  displayName: 'Download Karandash'
+
+- script: |
+    java -jar karandash.jar validate --format sarif --output karandash-results.sarif
+  displayName: 'Run Validation'
+
+- task: PublishBuildArtifacts@1
+  displayName: 'Publish SARIF Results'
+  inputs:
+    pathToPublish: 'karandash-results.sarif'
+    artifactName: 'karandash-results'
+  condition: always()

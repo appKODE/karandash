@@ -1,0 +1,58 @@
+# Strict Configuration
+# Extends base-config.yaml with stricter validation rules.
+# Use this for production projects requiring high-quality commit messages.
+
+extends: "./base-config.yaml"
+
+rules:
+  # Stricter title format (50 char best practice from git)
+  title-format:
+    pattern: "^(feat|fix|docs|style|refactor|perf|test|chore|ci|build)\\([a-z0-9-]+\\):.+"
+    min-length: 15
+    max-length: 50
+    require-ticket: true
+    suggestion: "Use scoped conventional commits: 'feat(auth): add OAuth2' or 'fix(api): handle timeout'"
+    explanation: "Scoped conventional commits enable fine-grained changelog sections per component"
+
+  # Stricter commit message validation
+  commit-messages:
+    pattern: "^(feat|fix|docs|style|refactor|perf|test|chore|ci|build)\\([a-z0-9-]+\\):.+"
+    max-length: 50
+    min-length: 15
+    suggestion: "Use scoped format: 'feat(scope): description' — scope must be lowercase alphanumeric"
+    explanation: "Strict commit format is required for automated semantic versioning in this project"
+
+  # JIRA ticket validation (optional)
+  jira-ticket:
+    project-keys:
+      - "PROJ"
+      - "FEAT"
+    validate-status:
+      - "In Progress"
+      - "In Review"
+    validate-assignee: false
+
+  # Strict file change requirements
+  file-changes:
+    patterns:
+      - pattern: ".*\\.sql"
+        require-approval:
+          - "dba-team"
+        require-labels:
+          - "database-change"
+      - pattern: ".*\\.env.*"
+        block-on-draft: fail
+
+  # Strict size limits
+  size-limits:
+    max-files: 25
+    max-lines: 500
+
+  # Block draft MRs in strict mode
+  draft-prevention:
+    block-draft: fail
+
+  # Require CODEOWNERS approval
+  codeowners:
+    path: "CODEOWNERS"
+    require-owner-approval: true

@@ -1,0 +1,38 @@
+# Lenient Configuration
+# Extends base-config.yaml with relaxed validation rules.
+# Use this for experimental projects or when transitioning to stricter standards.
+
+extends: "./base-config.yaml"
+
+rules:
+  # Relaxed title format (allow optional scope, longer titles)
+  title-format:
+    pattern: "^(feat|fix|docs|style|refactor|perf|test|chore|ci|build|wip|update|merge)(\\(.+\\))?:?\\s*.+"
+    min-length: 5
+    max-length: 100
+    suggestion: "Prefix your title with a type like 'feat:', 'fix:', or 'docs:' for better traceability"
+    explanation: "Type prefixes help categorize changes even in lenient configurations"
+
+  # Relaxed commit message validation
+  commit-messages:
+    pattern: ".+"
+    max-length: 100
+    min-length: 5
+    suggestion: "Write a clear, concise description of what changed and why"
+    explanation: "Even with relaxed validation, descriptive commit messages help reviewers understand the change"
+
+  # No branch naming restrictions
+  branch-naming:
+    allowed-patterns:
+      - ".*"
+    require-source-match: false
+    require-target-match: false
+
+  # Higher size limits
+  size-limits:
+    max-files: 100
+    max-lines: 2000
+
+  # Allow draft MRs
+  draft-prevention:
+    block-draft: off

@@ -1,0 +1,7 @@
+# Source: InlineLifecycleConfig KDoc; inline.* inherits through extends and a child overrides one key.
+extends: "../inline-lifecycle-base/config.yaml"
+
+reporters:
+  platform:
+    inline:
+      publish: batch

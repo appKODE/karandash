@@ -1,0 +1,12 @@
+# Source: TimeoutConfig KDoc (core/config) as advertised in v1.46.
+timeouts:
+  http: 45s
+  enrichment: 15s
+  plugin-shutdown: 10s
+  cache-ttl: 60s
+  rule-execution: 120s
+  global: 5m
+
+rules:
+  title-format:
+    min-length: 10

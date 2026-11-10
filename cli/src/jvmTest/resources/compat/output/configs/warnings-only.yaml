@@ -1,0 +1,6 @@
+# Only warnings on tools/integration-tests/fixtures/test-mr.json (1 changed file > max-files 0), for --strict.
+rules:
+  size-limits:
+    max-files: 0
+    severities:
+      on-violation: warning

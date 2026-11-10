@@ -1,0 +1,7 @@
+rules: commitMessages contextTag crossEntityConsistency draftPrevention jiraTicket labels languagePolicy sizeLimits titleFormat
+changelog-entry = \[ALPHA-\d+\] .+
+changelog-line = ^CHANGELOG: \[ALPHA-\d+\] .+(?:, \[ALPHA-\d+\] .+)*\.$
+project-tag = \[(?:android|ios)\]
+project-ticket = ALPHA-\d+
+project-tickets = (?:\[ALPHA-\d+\])+
+project-title = (?:(?:\[ALPHA-\d+\])+)?\[(?:android|ios)\] .+

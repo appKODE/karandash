@@ -1,0 +1,1 @@
+WARN Ignoring auth entry 'gitlab': missing type

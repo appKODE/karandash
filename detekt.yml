@@ -1,0 +1,544 @@
+config:
+  validation: true
+  warningsAsErrors: false
+
+# detekt 2 has no build>maxIssues: every rule defaults to severity error and the Gradle task fails on any
+# issue at or above failOnSeverity (default error), i.e. zero tolerance. Thresholds are "allowed" maxima
+# (reported above the value), so each is the 1.x threshold minus one.
+complexity:
+  active: true
+  ComplexCondition:
+    active: true
+    allowedConditions: 9
+  CyclomaticComplexMethod:
+    active: true
+    allowedComplexity: 29
+  LargeClass:
+    active: true
+    allowedLines: 499
+    excludes:
+      - '**/commonTest/**'
+      - '**/jvmTest/**'
+  LongMethod:
+    active: true
+    allowedLines: 119
+  LongParameterList:
+    active: true
+    allowedFunctionParameters: 11
+    allowedConstructorParameters: 11
+  MethodOverloading:
+    active: false
+  NestedBlockDepth:
+    active: true
+    allowedDepth: 6
+  ReplaceSafeCallChainWithRun:
+    active: false
+  StringLiteralDuplication:
+    active: true
+    allowedDuplications: 2
+    ignoreAnnotation: true
+    allowedWithLengthLessThan: 5
+    ignoreStringsRegex: '$^'
+    excludes:
+      - '**/commonTest/**'
+      - '**/jvmTest/**'
+  TooManyFunctions:
+    active: true
+    allowedFunctionsPerFile: 59
+    allowedFunctionsPerClass: 39
+    allowedFunctionsPerInterface: 29
+    allowedFunctionsPerObject: 59
+    allowedFunctionsPerEnum: 9
+    # Overrides are counted by the interface they implement (bridges serve every SDK module type).
+    ignoreOverridden: true
+
+coroutines:
+  active: true
+  GlobalCoroutineUsage:
+    active: true
+  RedundantSuspendModifier:
+    active: true
+  SleepInsteadOfDelay:
+    active: true
+  SuspendFunWithFlowReturnType:
+    active: true
+
+empty-blocks:
+  active: true
+  EmptyFunctionBlock:
+    active: true
+    ignoreOverridden: true
+  EmptyCatchBlock:
+    active: true
+    # `_` is not an excuse for an empty catch: say why in a comment or log it.
+    allowedExceptionNameRegex: '(?!)'
+
+exceptions:
+  active: true
+  ExceptionRaisedInUnexpectedLocation:
+    active: true
+  InstanceOfCheckForException:
+    active: false
+  NotImplementedDeclaration:
+    active: false
+  ObjectExtendsThrowable:
+    active: false
+  PrintStackTrace:
+    active: true
+  RethrowCaughtException:
+    active: false
+  ReturnFromFinally:
+    active: false
+  SwallowedException:
+    active: false
+  ThrowingExceptionFromFinally:
+    active: false
+  ThrowingExceptionInMain:
+    active: false
+  ThrowingExceptionsWithoutMessageOrCause:
+    active: false
+  ThrowingNewInstanceOfSameException:
+    active: false
+  TooGenericExceptionCaught:
+    active: true
+    exceptionNames:
+      - ArrayIndexOutOfBoundsException
+      - Error
+      - Exception
+      - IllegalMonitorStateException
+      - NullPointerException
+      - IndexOutOfBoundsException
+      - RuntimeException
+      - Throwable
+    allowedExceptionNameRegex: '_|(ignore|expected|allowed).*'
+    excludes:
+      - '**/commonTest/**'
+      - '**/jvmTest/**'
+  TooGenericExceptionThrown:
+    active: true
+    exceptionNames:
+      - Error
+      - Exception
+      - RuntimeException
+      - Throwable
+
+naming:
+  active: true
+  BooleanPropertyNaming:
+    active: false
+  ClassNaming:
+    active: true
+    classPattern: '[A-Z][a-zA-Z0-9]*'
+  ConstructorParameterNaming:
+    active: false
+  EnumNaming:
+    active: true
+    enumEntryPattern: '[A-Z][_a-zA-Z0-9]*'
+  ForbiddenClassName:
+    active: false
+  FunctionNameMaxLength:
+    active: false
+  FunctionNameMinLength:
+    active: false
+  FunctionNaming:
+    active: true
+    functionPattern: '[a-z][a-zA-Z0-9]*'
+    excludes:
+      - '**/commonTest/**'
+      - '**/jvmTest/**'
+      - '**/macosArm64Test/**'
+      - '**/src/test/**'
+      - '**/jvmMain/**/native/**'
+      - '**/jvmMain/**/wasm/**'
+  FunctionParameterNaming:
+    active: false
+  InvalidPackageDeclaration:
+    active: false
+  MatchingDeclarationName:
+    active: false
+  MemberNameEqualsClassName:
+    active: false
+  NoNameShadowing:
+    active: false
+  NonBooleanPropertyPrefixedWithIs:
+    active: false
+  ObjectPropertyNaming:
+    active: true
+    propertyPattern: '[A-Za-z][_A-Za-z0-9]*'
+    constantPattern: '[A-Za-z][_A-Za-z0-9]*'
+    privatePropertyPattern: '(_)?[A-Za-z][_A-Za-z0-9]*'
+  PackageNaming:
+    active: true
+    packagePattern: '[a-z][a-zA-Z.]*'
+  TopLevelPropertyNaming:
+    active: false
+  VariableMaxLength:
+    active: false
+  VariableMinLength:
+    active: false
+  VariableNaming:
+    active: true
+    variablePattern: '[a-z][A-Za-z0-9]*'
+    privateVariablePattern: '(_)?[a-z][A-Za-z0-9]*'
+    excludes:
+      - '**/commonTest/**'
+      - '**/jvmTest/**'
+
+performance:
+  active: true
+  ArrayPrimitive:
+    active: true
+  ForEachOnRange:
+    active: true
+  SpreadOperator:
+    active: true
+    excludes:
+      - '**/commonTest/**'
+      - '**/jvmTest/**'
+  UnnecessaryTemporaryInstantiation:
+    active: true
+
+potential-bugs:
+  active: true
+  CastToNullableType:
+    active: true
+  DontDowncastCollectionTypes:
+    active: true
+  EqualsAlwaysReturnsTrueOrFalse:
+    active: true
+  ExplicitGarbageCollectionCall:
+    active: true
+  HasPlatformType:
+    active: true
+  ImplicitDefaultLocale:
+    active: false
+  InvalidRange:
+    active: true
+  IteratorHasNextCallsNextMethod:
+    active: true
+  IteratorNotThrowingNoSuchElementException:
+    active: true
+  MapGetWithNotNullAssertionOperator:
+    active: true
+  MissingPackageDeclaration:
+    active: false
+  NullCheckOnMutableProperty:
+    active: false
+  NullableToStringCall:
+    active: false
+  UnconditionalJumpStatementInLoop:
+    active: true
+  UnnecessaryNotNullCheck:
+    active: true
+  UnnecessaryNotNullOperator:
+    active: true
+  UnnecessarySafeCall:
+    active: true
+  UnreachableCode:
+    active: true
+  UnsafeCallOnNullableType:
+    active: true
+    excludes:
+      - '**/commonTest/**'
+      - '**/jvmTest/**'
+  UnsafeCast:
+    active: true
+  UselessPostfixExpression:
+    active: true
+  WrongEqualsTypeParameter:
+    active: true
+
+style:
+  active: true
+  CollapsibleIfStatements:
+    active: true
+  DataClassContainsFunctions:
+    active: false
+  DataClassShouldBeImmutable:
+    active: false
+  DestructuringDeclarationWithTooManyEntries:
+    active: true
+    maxDestructuringEntries: 5
+  EqualsNullCall:
+    active: true
+  ExplicitCollectionElementAccessMethod:
+    active: false
+  ExplicitItLambdaParameter:
+    active: true
+  ExpressionBodySyntax:
+    active: false
+  ForbiddenComment:
+    active: false
+  ForbiddenImport:
+    active: true
+    forbiddenImports:
+      - reason: "Use kotlinx-datetime in commonMain"
+        value: "java.time.*"
+      - reason: "Use kotlin.io.encoding.Base64 for KMP compatibility"
+        value: "io.ktor.util.encodeBase64"
+      - reason: "Use kotlin.io.encoding.Base64 for KMP compatibility"
+        value: "io.ktor.util.decodeBase64"
+    excludes:
+      - '**/jvmMain/**'
+      - '**/commonTest/**'
+      - '**/jvmTest/**'
+  # detekt 2 skips a file with a file-level @Suppress of a rule before the rule runs, so karandash:SuppressOutsidePolicy
+  # cannot see `@file:Suppress("SuppressOutsidePolicy")`; ForbiddenSuppress is exempt from suppression and catches it.
+  ForbiddenSuppress:
+    active: true
+    rules:
+      - 'SuppressOutsidePolicy'
+      - 'karandash'
+      - 'karandash:SuppressOutsidePolicy'
+      - 'karandash.SuppressOutsidePolicy'
+      - 'detekt:SuppressOutsidePolicy'
+      - 'detekt.SuppressOutsidePolicy'
+      - 'all'
+      - 'All'
+      - 'ALL'
+  ForbiddenVoid:
+    active: false
+  FunctionOnlyReturningConstant:
+    active: false
+  LoopWithTooManyJumpStatements:
+    active: true
+    maxJumpCount: 5
+  MagicNumber:
+    active: true
+    ignoreNumbers:
+      - '-1'
+      - '0'
+      - '1'
+      - '2'
+      - '3'
+      - '4'
+      - '10'
+      - '100'
+    ignoreHashCodeFunction: true
+    ignorePropertyDeclaration: true
+    ignoreLocalVariableDeclaration: true
+    ignoreConstantDeclaration: true
+    ignoreCompanionObjectPropertyDeclaration: true
+    ignoreAnnotation: true
+    ignoreNamedArgument: true
+    ignoreEnums: true
+    ignoreRanges: false
+    excludes:
+      - '**/commonTest/**'
+      - '**/jvmTest/**'
+      - '**/src/test/**'
+  MaxLineLength:
+    active: false
+  MayBeConstant:
+    active: true
+  ModifierOrder:
+    active: true
+  MultilineLambdaItParameter:
+    active: false
+  NewLineAtEndOfFile:
+    active: false
+  NoTabs:
+    active: false
+  OptionalAbstractKeyword:
+    active: true
+  OptionalUnit:
+    active: false
+  ProtectedMemberInFinalClass:
+    active: true
+  RedundantExplicitType:
+    active: false
+  RedundantHigherOrderMapUsage:
+    active: true
+  RedundantVisibilityModifier:
+    active: false
+  ReturnCount:
+    active: true
+    max: 10
+    excludeGuardClauses: true
+  SafeCast:
+    active: true
+  SerialVersionUIDInSerializableClass:
+    active: false
+  SpacingAfterPackageAndImports:
+    active: true
+  ThrowsCount:
+    active: true
+    max: 8
+  TrailingWhitespace:
+    active: false
+  AbstractClassCanBeConcreteClass:
+    active: true
+  AbstractClassCanBeInterface:
+    active: true
+  UnnecessaryApply:
+    active: true
+  UnnecessaryFilter:
+    active: true
+  UnnecessaryInheritance:
+    active: true
+  UnnecessaryLet:
+    active: false
+  UnnecessaryParentheses:
+    active: false
+  RangeUntilInsteadOfRangeTo:
+    active: false
+  UnusedImport:
+    active: true
+  UnusedPrivateFunction:
+    active: true
+    allowedNames: '(_|ignored|expected|serialVersionUID)'
+  UnusedPrivateProperty:
+    active: true
+    allowedNames: '(_|ignored|expected|serialVersionUID)'
+  UseArrayLiteralsInAnnotations:
+    active: true
+  UseCheckNotNull:
+    active: true
+  UseCheckOrError:
+    active: true
+  UseDataClass:
+    active: false
+  UseEmptyCounterpart:
+    active: false
+  UseIfEmptyOrIfBlank:
+    active: false
+  UseIsNullOrEmpty:
+    active: true
+  UseLet:
+    active: false
+  UseOrEmpty:
+    active: true
+  UseRequire:
+    active: true
+  UseRequireNotNull:
+    active: true
+  UseSumOfInsteadOfFlatMapSize:
+    active: false
+  VarCouldBeVal:
+    active: true
+    ignoreLateinitVar: true
+  WildcardImport:
+    active: true
+    excludeImports:
+      - 'java.util.*'
+      - 'kotlinx.coroutines.*'
+      - 'kotlinx.cinterop.*'
+      - 'platform.posix.*'
+      - 'platform.*'
+
+# Repo conventions from docs/development/conventions.md, enforced by tools/detekt-rules (PSI only, no type resolution). Production code
+# only: every rule excludes test source sets. Path lists below are the sanctioned files for each convention.
+karandash:
+  active: true
+  GenericCatchWithoutBoundary:
+    active: true
+    excludes: &tests
+      - '**/src/*Test/**'
+      - '**/src/test/**'
+  SuspendCatchWithoutCancellation:
+    active: true
+    excludes: *tests
+  ForbiddenRunCatching:
+    active: true
+    excludes: *tests
+  ForbiddenWithTimeout:
+    active: true
+    excludes:
+      - '**/src/*Test/**'
+      - '**/src/test/**'
+  UnsanctionedRunBlocking:
+    active: true
+    excludes: *tests
+    # docs/development/conventions.md "Sanctioned runBlocking Sites"; path suffixes from the repo root.
+    sanctionedFiles:
+      - 'cli/src/commonMain/kotlin/io/karandash/cli/KarandashCli.kt'
+      - 'cli-ai/src/commonMain/kotlin/io/karandash/cli/SuspendCliktCommand.kt'
+      - 'cli/src/commonMain/kotlin/io/karandash/cli/commands/validate/ValidateCommand.kt'
+      - 'plugins/loader/src/commonMain/kotlin/io/karandash/loader/bridge/transport/JsTransport.kt'
+      - 'plugins/loader/src/commonMain/kotlin/io/karandash/loader/js/JsContextInjector.kt'
+      - 'plugins/loader/src/commonMain/kotlin/io/karandash/loader/bridge/host/HostServiceDispatcher.kt'
+      - 'plugins/loader/src/commonMain/kotlin/io/karandash/loader/bridge/BridgeTransport.kt'
+      - 'plugins/loader/src/jvmMain/kotlin/io/karandash/loader/jar/JarBridgeServer.kt'
+      - 'plugins/helpers/src/nativeMain/kotlin/io/karandash/helpers/CAbiBridge.kt'
+      - 'dsl/lsp-server/src/main/kotlin/io/karandash/lsp/Main.kt'
+      - 'dsl/lsp-server/src/main/kotlin/io/karandash/lsp/CachedRegistryMetadata.kt'
+      - 'dsl/lsp-server/src/main/kotlin/io/karandash/lsp/ConfigPipelineDiagnostics.kt'
+  UnownedCoroutineScope:
+    active: true
+    excludes: *tests
+  RawConsoleOutput:
+    active: true
+    # The process-level output primitives themselves:
+    #   PlatformEnvironment.jvm.kt  `stderrPrintln`, the stderr sink CliLogger and pre-logger startup write through
+    #   CrashHandler.jvm.kt         uncaught-exception hook, runs when no Logger can be trusted
+    #   StdoutOutputModule.kt       the `stdout` output module, whose contract is writing the report to stdout
+    #   JarBridgeServer.kt          stdout IS the JSON wire protocol to the native host
+    #   JarBridgePluginContext.kt   bridge subprocess logs go to stderr so they never corrupt that stdout
+    #   lsp-server Main.kt          stdout is the LSP JSON-RPC stream handed to lsp4j
+    excludes:
+      - '**/src/*Test/**'
+      - '**/src/test/**'
+      - '**/core/platform/src/jvmMain/kotlin/io/karandash/platform/PlatformEnvironment.jvm.kt'
+      - '**/core/crash-handler/src/jvmMain/kotlin/io/karandash/crashhandler/CrashHandler.jvm.kt'
+      - '**/plugins/plugins-core/outputs/stdout/src/commonMain/kotlin/io/karandash/plugins/outputs/StdoutOutputModule.kt'
+      - '**/plugins/loader/src/jvmMain/kotlin/io/karandash/loader/jar/JarBridgeServer.kt'
+      - '**/plugins/loader/src/jvmMain/kotlin/io/karandash/loader/jar/JarBridgePluginContext.kt'
+      - '**/dsl/lsp-server/src/main/kotlin/io/karandash/lsp/Main.kt'
+  InlineJsonBuilder:
+    active: true
+    excludes:
+      - '**/src/*Test/**'
+      - '**/src/test/**'
+      - '**/KarandashJson.kt'
+  DirectHttpClient:
+    active: true
+    excludes:
+      - '**/src/*Test/**'
+      - '**/src/test/**'
+      - '**/ProviderHttpClientFactory.kt'
+  DirectGetenv:
+    active: true
+    # core/file PlatformFS*.kt: the home-dir lookup sits below core/platform, which depends on core/file.
+    excludes:
+      - '**/src/*Test/**'
+      - '**/src/test/**'
+      - '**/PlatformEnvironment*.kt'
+      - '**/PlatformFS*.kt'
+  # Replaces a ForbiddenMethodCall on Regex.<init>, which needs type resolution the `detekt` tasks do not have.
+  # The compile points that take a non-literal pattern:
+  #   SafeRegexCompiler.kt  the ReDoS-guarded compile behind RegexHelper and SafeRegex
+  #   GlobMatcher.kt        glob-to-regex translation that escapes every regex metacharacter
+  #   CollectionMatcher.kt  the same translation for `*`/`?` collection patterns
+  DynamicRegex:
+    active: true
+    excludes:
+      - '**/src/*Test/**'
+      - '**/src/test/**'
+      - '**/core/regex-safety/src/commonMain/kotlin/io/karandash/helpers/SafeRegexCompiler.kt'
+      - '**/core/glob/src/commonMain/kotlin/io/karandash/utils/GlobMatcher.kt'
+      - '**/core/common/src/commonMain/kotlin/io/karandash/utils/CollectionMatcher.kt'
+  RawTestTempDirectory:
+    active: true
+    includes:
+      - '**/src/*Test/**'
+      - '**/src/test/**'
+    # Pure-JVM module without test-fixtures (pinned stdlib); its tests need a real directory for a rule that reads file paths.
+    excludes:
+      - '**/tools/detekt-rules/**'
+  UntypedConfigMap:
+    active: true
+    includes:
+      - '**/src/commonMain/**'
+  SuppressOutsidePolicy:
+    active: true
+    excludes: *tests
+    # docs/development/conventions.md "@Suppress Policy" permitted categories.
+    allowedIds:
+      - 'EXPECT_ACTUAL_CLASSIFIERS_ARE_IN_BETA_WARNING' # compiler opt-in
+      - 'OPT_IN_USAGE'                                  # compiler opt-in
+      - 'EmptyFunctionBlock'                            # native ABI stubs
+      - 'UnusedParameter'                               # actual / interface / C callback symmetry
+      - 'UNUSED_PARAMETER'                              # actual / interface / C callback symmetry
+      - 'UNCHECKED_CAST'                                # parser-boundary casts
+      - 'unused'                                        # retained public API
+      - 'TooGenericExceptionCaught'                     # module boundaries

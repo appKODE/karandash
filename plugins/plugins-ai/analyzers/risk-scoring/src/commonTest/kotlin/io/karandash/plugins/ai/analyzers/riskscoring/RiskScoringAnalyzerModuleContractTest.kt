@@ -1,0 +1,23 @@
+package io.karandash.plugins.ai.analyzers.riskscoring
+
+import io.karandash.sdk.ModuleContractTest
+import kotlinx.coroutines.test.runTest
+import kotlin.test.Test
+
+class RiskScoringAnalyzerModuleContractTest : ModuleContractTest<RiskScoringAnalyzerModule>() {
+    override fun createModule() = RiskScoringAnalyzerModule()
+
+    override fun malformedConfig() = null
+
+    @Test
+    fun shutdownWithoutInitialize() = runTest { verifyShutdownWithoutInitialize() }
+
+    @Test
+    fun shutdownIsIdempotent() = runTest { verifyShutdownIsIdempotent() }
+
+    @Test
+    fun initializeWithValidConfig() = runTest { verifyInitializeWithValidConfig() }
+
+    @Test
+    fun shutdownAfterInitialize() = runTest { verifyShutdownAfterInitialize() }
+}

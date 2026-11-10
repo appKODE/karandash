@@ -1,0 +1,11 @@
+# Source: docs/rules/ai-rules.md, prompt-overrides with scope templates.
+ai:
+  provider: "anthropic"
+  prompt-overrides:
+    ai-review-comments: |
+      {% if mr.scopes contains "android" %}
+      Focus on Android lifecycle and Kotlin idioms.
+      {% endif %}
+      {% if mr.scopes contains "core" %}
+      Focus on C++ memory safety and ABI stability.
+      {% endif %}

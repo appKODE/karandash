@@ -1,0 +1,93 @@
+# Karandash Plugin Test Toolchain Image
+#
+# Extends karandash-base with multi-language runtimes for plugin integration tests:
+# Go, Rust (+ wasm32), Emscripten (WASM C), cmake, gcc/g++
+# (cli.kexe runs WASM plugins on Chasm, compiled in: no WASM runtime library is needed)
+#
+# Build:
+#   docker build -f docker/Dockerfile.base -t karandash/base .
+#   docker build -f docker/Dockerfile.toolchain -t karandash/toolchain \
+#     --build-arg BASE_IMAGE=karandash/base .
+#
+# Usage in CI (plugin integration tests):
+#   image: ${CI_REGISTRY_IMAGE}/toolchain:latest-amd64
+
+ARG BASE_IMAGE=karandash/base:latest-amd64
+FROM ${BASE_IMAGE}
+
+LABEL org.opencontainers.image.title="karandash-toolchain"
+LABEL org.opencontainers.image.description="Multi-language toolchain for Karandash plugin integration tests"
+
+# C/C++ build tools (for native plugin examples)
+# clang + lld provide wasm32 cross-compilation on all architectures (arm64 fallback for Emscripten)
+RUN set -eux; \
+    find /etc/apt -type f -name '*.list' -print0 | xargs -0r sed -i 's|http://|https://|g'; \
+    apt-get -o Acquire::Retries=5 -o Acquire::http::No-Cache=true -o Acquire::https::No-Cache=true update; \
+    apt-get install -y --no-install-recommends \
+        gcc \
+        g++ \
+        make \
+        cmake \
+        clang \
+        lld \
+        python3 \
+        python3-venv \
+        curl \
+        wget \
+        ca-certificates \
+        openssl \
+        binutils \
+        build-essential; \
+    rm -rf /var/lib/apt/lists/*
+
+# Go (arch-aware download)
+ENV GO_VERSION=1.22.5
+RUN GOARCH=$(dpkg --print-architecture) && \
+    curl -fsSL "https://go.dev/dl/go${GO_VERSION}.linux-${GOARCH}.tar.gz" \
+    | tar -xz -C /usr/local
+ENV PATH="/usr/local/go/bin:${PATH}"
+ENV GOPATH="/root/go"
+
+# Rust + wasm32 target
+RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y \
+    --default-toolchain stable --profile minimal
+ENV PATH="/root/.cargo/bin:${PATH}"
+RUN rustup target add wasm32-unknown-unknown
+
+# Emscripten (for WASM C plugins) - arm64 binaries not available for all versions.
+# Its bundled node goes on PATH: Dangerfile.js support runs through node.
+ENV EMSDK_VERSION=3.1.56
+RUN ARCH=$(dpkg --print-architecture) && \
+    if [ "$ARCH" = "amd64" ]; then \
+        cd /opt && \
+        git clone --depth 1 https://github.com/emscripten-core/emsdk.git && \
+        cd emsdk && \
+        ./emsdk install ${EMSDK_VERSION} && \
+        ./emsdk activate ${EMSDK_VERSION} && \
+        ln -s /opt/emsdk/node/*/bin/node /usr/local/bin/node; \
+    else \
+        echo "Skipping Emscripten on ${ARCH} (no arm64 binaries for ${EMSDK_VERSION})"; \
+    fi
+ENV PATH="/opt/emsdk:/opt/emsdk/upstream/emscripten:${PATH}"
+ENV EMSDK="/opt/emsdk"
+
+# What tools/integration-tests downloads on every run otherwise: the examples' Gradle distributions (8.5, 9.4.0),
+# Kotlin/Native 2.0.21 for native-plugin-kotlin, their Gradle plugins (from the
+# base image) and the Rust example's crates. A failed prewarm only costs the download at test time.
+RUN provision-konan.sh 2.0.21
+COPY tools/examples/ /tmp/examples/
+RUN set -x; \
+    for ex in standalone-kotlin-plugin native-plugin-kotlin standalone-jvm-plugin; do \
+        (cd "/tmp/examples/$ex" && ./gradlew help --no-daemon) || true; \
+    done; \
+    (cd /tmp/examples/standalone-rust-plugin && cargo fetch) || true; \
+    rm -rf /tmp/examples
+
+# mkdocs for the docs:mkdocs job: pypi.org times out from the runners, so it is installed once here.
+# The job reinstalls only when docs/requirements.txt no longer matches this copy.
+COPY docs/requirements.txt /opt/docs/requirements.txt
+RUN python3 -m venv /opt/docs && \
+    /opt/docs/bin/pip install -q --retries 10 --timeout 60 -r /opt/docs/requirements.txt
+
+WORKDIR /build
+CMD ["bash"]

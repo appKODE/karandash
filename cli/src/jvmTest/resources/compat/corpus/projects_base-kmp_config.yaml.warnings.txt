@@ -1,0 +1,6 @@
+WARN [E0022] Environment variable 'KARANDASH_GITLAB_TOKEN' is referenced in config but not set.
+WARN [E0022] Environment variable 'KARANDASH_JIRA_URL' is referenced in config but not set.
+WARN [E0022] Environment variable 'JIRA_EMAIL' is referenced in config but not set.
+WARN [E0022] Environment variable 'JIRA_TOKEN' is referenced in config but not set.
+WARN [E0022] Environment variable 'BIFROST_API_KEY' is referenced in config but not set.
+WARN [E0022] Environment variable 'BIFROST_BASE_URL' is referenced in config but not set.

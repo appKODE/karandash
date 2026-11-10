@@ -1,0 +1,426 @@
+public final class io/karandash/config/KarandashLimits {
+	public static final field DEFAULT_CACHE_TTL_SECONDS J
+	public static final field DEFAULT_HTTP_TIMEOUT_SECONDS J
+	public static final field FETCH_TIMEOUT_MS J
+	public static final field INSTANCE Lio/karandash/config/KarandashLimits;
+	public static final field MAX_CACHE_SIZE I
+	public static final field MAX_CHAIN_DEPTH I
+	public static final field MAX_CHAIN_SIZE I
+	public static final field MAX_DIRECTORY_DEPTH I
+	public static final field MAX_EXPRESSION_LENGTH I
+	public static final field MAX_EXTENDS_ENTRIES I
+	public static final field MAX_FINDINGS I
+	public static final field MAX_GLOB_EXPANSION I
+	public static final field MAX_NESTING_DEPTH I
+	public static final field MAX_REGEX_LENGTH I
+}
+
+public final class io/karandash/duration/KarandashDuration : java/lang/Comparable {
+	public static final field Companion Lio/karandash/duration/KarandashDuration$Companion;
+	public static final synthetic fun box-impl (J)Lio/karandash/duration/KarandashDuration;
+	public synthetic fun compareTo (Ljava/lang/Object;)I
+	public fun compareTo-JIOawuU (J)I
+	public static fun compareTo-JIOawuU (JJ)I
+	public fun equals (Ljava/lang/Object;)Z
+	public static fun equals-impl (JLjava/lang/Object;)Z
+	public static final fun equals-impl0 (JJ)Z
+	public static final fun getHours-impl (J)J
+	public final fun getMillis ()J
+	public static final fun getMinutes-impl (J)J
+	public static final fun getSeconds-impl (J)J
+	public fun hashCode ()I
+	public static fun hashCode-impl (J)I
+	public static final fun toKotlinDuration-UwyO8pc (J)J
+	public fun toString ()Ljava/lang/String;
+	public static fun toString-impl (J)Ljava/lang/String;
+	public final synthetic fun unbox-impl ()J
+}
+
+public final class io/karandash/duration/KarandashDuration$Companion {
+	public final fun getNEVER-X9l3HfE ()J
+	public final fun getZERO-X9l3HfE ()J
+	public final fun ofHours-BJAmvPQ (J)J
+	public final fun ofMillis-BJAmvPQ (J)J
+	public final fun ofMinutes-BJAmvPQ (J)J
+	public final fun ofSeconds-BJAmvPQ (J)J
+	public final fun parse-BJAmvPQ (Ljava/lang/String;)J
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/karandash/duration/KarandashDurationSerializer : kotlinx/serialization/KSerializer {
+	public static final field INSTANCE Lio/karandash/duration/KarandashDurationSerializer;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public fun deserialize-BJAmvPQ (Lkotlinx/serialization/encoding/Decoder;)J
+	public fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun serialize-nMSBg34 (Lkotlinx/serialization/encoding/Encoder;J)V
+}
+
+public final class io/karandash/js/JsUtils {
+	public static final field INSTANCE Lio/karandash/js/JsUtils;
+	public final fun escapeForJs (Ljava/lang/String;)Ljava/lang/String;
+	public final fun quoteJson (Ljava/lang/String;)Ljava/lang/String;
+	public final fun stringListFromJson (Ljava/lang/String;)Ljava/util/List;
+}
+
+public final class io/karandash/percent/KarandashPercent : java/lang/Comparable {
+	public static final field Companion Lio/karandash/percent/KarandashPercent$Companion;
+	public static final synthetic fun box-impl (D)Lio/karandash/percent/KarandashPercent;
+	public synthetic fun compareTo (Ljava/lang/Object;)I
+	public fun compareTo-GuVyq1k (D)I
+	public static fun compareTo-GuVyq1k (DD)I
+	public fun equals (Ljava/lang/Object;)Z
+	public static fun equals-impl (DLjava/lang/Object;)Z
+	public static final fun equals-impl0 (DD)Z
+	public final fun getFraction ()D
+	public static final fun getPercent-impl (D)D
+	public static final fun getPercentInt-impl (D)I
+	public fun hashCode ()I
+	public static fun hashCode-impl (D)I
+	public fun toString ()Ljava/lang/String;
+	public static fun toString-impl (D)Ljava/lang/String;
+	public final synthetic fun unbox-impl ()D
+}
+
+public final class io/karandash/percent/KarandashPercent$Companion {
+	public final fun getHUNDRED-VfCgM2c ()D
+	public final fun getZERO-VfCgM2c ()D
+	public final fun ofFraction-q8WmZ2c (D)D
+	public final fun ofPercent-q8WmZ2c (I)D
+	public final fun parse-q8WmZ2c (Ljava/lang/String;)D
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/karandash/percent/KarandashPercentSerializer : kotlinx/serialization/KSerializer {
+	public static final field INSTANCE Lio/karandash/percent/KarandashPercentSerializer;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public fun deserialize-q8WmZ2c (Lkotlinx/serialization/encoding/Decoder;)D
+	public fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun serialize-YheDtA0 (Lkotlinx/serialization/encoding/Encoder;D)V
+}
+
+public final class io/karandash/size/KarandashSize : java/lang/Comparable {
+	public static final field Companion Lio/karandash/size/KarandashSize$Companion;
+	public static final synthetic fun box-impl (J)Lio/karandash/size/KarandashSize;
+	public synthetic fun compareTo (Ljava/lang/Object;)I
+	public fun compareTo-OLVB8sQ (J)I
+	public static fun compareTo-OLVB8sQ (JJ)I
+	public fun equals (Ljava/lang/Object;)Z
+	public static fun equals-impl (JLjava/lang/Object;)Z
+	public static final fun equals-impl0 (JJ)Z
+	public final fun getBytes ()J
+	public static final fun getGb-impl (J)J
+	public static final fun getKb-impl (J)J
+	public static final fun getMb-impl (J)J
+	public fun hashCode ()I
+	public static fun hashCode-impl (J)I
+	public fun toString ()Ljava/lang/String;
+	public static fun toString-impl (J)Ljava/lang/String;
+	public final synthetic fun unbox-impl ()J
+}
+
+public final class io/karandash/size/KarandashSize$Companion {
+	public final fun getZERO-vJDQoRk ()J
+	public final fun ofBytes-ax3uJk8 (J)J
+	public final fun ofGb-ax3uJk8 (J)J
+	public final fun ofKb-ax3uJk8 (J)J
+	public final fun ofMb-ax3uJk8 (J)J
+	public final fun parse-ax3uJk8 (Ljava/lang/String;)J
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/karandash/size/KarandashSizeSerializer : kotlinx/serialization/KSerializer {
+	public static final field INSTANCE Lio/karandash/size/KarandashSizeSerializer;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public fun deserialize-ax3uJk8 (Lkotlinx/serialization/encoding/Decoder;)J
+	public fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun serialize-pur-lOw (Lkotlinx/serialization/encoding/Encoder;J)V
+}
+
+public final class io/karandash/utils/CollectionMatcher {
+	public static final field INSTANCE Lio/karandash/utils/CollectionMatcher;
+	public final fun findMissing (Ljava/util/Collection;Ljava/util/List;)Ljava/util/List;
+	public final fun findPresent (Ljava/util/Collection;Ljava/util/List;)Ljava/util/List;
+	public final fun hasAll (Ljava/util/Collection;Ljava/util/List;)Z
+	public final fun hasAny (Ljava/util/Collection;Ljava/util/List;)Z
+}
+
+public final class io/karandash/utils/ConventionalTypes {
+	public static final field INSTANCE Lio/karandash/utils/ConventionalTypes;
+	public final fun getDEFAULT ()Ljava/util/List;
+}
+
+public final class io/karandash/utils/DurationFormatter {
+	public static final field INSTANCE Lio/karandash/utils/DurationFormatter;
+	public final fun formatMs (J)Ljava/lang/String;
+}
+
+public final class io/karandash/utils/GlobTranslator {
+	public static final field INSTANCE Lio/karandash/utils/GlobTranslator;
+	public final fun toRegexSource (Ljava/lang/String;Lio/karandash/utils/GlobTranslator$Mode;)Ljava/lang/String;
+}
+
+public final class io/karandash/utils/GlobTranslator$Mode : java/lang/Enum {
+	public static final field PATH Lio/karandash/utils/GlobTranslator$Mode;
+	public static final field TEXT Lio/karandash/utils/GlobTranslator$Mode;
+	public static final field WILDCARD Lio/karandash/utils/GlobTranslator$Mode;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public static fun valueOf (Ljava/lang/String;)Lio/karandash/utils/GlobTranslator$Mode;
+	public static fun values ()[Lio/karandash/utils/GlobTranslator$Mode;
+}
+
+public final class io/karandash/utils/StringExtensionsKt {
+	public static final fun parseCsvList (Ljava/lang/String;)Ljava/util/List;
+	public static final fun takeWhole (Ljava/lang/String;I)Ljava/lang/String;
+	public static final fun toEscapedAlternation (Ljava/util/List;)Ljava/lang/String;
+}
+
+public final class io/karandash/utils/SuggestionEngine {
+	public static final field INSTANCE Lio/karandash/utils/SuggestionEngine;
+	public final fun closest (Ljava/lang/String;Ljava/util/Collection;I)Ljava/lang/String;
+	public static synthetic fun closest$default (Lio/karandash/utils/SuggestionEngine;Ljava/lang/String;Ljava/util/Collection;IILjava/lang/Object;)Ljava/lang/String;
+	public final fun findClosest (Ljava/lang/String;Ljava/util/List;)Ljava/util/List;
+	public final fun suggest (Ljava/lang/String;Ljava/util/List;)Ljava/util/List;
+}
+
+public final class io/karandash/utils/VersionComparator {
+	public static final field INSTANCE Lio/karandash/utils/VersionComparator;
+	public final fun compare (Ljava/lang/String;Ljava/lang/String;)I
+	public final fun isBelow (Ljava/lang/String;Ljava/lang/String;)Z
+	public final fun isNewer (Ljava/lang/String;Ljava/lang/String;)Z
+}
+
+public final class io/karandash/utils/finding/AnchorFingerprint {
+	public static final field INSTANCE Lio/karandash/utils/finding/AnchorFingerprint;
+	public final fun anchoredLines (Ljava/lang/String;Lio/karandash/models/FileChange;)Ljava/util/Map;
+	public final fun fingerprintsIn (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)Ljava/util/Set;
+	public final fun generate (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;I)Ljava/lang/String;
+	public static synthetic fun generate$default (Lio/karandash/utils/finding/AnchorFingerprint;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;IILjava/lang/Object;)Ljava/lang/String;
+	public final fun stamp (Ljava/util/List;Ljava/util/List;)Ljava/util/List;
+}
+
+public final class io/karandash/utils/finding/CommitFindingGroup {
+	public static final field COLLAPSE_AT I
+	public static final field INSTANCE Lio/karandash/utils/finding/CommitFindingGroup;
+	public static final field SHOWN I
+	public final fun collapse (Ljava/util/List;Ljava/lang/String;)Ljava/util/List;
+	public final fun shortList (Ljava/util/Collection;)Ljava/lang/String;
+}
+
+public final class io/karandash/utils/finding/FindingBuilder {
+	public fun <init> ()V
+	public final fun getCategory ()Lio/karandash/models/finding/FindingCategory;
+	public final fun getConfidence ()Ljava/lang/Float;
+	public final fun getErrorCode ()Ljava/lang/String;
+	public final fun getExplanation ()Ljava/lang/String;
+	public final fun getFile ()Ljava/lang/String;
+	public final fun getFingerprint ()Ljava/lang/String;
+	public final fun getFixSuggestions ()Ljava/util/List;
+	public final fun getLine ()Ljava/lang/Integer;
+	public final fun getMetadata ()Ljava/util/Map;
+	public final fun getPriority ()I
+	public final fun getRelatedFindings ()Ljava/util/List;
+	public final fun getSuggestion ()Ljava/lang/String;
+	public final fun setCategory (Lio/karandash/models/finding/FindingCategory;)V
+	public final fun setConfidence (Ljava/lang/Float;)V
+	public final fun setErrorCode (Ljava/lang/String;)V
+	public final fun setExplanation (Ljava/lang/String;)V
+	public final fun setFile (Ljava/lang/String;)V
+	public final fun setFingerprint (Ljava/lang/String;)V
+	public final fun setFixSuggestions (Ljava/util/List;)V
+	public final fun setLine (Ljava/lang/Integer;)V
+	public final fun setMetadata (Ljava/util/Map;)V
+	public final fun setPriority (I)V
+	public final fun setRelatedFindings (Ljava/util/List;)V
+	public final fun setSuggestion (Ljava/lang/String;)V
+}
+
+public final class io/karandash/utils/finding/FindingBuilderKt {
+	public static final fun finding (Ljava/lang/String;Lio/karandash/models/finding/Severity;Ljava/lang/String;Lkotlin/jvm/functions/Function1;)Lio/karandash/models/finding/Finding;
+	public static synthetic fun finding$default (Ljava/lang/String;Lio/karandash/models/finding/Severity;Ljava/lang/String;Lkotlin/jvm/functions/Function1;ILjava/lang/Object;)Lio/karandash/models/finding/Finding;
+}
+
+public final class io/karandash/utils/finding/FindingFactory {
+	public static final field INSTANCE Lio/karandash/utils/finding/FindingFactory;
+	public final fun error (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/Integer;Ljava/lang/String;Ljava/lang/String;Ljava/util/Map;Ljava/util/List;)Lio/karandash/models/finding/Finding;
+	public static synthetic fun error$default (Lio/karandash/utils/finding/FindingFactory;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/Integer;Ljava/lang/String;Ljava/lang/String;Ljava/util/Map;Ljava/util/List;ILjava/lang/Object;)Lio/karandash/models/finding/Finding;
+	public final fun info (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/Integer;Ljava/lang/String;Ljava/lang/String;Ljava/util/Map;Ljava/util/List;)Lio/karandash/models/finding/Finding;
+	public static synthetic fun info$default (Lio/karandash/utils/finding/FindingFactory;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/Integer;Ljava/lang/String;Ljava/lang/String;Ljava/util/Map;Ljava/util/List;ILjava/lang/Object;)Lio/karandash/models/finding/Finding;
+	public final fun warn (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/Integer;Ljava/lang/String;Ljava/lang/String;Ljava/util/Map;Ljava/util/List;)Lio/karandash/models/finding/Finding;
+	public static synthetic fun warn$default (Lio/karandash/utils/finding/FindingFactory;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/Integer;Ljava/lang/String;Ljava/lang/String;Ljava/util/Map;Ljava/util/List;ILjava/lang/Object;)Lio/karandash/models/finding/Finding;
+}
+
+public final class io/karandash/utils/finding/FindingFingerprint {
+	public static final field INSTANCE Lio/karandash/utils/finding/FindingFingerprint;
+	public final fun generate (Ljava/lang/String;Lio/karandash/models/finding/Location;Ljava/lang/String;)Ljava/lang/String;
+}
+
+public final class io/karandash/utils/finding/LocationFormatterKt {
+	public static final fun toDisplayString (Lio/karandash/models/finding/Location;)Ljava/lang/String;
+	public static final fun toFilePosition (Lio/karandash/models/finding/Location;)Lkotlin/Pair;
+}
+
+public final class io/karandash/utils/mr/CommitHelpersKt {
+	public static final field SHORT_SHA_LENGTH I
+	public static final fun commitMessages (Lio/karandash/models/MergeRequest;)Ljava/util/List;
+	public static final fun commitsByAuthor (Lio/karandash/models/MergeRequest;Ljava/lang/String;)Ljava/util/List;
+	public static final fun conventionalCommitPattern (Ljava/util/List;)Ljava/lang/String;
+	public static synthetic fun conventionalCommitPattern$default (Ljava/util/List;ILjava/lang/Object;)Ljava/lang/String;
+	public static final fun hasSquashableCommits (Lio/karandash/models/MergeRequest;I)Z
+	public static synthetic fun hasSquashableCommits$default (Lio/karandash/models/MergeRequest;IILjava/lang/Object;)Z
+	public static final fun isConventional (Lio/karandash/models/Commit;)Z
+	public static final fun isFixup (Lio/karandash/models/Commit;)Z
+	public static final fun shortSha (Ljava/lang/String;)Ljava/lang/String;
+}
+
+public final class io/karandash/utils/mr/DiffHelpersKt {
+	public static final fun addedLines (Lio/karandash/models/FileChange;)Ljava/util/List;
+	public static final fun addedLinesWithNumbers (Lio/karandash/models/FileChange;)Ljava/util/List;
+	public static final fun hasContentMatching (Lio/karandash/models/FileChange;Lkotlin/text/Regex;)Z
+	public static final fun oldLineAt (Lio/karandash/models/FileChange;I)Ljava/lang/Integer;
+	public static final fun removedLines (Lio/karandash/models/FileChange;)Ljava/util/List;
+}
+
+public final class io/karandash/utils/mr/DiffLineInfo {
+	public static final field Companion Lio/karandash/utils/mr/DiffLineInfo$Companion;
+	public fun <init> (ILjava/lang/String;)V
+	public final fun component1 ()I
+	public final fun component2 ()Ljava/lang/String;
+	public final fun copy (ILjava/lang/String;)Lio/karandash/utils/mr/DiffLineInfo;
+	public static synthetic fun copy$default (Lio/karandash/utils/mr/DiffLineInfo;ILjava/lang/String;ILjava/lang/Object;)Lio/karandash/utils/mr/DiffLineInfo;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getContent ()Ljava/lang/String;
+	public final fun getLineNumber ()I
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final synthetic class io/karandash/utils/mr/DiffLineInfo$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lio/karandash/utils/mr/DiffLineInfo$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lio/karandash/utils/mr/DiffLineInfo;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lio/karandash/utils/mr/DiffLineInfo;)V
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/karandash/utils/mr/DiffLineInfo$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/karandash/utils/mr/HunkParser {
+	public static final field BINARY_MARKER Ljava/lang/String;
+	public static final field DEFAULT_MAX_SNAP I
+	public static final field INSTANCE Lio/karandash/utils/mr/HunkParser;
+	public static final field SUBMODULE_MARKER Ljava/lang/String;
+	public final fun annotateAddedLinesWithNumbers (Ljava/lang/String;)Ljava/lang/String;
+	public final fun extractAddedLineNumbers (Ljava/lang/String;)Ljava/util/Set;
+	public final fun getHEADER_REGEX ()Lkotlin/text/Regex;
+	public final fun hasSubmoduleMarker (Ljava/lang/String;)Z
+	public final fun parseHunks (Ljava/lang/String;)Ljava/util/List;
+	public final fun snapToAddedLine (ILjava/util/Set;I)Ljava/lang/Integer;
+	public static synthetic fun snapToAddedLine$default (Lio/karandash/utils/mr/HunkParser;ILjava/util/Set;IILjava/lang/Object;)Ljava/lang/Integer;
+	public final fun stripToAddedLines (Ljava/lang/String;)Ljava/lang/String;
+}
+
+public final class io/karandash/utils/mr/HunkParser$DiffHunk {
+	public static final field Companion Lio/karandash/utils/mr/HunkParser$DiffHunk$Companion;
+	public fun <init> (Ljava/lang/String;Ljava/util/List;IIIII)V
+	public final fun component1 ()Ljava/lang/String;
+	public final fun component2 ()Ljava/util/List;
+	public final fun component3 ()I
+	public final fun component4 ()I
+	public final fun component5 ()I
+	public final fun component6 ()I
+	public final fun component7 ()I
+	public final fun copy (Ljava/lang/String;Ljava/util/List;IIIII)Lio/karandash/utils/mr/HunkParser$DiffHunk;
+	public static synthetic fun copy$default (Lio/karandash/utils/mr/HunkParser$DiffHunk;Ljava/lang/String;Ljava/util/List;IIIIIILjava/lang/Object;)Lio/karandash/utils/mr/HunkParser$DiffHunk;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getAddedDensity ()D
+	public final fun getAddedLines ()I
+	public final fun getContextLines ()I
+	public final fun getDeletedLines ()I
+	public final fun getHeader ()Ljava/lang/String;
+	public final fun getLines ()Ljava/util/List;
+	public final fun getNewLineCount ()I
+	public final fun getNewStartLine ()I
+	public final fun getTotalChars ()I
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final synthetic class io/karandash/utils/mr/HunkParser$DiffHunk$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lio/karandash/utils/mr/HunkParser$DiffHunk$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lio/karandash/utils/mr/HunkParser$DiffHunk;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lio/karandash/utils/mr/HunkParser$DiffHunk;)V
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/karandash/utils/mr/HunkParser$DiffHunk$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/karandash/utils/mr/MrHelpersKt {
+	public static final fun addedFiles (Lio/karandash/models/MergeRequest;)Ljava/util/List;
+	public static final fun deletedFiles (Lio/karandash/models/MergeRequest;)Ljava/util/List;
+	public static final fun filesMatching (Lio/karandash/models/MergeRequest;Lkotlin/text/Regex;)Ljava/util/List;
+	public static final fun hasLabel (Lio/karandash/models/MergeRequest;Ljava/lang/String;)Z
+	public static final fun modifiedFiles (Lio/karandash/models/MergeRequest;)Ljava/util/List;
+	public static final fun titleMatches (Lio/karandash/models/MergeRequest;Lkotlin/text/Regex;)Z
+}
+
+public final class io/karandash/utils/mr/ShortSha {
+	public static final field INSTANCE Lio/karandash/utils/mr/ShortSha;
+	public final fun configure (I)V
+	public final fun getLength ()I
+}
+
+public final class io/karandash/utils/suggestion/ContextAwareSuggestionGenerator {
+	public static final field INSTANCE Lio/karandash/utils/suggestion/ContextAwareSuggestionGenerator;
+	public final fun suggestConventionalCommit (Ljava/lang/String;Ljava/util/List;)Ljava/lang/String;
+	public final fun suggestTitleWithTicket (Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
+}
+
+public final class io/karandash/utils/suggestion/PatternExampleGenerator {
+	public static final field INSTANCE Lio/karandash/utils/suggestion/PatternExampleGenerator;
+	public final fun generateExample (Ljava/lang/String;)Ljava/lang/String;
+	public final fun generateFormatHint (Ljava/lang/String;)Ljava/lang/String;
+	public final fun suggest (Ljava/lang/String;)Ljava/lang/String;
+	public final fun suggestFromGlobs (Ljava/util/List;)Ljava/lang/String;
+}
+
+public final class io/karandash/utils/validation/LengthValidator {
+	public static final field INSTANCE Lio/karandash/utils/validation/LengthValidator;
+	public final fun checkLength (Ljava/lang/String;Ljava/lang/Integer;Ljava/lang/Integer;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)Ljava/util/List;
+	public static synthetic fun checkLength$default (Lio/karandash/utils/validation/LengthValidator;Ljava/lang/String;Ljava/lang/Integer;Ljava/lang/Integer;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;ILjava/lang/Object;)Ljava/util/List;
+}
+
+public final class io/karandash/utils/validation/MrValidationContext {
+	public fun <init> (Lio/karandash/models/MergeRequest;)V
+	public final fun getApproverNames ()Ljava/util/Set;
+	public final fun getChangedPaths ()Ljava/util/Set;
+	public final fun getLabelSet ()Ljava/util/Set;
+	public final fun getMr ()Lio/karandash/models/MergeRequest;
+	public final fun getReviewerNames ()Ljava/util/Set;
+	public final fun getTotalLinesChanged ()I
+	public final fun isDraft ()Z
+}
+
+public final class io/karandash/utils/validation/ValidationContextKt {
+	public static final fun toContext (Lio/karandash/models/MergeRequest;)Lio/karandash/utils/validation/MrValidationContext;
+}
+
+public final class io/karandash/utils/validation/ValidationHelpersKt {
+	public static final fun checkRule (Ljava/lang/String;Lio/karandash/models/finding/Severity;ZLjava/lang/String;Ljava/lang/String;)Ljava/util/List;
+	public static synthetic fun checkRule$default (Ljava/lang/String;Lio/karandash/models/finding/Severity;ZLjava/lang/String;Ljava/lang/String;ILjava/lang/Object;)Ljava/util/List;
+	public static final fun validateFiles (Lio/karandash/models/MergeRequest;Lkotlin/text/Regex;Lkotlin/jvm/functions/Function1;)Ljava/util/List;
+}
+

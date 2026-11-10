@@ -1,0 +1,80 @@
+{
+  "responses": {
+    "design-doc-drift": {
+      "hasDrift": true,
+      "driftScore": 0.75,
+      "divergedSections": [
+        "Networking"
+      ],
+      "recommendations": [
+        "Route the call through ApiClient instead of a raw HttpClient"
+      ],
+      "summary": "createCharge bypasses ApiClient, losing retries and auth."
+    },
+    "generate-description": {
+      "suggestedTitle": "refactor(payments): rename charge to createCharge",
+      "suggestedDescription": "Renames PaymentsApi.charge to createCharge and fixes amount rounding.",
+      "changesSummary": [
+        "Rename public API method",
+        "Round amounts before posting"
+      ]
+    },
+    "outdated-docs": {
+      "issues": [
+        {
+          "file": "docs/payments.md",
+          "message": "Documents PaymentsApi.charge, renamed to createCharge.",
+          "severity": "warning",
+          "confidence": 0.85
+        },
+        {
+          "file": "README.md",
+          "message": "README may reference the old charge API.",
+          "severity": "info",
+          "confidence": 0.55
+        }
+      ]
+    },
+    "ownership-analysis": {
+      "ownershipScore": 0.6,
+      "crossTeamChanges": false,
+      "contributors": [
+        {
+          "name": "Eval Dev",
+          "email": "dev@example.com",
+          "linesOwned": 40,
+          "filesOwned": 1,
+          "role": "owner"
+        }
+      ],
+      "fileOwnership": [
+        {
+          "path": "src/main/kotlin/payments/PaymentsApi.kt",
+          "primaryOwner": "Eval Dev",
+          "ownershipPercentage": 0.8,
+          "contributorCount": 2
+        }
+      ],
+      "bugFixCorrelations": [
+        {
+          "file": "src/main/kotlin/payments/PaymentsApi.kt",
+          "bugIntroducedBy": "3f2a1c",
+          "fixedBy": "Eval Dev",
+          "commitMessage": "fix: charge rounding bug introduced in 3f2a1c",
+          "confidence": 0.8
+        }
+      ],
+      "knowledgeRisks": [],
+      "statistics": {
+        "totalFilesAnalyzed": 1,
+        "filesWithBlameData": 1,
+        "uniqueCodeOwners": 1,
+        "uniqueFixers": 1,
+        "bugFixCount": 1,
+        "crossTeamChangeCount": 0,
+        "avgOwnershipScore": 0.6
+      },
+      "summary": "Single owner; one bug fix correlated with an earlier commit."
+    }
+  }
+}

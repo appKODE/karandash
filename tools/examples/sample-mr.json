@@ -1,0 +1,35 @@
+{
+  "id": "123",
+  "iid": 456,
+  "title": "feat: Add new validation rule for commit messages",
+  "description": "This MR adds a new validation rule to check commit message format.",
+  "source_branch": "feature/commit-validation",
+  "target_branch": "main",
+  "author": {
+    "username": "john",
+    "name": "John Doe",
+    "email": "john@example.com"
+  },
+  "state": "opened",
+  "draft": false,
+  "labels": ["enhancement", "validation"],
+  "commits": [
+    {
+      "sha": "abc123def456",
+      "message": "feat: Add commit message validation\n\nImplemented conventional commit format checking.",
+      "author": {
+        "name": "John Doe",
+        "email": "john@example.com"
+      },
+      "timestamp": "2024-01-15T10:30:00Z"
+    }
+  ],
+  "changes": [
+    {
+      "path": "core/src/main/kotlin/ValidationEngine.kt",
+      "changeType": "MODIFIED",
+      "additions": 45,
+      "deletions": 12
+    }
+  ]
+}

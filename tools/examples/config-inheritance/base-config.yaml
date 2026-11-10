@@ -1,0 +1,51 @@
+# Base Configuration
+# This configuration defines common validation rules shared across all projects.
+# Extend this config in project-specific configs to inherit these rules.
+
+rules:
+  # Title format validation (conventional commits)
+  title-format:
+    pattern: "^(feat|fix|docs|style|refactor|perf|test|chore|ci|build)(\\(.+\\))?:.+"
+    min-length: 10
+    max-length: 72
+
+  # Commit message validation
+  commit-messages:
+    pattern: "^(feat|fix|docs|style|refactor|perf|test|chore|ci|build)(\\(.+\\))?:.+"
+    max-length: 72
+    min-length: 10
+
+  # Branch naming validation (optional)
+  branch-naming:
+    allowed-patterns:
+      - "feat/.*"
+      - "fix/.*"
+      - "docs/.*"
+      - "refactor/.*"
+      - "test/.*"
+      - "chore/.*"
+    require-source-match: true
+    require-target-match: false
+
+  # Merge request size limits
+  size-limits:
+    max-files: 50
+    max-lines: 1000
+
+  # Draft MR handling
+  draft-prevention:
+    block-draft: off
+
+# AI configuration (optional, requires AI provider)
+# ai:
+#   provider: "openai"
+#   reports:
+#     smart-digest: true
+#     risk-heatmap: true
+#   metrics:
+#     cognitive-load: true
+#     change-entropy: true
+#   enrichment:
+#     generate-description: true
+#     generate-title: true
+#     skip-if-description-exists: true

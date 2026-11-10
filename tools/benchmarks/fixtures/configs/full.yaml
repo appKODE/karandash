@@ -1,0 +1,70 @@
+rules:
+  title-format:
+    pattern: "^(feat|fix|chore|docs|refactor|test|ci)(\\(.*\\))?: .+"
+  commit-messages:
+    pattern: "^(feat|fix|chore|docs|refactor|test|ci)(\\(.*\\))?: .{10,}"
+  branch-naming:
+    pattern: "^(feature|bugfix|hotfix|release|chore)/[a-z0-9][a-z0-9-]+$"
+  draft-prevention: true
+  size-limits:
+    max-files: 50
+    max-lines: 1000
+  labels:
+    required-labels:
+      - "type:*"
+  conflict: true
+  security: true
+  approval:
+    min-approvals: 2
+  reviewer:
+    required-reviewers:
+      - "alice"
+      - "bob"
+  cicd-status: true
+  codeowners: true
+  file-changes:
+    patterns:
+      - pattern: ".github/**"
+      - pattern: "Dockerfile"
+  jira-ticket:
+    pattern: "[A-Z]+-[0-9]+"
+  description-format:
+    mr-sections:
+      - name: "Summary"
+        pattern: "^## Summary"
+        required: true
+      - name: "Test Plan"
+        pattern: "^## Test Plan"
+        required: true
+  cross-entity-consistency: true
+  context-tag: true
+  language-policy:
+    language-name: "English"
+  commit-body: true
+
+ai:
+  provider: "openai"
+  reports:
+    smart-digest:
+      enabled: true
+      audience: "developer"
+    risk-heatmap: true
+    dora-metrics: true
+    team-scorecard: false
+  metrics:
+    cognitive-load: true
+    change-entropy: true
+    avg-findings: true
+    hotspot-density: false
+
+enrichment:
+  jira:
+    enabled: true
+    url: "https://jira.example.com"
+
+reporters:
+  console: true
+  json:
+    output: "/dev/null"
+  sarif:
+    output: "/dev/null"
