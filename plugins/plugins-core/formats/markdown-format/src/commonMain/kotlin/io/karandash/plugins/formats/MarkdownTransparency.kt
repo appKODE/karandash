@@ -103,7 +103,12 @@ private fun StringBuilder.appendEnrichers(
     p.enrichers.forEach { e ->
         val details =
             e.reason?.let { sanitizeMarkdown(cutReason(skipReasonIn(it, locale.tag))) }
-                ?: if (e.tokens > 0) locale.t(SummaryText.TOKENS, e.tokens) else ""
+                ?: when {
+                    e.tokens > 0 -> locale.t(SummaryText.TOKENS, e.tokens)
+                    e.cached -> locale.t(SummaryText.ENRICHER_CACHED)
+                    e.items > 0 -> locale.t(SummaryText.ENRICHER_ITEMS, e.items)
+                    else -> locale.t(SummaryText.ENRICHER_NO_DATA)
+                }
         append("| `${sanitizeMarkdown(e.id)}` | ${e.status.label(locale)} | $details |\n")
     }
     append('\n')

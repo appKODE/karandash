@@ -380,7 +380,7 @@ internal class PipelineExecutionStage(
         }
         if (reportFindings.size != beforeReportingCount) {
             logger.debug(
-                "beforeReporting: findings reduced from $beforeReportingCount to ${reportFindings.size}",
+                "beforeReporting: findings changed from $beforeReportingCount to ${reportFindings.size}",
             )
         }
         return reportFindings

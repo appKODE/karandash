@@ -65,6 +65,23 @@ class MarkdownTransparencyTest {
     }
 
     @Test
+    fun `an ok enricher row tells its items, no data or cached`() {
+        val p = provenance.copy(
+            enrichers = listOf(
+                EnricherProvenance("git", ProvenanceStatus.OK, items = 2),
+                EnricherProvenance("ci", ProvenanceStatus.OK),
+                EnricherProvenance("jira", ProvenanceStatus.OK, cached = true),
+            ),
+        )
+
+        val block = provenanceBlock(p, MarkdownTransparencyConfig())
+
+        assertTrue("| `git` | ok | 2 items |" in block, block)
+        assertTrue("| `ci` | ok | no data |" in block, block)
+        assertTrue("| `jira` | ok | cached |" in block, block)
+    }
+
+    @Test
     fun `a provenance reason is cut to a bounded length in the block`() {
         val p = provenance.copy(enrichers = listOf(EnricherProvenance("jira", ProvenanceStatus.FAILED, reason = "x".repeat(1000))))
 

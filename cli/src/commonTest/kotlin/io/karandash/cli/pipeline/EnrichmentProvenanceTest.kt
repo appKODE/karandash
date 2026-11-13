@@ -24,9 +24,11 @@ class EnrichmentProvenanceTest {
     private class Stub(
         override val id: String,
         private val initialized: Boolean = true,
-        private val reason: String? = null,
+        private var reason: String? = null,
         private val data: String? = "0123456789abcdef",
         private val initError: String? = null,
+        private val empty: Boolean = false,
+        private val reasonAfterEnrich: String? = null,
     ) : EnrichmentProviderModule {
         override val name = id
         override val version = "1.0"
@@ -44,7 +46,10 @@ class EnrichmentProvenanceTest {
             mr: MergeRequest,
             config: JsonElement,
             upstreamContext: EnrichmentContext,
-        ): Map<String, JsonElement> = mapOf("$id:data" to JsonPrimitive(checkNotNull(data) { "boom" }))
+        ): Map<String, JsonElement> {
+            reasonAfterEnrich?.let { reason = it }
+            return if (empty) emptyMap() else mapOf("$id:data" to JsonPrimitive(checkNotNull(data) { "boom" }))
+        }
     }
 
     private val mr = MergeRequest(
@@ -86,12 +91,26 @@ class EnrichmentProvenanceTest {
 
             assertEquals(
                 listOf(
-                    EnricherProvenance("a-ok", ProvenanceStatus.OK),
+                    EnricherProvenance("a-ok", ProvenanceStatus.OK, items = 1),
                     EnricherProvenance("b-jira", ProvenanceStatus.SKIPPED, reason = "JIRA_TOKEN not set"),
                     EnricherProvenance("c-symbols", ProvenanceStatus.SKIPPED, reason = "ast-grep not found"),
                 ),
                 result,
             )
+        }
+
+    @Test
+    fun `an ok enricher counts the ids it delivered`() =
+        runTest {
+            assertEquals(listOf(1, 0), enrichers(Stub("a-ok"), Stub("b-empty", empty = true)).map { it.items })
+        }
+
+    @Test
+    fun `an enricher that learns while enriching why it found nothing is skipped with that reason`() =
+        runTest {
+            val result = enrichers(Stub("a-git", empty = true, reasonAfterEnrich = "no data: git not available")).single()
+
+            assertEquals(EnricherProvenance("a-git", ProvenanceStatus.SKIPPED, reason = "no data: git not available"), result)
         }
 
     @Test

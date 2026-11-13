@@ -1,12 +1,14 @@
 package io.karandash.cache.cas
 
 import io.karandash.testfixtures.TestFiles
+import kotlinx.io.IOException
 import kotlinx.io.files.Path
 import kotlinx.io.files.SystemFileSystem
 import kotlin.test.AfterTest
 import kotlin.test.BeforeTest
 import kotlin.test.Test
 import kotlin.test.assertEquals
+import kotlin.test.assertFailsWith
 import kotlin.test.assertFalse
 import kotlin.test.assertNotNull
 import kotlin.test.assertNull
@@ -26,6 +28,17 @@ class CasBlobStoreTest {
     @AfterTest
     fun tearDown() {
         TestFiles.deleteRecursively(tempDir)
+    }
+
+    @Test
+    fun putRethrowsWhenTheShardDirectoryCannotBeCreated() {
+        val file = Path(tempDir, "not-a-dir")
+        SystemFileSystem.sink(file).close()
+        val blocked = CasBlobStore(casDir = Path(file, "cas"))
+
+        // the mkdir error itself, not the later "Failed to open .../.<blob>.tmp" from the write
+        val e = assertFailsWith<IOException> { blocked.put("x".encodeToByteArray()) }
+        assertFalse(e.message.orEmpty().contains(".tmp"), e.message)
     }
 
     @Test

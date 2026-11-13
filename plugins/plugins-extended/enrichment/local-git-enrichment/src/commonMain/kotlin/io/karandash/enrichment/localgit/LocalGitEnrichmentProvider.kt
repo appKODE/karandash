@@ -43,6 +43,7 @@ class LocalGitEnrichmentProvider : EnrichmentProviderModule {
     private var logger: Logger = NoOpLogger
     private val cache = atomic<KarandashCache?>(null)
     private val workingDirectory = atomic<String>("")
+    private val noDataReason = atomic<String?>(null)
     private val subprocessBudgetMaxCalls = atomic<Int>(SubprocessBudget.DEFAULT_MAX_CALLS)
     private val subprocessBudgetMaxWallMillis = atomic<Long>(SubprocessBudget.DEFAULT_MAX_WALL_MILLIS)
 
@@ -64,7 +65,8 @@ class LocalGitEnrichmentProvider : EnrichmentProviderModule {
         return true
     }
 
-    override fun skipReason(): String? = if (workingDirectory.value.isBlank()) "no working directory: no local git history" else null
+    override fun skipReason(): String? =
+        if (workingDirectory.value.isBlank()) "no working directory: no local git history" else noDataReason.value
 
     override suspend fun shutdown() {
         // No resources to release
@@ -110,6 +112,7 @@ class LocalGitEnrichmentProvider : EnrichmentProviderModule {
         warnIfExhausted("contributor stats", contributorBudget)
         if (counts.isEmpty() && contributors.isEmpty()) {
             logger.debug("Local git enrichment: no frequency or contributor data produced")
+            noDataReason.value = whyNoData()
             return emptyMap()
         }
         return buildMap {
@@ -118,6 +121,20 @@ class LocalGitEnrichmentProvider : EnrichmentProviderModule {
             }
             if (contributors.isNotEmpty()) put(ENRICHMENT_CONTRIBUTOR_STATS, ContributorAnalyzer.toJson(contributors, period))
         }
+    }
+
+    /** Why git gave nothing, when it is not just a quiet history: git cannot run, or the clone is shallow. */
+    private suspend fun whyNoData(): String? {
+        // GitRunner turns a git that cannot start (or a shell `git: not found`) into null, silently: say why once
+        if (GitCliHelper.run(null, listOf("--version")) == null) {
+            logger.warn("Local git enrichment: `git --version` failed, git is not installed or not on PATH; no local git history")
+            return "no data: git not available"
+        }
+        if (ShallowCloneDetector.isShallow(workingDirectory.value, logger = logger)) {
+            logger.warn("Local git enrichment: shallow clone, history is cut; set GIT_DEPTH: 0 (or a larger depth) for local git history")
+            return "no data: shallow clone"
+        }
+        return null
     }
 
     private fun warnIfExhausted(

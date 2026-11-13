@@ -21,6 +21,11 @@ LABEL org.opencontainers.image.title="karandash"
 LABEL org.opencontainers.image.description="Karandash MR validation tool (JVM)"
 LABEL org.opencontainers.image.version="${VERSION}"
 
+# git: local-git enrichment and git-based rules read the checked-out history
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends git \
+    && rm -rf /var/lib/apt/lists/*
+
 WORKDIR /app
 
 COPY ${JAR_FILE} /app/karandash.jar

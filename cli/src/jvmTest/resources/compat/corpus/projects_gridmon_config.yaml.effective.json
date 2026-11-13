@@ -264,7 +264,7 @@
         "maxTokenBudget": "15000",
         "failOnError": false,
         "timeout": "5m",
-        "executionTimeout": "6m",
+        "executionTimeout": "11m",
         "maxRetries": 1,
         "stream": true,
         "priority": 200,

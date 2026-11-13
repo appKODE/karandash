@@ -238,7 +238,7 @@ internal suspend fun executeEnrichmentProviders(
     val engine = EnrichmentEngine(registered, logger = logger)
     val context = engine.enrich(mr)
     val ran = registered.map { r ->
-        val outcome = enricherOutcome(r.id, r.module, context)
+        val outcome = enricherOutcome(r.id, r.module, context, engine.timings.find { it.id == r.id })
         // a partly-off provider (skip reason) that then timed out or threw is failed, not skipped
         if (outcome.status == ProvenanceStatus.FAILED) outcome else decided.find { it.id == r.id } ?: outcome
     }
@@ -247,19 +247,23 @@ internal suspend fun executeEnrichmentProviders(
 }
 
 /**
- * Failed when the engine marked any of its ids missing (timeout or throw), else ok. No token count: enrichment data
- * can carry timestamps, so its size changes between identical runs and would rewrite the MR comment each time.
+ * Failed when the engine marked any of its ids missing (timeout or throw); skipped when the provider learned while
+ * enriching why it had nothing to give (local-git without git); else ok with the ids it delivered or cached, from
+ * [timing]. No token count or duration: enrichment data can carry timestamps and durations vary, so either would
+ * rewrite the MR comment between identical runs.
  */
 private fun enricherOutcome(
     id: String,
     provider: EnrichmentProviderModule,
     context: EnrichmentContext,
+    timing: EnrichmentTiming?,
 ): EnricherProvenance {
     val ids = provider.providedEnrichment
     if (ids.any { it in context.missingIds }) {
         return EnricherProvenance(id, ProvenanceStatus.FAILED, reason = "timed out or failed, see the log")
     }
-    return EnricherProvenance(id, ProvenanceStatus.OK)
+    provider.skipReason()?.let { return EnricherProvenance(id, ProvenanceStatus.SKIPPED, reason = it) }
+    return EnricherProvenance(id, ProvenanceStatus.OK, items = timing?.outputIds?.size ?: 0, cached = timing?.fromCache == true)
 }
 
 // the exception message can carry urls or tokens and the reason reaches the public MR comment: log only
