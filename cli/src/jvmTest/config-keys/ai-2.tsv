@@ -148,13 +148,13 @@ ai.violationBudget.baselineDate	plugins/plugins-ai/ai-core/src/commonTest/kotlin
 ai.violationBudget.baselineFile	plugins/plugins-ai/rules/ai/src/commonTest/kotlin/io/karandash/plugins/ai/AiPipelineExtensionKeyBehaviourTest.kt	ai violationBudget enabled and baselineFile decide whether baselined files are downgraded
 ai.violationBudget.enabled	plugins/plugins-ai/rules/ai/src/commonTest/kotlin/io/karandash/plugins/ai/AiPipelineExtensionKeyBehaviourTest.kt	ai violationBudget enabled and baselineFile decide whether baselined files are downgraded
 ai.violationBudget.incrementPerMonth	plugins/plugins-ai/ai-core/src/commonTest/kotlin/io/karandash/plugins/ai/core/config/ViolationBaselineTest.kt	incrementPerMonth raises the allowance per month since baselineDate
-ai.violationBudgets	plugins/plugins-ai/ai-core/src/commonTest/kotlin/io/karandash/plugins/ai/core/config/ViolationBudgetEvaluatorTest.kt	A29 over budget the findings are kept at their severity
-ai.violationBudgets.baseline	plugins/plugins-ai/ai-core/src/commonTest/kotlin/io/karandash/plugins/ai/core/config/ViolationBudgetEvaluatorTest.kt	A29 over budget the findings are kept at their severity
+ai.violationBudgets	plugins/plugins-ai/ai-core/src/commonTest/kotlin/io/karandash/plugins/ai/core/config/ViolationBudgetEvaluatorTest.kt	over budget the findings are kept at their severity
+ai.violationBudgets.baseline	plugins/plugins-ai/ai-core/src/commonTest/kotlin/io/karandash/plugins/ai/core/config/ViolationBudgetEvaluatorTest.kt	over budget the findings are kept at their severity
 ai.violationBudgets.baselineDate	plugins/plugins-ai/ai-core/src/commonTest/kotlin/io/karandash/plugins/ai/core/config/ViolationBudgetEvaluatorTest.kt	decay reduces allowance over time
 ai.violationBudgets.decayPeriodMonths	plugins/plugins-ai/ai-core/src/commonTest/kotlin/io/karandash/plugins/ai/core/config/ViolationBudgetEvaluatorTest.kt	decayPeriodMonths sets how many months make one decay period
 ai.violationBudgets.decayRatePercent	plugins/plugins-ai/ai-core/src/commonTest/kotlin/io/karandash/plugins/ai/core/config/ViolationBudgetEvaluatorTest.kt	decayRatePercent sets how much allowance each period removes
 ai.violationBudgets.minimum	plugins/plugins-ai/ai-core/src/commonTest/kotlin/io/karandash/plugins/ai/core/config/ViolationBudgetEvaluatorTest.kt	minimum floor is respected
-ai.violationBudgets.rule	plugins/plugins-ai/ai-core/src/commonTest/kotlin/io/karandash/plugins/ai/core/config/ViolationBudgetEvaluatorTest.kt	A29 over budget the findings are kept at their severity
+ai.violationBudgets.rule	plugins/plugins-ai/ai-core/src/commonTest/kotlin/io/karandash/plugins/ai/core/config/ViolationBudgetEvaluatorTest.kt	over budget the findings are kept at their severity
 ai.ranking	plugins/plugins-ai/ai-core/src/commonTest/kotlin/io/karandash/plugins/ai/core/pipeline/FindingCapTest.kt	ranking weights decide which finding the cap keeps
 ai.ranking.protect	plugins/plugins-ai/ai-core/src/commonTest/kotlin/io/karandash/plugins/ai/core/pipeline/FindingCapTest.kt	a confirmed BUG is protected past the cap
 ai.ranking.weights	plugins/plugins-ai/ai-core/src/commonTest/kotlin/io/karandash/plugins/ai/core/pipeline/FindingCapTest.kt	ranking weights decide which finding the cap keeps
