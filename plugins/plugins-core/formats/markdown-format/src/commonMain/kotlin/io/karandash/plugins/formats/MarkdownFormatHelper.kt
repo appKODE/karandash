@@ -313,10 +313,12 @@ private fun SummaryLocale.renderSummary(
     }
 
     val listLimit = if (compact) COMPACT_LIST_ENTRIES else Int.MAX_VALUE
-    val (policySkips, ruleSkips) = report.skippedRules.partition { it.category == SkipCategory.POLICY_OVERRIDE_NOT_APPLIED }
+    val (policySkips, allRuleSkips) = report.skippedRules.partition { it.category == SkipCategory.POLICY_OVERRIDE_NOT_APPLIED }
+    val (aiFailures, ruleSkips) = allRuleSkips.partition { it.category == SkipCategory.AI_PROVIDER_ERROR }
     if (report.findings.isEmpty()) {
         sb.appendLine(t(SummaryText.ALL_PASSED))
         // A pass with skipped rules is not a full review; say what was not run.
+        appendSkippedRules(sb, aiFailures, listLimit, SummaryText.AI_RULES_FAILED)
         appendSkippedRules(sb, ruleSkips, listLimit)
     } else {
         val partitioned = partitionFindings(report.findings)
@@ -326,7 +328,8 @@ private fun SummaryLocale.renderSummary(
         appendSeverityTable(sb, partitioned.regular, inlineCount)
         appendFindingsTable(sb, summaryPartitioned.regular, inlineCount, rowBudgetBytes = if (compact) COMPACT_ROW_BUDGET_BYTES else null)
         appendSupplementarySections(sb, partitioned)
-        appendComplianceChecklist(sb, report.complianceChecklist, ruleSkips)
+        appendComplianceChecklist(sb, report.complianceChecklist, allRuleSkips)
+        appendSkippedRules(sb, aiFailures, listLimit, SummaryText.AI_RULES_FAILED)
         appendSkippedRules(sb, ruleSkips, listLimit)
         appendPoliciesNotApplied(sb, policySkips, listLimit)
     }
@@ -809,10 +812,11 @@ private fun SummaryLocale.appendSkippedRules(
     sb: StringBuilder,
     skippedRules: List<SkippedRuleInfo>,
     maxEntries: Int,
+    title: SummaryText = SummaryText.SKIPPED_RULES,
 ) {
     if (skippedRules.isEmpty()) return
     sb.appendLine()
-    sb.appendLine("<details><summary>${t(SummaryText.SKIPPED_RULES, skippedRules.size)}</summary>")
+    sb.appendLine("<details><summary>${t(title, skippedRules.size)}</summary>")
     sb.appendLine()
     for (info in skippedRules.take(maxEntries)) {
         val reason = if (info.reason.isNotEmpty()) ": ${skipReasonIn(info.reason, tag)}" else ""

@@ -24,6 +24,8 @@ import kotlinx.serialization.Serializable
  * @property aiStatusTemplate The English template of [aiStatus] (`AI: unavailable — %1/%2 calls failed`), the key a
  *   translation pack translates it by; null when [aiStatus] has none (a plugin that sets only the line).
  * @property aiStatusArgs The values of `%1`, `%2`, ... in [aiStatusTemplate].
+ * @property notes One-line notes on how the review was made (incremental scope, an underfunded budget plan); English,
+ *   never translated.
  */
 @Serializable
 public data class ReviewProvenance(
@@ -36,6 +38,7 @@ public data class ReviewProvenance(
     val funnel: Map<String, Int> = emptyMap(),
     val aiStatusTemplate: String? = null,
     val aiStatusArgs: List<String> = emptyList(),
+    val notes: List<String> = emptyList(),
 ) {
     /**
      * [aiStatus] in [language]: its [aiStatusTemplate] translated by a pack and filled with its values (a skip reason
@@ -49,7 +52,8 @@ public data class ReviewProvenance(
         } ?: aiStatus
 
     /** True when there is more to show than the [coverage] line. */
-    public val hasDetails: Boolean get() = enrichers.isNotEmpty() || analyzers.isNotEmpty() || filters.isNotEmpty()
+    public val hasDetails: Boolean
+        get() = enrichers.isNotEmpty() || analyzers.isNotEmpty() || filters.isNotEmpty() || notes.isNotEmpty()
 }
 
 /** Outcome of one enricher or analyzer step. */

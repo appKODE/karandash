@@ -206,7 +206,12 @@ class ValidationEngine(
                 .toList()
         ).forEach { it.onEngineSkips(skippedRules.toList()) }
         val skipReasonProviders = skipReasonProviders(allConfiguredRuleIds)
-        skippedRules.addAll(skipReasonProviders.flatMap { it.skippedRuleReasons().values })
+        // AI skips name the module's kebab id, engine skips the config key: provider skips use the module id
+        skippedRules.addAll(
+            skipReasonProviders
+                .flatMap { it.skippedRuleReasons().values }
+                .map { it.copy(ruleId = registry.canonicalRuleId(it.ruleId)) },
+        )
 
         return ValidationResult(
             findings = finalizeFindings(runtimeConfig, allFindings),

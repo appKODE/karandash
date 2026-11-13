@@ -85,19 +85,24 @@ internal object LargeMrSummary {
         val oversized = units.size > config.maxUnits
         if (!oversized && lost.isEmpty()) return null
         val split = if (oversized) {
-            "Consider splitting this MR: ${units.size} review units is over ai.large-mr.max-units ${config.maxUnits}\n\n"
+            "Consider splitting this MR: ${units.size} review units is over ai.large-mr.max-units ${config.maxUnits}"
         } else {
-            ""
+            null
         }
+        val excluded = units.size - reviewed.size - notReviewed.size
         return Finding(
             severity = Severity.INFO,
-            message = "Large MR: ${units.size} review units, ${reviewed.size} reviewed, ${notReviewed.size} not reviewed",
+            message = "Large MR: ${units.size} review units: ${reviewed.size} reviewed, ${notReviewed.size} not reviewed, " +
+                "$excluded excluded or unchanged",
             rule = RULE,
-            explanation = split + listed("Reviewed units", reviewed) + "\n\n" + listed("Not reviewed units", notReviewed),
+            explanation = listOfNotNull(split, listed("Reviewed units", reviewed), listed("Not reviewed units", notReviewed))
+                .joinToString("\n\n"),
+            suggestion = split,
             metadata = mapOf(
                 "units" to units.size.toString(),
                 "reviewedUnits" to reviewed.size.toString(),
                 "notReviewedUnits" to notReviewed.size.toString(),
+                "excludedUnits" to excluded.toString(),
             ),
         )
     }
@@ -130,6 +135,7 @@ internal object LargeMrSummary {
                 severity = Severity.INFO,
                 message = "Test gap: ${gaps.size} unit(s) change $files production files and no test",
                 rule = TEST_GAP_RULE,
+                suggestion = "Add or update tests for the listed units",
                 explanation = "Units without a test:\n" +
                     gaps.take(LISTED_UNITS).joinToString("\n") { (unit, count) -> "- $unit ($count production files)" } +
                     if (gaps.size > LISTED_UNITS) "\n- … and ${gaps.size - LISTED_UNITS} more" else "",

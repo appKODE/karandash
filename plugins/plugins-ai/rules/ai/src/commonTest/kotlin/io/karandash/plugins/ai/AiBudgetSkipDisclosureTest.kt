@@ -267,7 +267,7 @@ class AiBudgetSkipDisclosureTest {
 
             assertEquals(
                 listOf(
-                    "Large MR: 2 review units, 1 reviewed, 1 not reviewed",
+                    "Large MR: 2 review units: 1 reviewed, 1 not reviewed, 0 excluded or unchanged",
                     "Test gap: 2 unit(s) change 2 production files and no test",
                 ),
                 added.map { it.message },

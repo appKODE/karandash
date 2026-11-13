@@ -11,6 +11,8 @@ import kotlinx.serialization.Serializable
  * @property notes Every clamp and warning the plan emitted, as logged.
  * @property refusals Calls the budget gate refused while the rules ran; the plan is dumped again when there are any.
  * @property sampleTokens Rule ID to the tokens its extra samples spent on their own budget, outside [runBudget].
+ * @property shortfall The plan line naming each underfunded rule's share and the knob to raise; null when every rule
+ *   is funded in full or `scale-budget` is off.
  */
 @Serializable
 internal data class BudgetPlanDump(
@@ -23,6 +25,7 @@ internal data class BudgetPlanDump(
     val notes: List<String>,
     val refusals: List<BudgetRefusal> = emptyList(),
     val sampleTokens: Map<String, Int> = emptyMap(),
+    val shortfall: String? = null,
 ) {
     /** Rule ID to the tokens granted on top of its share; only rules granted any. */
     val granted: Map<String, Int> get() = rules.filter { it.grant > 0 }.associate { it.rule to it.grant }

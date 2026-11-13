@@ -39,6 +39,7 @@ class LargeMrSummaryTest {
 
         assertEquals("Test gap: 22 unit(s) change 22 production files and no test", twelve.message)
         assertTrue("- … and 2 more" in checkNotNull(twelve.explanation), twelve.explanation)
+        assertEquals("Add or update tests for the listed units", twelve.suggestion)
         assertNull(twelve.location)
     }
 
@@ -132,7 +133,7 @@ class LargeMrSummaryTest {
         val units = unitsLine(changes, coverage).single()
 
         // vendor/lib was excluded before review: neither reviewed nor not reviewed.
-        assertEquals("Large MR: 3 review units, 1 reviewed, 1 not reviewed", units.message)
+        assertEquals("Large MR: 3 review units: 1 reviewed, 1 not reviewed, 1 excluded or unchanged", units.message)
         val explanation = checkNotNull(units.explanation)
         assertTrue("Reviewed units:\n- api" in explanation, explanation)
         assertTrue("Not reviewed units:\n- web" in explanation && "vendor" !in explanation, explanation)
@@ -160,7 +161,10 @@ class LargeMrSummaryTest {
         val changes = listOf(change("api/A.kt"), change("web/W.ts"))
         val coverage = RuleCoverage(files = setOf("api/A.kt", "web/W.ts"), reviewed = setOf("api/A.kt"), dropped = setOf("web/W.ts"))
 
-        assertEquals("Large MR: 2 review units, 1 reviewed, 1 not reviewed", unitsLine(changes, coverage).single().message)
+        assertEquals(
+            "Large MR: 2 review units: 1 reviewed, 1 not reviewed, 0 excluded or unchanged",
+            unitsLine(changes, coverage).single().message
+        )
     }
 
     @Test
@@ -187,7 +191,8 @@ class LargeMrSummaryTest {
                 AiExcludePolicy.DEFAULT_PATTERNS
             ).single()
 
-        assertEquals("Large MR: 3 review units, 3 reviewed, 0 not reviewed", units.message)
+        assertEquals("Large MR: 3 review units: 3 reviewed, 0 not reviewed, 0 excluded or unchanged", units.message)
+        assertEquals("Consider splitting this MR: 3 review units is over ai.large-mr.max-units 2", units.suggestion)
         assertTrue("Consider splitting this MR: 3 review units is over ai.large-mr.max-units 2" in checkNotNull(units.explanation))
     }
 

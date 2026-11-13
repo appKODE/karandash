@@ -58,6 +58,22 @@ class MarkdownReviewFixesTest {
 
     private val coverage = ReviewProvenance(ReviewCoverage(totalFiles = 140, reviewedFiles = 90, chunksSkipped = 2, truncatedFiles = 1))
 
+    @Test
+    fun `AI provider failures get their own block apart from the skipped rules`() {
+        val md = summary(
+            listOf(finding("small")),
+            listOf(
+                SkippedRuleInfo("ai-review", "provider error: unreachable: host", SkipCategory.AI_PROVIDER_ERROR),
+                SkippedRuleInfo("jira", "no token"),
+            ),
+        )
+
+        assertTrue("<summary>AI rules failed (1)</summary>" in md, md)
+        assertTrue("- `ai-review`: provider error: unreachable: host" in md, md)
+        assertTrue("<summary>Skipped rules (1)</summary>" in md, md)
+        assertTrue("- `jira`" in md && "- `ai-review`: " !in md.substringAfter("Skipped rules (1)"), md)
+    }
+
     private fun hugeFencedSummary(
         withCoverage: Boolean,
         skippedCount: Int,

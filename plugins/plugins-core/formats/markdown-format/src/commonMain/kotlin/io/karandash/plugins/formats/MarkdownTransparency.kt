@@ -86,6 +86,7 @@ internal fun provenanceBlock(
                 "**${locale.t(SummaryText.PROVENANCE_COVERAGE)}:** ${sanitizeMarkdown(it.describe(locale.tag))}\n\n"
             )
         }
+        provenance.notes.forEach { append("${sanitizeMarkdown(it)}\n\n") }
         appendEnrichers(provenance, locale)
         appendAnalyzers(provenance, locale)
         appendFilters(provenance, locale)

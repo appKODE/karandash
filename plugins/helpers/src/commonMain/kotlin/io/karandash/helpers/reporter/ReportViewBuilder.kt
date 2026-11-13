@@ -1,6 +1,7 @@
 package io.karandash.helpers.reporter
 
 import io.karandash.api.finding.ComplianceStatus
+import io.karandash.api.finding.SkipCategory
 import io.karandash.api.finding.ValidationReport
 import io.karandash.api.finding.skipReasonIn
 import io.karandash.api.finding.summarize
@@ -136,12 +137,22 @@ private fun ValidationReport.detailsView(
         .filter { it.metadata[WellKnownMetadataKeys.IS_RISK_ADVISORY] == "true" }
         .mapNotNull { it.metadata[WellKnownMetadataKeys.RISK_SCORE]?.toDoubleOrNull()?.toInt() }
         .maxOrNull()
-    val skipped = skippedRules.map { SkippedView(it.ruleId, skipReasonIn(it.reason, lang.tag)) }
+    // An AI provider failure is an outage to retry, not a rule the engine chose to skip: it gets its own line.
+    val (aiFailures, realSkips) = skippedRules.partition { it.category == SkipCategory.AI_PROVIDER_ERROR }
+    val skipped = realSkips.map { SkippedView(it.ruleId, skipReasonIn(it.reason, lang.tag)) }
     val passedRules = complianceChecklist.filter { it.status == ComplianceStatus.PASSED }.map { it.ruleId }
     val coverage = provenance?.coverage?.let { "${it.reviewedFiles}/${it.totalFiles}" }
     val fixed = delta?.fixed?.takeIf { it > 0 }?.let { ViewText.FIXED.count(lang, it) + " " + ViewText.SINCE_LAST_RUN.text(lang) }
     val lines = listOfNotNull(
         risk?.let { ViewText.RISK.format(lang, it.toString()) },
+        aiFailures.takeIf { it.isNotEmpty() }?.let { list ->
+            ViewText.AI_FAILED.count(lang, list.size) + ": " + list
+                .groupBy { skipReasonIn(it.reason, lang.tag) }
+                .entries
+                .joinToString("; ") { (reason, rules) ->
+                    rules.joinToString(", ") { it.ruleId } + if (reason.isBlank()) "" else " ($reason)"
+                }
+        },
         skipped.takeIf { it.isNotEmpty() }?.let { list ->
             ViewText.SKIPPED.count(lang, list.size) + ": " +
                 list.joinToString(", ") { s -> s.rule + s.reason.let { r -> if (r.isBlank()) "" else " ($r)" } }

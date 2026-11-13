@@ -300,14 +300,16 @@ class AiPipelineExtension(
         val state = runState.value
         val aiRule = aiRule()
         val notSent = aiRule?.skippedFiles() ?: SkippedFiles()
-        val incremental = incrementalCache.context?.let { IncrementalSummary.finding(it, notSent) }
+        aiRule?.recordIncrementalNote(
+            incrementalCache.context?.let { IncrementalSummary.note(it, notSent, reviewed = aiRule?.reviewedFileCount()) },
+        )
         val largeMr = aiRule
             ?.largeMrSummary(
                 (state?.mr ?: mr).changes,
                 pluginConfigRef.value.largeMr,
                 pluginConfigRef.value.testGap
             ).orEmpty()
-        val summaries = listOfNotNull(processRiskFinding(state), incremental) + largeMr
+        val summaries = listOfNotNull(processRiskFinding(state)) + largeMr
         val enabledReports = state?.enabledReports ?: emptySet()
         val enabledMetrics = state?.enabledMetrics ?: emptySet()
         if (enabledReports.isEmpty() && enabledMetrics.isEmpty()) return findings + summaries

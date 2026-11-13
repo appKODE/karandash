@@ -83,7 +83,7 @@ public data class ComplianceItem(
  */
 @Serializable
 public enum class ComplianceStatus {
-    /** All findings for this rule are INFO-level. */
+    /** The rule ran and reported no WARNING or ERROR finding; a rule with only INFO findings is not listed. */
     PASSED,
 
     /** At least one ERROR-severity finding exists. */

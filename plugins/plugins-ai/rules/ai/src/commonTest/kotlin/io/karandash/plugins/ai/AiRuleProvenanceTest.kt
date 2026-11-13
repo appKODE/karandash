@@ -11,6 +11,7 @@ import io.karandash.plugins.ai.dispatch.PostProcessResult
 import kotlinx.coroutines.test.runTest
 import kotlin.test.Test
 import kotlin.test.assertEquals
+import kotlin.test.assertNotNull
 import kotlin.test.assertNull
 
 /** T: the AI rule's [io.karandash.api.finding.ReviewProvenance] and per-finding why. */
@@ -73,7 +74,7 @@ class AiRuleProvenanceTest {
         assertEquals(ProvenanceStatus.OK, analyzers.getValue("aiReview").status)
         assertEquals("2 chunks skipped: timeout", analyzers.getValue("aiReview").reason)
         assertEquals(ProvenanceStatus.FAILED, analyzers.getValue("aiTestGap").status)
-        assertEquals(AiHealth(calls = 2, failed = 1), state.health())
+        assertEquals(AiHealth(calls = 2, failed = 1, reason = "provider down"), state.health())
     }
 
     @Test
@@ -86,6 +87,13 @@ class AiRuleProvenanceTest {
     @Test
     fun `no provenance when no AI rule ran or skipped`() {
         assertNull(AiRuleState().provenance())
+    }
+
+    @Test
+    fun `provenance carries the incremental and budget notes`() {
+        val state = AiRuleState(ruleModels = mapOf("a" to "m"))
+        assertEquals(listOf("note"), checkNotNull(state.provenance(notes = listOf("note"))).notes)
+        assertNotNull(AiRuleState().provenance(notes = listOf("note")))
     }
 
     @Test

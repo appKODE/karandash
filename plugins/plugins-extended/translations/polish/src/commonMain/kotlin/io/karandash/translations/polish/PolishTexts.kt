@@ -176,6 +176,8 @@ internal val POLISH_TEXTS: Map<String, String> =
         "Risk %s" to "Ryzyko %s",
         "%d rule skipped|%d rules skipped|%d rules skipped" to "%d reguła pominięta|%d reguły pominięte|%d reguł pominiętych",
         "Passed: %s" to "Zaliczone: %s",
+        "%d AI rule failed|%d AI rules failed|%d AI rules failed" to
+            "%d reguła AI nie powiodła się|%d reguły AI nie powiodły się|%d reguł AI nie powiodło się",
         "AI reviewed %s files" to "AI przejrzało plików: %s",
         "run %s of this MR" to "uruchomienie %s tego MR",
         "MR" to "MR",
@@ -222,6 +224,7 @@ internal val POLISH_TEXTS: Map<String, String> =
         "(warnings)" to "(ostrzeżenia)",
         "(skipped)" to "(pominięto)",
         "Skipped rules (%d)" to "Pominięte reguły (%d)",
+        "AI rules failed (%d)" to "Nieudane reguły AI (%d)",
         "Policies not applied (%d)" to "Niezastosowane polityki (%d)",
         "unnamed policy" to "polityka bez nazwy",
         "… %d more" to "… jeszcze %d",

@@ -29,9 +29,12 @@ internal fun AiRuleState.withAnalyzerRun(
 /**
  * The run's [ReviewProvenance]: coverage, one row per AI rule (ran or skipped, sorted by id so the report does not
  * depend on scheduling), feedback suppressions then the post-validation filter stages, and the hash chain.
- * Null when no AI rule ran or skipped and there is no [aiStatus] line.
+ * [notes] go under the coverage line. Null when no AI rule ran or skipped and there is no [aiStatus] line or note.
  */
-internal fun AiRuleState.provenance(aiStatus: Pair<AiStatusText, List<String>>? = null): ReviewProvenance? {
+internal fun AiRuleState.provenance(
+    aiStatus: Pair<AiStatusText, List<String>>? = null,
+    notes: List<String> = emptyList(),
+): ReviewProvenance? {
     val coverage = RuleCoverage.merge(ruleCoverage.values)
     val analyzers = (ruleModels.keys + ruleSkipReasons.keys).sorted().map { id ->
         val model = ruleModels[id]
@@ -53,7 +56,7 @@ internal fun AiRuleState.provenance(aiStatus: Pair<AiStatusText, List<String>>? 
             context = ruleContext[id],
         )
     }
-    if (coverage == null && analyzers.isEmpty() && aiStatus == null) return null
+    if (coverage == null && analyzers.isEmpty() && aiStatus == null && notes.isEmpty()) return null
     val feedback = listOfNotNull(feedbackSuppressed.takeIf { it > 0 }?.let { FilterProvenance(FilterProvenance.FEEDBACK, it) })
     return ReviewProvenance(
         coverage = coverage,
@@ -64,6 +67,7 @@ internal fun AiRuleState.provenance(aiStatus: Pair<AiStatusText, List<String>>? 
         funnel = reviewFunnel,
         aiStatusTemplate = aiStatus?.first?.en,
         aiStatusArgs = aiStatus?.second.orEmpty(),
+        notes = notes,
     )
 }
 
