@@ -634,6 +634,7 @@ abstract class AbstractAiProvider(
     override suspend fun close() {
         cachedHttpClient.getAndUpdate { null }?.close()
         unreachable.value = emptyMap()
+        reached.value = emptySet()
     }
 
     /**
@@ -641,6 +642,9 @@ abstract class AbstractAiProvider(
      * run and every rule shares it, so later calls fail at once instead of each waiting out the connect timeout.
      */
     private val unreachable = MutableStateFlow(emptyMap<String, String>())
+
+    /** Base URLs that answered at least once this run: a connect failure to one is transient, retried, never latched. */
+    private val reached = MutableStateFlow(emptySet<String>())
 
     /** Remembers [baseUrl] as unreachable and returns the non-retryable error that names its host only. */
     private fun markUnreachable(
@@ -652,7 +656,8 @@ abstract class AbstractAiProvider(
         val reason = "$PROVIDER_UNREACHABLE_PREFIX$host ($kind)"
         // calls already in flight fail on their own; one WARN per host
         if (baseUrl !in unreachable.getAndUpdate { it + (baseUrl to reason) }) {
-            logger.warn("AI provider '$providerId': $reason, later calls to it this run fail at once (${e.message})")
+            logger.warn("AI provider '$providerId': $reason, later calls to it this run fail at once (${e::class.simpleName})")
+            logger.debug("AI provider '$providerId': $reason: ${e.message}")
         }
         return AiProviderException(reason, retryable = false, cause = e)
     }
@@ -671,11 +676,17 @@ abstract class AbstractAiProvider(
 
         for (attempt in 0 until attempts) {
             try {
-                return executeAndHandle(model, send)
+                return executeAndHandle(model, send).also {
+                    reached.update { it + baseUrl }
+                    unreachable.update { it - baseUrl }
+                }
             } catch (e: AiProviderException) {
                 lastException = e
-                // a host that refuses or never answers the connect will not answer a retry either (a status means it answered)
-                if (e.statusCode == null) connectFailureKind(e)?.let { throw markUnreachable(baseUrl, it, e) }
+                // a host that refuses or never answers the connect will not answer a retry either (a status means it
+                // answered), unless it answered earlier this run
+                if (e.statusCode == null && baseUrl !in reached.value) {
+                    connectFailureKind(e)?.let { throw markUnreachable(baseUrl, it, e) }
+                }
                 // an IllegalArgumentException cause is a guard (SSRF) or request-building rejection, never transient
                 if (!e.retryable || e.cause is IllegalArgumentException || attempt == attempts - 1) {
                     throw e

@@ -77,6 +77,7 @@ class LocalGitEnrichmentProvider : EnrichmentProviderModule {
         config: JsonElement,
         upstreamContext: EnrichmentContext,
     ): Map<String, JsonElement> {
+        noDataReason.value = null
         val c = cache.value
         if (c == null) return doEnrich(mr, config)
         val deps = buildDependencies(mr, config)

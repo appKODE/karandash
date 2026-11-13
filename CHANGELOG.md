@@ -7,6 +7,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+2.0.1 changes:
+
+- AI provider that cannot be reached is named `unreachable: <host> (<kind>)`; calls to it fail fast for the rest of the run, unless it answered earlier in that run.
+- Connect timeout is capped at 15s; a shorter `ai.timeout` is kept.
+- The review-thread analysis shows as skipped in the report instead of passed.
+- Skip lines are split by cause, and the info-row text is clearer.
+- Findings carry a "How to fix" suggestion.
+- A budget note explains which context was cut by `ai.budget`.
+- Enricher results have a Details section in the report.
+- Jira enrichment skips with a reason when its url is not set.
+- Local git enrichment says why it gave no data (git not available, shallow clone).
+- `cache.dir` is honored for remote `extends`.
+- Docker runtime images include git.
+- Execution timeout is 11 minutes.
+
 ## [1.0.0] - 2026-11-09
 
 First public release.

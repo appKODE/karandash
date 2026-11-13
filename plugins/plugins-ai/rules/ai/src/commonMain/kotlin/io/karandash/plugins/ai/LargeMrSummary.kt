@@ -95,7 +95,7 @@ internal object LargeMrSummary {
             message = "Large MR: ${units.size} review units: ${reviewed.size} reviewed, ${notReviewed.size} not reviewed, " +
                 "$excluded excluded or unchanged",
             rule = RULE,
-            explanation = listOfNotNull(split, listed("Reviewed units", reviewed), listed("Not reviewed units", notReviewed))
+            explanation = listOfNotNull(listed("Reviewed units", reviewed), listed("Not reviewed units", notReviewed))
                 .joinToString("\n\n"),
             suggestion = split,
             metadata = mapOf(

@@ -40,6 +40,19 @@ public data class ReviewProvenance(
     val aiStatusArgs: List<String> = emptyList(),
     val notes: List<String> = emptyList(),
 ) {
+    /** The 2.0.1 constructor without [notes], kept for binary compatibility with 2.0.0 callers. */
+    public constructor(
+        coverage: ReviewCoverage?,
+        enrichers: List<EnricherProvenance>,
+        analyzers: List<AnalyzerProvenance>,
+        filters: List<FilterProvenance>,
+        chain: FindingHashChain?,
+        aiStatus: String?,
+        funnel: Map<String, Int>,
+        aiStatusTemplate: String?,
+        aiStatusArgs: List<String>,
+    ) : this(coverage, enrichers, analyzers, filters, chain, aiStatus, funnel, aiStatusTemplate, aiStatusArgs, emptyList())
+
     /**
      * [aiStatus] in [language]: its [aiStatusTemplate] translated by a pack and filled with its values (a skip reason
      * translated by [skipReasonIn]), else [aiStatus] as set.
@@ -87,7 +100,11 @@ public data class EnricherProvenance(
     val tokens: Int = 0,
     val items: Int = 0,
     val cached: Boolean = false,
-)
+) {
+    /** The 2.0.1 constructor without [items] and [cached], kept for binary compatibility with 2.0.0 callers. */
+    public constructor(id: String, status: ProvenanceStatus, reason: String?, tokens: Int) :
+        this(id, status, reason, tokens, 0, false)
+}
 
 /**
  * One AI analyzer (rule) of the run.

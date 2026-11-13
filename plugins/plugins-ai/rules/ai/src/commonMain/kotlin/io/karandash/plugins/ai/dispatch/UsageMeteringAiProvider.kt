@@ -35,6 +35,10 @@ internal class UsageMeteringAiProvider(
     private val completion = atomic(0)
     private val cacheRead = atomic(0)
     private val cacheWrite = atomic(0)
+    private val called = atomic(false)
+
+    /** True once a call went through it (sent, whatever its outcome) or one was [record]ed. */
+    val madeCall: Boolean get() = called.value
 
     override suspend fun complete(
         prompt: String,
@@ -43,15 +47,19 @@ internal class UsageMeteringAiProvider(
         maxTokens: Int,
         temperature: Double,
         jsonMode: Boolean,
-    ): AiResponse =
-        delegate.complete(prompt, systemPrompt, model, maxTokens, temperature, jsonMode).also {
+    ): AiResponse {
+        called.value = true
+        return delegate.complete(prompt, systemPrompt, model, maxTokens, temperature, jsonMode).also {
             record(it.promptTokens, it.completionTokens, it.cacheReadTokens, it.cacheWriteTokens)
         }
+    }
 
-    override suspend fun completeRequest(request: AiCompletionRequest): AiResponse =
-        delegate.completeRequest(request).also {
+    override suspend fun completeRequest(request: AiCompletionRequest): AiResponse {
+        called.value = true
+        return delegate.completeRequest(request).also {
             record(it.promptTokens, it.completionTokens, it.cacheReadTokens, it.cacheWriteTokens)
         }
+    }
 
     fun record(
         promptTokens: Int,
@@ -59,6 +67,7 @@ internal class UsageMeteringAiProvider(
         cacheReadTokens: Int = 0,
         cacheWriteTokens: Int = 0,
     ) {
+        called.value = true
         prompt.addAndGet(promptTokens)
         completion.addAndGet(completionTokens)
         cacheRead.addAndGet(cacheReadTokens)

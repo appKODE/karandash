@@ -62,11 +62,14 @@ internal object AiRuleErrorHandlers {
         val detail = messages.firstOrNull { it.startsWith(PROVIDER_UNREACHABLE_PREFIX) }
             ?: (e as? AiProviderException)?.statusCode?.let { "HTTP $it" }
             ?: TIMED_OUT.takeIf { messages.any { m -> m.lowercase().let { "timeout" in it || TIMED_OUT in it } } }
-            ?: "call failed, see the job log"
+            ?: CALL_FAILED
         return "$PROVIDER_ERROR_PREFIX$detail"
     }
 
     const val PROVIDER_ERROR_PREFIX: String = "provider error: "
+
+    /** The generic detail of a failed call whose cause is not known; the job log has the rest. */
+    const val CALL_FAILED: String = "call failed, see the job log"
     private const val TIMED_OUT = "timed out"
     private const val MAX_CAUSE_DEPTH = 8
 

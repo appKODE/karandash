@@ -28,7 +28,6 @@ import io.karandash.plugins.ai.core.rules.PerRuleContextResolver
 import io.karandash.plugins.ai.dispatch.AiRuleDispatcher
 import io.karandash.plugins.ai.dispatch.ChunkBudget
 import io.karandash.plugins.ai.dispatch.DispatchPlanDump
-import io.karandash.plugins.ai.dispatch.DispatchUsage
 import io.karandash.plugins.ai.dispatch.DryRunRecorder
 import io.karandash.plugins.ai.dispatch.MrMap
 import io.karandash.plugins.ai.dispatch.NoJsonRecovery
@@ -142,7 +141,7 @@ internal class AiRuleCoreValidator(
             coverage.skipReason?.let { reason ->
                 val skipped = skip(ruleId, reason, s)
                 // no call was made: no model row, and ai:health counts only real calls
-                if (usage == DispatchUsage(budgetTokens = 0)) return skipped
+                if (!meteredProvider.madeCall) return skipped
             }
         }
 

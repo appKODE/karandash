@@ -51,6 +51,29 @@ class CostDeltaSplitTest {
         }
 
     @Test
+    fun `madeCall is set only when a call goes through the metered provider`() =
+        runTest {
+            val provider = object : AiProvider {
+                override val providerId = "fake"
+
+                override suspend fun complete(
+                    prompt: String,
+                    systemPrompt: String?,
+                    model: String,
+                    maxTokens: Int,
+                    temperature: Double,
+                    jsonMode: Boolean,
+                ) = AiResponse("ok", promptTokens = 1, completionTokens = 1, totalTokens = 2, model = model)
+
+                override suspend fun close() = Unit
+            }
+            val metered = UsageMeteringAiProvider(provider)
+            assertEquals(false, metered.madeCall)
+            metered.complete("p")
+            assertEquals(true, metered.madeCall)
+        }
+
+    @Test
     fun `prompt cache reads and writes reach the cost line`() =
         runTest {
             val provider = object : AiProvider {

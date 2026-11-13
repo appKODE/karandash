@@ -17,6 +17,7 @@ import io.karandash.models.finding.Severity
 import io.karandash.models.finding.errorsCount
 import io.karandash.models.finding.groupedByRule
 import io.karandash.models.finding.sortedByPriority
+import io.karandash.normalize.ModuleIdNormalizer
 import io.karandash.state.RuleExecutionResult
 import kotlin.time.Clock
 
@@ -105,7 +106,9 @@ object ReportDataBuilder {
         skipped: Set<String>,
     ): List<ComplianceItem> {
         val flagged = findings.filter { it.severity != Severity.INFO }
-        val cleanRules = executed - skipped - findings.mapTo(mutableSetOf()) { it.rule }
+        // Engine ids are camelCase (`riskScoring`), AI finding rules kebab-case (`risk-scoring`): compare normalized.
+        val notClean = (skipped + findings.map { it.rule }).mapTo(mutableSetOf(), ModuleIdNormalizer::normalize)
+        val cleanRules = executed.filterNot { ModuleIdNormalizer.normalize(it) in notClean }
         val ruleIds = (flagged.map { it.rule } + cleanRules.sorted()).distinct()
         val errorRules = flagged
             .filter { it.severity == Severity.ERROR }

@@ -192,6 +192,20 @@ class ReportDataBuilderTest {
     }
 
     @Test
+    fun `a camelCase executed rule with a kebab-case finding is not passed`() {
+        val result = ValidationResult(
+            findings = listOf(finding(Severity.INFO, "risk-scoring")),
+            ruleExecutionResults = listOf(
+                RuleExecutionResult("riskScoring", emptyList(), fromCache = false, executionDurationNs = 0),
+            ),
+        )
+
+        val checklist = ReportDataBuilder.build(result).complianceChecklist
+
+        assertTrue(checklist.isEmpty(), "riskScoring must not be PASSED: $checklist")
+    }
+
+    @Test
     fun explanationsPassedThrough() {
         val explanations = mapOf(
             "title-format" to "Title must follow conventional commits",

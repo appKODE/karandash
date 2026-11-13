@@ -72,6 +72,23 @@ class AiStatusLineTest {
     }
 
     @Test
+    fun `the generic failure reason adds no parenthetical and the reason is picked by rule id`() {
+        val generic = SkippedRuleInfo("a", "provider error: call failed, see the job log", SkipCategory.AI_PROVIDER_ERROR)
+        val finding = checkNotNull(healthFinding(AiHealth(calls = 1, failed = 1, reason = generic.reason), NoOpLogger))
+        assertEquals(
+            "AI provider call failed; rerun the job when the provider is back, or check the ai.provider and proxy settings",
+            finding.suggestion,
+        )
+        val state = AiRuleState(
+            ruleSkipReasons = mapOf(
+                "z" to SkippedRuleInfo("z", "provider error: timed out", SkipCategory.AI_PROVIDER_ERROR),
+                "a" to SkippedRuleInfo("a", "provider error: HTTP 503", SkipCategory.AI_PROVIDER_ERROR),
+            ),
+        )
+        assertEquals("provider error: HTTP 503", state.health().reason)
+    }
+
+    @Test
     fun `token text rounds to tenths of a thousand`() {
         assertEquals("950", tokenText(950))
         assertEquals("1.0k", tokenText(1_000))

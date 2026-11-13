@@ -86,6 +86,29 @@ class ProviderErrorMappingTest {
                 logger.lines.count { it.startsWith("WARN") && "unreachable: proxy.example" in it },
                 logger.lines.joinToString("\n")
             )
+            assertTrue(logger.lines.none { it.startsWith("WARN") && "url=" in it }, "the raw message goes to DEBUG only")
+        }
+
+    @Test
+    fun `a connect failure to a host that answered earlier this run is retried, not latched`() =
+        runTest {
+            val ok =
+                """{"id":"c","object":"chat.completion","model":"m","choices":[{"index":0,
+                    |"message":{"role":"assistant","content":"hi"},"finish_reason":"stop"}],
+                    |"usage":{"prompt_tokens":1,"completion_tokens":1,"total_tokens":2}}
+                """.trimMargin()
+            var sent = 0
+            val engine = MockEngine {
+                sent++
+                if (sent == 2) throw ConnectTimeoutException("Connect timeout has expired")
+                respond(ok, HttpStatusCode.OK, json)
+            }
+            val provider = openAi(engine, "https://proxy.example/v1")
+            provider.complete(prompt = "p", model = "m")
+            assertEquals("hi", provider.complete(prompt = "p", model = "m").content)
+            assertEquals(3, sent, "the failed connect was retried")
+            provider.complete(prompt = "p", model = "m")
+            assertEquals(4, sent, "later calls are not failed fast")
         }
 
     @Test

@@ -37,7 +37,8 @@ internal fun AiRuleState.health(): AiHealth {
     return AiHealth(
         calls = (ruleModels.keys + failures.map { it.ruleId }).size,
         failed = failures.size,
-        reason = failures.firstOrNull()?.reason?.takeIf { it.isNotBlank() },
+        // sorted, so the reason shown does not depend on the order the rules finished in
+        reason = failures.minByOrNull { it.ruleId }?.reason?.takeIf { it.isNotBlank() },
     )
 }
 
@@ -128,6 +129,7 @@ internal fun healthFinding(
     val message = (if (health.unavailable) AiHealthText.UNAVAILABLE else AiHealthText.PARTLY_UNAVAILABLE).of(health.failed, health.calls)
     val cause = health.reason
         ?.removePrefix(AiRuleErrorHandlers.PROVIDER_ERROR_PREFIX)
+        ?.takeIf { it != AiRuleErrorHandlers.CALL_FAILED }
         ?.let { " ($it)" }
         .orEmpty()
     val suggestion = "AI provider call failed$cause; rerun the job when the provider is back, " +

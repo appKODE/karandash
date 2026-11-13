@@ -11,6 +11,7 @@ import io.karandash.plugins.ai.dispatch.RuleCoverage
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
+import kotlin.test.assertFalse
 import kotlin.test.assertNull
 import kotlin.test.assertTrue
 
@@ -193,7 +194,7 @@ class LargeMrSummaryTest {
 
         assertEquals("Large MR: 3 review units: 3 reviewed, 0 not reviewed, 0 excluded or unchanged", units.message)
         assertEquals("Consider splitting this MR: 3 review units is over ai.large-mr.max-units 2", units.suggestion)
-        assertTrue("Consider splitting this MR: 3 review units is over ai.large-mr.max-units 2" in checkNotNull(units.explanation))
+        assertFalse("Consider splitting" in checkNotNull(units.explanation), "moved to suggestion, not copied")
     }
 
     @Test
