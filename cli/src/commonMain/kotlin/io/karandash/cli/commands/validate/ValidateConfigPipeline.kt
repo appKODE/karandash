@@ -4,6 +4,7 @@ import io.karandash.api.errors.ConfigException
 import io.karandash.api.errors.KarandashError
 import io.karandash.cache.CacheManager
 import io.karandash.cache.DownloadsCacheConfig
+import io.karandash.cli.commands.cache.resolveCacheBaseDir
 import io.karandash.cli.pipeline.ConfigLoader
 import io.karandash.config.GlobLimitsConfig
 import io.karandash.config.LimitsConfig
@@ -36,7 +37,8 @@ internal class ValidateConfigPipeline(
     private val configPathStr: String?,
     private val logger: Logger,
     private val formatRegistry: ConfigFormatRegistry,
-    private val cacheManager: CacheManager = CacheManager.defaultInstance(),
+    /** The downloads cache; null builds one at the root config's `cache.dir` ([rootCacheDir]). */
+    private val cacheManager: CacheManager? = null,
     /** Receives each extends-chain entry (source URL, parsed element), deepest ancestor first. */
     private val onConfigLayer: ((url: String, element: JsonElement) -> Unit)? = null,
     /** `--allow-localhost`: lets `extends:` and `{ file: }` fetches reach loopback hosts. */
@@ -67,7 +69,8 @@ internal class ValidateConfigPipeline(
                 fetcher,
                 CacheLayer(
                     fetcher = fetcher,
-                    casCache = cacheManager.getCasCache(CacheManager.DOWNLOADS_NAMESPACE),
+                    casCache = (cacheManager ?: CacheManager(cacheDir = rootCacheDir(rootElement)))
+                        .getCasCache(CacheManager.DOWNLOADS_NAMESPACE),
                     logger = logger,
                     enabled = cacheDownloads && rootCacheEnabled(rootElement),
                 ),
@@ -75,6 +78,17 @@ internal class ValidateConfigPipeline(
         } finally {
             fetcher.close()
         }
+    }
+
+    /**
+     * Root `cache.dir`, where the run's caches live too, else [CacheManager.DEFAULT_BASE_DIR]. Only the local root
+     * config is known before the `extends:` chain is fetched, so a `cache.dir` set by a parent (or one holding a
+     * `${'$'}{VAR}`, interpolated only after the chain merge) cannot apply here and the default is used.
+     */
+    internal fun rootCacheDir(rootElement: JsonElement?): Path {
+        val cache = (rootElement as? JsonObject)?.get("cache") as? JsonObject
+        val dir = (cache?.get("dir") as? JsonPrimitive)?.takeIf { it.isString }?.content?.takeUnless { "${'$'}{" in it }
+        return resolveCacheBaseDir(null, dir)
     }
 
     /** Root `cache.enabled` (any key spelling); true unless it is the boolean false. */

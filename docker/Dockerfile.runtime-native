@@ -31,7 +31,8 @@ RUN set -eux; \
     apt-get install -y --no-install-recommends \
         libssl3 \
         libcurl4 \
-        ca-certificates; \
+        ca-certificates \
+        git; \
     rm -rf /var/lib/apt/lists/*
 
 WORKDIR /app

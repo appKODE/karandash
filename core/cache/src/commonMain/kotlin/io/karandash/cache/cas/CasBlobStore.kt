@@ -86,13 +86,15 @@ class CasBlobStore(
     fun blobPath(digest: CasDigest): Path = Path(casDir, digest.shard, digest.remainder)
 
     private fun ensureDirectory(dir: Path) {
-        if (!fs.exists(dir)) {
-            try {
-                createDirectories(dir)
-            } catch (_: IOException) {
-                // Race: another process created it
-            }
+        if (fs.exists(dir)) return
+        try {
+            createDirectories(dir)
+        } catch (e: IOException) {
+            // a concurrent process may have created it; otherwise the write would fail later with a vaguer error
+            if (!fs.exists(dir)) throw e
         }
+        // some platforms report a failed mkdir as false, not an exception
+        if (!fs.exists(dir)) throw IOException("Failed to create CAS directory $dir")
     }
 
     private companion object {

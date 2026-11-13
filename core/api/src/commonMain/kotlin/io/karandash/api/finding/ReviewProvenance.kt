@@ -76,6 +76,8 @@ public enum class ProvenanceStatus {
  * @property status Ok, skipped (switched off, e.g. a missing token or tool) or failed (threw or timed out).
  * @property reason Why it was skipped or failed; null when ok.
  * @property tokens Estimated tokens of the data it delivered (4 chars per token).
+ * @property items Enrichment ids it delivered this run; 0 when it ran and found nothing.
+ * @property cached True when its outputs were already in the context, so it did not run.
  */
 @Serializable
 public data class EnricherProvenance(
@@ -83,6 +85,8 @@ public data class EnricherProvenance(
     val status: ProvenanceStatus,
     val reason: String? = null,
     val tokens: Int = 0,
+    val items: Int = 0,
+    val cached: Boolean = false,
 )
 
 /**

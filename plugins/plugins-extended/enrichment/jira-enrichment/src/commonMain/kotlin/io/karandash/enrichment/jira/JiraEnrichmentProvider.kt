@@ -81,7 +81,11 @@ class JiraEnrichmentProvider internal constructor(
         context: PluginContext,
     ) {
         skip.value = null
-        val url = cfg.url.ifBlank { null } ?: return apiClient.close()
+        val url = cfg.url.ifBlank { null }
+        if (url == null) {
+            skip.value = "url not set (KARANDASH_JIRA_URL): ticket keys only, no ticket details"
+            return apiClient.close()
+        }
         val token = cfg.token ?: context.env("JIRA_TOKEN")
         if (token == null) {
             skip.value = "url set but JIRA_TOKEN not set: ticket keys only, no ticket details"

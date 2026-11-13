@@ -555,14 +555,20 @@ class JiraEnrichmentProviderTest {
         }
 
     @Test
-    fun `a url with a token or no url at all gives no skip reason`() =
+    fun `a url with a token gives no skip reason`() =
         runTest {
             val withToken = JiraEnrichmentProvider()
             withToken.initialize(testContextWithAuth())
+
+            assertNull(withToken.skipReason())
+        }
+
+    @Test
+    fun `no url gives a skip reason naming the env var`() =
+        runTest {
             val noUrl = JiraEnrichmentProvider()
             noUrl.initialize(testContext())
 
-            assertNull(withToken.skipReason())
-            assertNull(noUrl.skipReason())
+            assertTrue(noUrl.skipReason().orEmpty().startsWith("url not set (KARANDASH_JIRA_URL)"), noUrl.skipReason())
         }
 }

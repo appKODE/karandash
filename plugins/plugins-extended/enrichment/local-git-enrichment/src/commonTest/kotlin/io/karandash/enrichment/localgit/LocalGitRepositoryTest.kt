@@ -197,6 +197,22 @@ class LocalGitRepositoryTest {
         }
 
     @Test
+    fun `a shallow clone without history gives a no data skip reason`() =
+        runTest {
+            val dir = repo() ?: return@runTest
+            val full = LocalGitEnrichmentProvider()
+            full.initialize(Ctx(dir))
+            assertTrue(full.enrich(mr("never.kt"), JsonObject(emptyMap())).isEmpty())
+            assertNull(full.skipReason())
+
+            val shallow = repo(shallowMarker = true) ?: return@runTest
+            val provider = LocalGitEnrichmentProvider()
+            provider.initialize(Ctx(shallow))
+            assertTrue(provider.enrich(mr("never.kt"), JsonObject(emptyMap())).isEmpty())
+            assertEquals("no data: shallow clone", provider.skipReason())
+        }
+
+    @Test
     fun `provider caches the computed result`() =
         runTest {
             val dir = repo() ?: return@runTest

@@ -200,7 +200,7 @@ ai:
   max-token-budget: "${KARANDASH_AI_MAX_TOKENS}"
   fail-on-error: false
   timeout: "5m"
-  execution-timeout: "6m"
+  execution-timeout: "11m"
   max-retries: 1
   # Matches the eval config of s15/s16, the runs this preset was tuned on.
   stream: true
