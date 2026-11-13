@@ -44,6 +44,7 @@ internal enum class ViewText(
     SKIPPED(
         "%d rule skipped|%d rules skipped|%d rules skipped",
     ),
+    AI_FAILED("%d AI rule failed|%d AI rules failed|%d AI rules failed"),
     PASSED_RULES("Passed: %s"),
     AI_COVERAGE("AI reviewed %s files"),
     RUN_OF_MR("run %s of this MR"),

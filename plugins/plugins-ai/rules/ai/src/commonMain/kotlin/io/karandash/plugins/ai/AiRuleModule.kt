@@ -490,6 +490,9 @@ class AiRuleModule(
     /** Each AI rule's coverage this run, for the review-unit summary. */
     internal fun ruleCoverages(): Collection<RuleCoverage> = aiState.value.ruleCoverage.values
 
+    /** Changed files an AI rule sent to the model, across all rules; null when no rule ran. */
+    internal fun reviewedFileCount(): Int? = RuleCoverage.merge(ruleCoverages())?.reviewedFiles
+
     /** [LargeMrSummary] of this run's coverage, judged with the effective `ai.size-policy.exclude.patterns`. */
     internal fun largeMrSummary(
         changes: List<FileChange>,
@@ -503,7 +506,13 @@ class AiRuleModule(
         return LargeMrSummary.findings(changes, ruleCoverages(), config, patterns, testGap)
     }
 
-    override fun reviewProvenance(): ReviewProvenance? = aiState.value.let { it.provenance(it.aiStatusLine(configured = isConfigured())) }
+    override fun reviewProvenance(): ReviewProvenance? =
+        aiState.value.let {
+            it.provenance(
+                it.aiStatusLine(configured = isConfigured()),
+                listOfNotNull(it.incrementalNote, initState.value?.budgetPlan?.shortfall),
+            )
+        }
 
     /** Whether this run had AI rules switched on; the status line is printed only then. */
     private fun isConfigured(): Boolean = initState.value?.let { it.enabledRules.isNotEmpty() || it.customRules.isNotEmpty() } == true
@@ -526,6 +535,9 @@ class AiRuleModule(
         filters: List<FilterProvenance>,
         funnel: Map<String, Int> = emptyMap(),
     ) = aiState.update { it.copy(postFilters = filters, reviewFunnel = funnel) }
+
+    /** Records the incremental-review line for [reviewProvenance]. */
+    internal fun recordIncrementalNote(note: String?) = aiState.update { it.copy(incrementalNote = note) }
 
     /** Records the finding hash chain for [reviewProvenance]. */
     internal fun recordChain(chain: FindingHashChain) = aiState.update { it.copy(chain = chain) }

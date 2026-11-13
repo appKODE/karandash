@@ -94,11 +94,17 @@ internal class ChunkBudget(
                 logger.info("[ai] rule=${it.rule} calls=${it.calls} chunkChars=${it.chunkChars} call=${it.call} grant=$grant")
             }
         }
+        var shortfall: String? = null
         if (scale) {
             val wanted = runBefore + sized.values.sumOf { (it.need - it.share).coerceAtLeast(0) }
             val knob = budgetKnob(input.pluginCfg)
             val summary = planSummary(rules, input.run.maxTokens, wanted, knob)
-            if (rules.any { it.need > it.share + it.grant }) warn(summary) else logger.info(summary)
+            if (rules.any { it.need > it.share + it.grant }) {
+                warn(summary)
+                shortfall = summary.removePrefix("[ai] ").replaceFirstChar { it.uppercase() }
+            } else {
+                logger.info(summary)
+            }
         }
         return BudgetPlanDump(
             scaleBudget = scale,
@@ -112,6 +118,7 @@ internal class ChunkBudget(
             },
             rules = rules,
             notes = notes,
+            shortfall = shortfall,
         )
     }
 

@@ -89,6 +89,20 @@ class ChunkBudgetPlanTest {
     }
 
     @Test
+    fun `an underfunded plan names the funded share and the knob to raise, a fully funded one has no shortfall`() {
+        val run = TokenBudget(maxTokens = 3 * SHARE)
+        val short = AiPluginConfig(costBudget = CostBudgetConfig(maxTokensPerRun = 3 * SHARE + 50))
+        val shortfall = checkNotNull(ChunkBudget(buildTestRegistry()).ledger(input(shares(), run, short), NoOpLogger).shortfall)
+
+        assertTrue("funded: " in shortfall && "raise ai.cost-budget to " in shortfall, shortfall)
+        assertNull(
+            ChunkBudget(
+                buildTestRegistry()
+            ).ledger(input(shares(), TokenBudget(maxTokens = 3 * SHARE), AiPluginConfig()), NoOpLogger).shortfall
+        )
+    }
+
+    @Test
     fun `a configured priority outranks the default order`() {
         val shares = shares()
         val priorities = mapOf("codeSuggestions" to 5)

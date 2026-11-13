@@ -1,7 +1,9 @@
 package io.karandash.engine
 
+import io.karandash.api.finding.ComplianceItem
 import io.karandash.api.finding.ComplianceStatus
 import io.karandash.api.finding.LocationKey
+import io.karandash.api.finding.SkippedRuleInfo
 import io.karandash.api.finding.TimingData
 import io.karandash.models.finding.Finding
 import io.karandash.models.finding.FixSuggestion
@@ -159,12 +161,34 @@ class ReportDataBuilderTest {
         val result = ValidationResult(findings = findings)
         val report = ReportDataBuilder.build(result)
 
-        assertEquals(3, report.complianceChecklist.size)
+        assertEquals(2, report.complianceChecklist.size)
 
         val map = report.complianceChecklist.associateBy { it.ruleId }
         assertEquals(ComplianceStatus.FAILED, map["title-format"]?.status)
         assertEquals(ComplianceStatus.WARNING, map["branch-naming"]?.status)
-        assertEquals(ComplianceStatus.PASSED, map["draft"]?.status)
+        assertNull(map["draft"])
+    }
+
+    @Test
+    fun `a rule that ran clean is passed unless it was skipped and an INFO-only rule is not passed`() {
+        val result = ValidationResult(
+            findings = listOf(finding(Severity.INFO, "ai-incremental")),
+            ruleExecutionResults = listOf(
+                RuleExecutionResult("title-format", emptyList(), fromCache = false, executionDurationNs = 0),
+                RuleExecutionResult(
+                    "ai-incremental",
+                    listOf(finding(Severity.INFO, "ai-incremental")),
+                    fromCache = false,
+                    executionDurationNs = 0
+                ),
+                RuleExecutionResult("branch-naming", emptyList(), fromCache = false, executionDurationNs = 0),
+            ),
+            skippedRules = listOf(SkippedRuleInfo("branch-naming", "unreachable")),
+        )
+
+        val checklist = ReportDataBuilder.build(result).complianceChecklist
+
+        assertEquals(listOf(ComplianceItem("title-format", ComplianceStatus.PASSED)), checklist)
     }
 
     @Test

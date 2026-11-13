@@ -30,6 +30,8 @@ internal val RUSSIAN_TEXTS: Map<String, String> =
         "Risk %s" to "Риск %s",
         "%d rule skipped|%d rules skipped|%d rules skipped" to "%d правило пропущено|%d правила пропущено|%d правил пропущено",
         "Passed: %s" to "Пройдены: %s",
+        "%d AI rule failed|%d AI rules failed|%d AI rules failed" to
+            "%d AI-правило не выполнено|%d AI-правила не выполнено|%d AI-правил не выполнено",
         "AI reviewed %s files" to "AI проверил файлов: %s",
         "run %s of this MR" to "запуск %s этого MR",
         "MR" to "MR",
@@ -98,6 +100,7 @@ internal val RUSSIAN_TEXTS: Map<String, String> =
         "(warnings)" to "(предупреждения)",
         "(skipped)" to "(пропущено)",
         "Skipped rules (%d)" to "Пропущенные правила (%d)",
+        "AI rules failed (%d)" to "Невыполненные AI-правила (%d)",
         "Policies not applied (%d)" to "Неприменённые политики (%d)",
         "unnamed policy" to "политика без имени",
         "… %d more" to "… ещё %d",

@@ -19,6 +19,7 @@ import kotlinx.coroutines.test.runTest
 import kotlinx.serialization.json.jsonObject
 import kotlin.test.Test
 import kotlin.test.assertEquals
+import kotlin.test.assertNotNull
 import kotlin.test.assertNull
 import kotlin.test.assertTrue
 
@@ -69,11 +70,9 @@ class AiPipelineExtensionIncrementalTest {
             runOnce("""{"ai": {}}""", firstPush)
             val ext = runOnce("""{"ai": {}}""", secondPush)
 
-            val summary = ext.beforeReporting(emptyList(), secondPush).single { it.rule == IncrementalSummary.RULE }
+            val note = checkNotNull(note(ext))
 
-            assertEquals("1", summary.metadata["skippedFiles"])
-            assertEquals("1", summary.metadata["reviewedFiles"])
-            assertTrue(summary.explanation.orEmpty().contains("a/A.kt"))
+            assertEquals("Incremental AI review: 1 changed file(s) to review, 1 unchanged skipped (cached findings reused)", note)
         }
 
     @Test
@@ -83,7 +82,7 @@ class AiPipelineExtensionIncrementalTest {
             val ext = runOnce("""{"ai": {"incremental": false}}""", secondPush)
 
             assertNull(ext.incrementalChangedFiles())
-            assertTrue(ext.beforeReporting(emptyList(), secondPush).none { it.rule == IncrementalSummary.RULE })
+            assertNull(ext.getIncrementalContext()?.let { IncrementalSummary.note(it) })
         }
 
     @Test
@@ -104,7 +103,7 @@ class AiPipelineExtensionIncrementalTest {
             runOnce(config, createTestMergeRequest(changes = listOf(change("a/A.kt"), change("c/C.kt"))))
             val ext = runOnce(config, secondPush)
 
-            assertTrue(ext.beforeReporting(emptyList(), secondPush).any { it.rule == IncrementalSummary.RULE })
+            assertNotNull(note(ext))
         }
 
     @Test
@@ -114,8 +113,14 @@ class AiPipelineExtensionIncrementalTest {
             runOnce(config, firstPush)
             val ext = runOnce(config, secondPush)
 
-            assertTrue(ext.beforeReporting(emptyList(), secondPush).any { it.rule == IncrementalSummary.RULE })
+            assertNotNull(note(ext))
         }
+
+    /** The provenance line the pipeline records for [ext]'s run; [reviewed] is the changed files a rule reviewed. */
+    private fun note(
+        ext: AiPipelineExtension,
+        reviewed: Int? = null,
+    ): String? = IncrementalSummary.note(checkNotNull(ext.getIncrementalContext()), reviewed = reviewed)
 
     private fun pushed(
         vararg history: String,
@@ -135,10 +140,9 @@ class AiPipelineExtensionIncrementalTest {
             val ext = runOnce(oversized, rewritten)
 
             assertEquals(setOf("a/A.kt", "b/B.kt"), ext.incrementalChangedFiles())
-            val note = ext.beforeReporting(emptyList(), rewritten).single { it.rule == IncrementalSummary.RULE }
             assertEquals(
-                "Incremental AI review: all 2 file(s) reviewed, last reviewed commit aaaaaaaa is not in the MR history",
-                note.message,
+                "Incremental AI review: 2 changed file(s), 2 reviewed, last reviewed commit aaaaaaaa is not in the MR history",
+                note(ext, reviewed = 2),
             )
         }
 
@@ -150,8 +154,10 @@ class AiPipelineExtensionIncrementalTest {
             val ext = runOnce(oversized, withHistory)
 
             assertEquals(setOf("a/A.kt", "b/B.kt"), ext.incrementalChangedFiles())
-            val note = ext.beforeReporting(emptyList(), withHistory).single { it.rule == IncrementalSummary.RULE }
-            assertEquals("Incremental AI review: all 2 file(s) reviewed, no last reviewed commit stored", note.message)
+            assertEquals(
+                "Incremental AI review: 2 changed file(s), 2 reviewed, no last reviewed commit stored",
+                note(ext, reviewed = 2),
+            )
         }
 
     @Test
@@ -162,8 +168,7 @@ class AiPipelineExtensionIncrementalTest {
             val ext = runOnce(oversized, next)
 
             assertEquals(setOf("b/B.kt"), ext.incrementalChangedFiles())
-            val note = ext.beforeReporting(emptyList(), next).single { it.rule == IncrementalSummary.RULE }
-            assertEquals("1", note.metadata["skippedFiles"])
+            assertTrue(checkNotNull(note(ext)).contains("1 unchanged since aaaaaaaa"))
         }
 
     @Test

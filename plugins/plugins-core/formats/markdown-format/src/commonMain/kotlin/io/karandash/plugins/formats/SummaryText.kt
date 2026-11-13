@@ -48,6 +48,7 @@ internal enum class SummaryText(
     WARNINGS_MARK("(warnings)"),
     SKIPPED_MARK("(skipped)"),
     SKIPPED_RULES("Skipped rules (%d)"),
+    AI_RULES_FAILED("AI rules failed (%d)"),
     POLICIES_NOT_APPLIED("Policies not applied (%d)"),
     UNNAMED_POLICY("unnamed policy"),
     MORE("… %d more"),

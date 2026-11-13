@@ -41,6 +41,8 @@ internal data class AiRuleState(
     val sampleTokens: Map<String, Int> = emptyMap(),
     /** AI rule findings the pipeline extension served from the incremental cache this run; null when none were. */
     val cachedFindings: Int? = null,
+    /** The pipeline extension's incremental-review line ([IncrementalSummary.note]); null when not incremental. */
+    val incrementalNote: String? = null,
 )
 
 /** This state with [ruleId] skipped for [reason]; the category is read from the reason unless given. */

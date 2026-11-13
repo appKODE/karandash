@@ -20,6 +20,8 @@ import kotlinx.serialization.Serializable
 internal data class AiHealth(
     val calls: Int,
     val failed: Int,
+    /** The first failed call's skip reason, e.g. `provider error: unreachable: host (connect timeout)`. */
+    val reason: String? = null,
 ) {
     /** True when every call failed: the run had no AI review at all. */
     val unavailable: Boolean get() = calls > 0 && failed == calls
@@ -30,10 +32,13 @@ internal data class AiHealth(
 
 internal fun AiRuleState.health(): AiHealth {
     // a rule whose dispatch completed counts as answered even when some of its chunks failed
-    val failed = ruleSkipReasons.values
+    val failures = ruleSkipReasons.values
         .filter { it.category == SkipCategory.AI_PROVIDER_ERROR && it.ruleId !in ruleModels }
-        .map { it.ruleId }
-    return AiHealth(calls = (ruleModels.keys + failed).size, failed = failed.size)
+    return AiHealth(
+        calls = (ruleModels.keys + failures.map { it.ruleId }).size,
+        failed = failures.size,
+        reason = failures.firstOrNull()?.reason?.takeIf { it.isNotBlank() },
+    )
 }
 
 /**
@@ -121,7 +126,16 @@ internal fun healthFinding(
     val text = "AI ${if (health.unavailable) "unavailable" else "partly unavailable"} (${health.failedText})"
     logger.info(text)
     val message = (if (health.unavailable) AiHealthText.UNAVAILABLE else AiHealthText.PARTLY_UNAVAILABLE).of(health.failed, health.calls)
-    return FindingFactory.info(rule = AI_HEALTH_RULE, message = message.en).withText(message = message)
+    val cause = health.reason
+        ?.removePrefix(AiRuleErrorHandlers.PROVIDER_ERROR_PREFIX)
+        ?.let { " ($it)" }
+        .orEmpty()
+    val suggestion = "AI provider call failed$cause; rerun the job when the provider is back, " +
+        "or check the ai.provider and proxy settings"
+    return FindingFactory
+        .info(rule = AI_HEALTH_RULE, message = message.en)
+        .withText(message = message)
+        .copy(suggestion = suggestion)
 }
 
 /** The [healthFinding] message in English; other languages from a pack (`{0}` failed of `{1}` calls). */

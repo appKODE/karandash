@@ -4,6 +4,7 @@ import io.karandash.api.finding.BaselineComparison
 import io.karandash.api.finding.ComplianceItem
 import io.karandash.api.finding.ComplianceStatus
 import io.karandash.api.finding.ReportMetadata
+import io.karandash.api.finding.SkipCategory
 import io.karandash.api.finding.SkippedRuleInfo
 import io.karandash.api.finding.ValidationReport
 import io.karandash.api.finding.summarize
@@ -12,6 +13,7 @@ import io.karandash.models.finding.Location
 import io.karandash.models.finding.Severity
 import io.karandash.models.report.MrView
 import io.karandash.models.report.ReportStyle
+import io.karandash.models.report.SkippedView
 import io.karandash.models.support.WellKnownMetadataKeys
 import kotlin.test.Test
 import kotlin.test.assertEquals
@@ -39,6 +41,7 @@ class ReportViewBuilderTest {
         findings: List<Finding>,
         passed: Boolean = false,
         baseline: BaselineComparison? = null,
+        skipped: List<SkippedRuleInfo> = listOf(SkippedRuleInfo("jira", "no token")),
     ) = ValidationReport(
         passed = passed,
         findings = findings,
@@ -49,7 +52,7 @@ class ReportViewBuilderTest {
         complianceChecklist = listOf(ComplianceItem("title", ComplianceStatus.PASSED)),
         explanations = emptyMap(),
         metadata = ReportMetadata(version = "1.0.0", timestamp = 0L),
-        skippedRules = listOf(SkippedRuleInfo("jira", "no token")),
+        skippedRules = skipped,
         baselineComparison = baseline,
     )
 
@@ -106,6 +109,27 @@ class ReportViewBuilderTest {
             details.lines,
         )
         assertTrue(details.any)
+    }
+
+    @Test
+    fun `an AI provider failure gets its own details line and is not counted as a skipped rule`() {
+        val failed = "provider error: unreachable: proxy.example.ru (connect timeout)"
+        val skipped = listOf(
+            SkippedRuleInfo("ai-review", failed, SkipCategory.AI_PROVIDER_ERROR),
+            SkippedRuleInfo("ai-test-gap", failed, SkipCategory.AI_PROVIDER_ERROR),
+            SkippedRuleInfo("jira", "no token"),
+        )
+        val details = report(emptyList(), skipped = skipped).toView().details
+
+        assertEquals(
+            listOf(
+                "2 AI rules failed: ai-review, ai-test-gap ($failed)",
+                "1 rule skipped: jira (no token)",
+                "Passed: title",
+            ),
+            details.lines,
+        )
+        assertEquals(listOf(SkippedView("jira", "no token")), details.skipped)
     }
 
     @Test

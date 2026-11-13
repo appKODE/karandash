@@ -60,6 +60,18 @@ class AiStatusLineTest {
     }
 
     @Test
+    fun `the health finding says why the provider failed and what to check`() {
+        val finding = checkNotNull(
+            healthFinding(AiHealth(calls = 2, failed = 2, reason = "provider error: unreachable: host (connect timeout)"), NoOpLogger),
+        )
+        assertEquals(
+            "AI provider call failed (unreachable: host (connect timeout)); rerun the job when the provider is back, " +
+                "or check the ai.provider and proxy settings",
+            finding.suggestion,
+        )
+    }
+
+    @Test
     fun `token text rounds to tenths of a thousand`() {
         assertEquals("950", tokenText(950))
         assertEquals("1.0k", tokenText(1_000))

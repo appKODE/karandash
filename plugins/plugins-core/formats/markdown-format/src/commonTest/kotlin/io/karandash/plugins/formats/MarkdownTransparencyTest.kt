@@ -49,6 +49,19 @@ class MarkdownTransparencyTest {
     }
 
     @Test
+    fun `provenance notes render under the coverage line in the how-this-review block`() {
+        val p = ReviewProvenance(
+            coverage = ReviewCoverage(totalFiles = 3, reviewedFiles = 2),
+            notes = listOf("Incremental AI review: 2 changed file(s), 2 reviewed, 1 unchanged since aaaaaaaa skipped"),
+        )
+        val md = formatSummaryMarkdown(report(p), emptyList(), inlineCount = 0, MarkdownTransparencyConfig())
+
+        val block = md.substringAfter("<details><summary>How this review was made</summary>", "").substringBefore("</details>")
+        assertTrue("reviewed 2/3 files" in block && "Incremental AI review: 2 changed file(s)" in block, md)
+        assertTrue(block.indexOf("reviewed 2/3 files") < block.indexOf("Incremental AI review"), block)
+    }
+
+    @Test
     fun `a huge provenance block in expanded mode with the diagram keeps the summary under the size limit`() {
         val longReason = "provider said no ".repeat(150)
         val huge = provenance.copy(

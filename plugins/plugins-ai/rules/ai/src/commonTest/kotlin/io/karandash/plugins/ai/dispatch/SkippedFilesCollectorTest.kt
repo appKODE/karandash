@@ -44,7 +44,7 @@ class SkippedFilesCollectorTest {
     }
 
     @Test
-    fun `incremental summary appends the not-sent counts and metadata`() {
+    fun `incremental note appends the not-sent counts`() {
         val context = IncrementalContext(
             mrKey = "mr",
             deltaMr = createTestMergeRequest(),
@@ -53,13 +53,10 @@ class SkippedFilesCollectorTest {
             hasCacheEntry = true,
             currentSnapshot = emptyMap(),
         )
-        val plain = IncrementalSummary.finding(context)
-        assertTrue(plain?.message?.endsWith("(cached findings reused)") == true)
+        val plain = IncrementalSummary.note(context)
+        assertTrue(plain?.endsWith("(cached findings reused)") == true)
 
-        val finding = checkNotNull(IncrementalSummary.finding(context, SkippedFiles(tooLarge = setOf("a", "b"), binary = setOf("c"))))
-        assertTrue(finding.message.endsWith("; not sent to AI by at least one rule: 2 too large, 1 binary"), finding.message)
-        assertEquals("2", finding.metadata["tooLargeFiles"])
-        assertEquals("0", finding.metadata["filteredFiles"])
-        assertEquals("1", finding.metadata["binaryFiles"])
+        val note = checkNotNull(IncrementalSummary.note(context, SkippedFiles(tooLarge = setOf("a", "b"), binary = setOf("c"))))
+        assertTrue(note.endsWith("; not sent to AI by at least one rule: 2 too large, 1 binary"), note)
     }
 }

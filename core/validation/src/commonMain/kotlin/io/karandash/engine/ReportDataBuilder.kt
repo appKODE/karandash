@@ -64,7 +64,11 @@ object ReportDataBuilder {
                 LocationKey(path = loc.path, line = loc.line)
             }
 
-        val complianceChecklist = buildComplianceChecklist(findings)
+        val complianceChecklist = buildComplianceChecklist(
+            findings,
+            executed = result.ruleExecutionResults.mapTo(mutableSetOf()) { it.ruleId },
+            skipped = result.skippedRules.mapTo(mutableSetOf()) { it.ruleId },
+        )
         val ruleSummaries = buildRuleSummaries(findings, result.ruleExecutionResults)
         val metrics = buildMetrics(result, timingData)
 
@@ -91,13 +95,23 @@ object ReportDataBuilder {
         )
     }
 
-    private fun buildComplianceChecklist(findings: List<Finding>): List<ComplianceItem> {
-        val ruleIds = findings.map { it.rule }.distinct()
-        val errorRules = findings
+    /**
+     * One item per rule with a WARNING or ERROR finding, and per rule that ran clean: executed, not skipped, and with
+     * no finding at all. A rule whose only findings are INFO is left out, so it is not listed as passed.
+     */
+    private fun buildComplianceChecklist(
+        findings: List<Finding>,
+        executed: Set<String>,
+        skipped: Set<String>,
+    ): List<ComplianceItem> {
+        val flagged = findings.filter { it.severity != Severity.INFO }
+        val cleanRules = executed - skipped - findings.mapTo(mutableSetOf()) { it.rule }
+        val ruleIds = (flagged.map { it.rule } + cleanRules.sorted()).distinct()
+        val errorRules = flagged
             .filter { it.severity == Severity.ERROR }
             .map { it.rule }
             .toSet()
-        val warningRules = findings
+        val warningRules = flagged
             .filter { it.severity == Severity.WARNING }
             .map { it.rule }
             .toSet()
