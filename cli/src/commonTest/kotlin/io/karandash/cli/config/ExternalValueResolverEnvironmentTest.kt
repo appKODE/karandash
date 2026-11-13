@@ -105,7 +105,7 @@ class ExternalValueResolverEnvironmentTest {
     }
 
     @Test
-    fun `resolves file with only whitespace, trimEnd removes all whitespace-only content`() {
+    fun `resolves file with only whitespace - trimEnd removes all whitespace-only content`() {
         // All characters are whitespace, so trimEnd() reduces the entire string to ""
         val file = write("spaces.txt", "   \t   \n  \n")
         val config = buildJsonObject {
@@ -116,7 +116,7 @@ class ExternalValueResolverEnvironmentTest {
     }
 
     @Test
-    fun `resolves file with multiple trailing newlines, trimEnd removes all`() {
+    fun `resolves file with multiple trailing newlines - trimEnd removes all`() {
         val file = write("trailing.txt", "^feat:\n\n\n")
         val config = buildJsonObject {
             put("pattern", buildJsonObject { put("file", file.toString()) })
@@ -126,7 +126,7 @@ class ExternalValueResolverEnvironmentTest {
     }
 
     @Test
-    fun `resolves file with Windows CRLF line endings, trimEnd removes trailing CRLF`() {
+    fun `resolves file with Windows CRLF line endings - trimEnd removes trailing CRLF`() {
         val file = write("crlf.txt", "^(feat|fix):\r\n")
         val config = buildJsonObject {
             put("pattern", buildJsonObject { put("file", file.toString()) })

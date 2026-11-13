@@ -103,7 +103,7 @@ class JsonElementMergerTest {
     // ── Type mismatch edge cases ────────────────────────────────────────
 
     @Test
-    fun `type mismatch string vs object, override wins`() {
+    fun `type mismatch string vs object - override wins`() {
         val base = JsonObject(mapOf("key" to JsonPrimitive("string")))
         val override = JsonObject(mapOf("key" to JsonObject(mapOf("nested" to JsonPrimitive(true)))))
         val result = JsonElementMerger.mergeLayers(base, override) as JsonObject
@@ -112,7 +112,7 @@ class JsonElementMergerTest {
     }
 
     @Test
-    fun `type mismatch object vs array, override wins`() {
+    fun `type mismatch object vs array - override wins`() {
         val base = JsonObject(mapOf("key" to JsonObject(mapOf("a" to JsonPrimitive(1)))))
         val override = JsonObject(mapOf("key" to JsonArray(listOf(JsonPrimitive(1), JsonPrimitive(2)))))
         val result = JsonElementMerger.mergeLayers(base, override) as JsonObject
@@ -215,7 +215,7 @@ class JsonElementMergerTest {
     // ── Policies merge-by-key (built-in default) ─────────────────────────
 
     @Test
-    fun `policies use MERGE_BY_KEY by default, unmatched base items preserved`() {
+    fun `policies use MERGE_BY_KEY by default - unmatched base items preserved`() {
         val base = JsonObject(
             mapOf(
                 "policies" to JsonArray(
@@ -388,7 +388,7 @@ class JsonElementMergerTest {
     // ── Scalar override edge cases ──────────────────────────────────────
 
     @Test
-    fun `scalar values, override wins for all primitive types`() {
+    fun `scalar values - override wins for all primitive types`() {
         val base = JsonObject(
             mapOf(
                 "bool" to JsonPrimitive(false),

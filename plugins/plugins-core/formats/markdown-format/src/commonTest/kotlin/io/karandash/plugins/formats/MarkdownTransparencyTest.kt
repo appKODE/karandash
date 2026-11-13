@@ -78,7 +78,7 @@ class MarkdownTransparencyTest {
     }
 
     @Test
-    fun `an ok enricher row tells its items, no data or cached`() {
+    fun `an ok enricher row tells its items - no data or cached`() {
         val p = provenance.copy(
             enrichers = listOf(
                 EnricherProvenance("git", ProvenanceStatus.OK, items = 2),

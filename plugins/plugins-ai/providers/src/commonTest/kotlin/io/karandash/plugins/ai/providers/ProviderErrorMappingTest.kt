@@ -90,7 +90,7 @@ class ProviderErrorMappingTest {
         }
 
     @Test
-    fun `a connect failure to a host that answered earlier this run is retried, not latched`() =
+    fun `a connect failure to a host that answered earlier this run is retried - not latched`() =
         runTest {
             val ok =
                 """{"id":"c","object":"chat.completion","model":"m","choices":[{"index":0,

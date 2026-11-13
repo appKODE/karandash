@@ -89,7 +89,7 @@ class ChunkBudgetPlanTest {
     }
 
     @Test
-    fun `an underfunded plan names the funded share and the knob to raise, a fully funded one has no shortfall`() {
+    fun `an underfunded plan names the funded share and the knob to raise - a fully funded one has no shortfall`() {
         val run = TokenBudget(maxTokens = 3 * SHARE)
         val short = AiPluginConfig(costBudget = CostBudgetConfig(maxTokensPerRun = 3 * SHARE + 50))
         val shortfall = checkNotNull(ChunkBudget(buildTestRegistry()).ledger(input(shares(), run, short), NoOpLogger).shortfall)

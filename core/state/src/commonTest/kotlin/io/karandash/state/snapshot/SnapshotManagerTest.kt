@@ -304,7 +304,7 @@ class SnapshotManagerTest {
     }
 
     @Test
-    fun `saveRunSnapshot is idempotent, only writes once`() {
+    fun `saveRunSnapshot is idempotent - only writes once`() {
         var saveCount = 0
         val persistence = object : SnapshotPersistence {
             override fun loadSnapshot(mrKey: String) = emptyMap<String, Long>()
