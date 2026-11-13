@@ -60,7 +60,7 @@ class AiRuleCostLoggerTest {
                 coverage = null
             )
 
-        assertEquals("  mr-summary: skipped (provider error: timed out)", line)
+        assertEquals("  mr-summary: failed (provider error: timed out)", line)
     }
 
     @Test

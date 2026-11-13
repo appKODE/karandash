@@ -92,7 +92,8 @@ internal object AiRuleCostLogger {
         val reason = skipReason ?: coverage?.skipReason
         return when {
             reason != null -> {
-                "  $ruleId: skipped ($reason)"
+                val label = if (reason.startsWith(AiRuleErrorHandlers.PROVIDER_ERROR_PREFIX)) "failed" else "skipped"
+                "  $ruleId: $label ($reason)"
             }
 
             tokens != null -> {

@@ -1596,7 +1596,7 @@ ai:
 ```
 AI plugin cost estimate: $0.2500 (48210 tokens total, 41000 in / 7210 out)
   ai-security-scan: ok, 12000 tokens, 4s 100ms
-  mr-summary: skipped (provider error: timed out)
+  mr-summary: failed (provider error: timed out)
   code-suggestions: from cache
 ```
 
