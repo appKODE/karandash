@@ -624,13 +624,12 @@ Deletions: 0
 | | Rule | Finding | How to fix |
 |---|---|---|---|
 | ℹ️ | `code-quality` | Code quality: good (score: 0.7) - Mostly mechanical changes. |  |
-| ℹ️ | `ai-test-gap` | Test gap: 1 unit(s) change 4 production files and no test |  |
+| ℹ️ | `ai-test-gap` | Test gap: 1 unit(s) change 4 production files and no test | Add or update tests for the listed units |
 
 <details><summary>Details</summary>
 
 - Risk 0
 - AI reviewed 5/5 files
-- Passed: change-categorization, code-quality, mr-summary, pr-split, risk-scoring, ai-test-gap
 
 </details>
 
@@ -672,7 +671,7 @@ Suggested splits:
 
 | Enricher | Status | Details |
 |---|---|---|
-| `jira` | ok |  |
+| `jira` | skipped | url not set (KARANDASH_JIRA_URL): ticket keys only, no ticket details |
 
 | Analyzer | Model | Tokens in/out | Cost | Findings |
 |---|---|---|---|---|
@@ -686,5 +685,5 @@ Suggested splits:
 
 <sub>karandash 1.0.0 · React 👎 on a finding to mark it as a false positive. · updated 2026-10-30 15:40 UTC</sub>
 
-<!-- karandash-state verdict=pass findings=d27547298d1d40f3 body=79e0e1011bc8d028 -->
+<!-- karandash-state verdict=pass findings=d27547298d1d40f3 body=b25126372cfbd482 -->
 ~~~~~

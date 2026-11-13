@@ -782,13 +782,12 @@ Deletions: 0
 | ❌ | src/main/kotlin/orders/OrderService.kt:13 | `review-comments` | `order!!` throws for an unknown id; the description promises no crash. | Return early with `val order = repo.find(id) ?: return`. <!-- karandash-row ecf791905a503757 --> |
 | ⚠️ | MR | `code-quality` | Code quality: needs improvement (score: 0.5) - The cancel function asserts non-null and swallows every exception. |  |
 | ⚠️ | src/main/kotlin/orders/OrderService.kt:13 | `review-comments` | The empty catch hides every failure of `repo.delete`. | Log the exception or let it propagate. <!-- karandash-row 415f3b737a4c2dae --> |
-| ℹ️ | MR | `ai-test-gap` | Test gap: 1 unit(s) change 1 production files and no test |  |
+| ℹ️ | MR | `ai-test-gap` | Test gap: 1 unit(s) change 1 production files and no test | Add or update tests for the listed units |
 
 <details><summary>Details</summary>
 
 - Risk 0
 - AI reviewed 1/1 files
-- Passed: change-categorization, mr-summary, risk-scoring, ai-test-gap
 
 </details>
 
@@ -817,7 +816,7 @@ Adds OrderService.cancel.
 
 | Enricher | Status | Details |
 |---|---|---|
-| `jira` | ok |  |
+| `jira` | skipped | url not set (KARANDASH_JIRA_URL): ticket keys only, no ticket details |
 
 | Analyzer | Model | Tokens in/out | Cost | Findings |
 |---|---|---|---|---|
@@ -831,7 +830,7 @@ Adds OrderService.cancel.
 
 <sub>karandash 1.0.0 · React 👎 on a finding to mark it as a false positive. · updated 2026-10-30 15:40 UTC</sub>
 
-<!-- karandash-state verdict=fail findings=e770c26552ba9eb3 body=d31e3b4c1dbcb51a -->
+<!-- karandash-state verdict=fail findings=e770c26552ba9eb3 body=84d4577e39b1eb5e -->
 ~~~~~
 
 ## Note: src/main/kotlin/orders/OrderService.kt:13

@@ -610,6 +610,7 @@ Deletions: 1
 
 - 3 rules skipped: outdated-docs (no documentation near the changed code could be read at the source SHA), review-thread-analysis (no open review threads), similar-issues (the platform cannot search past merge requests)
 - AI reviewed 1/1 files
+- Passed: code-suggestions, description-quality, review-comments, risk-scoring
 
 </details>
 
@@ -619,21 +620,21 @@ Deletions: 1
 
 | Enricher | Status | Details |
 |---|---|---|
-| `jira` | ok |  |
+| `jira` | skipped | url not set (KARANDASH_JIRA_URL): ticket keys only, no ticket details |
 
 | Analyzer | Model | Tokens in/out | Cost | Findings |
 |---|---|---|---|---|
 | `code-suggestions` | `eval-replay` | 1150/4 | $0.0000 | 0 |
 | `description-quality` | `eval-replay` | 857/20 | $0.0000 | 0 |
-| `outdated-docs` | `eval-replay` | 0/0 | $0.0000 | 0 |
+| `outdated-docs` | skipped: no documentation near the changed code could be read at the source SHA | 0/0 | $0.0000 | 0 |
 | `review-comments` | `eval-replay` | 4600/6 | $0.0000 | 0 |
-| `review-thread-analysis` | `eval-replay` | 0/0 | $0.0000 | 0 |
+| `review-thread-analysis` | skipped: no open review threads | 0/0 | $0.0000 | 0 |
 | `risk-scoring` | `eval-replay` | 890/24 | $0.0000 | 0 |
-| `similar-issues` | `eval-replay` | 0/0 | $0.0000 | 0 |
+| `similar-issues` | skipped: the platform cannot search past merge requests | 0/0 | $0.0000 | 0 |
 
 </details>
 
 <sub>karandash 1.0.0 · React 👎 on a finding to mark it as a false positive. · updated 2026-10-30 15:40 UTC</sub>
 
-<!-- karandash-state verdict=pass findings=cbf29ce484222325 body=594bcf35e164ef80 -->
+<!-- karandash-state verdict=pass findings=cbf29ce484222325 body=152278341a6a9ea3 -->
 ~~~~~

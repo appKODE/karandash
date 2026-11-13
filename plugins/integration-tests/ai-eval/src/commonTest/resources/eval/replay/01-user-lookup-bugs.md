@@ -1322,13 +1322,13 @@ Target Branch: main
 | ⚠️ | MR | `review-thread-analysis` | Description claims no behavior change but adds new public query methods. | Drop the 'no behavior change' line. |
 | ⚠️ | src/main/kotlin/users/UserRepository.kt:19 | `code-quality` | \[correctness\] Non-null assertion on a nullable lookup | Return a fallback for missing users <!-- karandash-row f1b3225ce220d33d --> |
 | ℹ️ | MR | `similar-issues` | Found 1 potential related pattern: String-interpolated SQL in repository classes |  |
-| ℹ️ | MR | `ai-test-gap` | Test gap: 1 unit(s) change 1 production files and no test |  |
+| ℹ️ | MR | `ai-test-gap` | Test gap: 1 unit(s) change 1 production files and no test | Add or update tests for the listed units |
 
 <details><summary>Details</summary>
 
 - Risk 0
 - AI reviewed 1/1 files
-- Passed: change-categorization, mr-summary, risk-scoring, similar-issues, fix-suggestions, ai-test-gap
+- Passed: code-suggestions, description-quality
 
 </details>
 
@@ -1362,7 +1362,7 @@ Adds findByName and displayName to UserRepository.
 
 | Enricher | Status | Details |
 |---|---|---|
-| `jira` | ok |  |
+| `jira` | skipped | url not set (KARANDASH_JIRA_URL): ticket keys only, no ticket details |
 
 | Analyzer | Model | Tokens in/out | Cost | Findings |
 |---|---|---|---|---|
@@ -1387,7 +1387,7 @@ Adds findByName and displayName to UserRepository.
 
 <sub>karandash 1.0.0 · React 👎 on a finding to mark it as a false positive. · updated 2026-10-30 15:40 UTC</sub>
 
-<!-- karandash-state verdict=fail findings=b6703c475720f7ff body=b45fc66b5afe2f1f -->
+<!-- karandash-state verdict=fail findings=b6703c475720f7ff body=8c4fa361d55fb774 -->
 ~~~~~
 
 ## Note: src/main/kotlin/users/UserRepository.kt:13

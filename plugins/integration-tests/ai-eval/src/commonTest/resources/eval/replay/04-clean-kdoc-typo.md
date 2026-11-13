@@ -593,13 +593,13 @@ Deletions: 1
 
 | | Rule | Finding | How to fix |
 |---|---|---|---|
-| ℹ️ | `ai-test-gap` | Test gap: 1 unit(s) change 1 production files and no test |  |
+| ℹ️ | `ai-test-gap` | Test gap: 1 unit(s) change 1 production files and no test | Add or update tests for the listed units |
 
 <details><summary>Details</summary>
 
 - 6 rules skipped: design-doc-drift (no design doc content in enrichment context), fix-suggestions (no input data (no ERROR or WARNING findings to fix)), outdated-docs (no documentation near the changed code could be read at the source SHA), pr-split (threshold not met (1 files &lt;= 3)), review-thread-analysis (no open review threads), similar-issues (the platform cannot search past merge requests)
 - AI reviewed 1/1 files
-- Passed: ai-test-gap
+- Passed: code-suggestions, description-quality, review-comments, risk-scoring
 
 </details>
 
@@ -609,24 +609,24 @@ Deletions: 1
 
 | Enricher | Status | Details |
 |---|---|---|
-| `jira` | ok |  |
+| `jira` | skipped | url not set (KARANDASH_JIRA_URL): ticket keys only, no ticket details |
 
 | Analyzer | Model | Tokens in/out | Cost | Findings |
 |---|---|---|---|---|
 | `code-suggestions` | `eval-replay` | 1109/4 | $0.0000 | 0 |
 | `description-quality` | `eval-replay` | 846/21 | $0.0000 | 0 |
-| `design-doc-drift` | `eval-replay` | 0/0 | $0.0000 | 0 |
-| `fix-suggestions` | `eval-replay` | 0/0 | $0.0000 | 0 |
-| `outdated-docs` | `eval-replay` | 0/0 | $0.0000 | 0 |
-| `pr-split` | `eval-replay` | 0/0 | $0.0000 | 0 |
+| `design-doc-drift` | skipped: no design doc content in enrichment context | 0/0 | $0.0000 | 0 |
+| `fix-suggestions` | skipped: no input data (no ERROR or WARNING findings to fix) | 0/0 | $0.0000 | 0 |
+| `outdated-docs` | skipped: no documentation near the changed code could be read at the source SHA | 0/0 | $0.0000 | 0 |
+| `pr-split` | skipped: threshold not met (1 files &lt;= 3) | 0/0 | $0.0000 | 0 |
 | `review-comments` | `eval-replay` | 4516/6 | $0.0000 | 0 |
-| `review-thread-analysis` | `eval-replay` | 0/0 | $0.0000 | 0 |
+| `review-thread-analysis` | skipped: no open review threads | 0/0 | $0.0000 | 0 |
 | `risk-scoring` | `eval-replay` | 884/25 | $0.0000 | 0 |
-| `similar-issues` | `eval-replay` | 0/0 | $0.0000 | 0 |
+| `similar-issues` | skipped: the platform cannot search past merge requests | 0/0 | $0.0000 | 0 |
 
 </details>
 
 <sub>karandash 1.0.0 · React 👎 on a finding to mark it as a false positive. · updated 2026-10-30 15:40 UTC</sub>
 
-<!-- karandash-state verdict=pass findings=d4885ca65e0a11c5 body=2e69b25a144c8899 -->
+<!-- karandash-state verdict=pass findings=d4885ca65e0a11c5 body=ade41784d909300e -->
 ~~~~~

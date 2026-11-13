@@ -564,6 +564,7 @@ Deletions: 1
 
 - 1 rule skipped: outdated-docs (no documentation near the changed code could be read at the source SHA)
 - AI reviewed 1/1 files
+- Passed: code-suggestions, design-doc-drift, review-comments, risk-scoring
 
 </details>
 
@@ -573,14 +574,14 @@ Deletions: 1
 
 | Enricher | Status | Details |
 |---|---|---|
-| `eval-design-doc` | ok |  |
-| `jira` | ok |  |
+| `eval-design-doc` | ok | 1 items |
+| `jira` | skipped | url not set (KARANDASH_JIRA_URL): ticket keys only, no ticket details |
 
 | Analyzer | Model | Tokens in/out | Cost | Findings |
 |---|---|---|---|---|
 | `code-suggestions` | `eval-replay` | 1002/4 | $0.0000 | 0 |
 | `design-doc-drift` | `eval-replay` | 831/30 | $0.0000 | 0 |
-| `outdated-docs` | `eval-replay` | 0/0 | $0.0000 | 0 |
+| `outdated-docs` | skipped: no documentation near the changed code could be read at the source SHA | 0/0 | $0.0000 | 0 |
 | `review-comments` | `eval-replay` | 4212/6 | $0.0000 | 0 |
 | `risk-scoring` | `eval-replay` | 885/26 | $0.0000 | 0 |
 
@@ -588,5 +589,5 @@ Deletions: 1
 
 <sub>karandash 1.0.0 · React 👎 on a finding to mark it as a false positive. · updated 2026-10-30 15:40 UTC</sub>
 
-<!-- karandash-state verdict=pass findings=cbf29ce484222325 body=fd120cd1004b23ab -->
+<!-- karandash-state verdict=pass findings=cbf29ce484222325 body=5cf1714dda8ba7b7 -->
 ~~~~~

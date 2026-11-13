@@ -783,7 +783,7 @@ Deletions: 0
 <details><summary>Details</summary>
 
 - AI reviewed 2/2 files
-- Passed: change-categorization, description-quality, mr-summary
+- Passed: review-comments, risk-scoring
 
 </details>
 
@@ -810,7 +810,7 @@ Adds Int.clampTo and a unit test.
 
 | Enricher | Status | Details |
 |---|---|---|
-| `jira` | ok |  |
+| `jira` | skipped | url not set (KARANDASH_JIRA_URL): ticket keys only, no ticket details |
 
 | Analyzer | Model | Tokens in/out | Cost | Findings |
 |---|---|---|---|---|
@@ -824,5 +824,5 @@ Adds Int.clampTo and a unit test.
 
 <sub>karandash 1.0.0 · React 👎 on a finding to mark it as a false positive. · updated 2026-10-30 15:40 UTC</sub>
 
-<!-- karandash-state verdict=pass findings=6b979cc3caf785f1 body=65e63cd29ffa0515 -->
+<!-- karandash-state verdict=pass findings=6b979cc3caf785f1 body=32c9fa54a3dee1f9 -->
 ~~~~~

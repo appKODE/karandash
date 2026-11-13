@@ -742,13 +742,12 @@ Deletions: 0
 |---|---|---|---|---|
 | ❌ | src/main/kotlin/payments/GatewayConfig.kt:6 | `review-comments` | A live API key is committed in source and must be rotated. | Load the key from an environment variable at startup. <!-- karandash-row 96a3144b4ee98064 --> |
 | ⚠️ | MR | `code-quality` | Code quality: needs improvement (score: 0.4) - A live credential is hard coded. |  |
-| ℹ️ | MR | `ai-test-gap` | Test gap: 1 unit(s) change 1 production files and no test |  |
+| ℹ️ | MR | `ai-test-gap` | Test gap: 1 unit(s) change 1 production files and no test | Add or update tests for the listed units |
 
 <details><summary>Details</summary>
 
 - Risk 0
 - AI reviewed 1/1 files
-- Passed: change-categorization, mr-summary, risk-scoring, ai-test-gap
 
 </details>
 
@@ -776,7 +775,7 @@ Adds the payment gateway configuration object.
 
 | Enricher | Status | Details |
 |---|---|---|
-| `jira` | ok |  |
+| `jira` | skipped | url not set (KARANDASH_JIRA_URL): ticket keys only, no ticket details |
 
 | Analyzer | Model | Tokens in/out | Cost | Findings |
 |---|---|---|---|---|
@@ -794,7 +793,7 @@ Adds the payment gateway configuration object.
 
 <sub>karandash 1.0.0 · React 👎 on a finding to mark it as a false positive. · updated 2026-10-30 15:40 UTC</sub>
 
-<!-- karandash-state verdict=fail findings=26034eea60267b72 body=e2ac03a655930580 -->
+<!-- karandash-state verdict=fail findings=26034eea60267b72 body=9bef58c1c640ac40 -->
 ~~~~~
 
 ## Note: src/main/kotlin/payments/GatewayConfig.kt:6

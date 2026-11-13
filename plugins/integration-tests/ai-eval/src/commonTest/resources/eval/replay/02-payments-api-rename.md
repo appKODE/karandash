@@ -432,12 +432,12 @@ L25(+)     }
 |---|---|---|---|
 | ⚠️ | `ownership-analysis` | Ownership analysis (score: 0.6): Single owner; one bug fix correlated with an earlier commit. |  |
 | ⚠️ | `ownership-analysis` | Bug-fix pattern in src/main/kotlin/payments/PaymentsApi.kt: this change fixes code from an earlier commit (confidence: 80%) |  |
-| ℹ️ | `ai-test-gap` | Test gap: 1 unit(s) change 1 production files and no test |  |
+| ℹ️ | `ai-test-gap` | Test gap: 1 unit(s) change 1 production files and no test | Add or update tests for the listed units |
 
 <details><summary>Details</summary>
 
 - AI reviewed 1/1 files
-- Passed: generate-description, ai-test-gap
+- Passed: outdated-docs
 
 </details>
 
@@ -466,8 +466,8 @@ Renames PaymentsApi.charge to createCharge and fixes amount rounding.
 
 | Enricher | Status | Details |
 |---|---|---|
-| `eval-design-doc` | ok |  |
-| `jira` | ok |  |
+| `eval-design-doc` | ok | 1 items |
+| `jira` | skipped | url not set (KARANDASH_JIRA_URL): ticket keys only, no ticket details |
 
 | Analyzer | Model | Tokens in/out | Cost | Findings |
 |---|---|---|---|---|
@@ -481,5 +481,5 @@ Renames PaymentsApi.charge to createCharge and fixes amount rounding.
 
 <sub>karandash 1.0.0 · React 👎 on a finding to mark it as a false positive. · updated 2026-10-30 15:40 UTC</sub>
 
-<!-- karandash-state verdict=pass findings=d808fb6d2f71c843 body=e2352b227747102a -->
+<!-- karandash-state verdict=pass findings=d808fb6d2f71c843 body=5db5fa6f282ae07b -->
 ~~~~~
