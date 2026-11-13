@@ -25,6 +25,7 @@ import io.ktor.client.statement.HttpResponse
 import io.ktor.client.statement.bodyAsChannel
 import io.ktor.client.statement.bodyAsText
 import io.ktor.http.HttpStatusCode
+import io.ktor.http.parseUrl
 import kotlinx.atomicfu.atomic
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
@@ -162,6 +163,9 @@ abstract class AbstractAiProvider(
 
         /** Silence tolerated on a non-streaming call; OpenRouter keep-alive bytes reset it, a silent connection does not. */
         private val STALL_LIMIT = KarandashDuration.ofSeconds(180)
+
+        /** A dead host fails within this, not the whole `ai.timeout`; a reachable one connects far sooner. */
+        private val CONNECT_TIMEOUT_CAP = KarandashDuration.ofSeconds(15)
         protected const val HTTP_SERVER_ERROR_MIN = 500
         protected const val HTTP_SERVER_ERROR_MAX = 599
         protected const val HTTP_SUCCESS_MIN = 200
@@ -391,7 +395,7 @@ abstract class AbstractAiProvider(
             val created = ProviderHttpClientFactory.create(
                 engine = httpClientEngine,
                 timeout = timeout,
-                connectTimeout = timeout,
+                connectTimeout = minOf(timeout, CONNECT_TIMEOUT_CAP),
                 json = json,
                 services = runtime.value.services,
                 logger = logger,
@@ -629,6 +633,28 @@ abstract class AbstractAiProvider(
 
     override suspend fun close() {
         cachedHttpClient.getAndUpdate { null }?.close()
+        unreachable.value = emptyMap()
+    }
+
+    /**
+     * Base URL to the `unreachable: <host> (<kind>)` reason of its first connect failure. A run handle lives for one
+     * run and every rule shares it, so later calls fail at once instead of each waiting out the connect timeout.
+     */
+    private val unreachable = MutableStateFlow(emptyMap<String, String>())
+
+    /** Remembers [baseUrl] as unreachable and returns the non-retryable error that names its host only. */
+    private fun markUnreachable(
+        baseUrl: String,
+        kind: String,
+        e: AiProviderException,
+    ): AiProviderException {
+        val host = parseUrl(baseUrl)?.host?.takeIf { it.isNotEmpty() } ?: "provider"
+        val reason = "$PROVIDER_UNREACHABLE_PREFIX$host ($kind)"
+        // calls already in flight fail on their own; one WARN per host
+        if (baseUrl !in unreachable.getAndUpdate { it + (baseUrl to reason) }) {
+            logger.warn("AI provider '$providerId': $reason, later calls to it this run fail at once (${e.message})")
+        }
+        return AiProviderException(reason, retryable = false, cause = e)
     }
 
     // -- Private retry machinery --
@@ -640,12 +666,16 @@ abstract class AbstractAiProvider(
         var lastException: Exception? = null
         // maxRetries counts retries after the first attempt, like ai.max-retries in the docs and HttpClientSettings.Retry
         val attempts = effectiveMaxRetries.value.coerceAtLeast(0) + 1
+        val baseUrl = resolveBaseUrl()
+        unreachable.value[baseUrl]?.let { throw AiProviderException(it, retryable = false) }
 
         for (attempt in 0 until attempts) {
             try {
                 return executeAndHandle(model, send)
             } catch (e: AiProviderException) {
                 lastException = e
+                // a host that refuses or never answers the connect will not answer a retry either (a status means it answered)
+                if (e.statusCode == null) connectFailureKind(e)?.let { throw markUnreachable(baseUrl, it, e) }
                 // an IllegalArgumentException cause is a guard (SSRF) or request-building rejection, never transient
                 if (!e.retryable || e.cause is IllegalArgumentException || attempt == attempts - 1) {
                     throw e
@@ -751,6 +781,31 @@ abstract class AbstractAiProvider(
         return if (retryAfterMs != null) AiProviderException.RateLimited(retryAfterMs, error.message.orEmpty()) else error
     }
 }
+
+/** Prefix of the error of a call whose host could not be reached: `unreachable: <host> (<kind>)`. */
+const val PROVIDER_UNREACHABLE_PREFIX: String = "unreachable: "
+
+private const val MAX_CAUSE_DEPTH = 8
+
+/** `connect timeout`, `connection refused` or `dns` when [e] or a cause is a failure to connect, else null. */
+internal fun connectFailureKind(e: Throwable): String? =
+    generateSequence(e) { it.cause }.take(MAX_CAUSE_DEPTH).firstNotNullOfOrNull { t ->
+        val name = t::class.simpleName.orEmpty()
+        val message = t.message.orEmpty().lowercase()
+        when {
+            name == "ConnectTimeoutException" || "connect timeout" in message || "connection timed out" in message -> "connect timeout"
+
+            name == "ConnectException" || "connection refused" in message -> "connection refused"
+
+            name == "UnresolvedAddressException" || name == "UnknownHostException" ||
+                DNS_MARKERS.any { it in message } -> "dns"
+
+            else -> null
+        }
+    }
+
+private val DNS_MARKERS =
+    listOf("unresolved address", "could not resolve", "couldn't resolve", "name or service not known", "nodename nor servname")
 
 /** a 401 becomes [AiProviderException.AuthenticationFailed], a 404 naming a model [AiProviderException.ModelNotAvailable]; 403 stays non-retryable. */
 private fun typedError(

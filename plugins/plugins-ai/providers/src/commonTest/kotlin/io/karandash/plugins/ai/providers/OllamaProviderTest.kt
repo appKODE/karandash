@@ -218,7 +218,7 @@ class OllamaProviderTest {
 
     @Test
     @Suppress("TooGenericExceptionThrown")
-    fun `complete throws retryable exception on connection refused like every openai-compatible provider`() =
+    fun `complete names the host of a refused connection like every openai-compatible provider`() =
         runTest {
             val engine = MockEngine { _ ->
                 throw Exception("Connection refused")
@@ -229,8 +229,8 @@ class OllamaProviderTest {
                 provider.complete(prompt = "Hello", model = "llama3.2")
             }
 
-            assertTrue(exception.retryable, "Connection errors are retryable, as for the other OpenAI-compatible providers")
-            assertTrue(exception.message!!.contains("HTTP request failed"))
+            assertFalse(exception.retryable, "A refused connection is not retried, as for the other OpenAI-compatible providers")
+            assertEquals("unreachable: ollama (connection refused)", exception.message)
 
             provider.close()
         }
@@ -430,7 +430,7 @@ class OllamaProviderTest {
 
     @Test
     @Suppress("TooGenericExceptionThrown")
-    fun `complete retries connection errors like every other provider`() =
+    fun `complete does not retry a refused connection like every other provider`() =
         runTest {
             var callCount = 0
 
@@ -444,7 +444,7 @@ class OllamaProviderTest {
                 provider.complete(prompt = "Hello", model = "llama3.2")
             }
 
-            assertEquals(3, callCount, "A refused connection is retried up to maxRetries attempts")
+            assertEquals(1, callCount, "A refused connection is not retried: the host will not answer a retry either")
 
             provider.close()
         }

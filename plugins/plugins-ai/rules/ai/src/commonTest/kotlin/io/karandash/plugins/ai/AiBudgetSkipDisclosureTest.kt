@@ -6,6 +6,7 @@ import io.karandash.api.ModuleType
 import io.karandash.api.PluginContext
 import io.karandash.api.ai.AiAnalyzerContext
 import io.karandash.api.ai.AiAnalyzerModule
+import io.karandash.api.finding.ProvenanceStatus
 import io.karandash.api.finding.ReviewCoverage
 import io.karandash.api.module.RuleModule
 import io.karandash.api.support.mapToJsonElement
@@ -84,6 +85,22 @@ class AiBudgetSkipDisclosureTest {
             assertEquals("  $DECLINING: skipped (no input data)", ruleLine(summary, DECLINING), summary)
             assertTrue("skipped" !in ruleLine(summary, QUIET), summary)
             assertEquals(setOf(DECLINING), module.skippedRuleReasons().keys)
+            module.shutdown()
+        }
+
+    @Test
+    fun `a rule that skipped without a call shows no model and is no health call`() =
+        runTest {
+            val declining = TestAnalyzer(DECLINING, SMALL_ESTIMATE) { it.skip("no open review threads") }
+            val module = initializedModule(listOf(declining))
+
+            module.validate(DECLINING, createTestMergeRequest(changes = listOf(change("A.kt"))), JsonObject(emptyMap()))
+
+            val row = assertNotNull(module.reviewProvenance()?.analyzers?.singleOrNull { it.ruleId == DECLINING })
+            assertEquals(null, row.model)
+            assertEquals(ProvenanceStatus.SKIPPED, row.status)
+            assertEquals("no open review threads", row.reason)
+            assertEquals(0, module.health().calls)
             module.shutdown()
         }
 

@@ -4,6 +4,7 @@ import io.karandash.api.ai.AiProviderException
 import io.karandash.api.finding.SkipCategory
 import io.karandash.models.finding.Finding
 import io.karandash.plugins.ai.dispatch.TrivialDiff
+import io.karandash.plugins.ai.providers.PROVIDER_UNREACHABLE_PREFIX
 import io.karandash.utils.finding.FindingFactory
 
 internal object AiRuleErrorHandlers {
@@ -15,7 +16,8 @@ internal object AiRuleErrorHandlers {
         e: AiProviderException,
         state: AiRuleInitState,
     ): List<Finding> {
-        // One INFO line per run says the AI is unavailable (healthFinding); each call's detail is DEBUG
+        // one WARN per rule names the cause; the raw message (urls, a response body) stays at DEBUG
+        state.runtimeContext.logger.warn("AI plugin: $ruleId failed: ${providerErrorReason(e)}")
         state.runtimeContext.logger.debug(
             "AI plugin: Provider error for $ruleId: ${e.message} (status=${e.statusCode}, retryable=${e.retryable})",
         )
@@ -56,17 +58,17 @@ internal object AiRuleErrorHandlers {
      * response body, and the reason reaches the MR comment.
      */
     fun providerErrorReason(e: Exception): String {
-        val message = e.message.orEmpty()
-        val detail = when {
-            e is AiProviderException && e.statusCode != null -> "HTTP ${e.statusCode}"
-            TIMED_OUT in message.lowercase() -> TIMED_OUT
-            else -> "call failed, see the job log"
-        }
+        val messages = generateSequence<Throwable>(e) { it.cause }.take(MAX_CAUSE_DEPTH).mapNotNull { it.message }.toList()
+        val detail = messages.firstOrNull { it.startsWith(PROVIDER_UNREACHABLE_PREFIX) }
+            ?: (e as? AiProviderException)?.statusCode?.let { "HTTP $it" }
+            ?: TIMED_OUT.takeIf { messages.any { m -> m.lowercase().let { "timeout" in it || TIMED_OUT in it } } }
+            ?: "call failed, see the job log"
         return "$PROVIDER_ERROR_PREFIX$detail"
     }
 
     const val PROVIDER_ERROR_PREFIX: String = "provider error: "
     private const val TIMED_OUT = "timed out"
+    private const val MAX_CAUSE_DEPTH = 8
 
     fun errorFinding(
         ruleId: String,

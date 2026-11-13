@@ -4,6 +4,8 @@ import io.karandash.api.ai.AiProviderException
 import io.karandash.duration.KarandashDuration
 import io.ktor.client.engine.mock.MockEngine
 import io.ktor.client.engine.mock.respond
+import io.ktor.client.network.sockets.ConnectTimeoutException
+import io.ktor.client.plugins.HttpTimeoutCapability
 import io.ktor.http.HttpHeaders
 import io.ktor.http.HttpStatusCode
 import io.ktor.http.headersOf
@@ -58,6 +60,58 @@ class ProviderErrorMappingTest {
             val engine = MockEngine { respond("{}", HttpStatusCode.OK, json) }
             assertFailsWith<AiProviderException> { openAi(engine, "http://169.254.169.254/v1").complete(prompt = "p", model = "m") }
             assertEquals(0L, testScheduler.currentTime, "no backoff delay means no retry")
+        }
+
+    @Test
+    fun `a connect timeout is not retried and later calls to the host fail at once`() =
+        runTest {
+            var sent = 0
+            val engine = MockEngine {
+                sent++
+                throw ConnectTimeoutException(
+                    "Connect timeout has expired [url=https://proxy.example/v1/chat/completions, connect_timeout=15000 ms]"
+                )
+            }
+            val provider = openAi(engine, "https://proxy.example/v1")
+            val logger = RecordingLogger()
+            provider.initialize(RecordingContext(logger))
+            val first = assertFailsWith<AiProviderException> { provider.complete(prompt = "p", model = "m") }
+            assertEquals("unreachable: proxy.example (connect timeout)", first.message)
+            assertEquals(false, first.retryable)
+            val second = assertFailsWith<AiProviderException> { provider.complete(prompt = "p", model = "m") }
+            assertEquals(first.message, second.message)
+            assertEquals(1, sent, "one attempt in all: no retry, no second connect")
+            assertEquals(
+                1,
+                logger.lines.count { it.startsWith("WARN") && "unreachable: proxy.example" in it },
+                logger.lines.joinToString("\n")
+            )
+        }
+
+    @Test
+    fun `connection refused and dns failures are unreachable too`() =
+        runTest {
+            assertEquals(
+                "connection refused",
+                connectFailureKind(AiProviderException("x", cause = IllegalStateException("Connection refused")))
+            )
+            assertEquals("dns", connectFailureKind(IllegalStateException("Could not resolve host: proxy.example")))
+            assertEquals(null, connectFailureKind(AiProviderException("Request timed out after 5m")))
+        }
+
+    @Test
+    fun `the connect timeout is capped at 15s and a shorter ai timeout is kept`() =
+        runTest {
+            for ((timeout, expected) in listOf(KarandashDuration.ofMinutes(5) to 15_000L, KarandashDuration.ofSeconds(5) to 5_000L)) {
+                var connect: Long? = null
+                val engine = MockEngine {
+                    connect = it.getCapabilityOrNull(HttpTimeoutCapability)?.connectTimeoutMillis
+                    respond("{}", HttpStatusCode.InternalServerError, json)
+                }
+                val provider = OpenAiProvider(apiKey = "k", timeout = timeout, maxRetries = 0, httpClientEngine = engine)
+                assertFailsWith<AiProviderException> { provider.complete(prompt = "p", model = "m") }
+                assertEquals(expected, connect, "ai.timeout=$timeout")
+            }
         }
 
     @Test
