@@ -7,22 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-2.0.1 changes:
-
-- An AI provider that cannot be reached is reported as `unreachable: <host> (<kind>)` in the MR note and logged once at WARN. Connect failures are not retried, and later calls to the same base URL fail at once for the rest of the run, unless that host answered earlier in the run.
-- The AI connect timeout is capped at 15s (`ai.timeout` still bounds the whole call).
-- An AI rule that made no call (for example review-thread-analysis with no open threads) shows as skipped, with no model, and is not counted by `ai:health`.
-- The report lists AI provider errors on their own "N AI rules failed" line, apart from real skips. Rule ids in that list are canonical.
-- The Passed line leaves out rules that have only info findings.
-- ai-incremental moves to "How this review was made". ai-large-mr counts add up (reviewed, not reviewed, excluded or unchanged).
-- The `ai:health`, ai-large-mr and ai-test-gap info rows have a "How to fix" text.
-- When the budget plan underfunds a rule, the MR note shows the per-rule share and the `ai.cost-budget` value needed.
-- The Enricher table fills its Details column (items, no data, cached). Jira with no url is skipped with a reason, and local-git says why it gave no data (git not available, shallow clone).
-- The remote `extends:` cache uses `cache.dir`, and a cache directory that cannot be created is reported instead of failing later with E0019.
-- The Docker runtime images include git.
-- The base config `projects/base` sets `execution-timeout: "11m"` to fit 5m x 2 tries.
-
-## [1.0.0] - 2026-11-09
+## [1.0.0] - 2026-11-14
 
 First public release.
 
