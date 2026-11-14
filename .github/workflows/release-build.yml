@@ -64,7 +64,7 @@ jobs:
             tasks: :cli:linkReleaseExecutableMingwX64
             paths: cli/build/bin/mingwX64/releaseExecutable/cli.exe
           - name: macos
-            os: macos-14
+            os: macos-15
             prepare: :cli:compileKotlinMacosArm64 :cli:compileKotlinMacosX64
             tasks: :cli:linkReleaseExecutableMacosArm64 :cli:linkReleaseExecutableMacosX64
             paths: |
@@ -174,7 +174,7 @@ jobs:
   # macOS host: the SDK modules declare every native target, and only a Mac builds the Apple klibs.
   maven:
     needs: meta
-    runs-on: macos-14
+    runs-on: macos-15
     environment: ${{ inputs.dry_run && 'dry-run' || 'release' }}
     timeout-minutes: 90
     steps:
