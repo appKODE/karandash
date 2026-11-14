@@ -168,6 +168,14 @@ jobs:
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
       - uses: ./.github/actions/setup
+      # Apple clang has no wasm32 target; the WASM C example builds with Homebrew LLVM (clang + wasm-ld)
+      - name: LLVM with wasm32
+        run: |
+          LLVM="$(brew --prefix llvm@18)/bin"
+          [ -x "$LLVM/clang" ] || { brew install llvm@18; LLVM="$(brew --prefix llvm@18)/bin"; }
+          if [ ! -x "$LLVM/wasm-ld" ]; then brew install lld; echo "$(brew --prefix lld)/bin" >> "$GITHUB_PATH"; fi
+          "$LLVM/clang" --print-targets | grep -q wasm32
+          echo "$LLVM" >> "$GITHUB_PATH"
       - run: ./gradlew macosArm64Test :cli:linkReleaseExecutableMacosArm64 :cli:shadowJar
       - name: Smoke
         run: |
