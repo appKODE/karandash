@@ -22,5 +22,7 @@ jobs:
       pages: write
       id-token: write
     uses: ./.github/workflows/release-build.yml
+    # without inherit the called workflow sees no secrets, environment ones included
+    secrets: inherit
     with:
       dry_run: false
