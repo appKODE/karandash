@@ -1,4 +1,6 @@
 plugins {
+    // loads build-logic once in the root classloader, so every project shares one MavenCentralBuildService class
+    id("karandash.publishing") apply false
     alias(libs.plugins.kotlin.multiplatform) apply false
     alias(libs.plugins.kotlin.serialization) apply false
     alias(libs.plugins.kotlin.jvm) apply false
