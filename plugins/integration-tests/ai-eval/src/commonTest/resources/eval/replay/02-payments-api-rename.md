@@ -479,7 +479,7 @@ Renames PaymentsApi.charge to createCharge and fixes amount rounding.
 
 </details>
 
-<sub>karandash 1.0.0 · React 👎 on a finding to mark it as a false positive. · updated 2026-10-30 15:40 UTC</sub>
+<sub>karandash 1.0.1 · React 👎 on a finding to mark it as a false positive. · updated 2026-10-30 15:40 UTC</sub>
 
-<!-- karandash-state verdict=pass findings=d808fb6d2f71c843 body=5db5fa6f282ae07b -->
+<!-- karandash-state verdict=pass findings=d808fb6d2f71c843 body=ef6aa34ab1453146 -->
 ~~~~~

@@ -683,7 +683,7 @@ Suggested splits:
 
 </details>
 
-<sub>karandash 1.0.0 · React 👎 on a finding to mark it as a false positive. · updated 2026-10-30 15:40 UTC</sub>
+<sub>karandash 1.0.1 · React 👎 on a finding to mark it as a false positive. · updated 2026-10-30 15:40 UTC</sub>
 
-<!-- karandash-state verdict=pass findings=d27547298d1d40f3 body=b25126372cfbd482 -->
+<!-- karandash-state verdict=pass findings=d27547298d1d40f3 body=521c0b31b0665057 -->
 ~~~~~

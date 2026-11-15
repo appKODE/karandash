@@ -791,9 +791,9 @@ Adds the payment gateway configuration object.
 
 </details>
 
-<sub>karandash 1.0.0 · React 👎 on a finding to mark it as a false positive. · updated 2026-10-30 15:40 UTC</sub>
+<sub>karandash 1.0.1 · React 👎 on a finding to mark it as a false positive. · updated 2026-10-30 15:40 UTC</sub>
 
-<!-- karandash-state verdict=fail findings=26034eea60267b72 body=9bef58c1c640ac40 -->
+<!-- karandash-state verdict=fail findings=26034eea60267b72 body=6f6ae66f3902c595 -->
 ~~~~~
 
 ## Note: src/main/kotlin/payments/GatewayConfig.kt:6

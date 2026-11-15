@@ -587,7 +587,7 @@ Deletions: 1
 
 </details>
 
-<sub>karandash 1.0.0 · React 👎 on a finding to mark it as a false positive. · updated 2026-10-30 15:40 UTC</sub>
+<sub>karandash 1.0.1 · React 👎 on a finding to mark it as a false positive. · updated 2026-10-30 15:40 UTC</sub>
 
-<!-- karandash-state verdict=pass findings=cbf29ce484222325 body=5cf1714dda8ba7b7 -->
+<!-- karandash-state verdict=pass findings=cbf29ce484222325 body=ff62273c614e862 -->
 ~~~~~

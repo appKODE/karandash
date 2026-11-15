@@ -54,7 +54,7 @@
 
 </details>
 
-<sub>karandash 1.0.0 · React 👎 on a finding to mark it as a false positive. · updated 2026-10-30 15:40 UTC</sub>
+<sub>karandash 1.0.1 · React 👎 on a finding to mark it as a false positive. · updated 2026-10-30 15:40 UTC</sub>
 
-<!-- karandash-state verdict=pass findings=d4885ca65e0a11c5 body=4c0d633872d0af67 -->
+<!-- karandash-state verdict=pass findings=d4885ca65e0a11c5 body=777ef11e0e0589d2 -->
 ~~~~~

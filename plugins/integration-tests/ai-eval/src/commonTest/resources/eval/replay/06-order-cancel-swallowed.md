@@ -828,9 +828,9 @@ Adds OrderService.cancel.
 
 </details>
 
-<sub>karandash 1.0.0 · React 👎 on a finding to mark it as a false positive. · updated 2026-10-30 15:40 UTC</sub>
+<sub>karandash 1.0.1 · React 👎 on a finding to mark it as a false positive. · updated 2026-10-30 15:40 UTC</sub>
 
-<!-- karandash-state verdict=fail findings=e770c26552ba9eb3 body=84d4577e39b1eb5e -->
+<!-- karandash-state verdict=fail findings=e770c26552ba9eb3 body=7c554f5df239edf3 -->
 ~~~~~
 
 ## Note: src/main/kotlin/orders/OrderService.kt:13

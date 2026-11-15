@@ -114,13 +114,16 @@ fi
 # ---------------------------------------------------------------------------
 section "(c) Compile probe items (standalone build, published SDK only)"
 
+# the probe resolves the SDK at the version just published, not a hardcoded default
+KARANDASH_VERSION=$(sed -n 's/^ *version = "\(.*\)"$/\1/p' "$ROOT_DIR/build.gradle.kts" | head -1)
+
 # compile_item <source-set> <label>
 compile_item() {
     local source_set="$1" label="$2"
     local task log
     task="compile$(tr '[:lower:]' '[:upper:]' <<< "${source_set:0:1}")${source_set:1}Kotlin"
     log="$LOG_DIR/compile-$source_set.log"
-    if "$GRADLEW" -p "$PROBE_DIR" --no-configuration-cache "$task" > "$log" 2>&1; then
+    if "$GRADLEW" -p "$PROBE_DIR" --no-configuration-cache -PkarandashVersion="$KARANDASH_VERSION" "$task" > "$log" 2>&1; then
         pass "$label ($source_set)"
         return 0
     fi
