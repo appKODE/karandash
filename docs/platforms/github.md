@@ -274,7 +274,7 @@ jobs:
       security-events: write
     steps:
       - uses: actions/checkout@v4
-      - uses: appKODE/karandash@v1.0.0
+      - uses: appKODE/karandash@v1.0.1
         with:
           comment: 'true'
           sarif: 'true'
@@ -317,7 +317,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: docker://rinekri/karandash:v1.0.0
+      - uses: docker://rinekri/karandash:v1.0.1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
@@ -458,7 +458,7 @@ Or for Docker:
 ```bash
 docker run -v /path/to/ca-cert.pem:/usr/local/share/ca-certificates/ca.crt \
   -e GITHUB_TOKEN=$GITHUB_TOKEN \
-  rinekri/karandash:v1.0.0 karandash validate
+  rinekri/karandash:v1.0.1 karandash validate
 ```
 
 ---
@@ -568,7 +568,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: docker://rinekri/karandash:v1.0.0
+      - uses: docker://rinekri/karandash:v1.0.1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
@@ -595,7 +595,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - uses: appKODE/karandash@v1.0.0
+      - uses: appKODE/karandash@v1.0.1
         with:
           comment: 'true'
           sarif: 'true'

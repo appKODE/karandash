@@ -66,7 +66,7 @@ Use the official Karandash GitHub Action for the simplest setup.
              fetch-depth: 0
 
          - name: Run Karandash validation
-           uses: appKODE/karandash@v1.0.0
+           uses: appKODE/karandash@v1.0.1
            with:
              sarif: 'true'
              comment: 'true'
@@ -122,9 +122,9 @@ jobs:
           fetch-depth: 0
 
       - name: Run Karandash validation
-        uses: appKODE/karandash@v1.0.0
+        uses: appKODE/karandash@v1.0.1
         with:
-          version: 'v1.0.0'  # Pin to specific version
+          version: 'v1.0.1'  # Pin to specific version
           config-path: '.karandash/strict-rules.yml'
           format: 'sarif'
           sarif: 'true'
@@ -144,7 +144,7 @@ The action provides these outputs for use in subsequent steps:
 steps:
   - name: Run Karandash validation
     id: validate
-    uses: appKODE/karandash@v1.0.0
+    uses: appKODE/karandash@v1.0.1
     with:
       comment: 'true'
 
@@ -236,7 +236,7 @@ Integrate Karandash into GitLab pipelines with SAST integration.
    karandash-validate:
      stage: test
      image:
-       name: rinekri/karandash:v1.0.0      # native binary; rinekri/karandash:v1.0.0-jvm for the JVM build
+       name: rinekri/karandash:v1.0.1      # native binary; rinekri/karandash:v1.0.1-jvm for the JVM build
        pull_policy: if-not-present
 
      rules:
@@ -254,11 +254,11 @@ Integrate Karandash into GitLab pipelines with SAST integration.
 #### Option 1b: Reusable Template
 
 Include the template straight from GitHub at a release tag; its inputs cover the config path, output format,
-stage and image (default `rinekri/karandash:v1.0.0`):
+stage and image (default `rinekri/karandash:v1.0.1`):
 
 ```yaml
 include:
-  - remote: 'https://raw.githubusercontent.com/appKODE/karandash/v1.0.0/.gitlab/templates/validate.yml'
+  - remote: 'https://raw.githubusercontent.com/appKODE/karandash/v1.0.1/.gitlab/templates/validate.yml'
     inputs:
       config_path: '.karandash/config.yaml'
       format: 'sarif'
@@ -1050,7 +1050,7 @@ Results appear in Security > Code scanning tab:
 
 ```yaml
 - name: Run Karandash validation
-  uses: appKODE/karandash@v1.0.0
+  uses: appKODE/karandash@v1.0.1
   with:
     sarif: 'true'
 
@@ -1151,7 +1151,7 @@ Enable in action configuration:
 
 ```yaml
 - name: Run Karandash validation
-  uses: appKODE/karandash@v1.0.0
+  uses: appKODE/karandash@v1.0.1
   with:
     comment: 'true'
 ```
@@ -1168,7 +1168,7 @@ Use `actions/github-script` for custom comments:
 ```yaml
 - name: Get validation results
   id: validate
-  uses: appKODE/karandash@v1.0.0
+  uses: appKODE/karandash@v1.0.1
   with:
     sarif: 'true'
 
@@ -1274,7 +1274,7 @@ java -version  # Should show 17 or later
 2. **Use specific version**:
    ```bash
    # Instead of 'latest', use explicit version
-   wget https://github.com/appKODE/karandash/releases/download/v1.0.0/karandash.jar
+   wget https://github.com/appKODE/karandash/releases/download/v1.0.1/karandash.jar
    ```
 
 3. **Check network access**:

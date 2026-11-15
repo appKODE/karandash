@@ -8,7 +8,7 @@ Every release tag publishes its files to [GitHub Releases](https://github.com/ap
 together with a `SHA256SUMS` file:
 
 ```bash
-BASE=https://github.com/appKODE/karandash/releases/download/v1.0.0
+BASE=https://github.com/appKODE/karandash/releases/download/v1.0.1
 curl -fsSLO "$BASE/karandash.jar" -fsSLO "$BASE/SHA256SUMS"
 grep ' karandash.jar$' SHA256SUMS | sha256sum -c -   # macOS: shasum -a 256 -c -
 java -jar karandash.jar --version
@@ -24,12 +24,12 @@ Images are on Docker Hub as `rinekri/karandash`:
 
 | Tag | Contents |
 |-----|----------|
-| `rinekri/karandash:v1.0.0` | native binary, `linux/amd64` |
-| `rinekri/karandash:v1.0.0-jvm` | JVM, `linux/amd64` and `linux/arm64` |
+| `rinekri/karandash:v1.0.1` | native binary, `linux/amd64` |
+| `rinekri/karandash:v1.0.1-jvm` | JVM, `linux/amd64` and `linux/arm64` |
 | `latest`, `latest-jvm` | the newest release |
 
 ```bash
-docker run --rm -v "$PWD:/work" -w /work rinekri/karandash:v1.0.0 validate --help
+docker run --rm -v "$PWD:/work" -w /work rinekri/karandash:v1.0.1 validate --help
 ```
 
 The binary is on `PATH` as `karandash`, so the image works directly as a CI job image.
@@ -37,9 +37,9 @@ The binary is on `PATH` as `karandash`, so the image works directly as a CI job 
 ## GitHub Actions
 
 ```yaml
-- uses: appKODE/karandash@v1.0.0
+- uses: appKODE/karandash@v1.0.1
   with:
-    version: v1.0.0
+    version: v1.0.1
 ```
 
 See [GitHub](../platforms/github.md) for the inputs and the runner requirements.
@@ -48,7 +48,7 @@ See [GitHub](../platforms/github.md) for the inputs and the runner requirements.
 
 ```yaml
 karandash-validate:
-  image: rinekri/karandash:v1.0.0
+  image: rinekri/karandash:v1.0.1
   script:
     - karandash validate --config .karandash/config.yaml
   rules:
@@ -59,7 +59,7 @@ Or include the reusable template straight from GitHub:
 
 ```yaml
 include:
-  - remote: 'https://raw.githubusercontent.com/appKODE/karandash/v1.0.0/.gitlab/templates/validate.yml'
+  - remote: 'https://raw.githubusercontent.com/appKODE/karandash/v1.0.1/.gitlab/templates/validate.yml'
 ```
 
 ## From Source

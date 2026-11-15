@@ -2,16 +2,16 @@
 #
 # Include in downstream GitLab projects straight from the GitHub repository (pin the tag):
 #   include:
-#     - remote: 'https://raw.githubusercontent.com/appKODE/karandash/v1.0.0/.gitlab/templates/validate.yml'
+#     - remote: 'https://raw.githubusercontent.com/appKODE/karandash/v1.0.1/.gitlab/templates/validate.yml'
 #
 # With inputs (GitLab 15.11+):
 #   include:
-#     - remote: 'https://raw.githubusercontent.com/appKODE/karandash/v1.0.0/.gitlab/templates/validate.yml'
+#     - remote: 'https://raw.githubusercontent.com/appKODE/karandash/v1.0.1/.gitlab/templates/validate.yml'
 #       inputs:
 #         config_path: '.karandash/config.yaml'
 #         format: 'sarif'
 #         stage: 'test'
-#         image: 'rinekri/karandash:v1.0.0'
+#         image: 'rinekri/karandash:v1.0.1'
 
 spec:
   inputs:
@@ -29,7 +29,7 @@ spec:
       default: 'test'
       description: 'Pipeline stage to run in'
     image:
-      default: 'rinekri/karandash:v1.0.0'
+      default: 'rinekri/karandash:v1.0.1'
       description: 'Karandash Docker image to use (Docker Hub; native binary on PATH as karandash)'
     allow_failure:
       type: boolean

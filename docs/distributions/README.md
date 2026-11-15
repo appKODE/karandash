@@ -17,7 +17,7 @@ curl -L https://github.com/appKODE/karandash/releases/latest/download/karandash-
   -o karandash && chmod +x karandash
 ```
 
-See [native-binary.md](native-binary.md) for full download and build instructions. Each release also ships `SHA256SUMS` for verifying downloads, and Docker Hub carries the same binary as `rinekri/karandash:v1.0.0` (`-jvm` for the fat JAR).
+See [native-binary.md](native-binary.md) for full download and build instructions. Each release also ships `SHA256SUMS` for verifying downloads, and Docker Hub carries the same binary as `rinekri/karandash:v1.0.1` (`-jvm` for the fat JAR).
 
 ## JVM Fat JAR (secondary)
 

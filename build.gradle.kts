@@ -33,7 +33,7 @@ dependencyCheck {
 allprojects {
     // Kover 0.9.11+ rejects duplicate group:name identities; test-only integration projects share names with tier modules.
     group = if (path.startsWith(":plugins:integration-tests:")) "ru.kode.karandash.integration-tests" else "ru.kode.karandash"
-    version = "1.0.0"
+    version = "1.0.1"
 
     repositories {
         mavenCentral()

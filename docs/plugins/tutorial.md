@@ -94,7 +94,7 @@ repositories {
 
 dependencies {
     // Plugin SDK
-    implementation("ru.kode.karandash:sdk:1.0.0")
+    implementation("ru.kode.karandash:sdk:1.0.1")
 
     // Kotlin
     implementation("org.jetbrains.kotlin:kotlin-stdlib")

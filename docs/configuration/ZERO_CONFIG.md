@@ -302,7 +302,7 @@ A: No. Zero-config provides fixed defaults. To customize, create a config file w
 
 **Q: Do zero-config rules change between versions?**
 
-A: Defaults may improve in major versions. Pin your Docker image tag (`rinekri/karandash:v1.0.0`) for stability.
+A: Defaults may improve in major versions. Pin your Docker image tag (`rinekri/karandash:v1.0.1`) for stability.
 
 **Q: Can I use zero-config with custom plugins?**
 

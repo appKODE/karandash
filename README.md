@@ -63,7 +63,7 @@ Console | JSON | SARIF 2.1.0 | Reviewdog rdjsonl/rdjson | Comment poster | Email
 Releases are published to [GitHub Releases](https://github.com/appKODE/karandash/releases). Download the fat JAR (Java 17+) and check it against `SHA256SUMS`:
 
 ```bash
-BASE=https://github.com/appKODE/karandash/releases/download/v1.0.0
+BASE=https://github.com/appKODE/karandash/releases/download/v1.0.1
 curl -fsSLO "$BASE/karandash.jar" -fsSLO "$BASE/SHA256SUMS"
 grep ' karandash.jar$' SHA256SUMS | sha256sum -c -
 java -jar karandash.jar --version
@@ -71,7 +71,7 @@ java -jar karandash.jar --version
 
 Native binaries (`karandash-linux-x64`, `karandash-macos-arm64`, `karandash-macos-x64`, `karandash-windows-x64.exe`) are attached to the same release; swap the file name.
 
-**Docker:** `rinekri/karandash:v1.0.0` (native binary) and `rinekri/karandash:v1.0.0-jvm` on Docker Hub; `latest` and `latest-jvm` track the newest release.
+**Docker:** `rinekri/karandash:v1.0.1` (native binary) and `rinekri/karandash:v1.0.1-jvm` on Docker Hub; `latest` and `latest-jvm` track the newest release.
 
 See the [installation guide](docs/getting-started/installation.md) for all options, or the [documentation site](https://appkode.github.io/karandash).
 
@@ -186,9 +186,9 @@ jobs:
       pull-requests: write
     steps:
       - uses: actions/checkout@v4
-      - uses: appKODE/karandash@v1.0.0
+      - uses: appKODE/karandash@v1.0.1
         with:
-          version: v1.0.0
+          version: v1.0.1
 ```
 
 **GitLab CI**: add to `.gitlab-ci.yml`:
@@ -196,7 +196,7 @@ jobs:
 ```yaml
 karandash:
   stage: test
-  image: rinekri/karandash:v1.0.0
+  image: rinekri/karandash:v1.0.1
   rules:
     - if: $CI_MERGE_REQUEST_IID
   script:

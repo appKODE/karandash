@@ -268,7 +268,7 @@ jobs:
           fetch-depth: 0
 
       - name: Run Karandash validation
-        uses: appKODE/karandash@v1.0.0
+        uses: appKODE/karandash@v1.0.1
         with:
           reviewdog: 'pr-review'
 ```
